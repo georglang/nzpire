@@ -10,6 +10,8 @@ if (Meteor.isClient) {
         console.log("You pressed the button");
     }
   });
+
+  var test = new THREE.WebGLRenderer();
 }
 
 if (Meteor.isServer) {
