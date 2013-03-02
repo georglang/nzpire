@@ -7,3 +7,12 @@ autopublish
 insecure
 preserve-inputs
 coffeescript
+accounts-base
+accounts-password
+email
+accounts-ui
+accounts-facebook
+accounts-github
+accounts-google
+accounts-twitter
+accounts-weibo
