@@ -3,8 +3,13 @@
 </head>
 
 <body>
+  {{> login}}
   {{> modelingspace}}
 </body>
+
+<template name="login">
+	{{loginButtons}}
+</template>
 
 <template name="modelingspace">
   <div id="modelingspace"></div>
