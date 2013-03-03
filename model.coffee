@@ -1,0 +1,1 @@
+Cubes = new Meteor.Collection 'cubes'
