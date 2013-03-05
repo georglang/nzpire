@@ -5,12 +5,33 @@
 <body>
   {{> login}}
   {{> modelingspace}}
+  {{> page_controller}}
 </body>
 
 <template name="login">
 	{{loginButtons}}
 </template>
 
+<template name="page_controller">
+  {{{display_page}}}
+</template>
+
 <template name="modelingspace">
   <div id="modelingspace"></div>
+</template>
+
+<template name="index">
+	<div> INDEX TEMPLATE </div>
+</template>
+
+<template name="help">
+	<div> HELP TEMPLATE </div>
+</template>
+
+<template name="search">
+	<div> SEARCH TEMPLATE </div>
+</template>
+
+<template name="test">
+	<div> TEST TEMPLATE </div>
 </template>
