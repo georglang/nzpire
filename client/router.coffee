@@ -6,10 +6,26 @@ Template.page_controller.display_page = ->
 
 WorkspaceRouter = Backbone.Router.extend(
   routes:
+    "index": "index"
+    "modelingspace": "modelingspace"
     "help": "help" # #help
     "search": "search" # #search
     "search/:query": "search" # #search/kiwis
     "test/:abc/p:page": "test" # #search/kiwis/p7
+
+  index: ->
+    console.log "index"
+    Session.set "template", "index"  
+    @navigate "index",
+      trigger: true
+      replace: true
+
+  modelingspace: ->
+    console.log "modelingspace"
+    Session.set "template", "modelingspace"
+    @navigate "modelingspace"
+      trigger: true
+      replace: true
 
   help: ->
     console.log "help"

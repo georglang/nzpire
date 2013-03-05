@@ -3,10 +3,17 @@
 </head>
 
 <body>
+  {{> menue}}
   {{> login}}
   {{> modelingspace}}
   {{> page_controller}}
 </body>
+
+<template name="menue">
+	<input type="button" id="index" value="Index">
+	<input type="button" id="help" value="Help">
+	<input type="button" id="search" value="Search">
+</template>
 
 <template name="login">
 	{{loginButtons}}
