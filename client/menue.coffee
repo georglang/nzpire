@@ -3,8 +3,8 @@ Template.menue.events
 		console.log "clicked help"
 		Workspace.help()
 
-	'click input#index': ->
-		console.log "clicked index"
+	'click input#home': ->
+		console.log "clicked home"
 		Workspace.index()
 
 	'click input#search': ->
