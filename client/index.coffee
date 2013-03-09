@@ -62,7 +62,7 @@ render = ->
 Meteor.startup ->
   Meteor.autorun ->
     cubes = Cubes.find().fetch()
-    console.log cubes
+    #console.log cubes
     scene.children.forEach (child) ->
       scene.remove child
     scene.add pointLight
@@ -73,15 +73,15 @@ Meteor.startup ->
 
       scene.add cubeMesh
 
-    console.log scene
+    #console.log scene
 
 
   # get the DOM element to attach to
   # - assume we've got jQuery to hand
   $container = $("#modelingspace")
-  console.log $container
+  #console.log $container
 
-  console.log renderer.domElement
+  #console.log renderer.domElement
   # attach the render-supplied DOM element
   $container.append(renderer.domElement)
 
