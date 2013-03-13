@@ -6,7 +6,6 @@ Accounts.onCreateUser( (options,user)->
 
 	# Function to check if the Email is already in our Profile Collection
 	checkForEmail = (email)->
-		#console.log email
 		Profiles.find(
 			email: email[0]
 		).fetch()

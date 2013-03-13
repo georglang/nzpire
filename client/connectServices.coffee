@@ -4,32 +4,31 @@ connectProfiles = (tmpEmail,loginFunction)->
 	tmpProfile = Profiles.findOne
 		email: tmpEmail
 
-	oldProfile = Profiles.findOne
+	newProfile = Profiles.findOne
 		email: Meteor.user().emails[0]
 
-	Profiles.update {_id: tmpProfile._id},{$push: {email: Meteor.user().emails[0]}}
-	#Profiles.remove {_id: oldProfile._id}
-	Meteor.users.remove({_id: Meteor.userId()})
+	service = Object.keys(Meteor.user().services)[0]
+	service_id = Meteor.user().services[service].id
+	updateObject =
+		services: {}
+	updateObject.services[service] = service_id
 
-	loginFunction
-		requestOfflineToken: [true]		
+	# Adds the service and the email
+	Profiles.update {_id: tmpProfile._id},{$push: updateObject}
+	Profiles.update {_id: tmpProfile._id},{$push: {email: Meteor.user().emails[0]}}
+	# Removes the created Profile
+	Profiles.remove {_id: newProfile._id}
 
 # Checks out which Services the User has already connected and Returns the rest
 Template.index.connectButtons = ->
-	Session.set("email", Meteor.user().emails[0])
-	#Meteor.subscribe "usersProfile", Session.get "email"
 	# Provides Services
 	services = ["Facebook","Twitter","Google","Github"];
 
-	console.log Session.get "email"
 	tmpProfile = Profiles.find(
-		email: Session.get "email"
+		email: Meteor.user().emails[0]
 		).fetch()[0]
-	console.log tmpProfile
 
-	
 	# Array of Services the User has already connected
-	
 	serviceArray = tmpProfile.services
 
 	i = 0
@@ -84,6 +83,7 @@ Template.index.events
 Meteor.autorun ->
 	Meteor.subscribe "userData"
 	Meteor.subscribe "allProfiles"
+	Meteor.subscribe "allCubes"
 	
 		
 
