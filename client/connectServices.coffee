@@ -5,7 +5,7 @@ connectProfiles = (tmpEmail,loginFunction)->
 		email: tmpEmail
 
 	newProfile = Profiles.findOne
-		email: Meteor.user().emails[0]
+		email: currentEmail()
 
 	service = Object.keys(Meteor.user().services)[0]
 	service_id = Meteor.user().services[service].id
@@ -15,7 +15,7 @@ connectProfiles = (tmpEmail,loginFunction)->
 
 	# Adds the service and the email
 	Profiles.update {_id: tmpProfile._id},{$push: updateObject}
-	Profiles.update {_id: tmpProfile._id},{$push: {email: Meteor.user().emails[0]}}
+	Profiles.update {_id: tmpProfile._id},{$push: {email: currentEmail()}}
 	# Removes the created Profile
 	Profiles.remove {_id: newProfile._id}
 
@@ -25,9 +25,8 @@ Template.index.connectButtons = ->
 	services = ["Facebook","Twitter","Google","Github"];
 
 	tmpProfile = Profiles.find(
-		email: Meteor.user().emails[0]
+		email: currentEmail()
 		).fetch()[0]
-
 	# Array of Services the User has already connected
 	serviceArray = tmpProfile.services
 
@@ -46,7 +45,7 @@ Template.index.connectButtons = ->
 # Connect Buttons Onclick login with the service and on callback calls the function connectProfiles
 Template.index.events
 	'click input#connectWithFacebook': ->
-		tmpEmail = Meteor.user().emails[0]
+		tmpEmail = currentEmail()
 		Meteor.loginWithFacebook
 			requestOfflineToken: [true]
 		, ->
@@ -54,7 +53,7 @@ Template.index.events
 		return true
 
 	'click input#connectWithGithub': ->
-		tmpEmail = Meteor.user().emails[0]
+		tmpEmail = currentEmail()
 		Meteor.loginWithGithub
 			requestOfflineToken: [true]
 		, ->
@@ -62,7 +61,7 @@ Template.index.events
 		return true
 
 	'click input#connectWithGoogle': ->
-		tmpEmail = Meteor.user().emails[0]
+		tmpEmail = currentEmail()
 		Meteor.loginWithGoogle
 			requestOfflineToken: [true]
 		, ->
@@ -70,7 +69,7 @@ Template.index.events
 		return true
 
 	'click input#connectWithTwitter': ->
-		tmpEmail = Meteor.user().emails[0]
+		tmpEmail = currentEmail()
 		Meteor.loginWithTwitter
 			requestOfflineToken: [true]
 		, ->
