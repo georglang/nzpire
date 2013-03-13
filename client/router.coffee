@@ -1,7 +1,6 @@
 Session.set "template", "index"
 
 Template.page_controller.display_page = ->
-  console.log "Loading page template"
   Template[Session.get("template")]()
 
 WorkspaceRouter = Backbone.Router.extend(

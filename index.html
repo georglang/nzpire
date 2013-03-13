@@ -29,7 +29,7 @@
 
 <template name="index">
 	<div id="index"> INDEX TEMPLATE
-		{{#if currentUser.emails}}
+		{{#if currentUser.services}}
 			{{#each connectButtons}}
 				<input type="button" id="connectWith{{this}}" value="ConnectWith{{this}}">
 			{{/each}}

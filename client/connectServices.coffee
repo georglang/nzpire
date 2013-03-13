@@ -8,7 +8,7 @@ connectProfiles = (tmpEmail,loginFunction)->
 		email: Meteor.user().emails[0]
 
 	Profiles.update {_id: tmpProfile._id},{$push: {email: Meteor.user().emails[0]}}
-	Profiles.remove {_id: oldProfile._id}
+	#Profiles.remove {_id: oldProfile._id}
 	Meteor.users.remove({_id: Meteor.userId()})
 
 	loginFunction
@@ -16,13 +16,22 @@ connectProfiles = (tmpEmail,loginFunction)->
 
 # Checks out which Services the User has already connected and Returns the rest
 Template.index.connectButtons = ->
+	Session.set("email", Meteor.user().emails[0])
+	#Meteor.subscribe "usersProfile", Session.get "email"
 	# Provides Services
 	services = ["Facebook","Twitter","Google","Github"];
 
-	tmpProfile = Profiles.findOne
-		email: Meteor.user().emails[0]
-	# Array of Services the User has already connected	
+	console.log Session.get "email"
+	tmpProfile = Profiles.find(
+		email: Session.get "email"
+		).fetch()[0]
+	console.log tmpProfile
+
+	
+	# Array of Services the User has already connected
+	
 	serviceArray = tmpProfile.services
+
 	i = 0
 	# Compares the User Services with the Provided services and slices the matches out of the provided
 	while i < serviceArray.length
@@ -33,6 +42,7 @@ Template.index.connectButtons = ->
 	  	services.splice inArray,1
 	  ++i	  
 	return services
+	
 
 # Connect Buttons Onclick login with the service and on callback calls the function connectProfiles
 Template.index.events
@@ -68,5 +78,13 @@ Template.index.events
 			connectProfiles(tmpEmail,Meteor.loginWithTwitter)
 		return true				
 
+
+	
+
 Meteor.autorun ->
+	Meteor.subscribe "userData"
+	Meteor.subscribe "allProfiles"
+	
+		
+
 
