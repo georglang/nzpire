@@ -5,7 +5,6 @@
 <body>
   {{> menue}}
   {{> login}}
-  {{> modelingspace}}
   {{> page_controller}}
 </body>
 
@@ -13,6 +12,7 @@
 	<input type="button" id="home" value="Home">
 	<input type="button" id="help" value="Help">
 	<input type="button" id="search" value="Search">
+	<input type="button" id="modelingspaceButton" value="Modelingspace">
 </template>
 
 <template name="login">
@@ -25,6 +25,7 @@
 
 <template name="modelingspace">
   <div id="modelingspace"></div>
+  {{create}}
 </template>
 
 <template name="index">

@@ -10,6 +10,24 @@ Template.modelingspace.events
         y: min + Math.random() * (max - min)
         z: 0
 
+Template.modelingspace.create = ->
+  #After Rendering or Rerendering
+  Meteor.defer ->    
+    console.log "create"
+    changedTemplate = false
+    # get the DOM element to attach to
+    # - assume we've got jQuery to hand
+    $container = $("#modelingspace")
+    console.log $container
+
+    #console.log renderer.domElement
+    # attach the render-supplied DOM element
+    console.log getRenderer()
+    console.log getRenderer().domElement
+    $container.append(getRenderer().domElement)
+    $container.append("<img></img>")
+    render()
+
 # set the scene size
 WIDTH = 400
 HEIGHT = 300
@@ -32,6 +50,8 @@ scene.add camera
 getScene = ->
   return scene
 
+getRenderer = ->
+  return renderer
 # the camera starts at 0,0,0
 # so pull it back
 camera.position.z = 300
@@ -57,7 +77,8 @@ render = ->
   # draw!
   renderer.render scene, camera
 
-  requestAnimationFrame render
+  if Session.get("template") == "modelingspace"
+    requestAnimationFrame render
 
 Meteor.startup ->
   Meteor.autorun ->
@@ -85,4 +106,4 @@ Meteor.startup ->
   # attach the render-supplied DOM element
   $container.append(renderer.domElement)
 
-  render()
+  
