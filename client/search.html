@@ -1,0 +1,10 @@
+<template name="search">
+	<div> SEARCH TEMPLATE </div>
+	<div>
+		<ul>
+		{{#each getResults}}
+			<li>{{this.name}}_,_{{this.email}} </li>
+		{{/each}}
+	</ul>
+	</div>
+</template>

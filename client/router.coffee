@@ -34,10 +34,11 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true
 
 
-  search: ->
-    console.log "search"
+  search: (query) ->
+    console.log "search " + query
     Session.set "template", "search"
-    @navigate "search"
+    Session.set "searchQuery", query
+    @navigate "search/" + query,
       trigger: true
       replace: true
 
