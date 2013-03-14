@@ -11,6 +11,6 @@ Template.menue.events
 		console.log "clicked search"
 		Workspace.search document.getElementById("searchQuery").value
 
-	'click input#modelingspace': ->
+	'click input#modelingspaceButton': ->
 		console.log "clicked modelingspace"
 		Workspace.modelingspace()
