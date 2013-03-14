@@ -5,6 +5,7 @@ Meteor.publish "userData", ->
   return Meteor.users.find {_id: this.userId},
     fields:
       'services': 1
+      'mail': 1
 
 Meteor.publish "allProfiles", ->
 	Profiles.find({})
