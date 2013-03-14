@@ -14,3 +14,10 @@ Template.menue.events
 	'click input#modelingspaceButton': ->
 		console.log "clicked modelingspace"
 		Workspace.modelingspace()
+
+	'keydown input#searchQuery': (e)->
+		Meteor.defer ->
+			searchQuery = document.getElementById("searchQuery").value
+			if searchQuery.length > 2 || e.keyCode == 13
+				console.log "onchange search"
+				Workspace.search searchQuery

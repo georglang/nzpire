@@ -1,12 +1,31 @@
+searchForProfiles = (searchQuery)->
+	Profiles.find( $or:[
+			email: eval(searchQuery)
+		,
+			name: eval(searchQuery)
+		])	
+
+searchForModels = (searchQuery)->
+	###
+	Models.find( $or:[
+			name: eval(searchQuery)
+		,
+			author: eval(searchQuery)
+		])
+	###
+
 Template.search.getResults = ->
-	console.log "getResults"
-	console.log Session.get "searchQuery"
+	searchingFor = Session.get("searchQuery").charAt(0)
 
-	searchQuery = "/" + Session.get("searchQuery")+ "/"
-	console.log searchQuery
-	result = Profiles.find(
-		email: eval(searchQuery)).fetch()		
+	if searchingFor == "@"
+		searchQuery = "/" + Session.get("searchQuery").slice(1) + "/"
+		result = searchForProfiles(searchQuery)
+	else if searchingFor == "$"
+	  searchQuery = "/" + Session.get("searchQuery").slice(1) + "/"
+	  result = searchForModels(searchQuery)
+	else
+		searchQuery = "/" + Session.get("searchQuery") + "/"
+		result = searchForProfiles(searchQuery)
+		#result =searchForModels(searchQuery))
 
-	console.log "result"
-	console.log result
 	return result
