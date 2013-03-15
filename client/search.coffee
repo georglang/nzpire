@@ -6,13 +6,8 @@ searchForProfiles = (searchQuery)->
 		])	
 
 searchForModels = (searchQuery)->
-	###
-	Models.find( $or:[
-			name: eval(searchQuery)
-		,
-			author: eval(searchQuery)
-		])
-	###
+	Models.find
+		name: eval(searchQuery)
 
 Template.search.getResults = ->
 	searchingFor = Session.get("searchQuery").charAt(0)
@@ -20,12 +15,13 @@ Template.search.getResults = ->
 	if searchingFor == "@"
 		searchQuery = "/" + Session.get("searchQuery").slice(1) + "/"
 		result = searchForProfiles(searchQuery)
-	else if searchingFor == "$"
+	else if searchingFor == "#"
 	  searchQuery = "/" + Session.get("searchQuery").slice(1) + "/"
 	  result = searchForModels(searchQuery)
 	else
 		searchQuery = "/" + Session.get("searchQuery") + "/"
-		result = searchForProfiles(searchQuery)
-		#result =searchForModels(searchQuery))
+		result = searchForProfiles(searchQuery).fetch()
+		result2 = searchForModels(searchQuery).fetch()
+		jQuery.merge(result,result2)
 
 	return result
