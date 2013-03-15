@@ -12,3 +12,6 @@ Meteor.publish "allProfiles", ->
 
 Meteor.publish "allCubes", ->
 	Cubes.find({})
+
+Meteor.publish "allModels", ->
+	Models.find({})

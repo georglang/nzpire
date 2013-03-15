@@ -83,7 +83,7 @@ Meteor.autorun ->
 	Meteor.subscribe "userData"
 	Meteor.subscribe "allProfiles"
 	Meteor.subscribe "allCubes"
-	
+	Meteor.subscribe "allModels"
 		
 
 
