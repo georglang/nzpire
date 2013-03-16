@@ -3,7 +3,7 @@
 	<div>
 		<ul>
 		{{#each getResults}}
-			<li>{{this.name}}_,_{{this.email}} </li>
+			<li><div class="{{this.searchingFor}}" id="{{this._id}}">{{this.name}}</div><div class="{{this.order}}" id="{{this._id}}">{{this.order}}</div></li>
 		{{/each}}
 	</ul>
 	</div>
