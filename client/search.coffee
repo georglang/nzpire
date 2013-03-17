@@ -36,6 +36,8 @@ order = (searchingFor,_id)->
 		else
 			return "favourite"
 
+
+
 Template.search.getResults = ->
 	searchingFor = Session.get("searchQuery").charAt(0)
 
@@ -44,9 +46,11 @@ Template.search.getResults = ->
 		result = searchForProfiles(searchQuery).fetch()
 		i.searchingFor = "profileLink" for i in result
 		i.order = order("profileLink",i._id) for i in result
-	else if searchingFor == "#"
+	else if searchingFor == "&"
 	  searchQuery = "/" + Session.get("searchQuery").slice(1) + "/i"
-	  result = searchForModels(searchQuery)
+	  result = searchForModels(searchQuery).fetch()
+	  i.searchingFor = "modelLink" for i in result
+	  i.order = order("modelLink",i._id) for i in result
 	else
 		searchQuery = "/" + Session.get("searchQuery") + "/i"
 		result = searchForProfiles(searchQuery).fetch()
@@ -62,7 +66,7 @@ Template.search.getResults = ->
 Template.search.events
 	'click div.profileLink': (e)->
 		Workspace.profile e.target.id
-		
+
 	'click div.modelLink': (e)->
 		Workspace.modelingspace e.target.id
 
