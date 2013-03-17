@@ -1,6 +1,6 @@
 <template name="search">
 	<div> SEARCH TEMPLATE </div>
-	<div>
+	<div id="searchresult">
 		<ul>
 		{{#each getResults}}
 			<li><div class="{{this.searchingFor}}" id="{{this._id}}">{{this.name}}</div><div class="{{this.order}}" id="{{this._id}}">{{this.order}}</div></li>
