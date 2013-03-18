@@ -13,19 +13,19 @@ Template.modelingspace.events
 Template.modelingspace.create = ->
   #After Rendering or Rerendering
   Meteor.defer ->    
-    console.log "create"
+    #console.log "create"
     changedTemplate = false
     # get the DOM element to attach to
     # - assume we've got jQuery to hand
     $container = $("#modelingspace")
-    console.log $container
+    #console.log $container
 
     #console.log renderer.domElement
     # attach the render-supplied DOM element
-    console.log getRenderer()
-    console.log getRenderer().domElement
+    #console.log getRenderer()
+    #console.log getRenderer().domElement
     $container.append(getRenderer().domElement)
-    $container.append("<img></img>")
+    #$container.append("<img></img>")
     render()
 
 # set the scene size
