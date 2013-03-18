@@ -1,4 +1,3 @@
-
 # Inserts the new Mail into the old Account and Deletes the created User and reloggs the User
 connectProfiles = (tmpEmail,loginFunction)->
 	tmpProfile = Profiles.findOne

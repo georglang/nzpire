@@ -6,11 +6,12 @@ Template.page_controller.display_page = ->
 WorkspaceRouter = Backbone.Router.extend(
   routes:
     "index": "index"
-    "modelingspace": "modelingspace"
+    "modelingspace/:id": "modelingspace"
     "help": "help" # #help
     "search": "search" # #search
     "search/:query": "search" # #search/kiwis
     "test/:abc/p:page": "test" # #search/kiwis/p7
+    "profile/:_id" : "profile"
 
   index: ->
     console.log "index"
@@ -19,10 +20,10 @@ WorkspaceRouter = Backbone.Router.extend(
       trigger: true
       replace: true
 
-  modelingspace: ->
+  modelingspace: (_id = "new")->
     console.log "modelingspace"
     Session.set "template", "modelingspace"
-    @navigate "modelingspace"
+    @navigate "modelingspace/" + _id,
       trigger: true
       replace: true
 
@@ -49,6 +50,13 @@ WorkspaceRouter = Backbone.Router.extend(
     @navigate "test/" + abc + "/" + page,
       trigger: true
       replace: true
+
+  profile: (_id) ->
+    console.log "profile" + _id
+    Session.set "template", "profile"
+    @navigate "profile/" + _id,
+      trigger: true
+      replace: true    
 
 )
 Workspace = new WorkspaceRouter()

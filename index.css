@@ -1,1 +1,8 @@
 /* CSS declarations go here */
+.profileLink{
+	background-color:lightgreen;
+}
+
+.modelLink{
+	background-color:lightblue;
+}

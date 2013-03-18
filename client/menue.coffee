@@ -17,7 +17,9 @@ Template.menue.events
 
 	'keydown input#searchQuery': (e)->
 		Meteor.defer ->
+			console.log "onchange search"
 			searchQuery = document.getElementById("searchQuery").value
 			if searchQuery.length > 2 || e.keyCode == 13
-				console.log "onchange search"
 				Workspace.search searchQuery
+			else if searchQuery.length <= 2
+				$('#searchresult').empty()

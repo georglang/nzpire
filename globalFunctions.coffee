@@ -1,6 +1,6 @@
 currentProfile = ->
 	Profiles.find(
-		email: currentEmail
+		email: currentEmail()
 	).fetch()[0]	
 
 currentEmail = ->
