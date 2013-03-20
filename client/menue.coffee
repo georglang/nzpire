@@ -32,4 +32,4 @@ Template.menue.events
 				Workspace.search encodeURIComponent(searchQuery)
 			else if searchQuery.length <= 2
 				$('#searchresult').empty()
-				Workspace.search ""
+				Workspace.search " "

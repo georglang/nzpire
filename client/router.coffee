@@ -44,7 +44,7 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true
     if query.charAt(0) == "%"
       query = decodeURIComponent(query)
-    if query != ""    
+    if query != " "    
       Session.set "searchQuery", query
 
 
