@@ -9,7 +9,7 @@ Template.menue.events
 
 	'click input#search': ->
 		console.log "clicked search"
-		Workspace.search document.getElementById("searchQuery").value
+		Workspace.search encodeURIComponent(document.getElementById("searchQuery").value)
 
 	'click input#modelingspaceButton': ->
 		console.log "clicked modelingspace"
