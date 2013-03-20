@@ -1,5 +1,5 @@
 Template.modeling.events
-  'click canvas': ->
+  'click canvas': (e) ->
     #sphereMaterial.color = new THREE.Color().setRGB Math.random(), Math.random(), Math.random()
     min = -100
     max = 100
@@ -10,13 +10,30 @@ Template.modeling.events
         y: min + Math.random() * (max - min)
         z: 0
 
-  'keydown body': (e) ->
-    console.log e.keyCode
+  'mouseover #modelingContainer': (e) ->
+    $("#modelingContainer").focus()
+
+  'mouseout #modelingContainer': (e) ->
+    $("#modelingContainer").blur()
+
+  'keydown #modelingContainer': (e) ->
+    #console.log 'keycode', e.keyCode
+    if e.keyCode is 37 or e.keyCode is 65
+      console.log 'left'
+      return false
+    else if e.keyCode is 38 or e.keyCode is 87
+      console.log 'up'
+      return false
+    else if e.keyCode is 39 or e.keyCode is 68
+      console.log 'right'
+      return false
+    else if e.keyCode is 40 or e.keyCode is 83
+      console.log 'down'
+      return false
 
 Template.modeling.create = ->
   Meteor.defer ->
     $(window).resize ->
-      console.log 'resize'
       WIDTH = container.width()
       HEIGHT = container.height()
       ASPECT = WIDTH / HEIGHT
@@ -55,7 +72,6 @@ Template.modeling.create = ->
     render = ->
       if Session.get("template") == "modeling"
         renderer.render scene, camera
-        console.log 'rendering'
       requestAnimationFrame render
 
     render()
