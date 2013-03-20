@@ -15,6 +15,10 @@ Template.menue.events
 		console.log "clicked modelingspace"
 		Workspace.modelingspace()
 
+	'click input#profile': ->
+		console.log "clicked profile"
+		Workspace.profile(currentProfile()._id)
+
 	'keydown input#searchQuery': (e)->
 		Meteor.defer ->
 			console.log "onchange search"
