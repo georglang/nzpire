@@ -56,11 +56,18 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true
 
   profile: (_id) ->
-    console.log "profile" + _id
+    console.log "profile id:" + _id
     Session.set "template", "profile"
     @navigate "profile/" + _id,
       trigger: true
-      replace: true    
+      replace: true
+
+  edit: (_id) ->
+    console.log "edit id:" + _id
+    Session.set "template", "edit"
+    @navigate "edit/" + _id,
+      trigger: true
+      replace: true      
 
   news: ->
     console.log "news"
