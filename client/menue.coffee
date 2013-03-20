@@ -1,29 +1,35 @@
 Template.menue.events
-	'click input#news': ->
+	'click #news': ->
 		console.log "clicked news"
 		Workspace.news()
+		false
 
-	'click input#home': ->
+	'click #home': ->
 		console.log "clicked home"
 		Workspace.index()
+		false
 
-	'click input#search': ->
+	'click #search': ->
 		console.log "clicked search"
 		Workspace.search encodeURIComponent(document.getElementById("searchQuery").value)
+		false
 
-	'click input#modelingspaceButton': ->
-		console.log "clicked modelingspace"
-		Workspace.modelingspace()
+	'click #modeling': ->
+		console.log "clicked modeling"
+		Workspace.modeling()
+		false
 
-	'click input#profile': ->
+	'click #profile': ->
 		console.log "clicked profile"
 		Workspace.profile(currentProfile()._id)
+		false
 
-	'click input#edit': ->
+	'click #edit': ->
 		console.log "clicked edit"
 		Workspace.edit(currentProfile()._id)
+		false
 
-	'keydown input#searchQuery': (e)->
+	'keydown #searchQuery': (e)->
 		Meteor.defer ->
 			console.log "onchange search"
 			searchQuery = document.getElementById("searchQuery").value
