@@ -24,6 +24,7 @@ Accounts.onCreateUser( (options,user)->
 
 			# Adds the service
 			Profiles.update {_id: checkedEmail[0]._id},{$push: updateObject}			
+			Profiles.update {_id: checkedEmail[0]._id},{$set: {updatedAt: new Date()}}
 		else
 			insertObject =
 				name: options.email
@@ -69,11 +70,15 @@ Accounts.onCreateUser( (options,user)->
 
 			# Adds the service
 			Profiles.update {_id: checkedEmail[0]._id},{$push: updateObject}
+			Profiles.update {_id: checkedEmail[0]._id},{$set: {updatedAt: new Date()}}
 
 		else
 			insertObject =
 				name: username
 				email: emails
+				following: []
+				favourites: []
+				updatedAt: new Date()
 				services: []
 			serviceObject = {}
 			serviceObject[service] = service_id

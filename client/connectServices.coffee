@@ -15,6 +15,7 @@ connectProfiles = (tmpEmail,loginFunction)->
 	# Adds the service and the email
 	Profiles.update {_id: tmpProfile._id},{$push: updateObject}
 	Profiles.update {_id: tmpProfile._id},{$push: {email: currentEmail()}}
+	Profiles.update {_id: tmpProfile._id},{$set: {updatedAt: new Date()}}
 	# Removes the created Profile
 	Profiles.remove {_id: newProfile._id}
 
