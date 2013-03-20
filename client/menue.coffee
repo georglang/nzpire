@@ -1,7 +1,7 @@
 Template.menue.events
-	'click input#help': ->
-		console.log "clicked help"
-		Workspace.help()
+	'click input#news': ->
+		console.log "clicked news"
+		Workspace.news()
 
 	'click input#home': ->
 		console.log "clicked home"
@@ -20,6 +20,8 @@ Template.menue.events
 			console.log "onchange search"
 			searchQuery = document.getElementById("searchQuery").value
 			if searchQuery.length > 2 || e.keyCode == 13
-				Workspace.search searchQuery
+				console.log encodeURIComponent(searchQuery)
+				Workspace.search encodeURIComponent(searchQuery)
 			else if searchQuery.length <= 2
 				$('#searchresult').empty()
+				Workspace.search ""
