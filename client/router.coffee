@@ -6,12 +6,13 @@ Template.page_controller.display_page = ->
 WorkspaceRouter = Backbone.Router.extend(
   routes:
     "index": "index"
-    "modelingspace/:id": "modelingspace"
+    "modeling/:id": "modeling"
     "help": "help" # #help
     "search": "search" # #search
     "search/:query": "search" # #search/kiwis
     "test/:abc/p:page": "test" # #search/kiwis/p7
     "profile/:_id" : "profile"
+    "news" : "news"
 
   index: ->
     console.log "index"
@@ -20,10 +21,10 @@ WorkspaceRouter = Backbone.Router.extend(
       trigger: true
       replace: true
 
-  modelingspace: (_id = "new")->
-    console.log "modelingspace"
-    Session.set "template", "modelingspace"
-    @navigate "modelingspace/" + _id,
+  modeling: (_id = "new")->
+    console.log "modeling"
+    Session.set "template", "modeling"
+    @navigate "modeling/" + _id,
       trigger: true
       replace: true
 
@@ -35,13 +36,16 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true
 
 
-  search: (query) ->
+  search: (query = " ") ->
     console.log "search " + query
     Session.set "template", "search"
-    Session.set "searchQuery", query
     @navigate "search/" + query,
       trigger: true
       replace: true
+    if query.charAt(0) == "%"
+      query = decodeURIComponent(query)
+    if query != " "    
+      Session.set "searchQuery", query
 
 
   test: (abc, page) ->
@@ -64,6 +68,12 @@ WorkspaceRouter = Backbone.Router.extend(
       trigger: true
       replace: true      
 
+  news: ->
+    console.log "news"
+    Session.set "template", "news"
+    @navigate "news",
+      trigger: true
+      replace: true
 )
 Workspace = new WorkspaceRouter()
 Meteor.startup ->

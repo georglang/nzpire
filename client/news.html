@@ -1,0 +1,8 @@
+<template name="news">
+	<div> NEWS TEMPLATE </div>
+	{{#if currentUser.services}}
+		{{#each getNews}}
+		<div> {{name}}_{{updatedAt}} </div>
+		{{/each}}
+	{{/if}}
+</template>
