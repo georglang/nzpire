@@ -3,7 +3,6 @@ Meteor.startup ->
 
 Accounts.onCreateUser( (options,user)->
 	# Email and Services are Arrays in the Profile Collections
-
 	# Function to check if the Email is already in our Profile Collection
 	checkForEmail = (email)->
 		Profiles.find(
@@ -27,7 +26,7 @@ Accounts.onCreateUser( (options,user)->
 			Profiles.update {_id: checkedEmail[0]._id},{$set: {updatedAt: new Date()}}
 		else
 			insertObject =
-				name: options.email
+				name: options.username
 				email: emails
 				services: []
 			serviceObject = {}
