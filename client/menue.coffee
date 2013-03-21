@@ -21,7 +21,7 @@ Template.menue.events
 
 	'click input#edit': ->
 		console.log "clicked edit"
-		Workspace.edit(currentProfile()._id)
+		Workspace.edit()
 
 	'keydown input#searchQuery': (e)->
 		Meteor.defer ->
