@@ -79,6 +79,7 @@ Accounts.onCreateUser( (options,user)->
 				favourites: []
 				updatedAt: new Date()
 				services: []
+				www: ""
 			serviceObject = {}
 			serviceObject[service] = service_id
 			insertObject.services.push(serviceObject)

@@ -3,3 +3,6 @@ Template.profile.userName = ->
 
 Template.profile.email = ->
 	currentEmail()
+
+Template.profile.www = ->
+	currentProfile().www
