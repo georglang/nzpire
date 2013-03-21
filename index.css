@@ -6,3 +6,24 @@
 .modelLink{
 	background-color:lightblue;
 }
+
+#searchQuery{
+	position: relative;
+	top:5px;
+}
+
+#login-name-link{
+	position: relative;
+	top: 9px;
+	margin-left: 15px;
+}
+
+#login-sign-in-link{
+	position: relative;
+	top: 9px;
+	margin-left: 15px;
+}
+
+.navbar{
+	margin-bottom: 0px;
+}
