@@ -58,10 +58,9 @@ WorkspaceRouter = Backbone.Router.extend(
       trigger: true
       replace: true
 
-  edit: (_id) ->
-    console.log "edit id:" + _id
+  edit: ->
     Session.set "template", "edit"
-    @navigate "edit/" + _id,
+    @navigate "edit/",
       trigger: true
       replace: true      
 
