@@ -75,6 +75,7 @@ Accounts.onCreateUser( (options,user)->
 				name: username
 				email: emails
 				services: []
+				www: ""
 			serviceObject = {}
 			serviceObject[service] = service_id
 			insertObject.services.push(serviceObject)
