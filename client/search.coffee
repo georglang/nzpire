@@ -39,6 +39,7 @@ order = (searchingFor,_id)->
 
 
 Template.search.getResults = ->
+	console.log Session.get("searchQuery")
 	searchingFor = Session.get("searchQuery").charAt(0)
 
 	if searchingFor == "@"
