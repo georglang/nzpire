@@ -2,23 +2,23 @@ camera = undefined
 lastMousePosition = undefined
 mouseDelta = undefined
 
-Template.modeling.events
+Template.model.events
   'click canvas': (e) ->
     Cubes.insert position: camera.position
 
-  'mouseover #modelingContainer': (e) ->
-    #$("#modelingContainer").focus()
+  'mouseover #modelContainer': (e) ->
+    #$("#modelContainer").focus()
 
-  'mouseout #modelingContainer': (e) ->
-    #$("#modelingContainer").blur()
+  'mouseout #modelContainer': (e) ->
+    #$("#modelContainer").blur()
 
-  'mousemove #modelingContainer': (e) ->
+  'mousemove #modelContainer': (e) ->
     #console.log e
 
-  'keydown #modelingContainer': (e) ->
+  'keydown #modelContainer': (e) ->
     #console.log 'keycode', e.keyCode
 
-Template.modeling.create = ->
+Template.model.create = ->
   Meteor.defer ->
     $(window).resize ->
       WIDTH = container.width()
@@ -29,7 +29,7 @@ Template.modeling.create = ->
       camera.aspect = ASPECT
       camera.updateProjectionMatrix();
 
-    container = $ "#modelingContainer"
+    container = $ "#modelContainer"
 
     # camera attributes
     VIEW_ANGLE = 45
@@ -78,7 +78,7 @@ Template.modeling.create = ->
     container.append renderer.domElement
 
     render = ->
-      if Session.get("template") == "modeling"
+      if Session.get("template") == "model"
         renderer.render scene, camera
         controls.update clock.getDelta()
       requestAnimationFrame render
