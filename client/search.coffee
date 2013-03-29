@@ -39,7 +39,7 @@ order = (searchingFor,_id)->
 
 
 Template.search.getResults = ->
-	console.log Session.get("searchQuery")
+	#console.log Session.get("searchQuery")
 	searchingFor = Session.get("searchQuery").charAt(0)
 
 	if searchingFor == "@"
@@ -69,7 +69,7 @@ Template.search.events
 		Workspace.profile e.target.id
 
 	'click div.modelLink': (e)->
-		Workspace.modelingspace e.target.id
+		Workspace.model e.target.id
 
 	'click div.follow': (e)->
 		Profiles.update {_id: currentProfile()._id},{$push: {following: e.target.id}}
