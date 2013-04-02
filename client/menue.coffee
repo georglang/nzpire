@@ -22,21 +22,18 @@ Template.menue.events
 
 	'click #createNewModel': ->
 		modelName = $('#modelName').val()
-		if $('#modelNameAlreadyTaken')[0] != undefined
-			$('#modelNameAlreadyTaken').remove()
+		if $('#errorNewModel')[0] != undefined
+			$('#errorNewModel').remove()
 
-		if modelName != ""
-			checkForAvailability = Models.findOne
-				name: modelName
-			console.log checkForAvailability
-			if checkForAvailability == undefined
-				console.log currentProfile().name
-				newModelId = Models.insert({name: modelName,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:currentProfile()._id,invited:[],predecessor:"",isPublic:false})
-				$('#newModel')[0].remove()
-				Workspace.model(newModelId)
+		options = {name: modelName, predecessor: "", creator: currentProfile()._id,isPublic: false}
+		Meteor.call 'createModel',options, (error,result)->
+			if error
+				$('#createNewModel').after("<div id='errorNewModel'>"+error.reason+"</div>")
 			else
-				console.log "else"
-				$('#createNewModel').after("<div id='modelNameAlreadyTaken'>Modelname not available</div>")
+				$('#newModel')[0].remove()
+				Workspace.model(result)
+		
+				
 
 	'click #profile': ->
 		console.log "clicked profile"

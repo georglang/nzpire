@@ -1,6 +1,5 @@
 findModelById = (_id)->
-	Models.findOne
-		_id: _id	
+	findOneModelByOptions {_id:_id}
 
 findProfileById = (_id)->
 	Profiles.findOne
@@ -9,20 +8,20 @@ findProfileById = (_id)->
 
 
 Template.model.isOwner = ->
-	if currentProfile()._id == findModelById(Session.get 'model').creator
+	if currentProfile()._id == findOneModelByOptions({_id: Session.get('model')}).creator
 		return true
 	else
 		return false
 
 Template.model.modelname = ->
-	name = findModelById(Session.get 'model').name
+	name = findOneModelByOptions({_id: Session.get('model')}).name
 	if name != undefined
 		return name
 	else
 		return null
 
 Template.model.updatedAt = ->
-	updatedAt = findModelById(Session.get 'model').updatedAt
+	updatedAt = findOneModelByOptions({_id: Session.get('model')}).updatedAt
 	if updatedAt != undefined
 		d = new Date(updatedAt)
 		return d.toUTCString()
@@ -30,7 +29,7 @@ Template.model.updatedAt = ->
 		return null
 
 Template.model.tags = ->
-	tags = findModelById(Session.get 'model').tags
+	tags = findOneModelByOptions({_id: Session.get('model')}).tags
 
 	if tags != undefined
 		if Template.model.isOwner()		
@@ -40,7 +39,7 @@ Template.model.tags = ->
 		return null
 
 Template.model.creator = ->
-	creatorId = findModelById(Session.get 'model').creator
+	creatorId = findOneModelByOptions({_id: Session.get('model')}).creator
 	if creatorId != ""
 		name = findProfileById(creatorId).name
 		return name
@@ -49,7 +48,7 @@ Template.model.creator = ->
 
 Template.model.invited = ->
 	names = []
-	invitedPeople = findModelById(Session.get 'model').invited
+	invitedPeople = findOneModelByOptions({_id: Session.get('model')}).invited
 	if invitedPeople != undefined
 		names.push(findProfileById(i.userId).name) for i in invitedPeople
 		if Template.model.isOwner()
@@ -59,7 +58,7 @@ Template.model.invited = ->
 		return null
 
 Template.model.predecessor = ->
-	predecessorId = findModelById(Session.get 'model').predecessor
+	predecessorId = findOneModelByOptions({_id: Session.get('model')}).predecessor
 	if predecessorId != ""
 		name = findModelById(predecessorId).name
 		return name
@@ -67,7 +66,7 @@ Template.model.predecessor = ->
 		return null
 	
 Template.model.isPublic = ->
-	isPublic = findModelById(Session.get 'model').isPublic
+	isPublic = findOneModelByOptions({_id: Session.get('model')}).isPublic
 	if isPublic != undefined
 		return isPublic
 	else
@@ -81,71 +80,62 @@ Template.model.events
 				$(e.target).replaceWith("<input autofocus='autofocus' id='editModelName' type='text' value='"+Template.model.modelname()+"'>")
 			else if className == 'tags'
 				tagName = $(e.target).html()
-				if tagName.length > 0
-					Models.update({_id: Session.get 'model'},{$pull: {tags: tagName}})
-				else if tagName.length == 0
+				if tagName.length == 0
 					$(e.target).replaceWith("<input autofocus='autofocus' id='addTag' type='text' placeholder='Tagname'>")
+				else
+					options = {_id: Session.get('model'),tag: tagName}
+					Meteor.call 'removeModelTag', options, (error,result)->
+						if error
+							console.log error.reason
 			else if className == 'invited'
 				invitedName = $(e.target).html()
-				if invitedName.length > 0
-					Models.update({_id: Session.get 'model'},{$pull: {invited: invitedName}})
-				else if invitedName.length == 0
-					$(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'>")				
-			else if className == 'isPublic'
-				if Template.model.isPublic() == false
-					isPublic = true
+				if invitedName.length == 0
+					$(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'>")
 				else
-					isPublic = false
-				Models.update({_id: Session.get('model')},{$set: {isPublic: isPublic}})
-
+					options = {_id: Session.get('model'),invite: invitedName}
+					Meteor.call 'removeModelInvite', options, (error,result)->
+						if error
+							console.log error.reason
+			else if className == 'isPublic'
+				options = {_id: Session.get('model'),isPublic: Template.model.isPublic()}
+				Meteor.call 'updateModelIsPublic',options, (error,result)->
+					if error
+						console.log error.reason
 
 	'blur #editModelName': (e)->
-		if e.target.value.length > 3
-	 		checkForAvailability = Models.findOne({name: e.target.value})
-			if $('#modelNameAlreadyTaken')[0] != undefined
-				$('#modelNameAlreadyTaken').remove()			
-			if checkForAvailability == undefined
-				Models.update({_id: Session.get('model')},{$set: {name: e.target.value}})
-			else
-				$('#editModelName').after("<div id='modelNameAlreadyTaken'>Modelname not available</div>")
+		modelName = e.target.value
+		if modelName.length > 3
+			if $('#errorUpdateModelName')[0] != undefined
+				$('#errorUpdateModelName').remove()	
+
+			options = {_id:Session.get('model'),name: modelName}
+			Meteor.call 'updateModelName', options, (error,result) ->
+				if error
+					$('#editModelName').after("<div id='errorUpdateModelName'>"+error.reason+"</div>")
 
 	'keydown #editModelName': (e)->
 		if e.keyCode == 13
 			$('#editModelName').blur()
 
 	'blur #addTag': (e)->
-		if e.target.value.length > 3
-			checkForAvailability = Models.findOne({tags: e.target.value})
-			if $('#tagAlreadyTaken')[0] != undefined
-				$('#tagAlreadyTaken').remove()			
-			if checkForAvailability == undefined
-				Models.update({_id: Session.get('model')},{$push: {tags: e.target.value}})
-			else
-				$('#addTag').after("<div id='tagAlreadyTaken'>Tag already defined</div>")
+		if $('#errorUpdateTag')[0] != undefined
+			$('#errorUpdateTag').remove()			
+		options = {_id: Session.get('model'),tag: e.target.value}
+		Meteor.call 'updateModelTag', options, (error,result)->
+			if error
+				$('#addTag').after("<div id='errorUpdateTag'>"+error.reason+"</div>")			
 
 	'keydown #addTag': (e)->
 		if e.keyCode == 13
 			$('#addTag').blur()
 
 	'blur #addInvite': (e)->
-		if e.target.value.length > 3
-			checkForAvailability = Profiles.findOne({name: e.target.value})
-
-			if checkForAvailability != undefined
-				invitedProfileId = checkForAvailability._id
-				findObject = {userId: invitedProfileId}
-				checkAlreadyInvited = Models.findOne({_id: Session.get('model'),invited: findObject})
-
-			if $('#errorInvited')[0] != undefined
-				$('#errorInvited').remove()							
-
-			if checkForAvailability == undefined
-				$('#addInvite').after("<div id='errorInvited'>Username does not exist</div>")
-			else if checkAlreadyInvited != undefined
-				$('#addInvite').after("<div id='errorInvited'>User already invited</div>")
-			else
-				updateObject = {userId: invitedProfileId}
-				Models.update({_id: Session.get('model')},{$push: {invited: updateObject}})			
+		if $('#errorUpdateInvite')[0] != undefined
+			$('#errorUpdateInvite').remove()				
+		options = {_id: Session.get('model'),invite: e.target.value}
+		Meteor.call 'updateModelInvite',options, (error,result)->
+			if error
+				$('#addInvite').after("<div id='errorUpdateInvite'>"+error.reason+"</div>")		
 
 	'keydown #addInvite': (e)->
 		if e.keyCode == 13
@@ -162,17 +152,15 @@ Template.model.events
 
 	'click #createCloneModel': ->
 		modelName = $('#cloneModelName').val()
-		if $('#modelNameAlreadyTaken')[0] != undefined
-			$('#modelNameAlreadyTaken').remove()
+		if $('#errorCloneModel')[0] != undefined
+			$('#errorCloneModel').remove()
 
-		if modelName != ""
-			checkForAvailability = Models.findOne
-				name: modelName
-			if checkForAvailability == undefined
-				newModelId = Models.insert({name: modelName,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:currentProfile()._id,invited:[],predecessor:Session.get('model'),isPublic:false})
-				Workspace.model(newModelId)
+		options = {name: modelName, predecessor: Session.get('model'), creator: currentProfile()._id,isPublic: false}
+		Meteor.call 'createModel',options, (error,result)->
+			if error
+				$('#createNewModel').after("<div id='errorCloneModel'>"+error.reason+"</div>")
 			else
-				$('#createCloneModel').after("<div id='modelNameAlreadyTaken'>Modelname not available</div>")
+				Workspace.model(result)
 
 Template.model.profilesList = ->
 	Profiles.find({})
