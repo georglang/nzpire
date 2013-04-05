@@ -8,6 +8,7 @@ WorkspaceRouter = Backbone.Router.extend(
   routes:
     "index": "index"
     "model/:id": "model"
+    "model/:id/edit": "modelEdit"
     "help": "help" # #help
     "search": "search" # #search
     "search/:query": "search" # #search/kiwis
@@ -22,11 +23,19 @@ WorkspaceRouter = Backbone.Router.extend(
       trigger: true
       replace: true
 
-  model: (_id = "new")->
+  model: (_id)->
     console.log "model"
     Session.set "template", "model"
     Session.set "model", _id
     @navigate "model/" + _id,
+      trigger: true
+      replace: true
+
+  modelEdit: (_id)->
+    console.log "modelEdit"
+    Session.set "template", "modelEdit"
+    Session.set "model", _id
+    @navigate "model/" + _id + "/edit"
       trigger: true
       replace: true
 
