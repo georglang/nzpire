@@ -1,9 +1,11 @@
 camera = undefined
 lastMousePosition = undefined
 mouseDelta = undefined
+cubesNode = new THREE.Object3D()
 
 Template.model.events
   'click canvas': (e) ->
+    console.log 'inserting cube into the scene'
     Cubes.insert position: camera.position
 
   'mouseover #modelContainer': (e) ->
@@ -16,7 +18,10 @@ Template.model.events
     #console.log e
 
   'keydown #modelContainer': (e) ->
-    #console.log 'keycode', e.keyCode
+    # if 'l' is pressed delete all Cubes
+    if e.keyCode is 76
+      console.log 'removing all cubes from the scene'
+      Cubes.remove {}
 
 Template.model.create = ->
   Meteor.defer ->
@@ -30,6 +35,7 @@ Template.model.create = ->
       camera.updateProjectionMatrix();
 
     container = $ "#modelContainer"
+    container.focus()
 
     # camera attributes
     VIEW_ANGLE = 45
@@ -41,7 +47,7 @@ Template.model.create = ->
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR)
     $(window).resize()
 
-    controls = new THREE.FlyControls camera, renderer.domElement
+    controls = new THREE.FlyControls camera, document.getElementById 'modelContainer'
     controls.movementSpeed = 1000
     controls.rollSpeed = 1.0
     controls.dragToLook = true
@@ -52,7 +58,9 @@ Template.model.create = ->
     scene.add camera
     camera.position.z = 300
 
-    cubeMaterial = new THREE.MeshLambertMaterial(color: 0xCC0000)
+    scene.add cubesNode
+
+    cubeMaterial = new THREE.MeshLambertMaterial color: 0xCC0000
 
     x = -1
 
@@ -66,7 +74,7 @@ Template.model.create = ->
 
         while z < 2
           ++z
-          pointLight = new THREE.PointLight(0xFFFFFF)
+          pointLight = new THREE.PointLight 0xFFFFFF
           pointLight.position.x = x * 400
           pointLight.position.y = z * 400
           pointLight.position.z = y * 400
@@ -86,14 +94,17 @@ Template.model.create = ->
     render()
 
     Meteor.autorun ->
+      console.log "running model autorun ..."
       cubes = Cubes.find().fetch()
-      #console.log cubes
-      scene.children.forEach (child) ->
-        scene.remove child
-      scene.add pointLight
+
+      numOfCubes = cubesNode.children.length
+      c = 0
+      while c < numOfCubes
+        ++c
+        cubesNode.remove cubesNode.children[0]
 
       cubes.forEach (cube) ->
         cubeMesh = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), cubeMaterial)
         cubeMesh.position = cube.position
 
-        scene.add cubeMesh
+        cubesNode.add cubeMesh
