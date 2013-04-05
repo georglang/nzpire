@@ -25,7 +25,7 @@
         <ul>
           {{#each invited}}          
             <li>
-              <div class="invited">{{this}}</div>
+              <div class="invited">{{this.name}}</div>
             </li>
           {{/each}}
         </ul>
@@ -79,4 +79,11 @@
   {{/each}}
 </datalist>
 
+</template>
+
+
+<template name="modelEdit">
+  {{#if currentUser.services}}
+    {{test}}
+  {{/if}}
 </template>

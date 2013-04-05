@@ -1,12 +1,3 @@
-findModelById = (_id)->
-	findOneModelByOptions {_id:_id}
-
-findProfileById = (_id)->
-	Profiles.findOne
-		_id: _id
-
-
-
 Template.model.isOwner = ->
 	if currentProfile()._id == findOneModelByOptions({_id: Session.get('model')}).creator
 		return true
@@ -41,7 +32,7 @@ Template.model.tags = ->
 Template.model.creator = ->
 	creatorId = findOneModelByOptions({_id: Session.get('model')}).creator
 	if creatorId != ""
-		name = findProfileById(creatorId).name
+		name = findOneProfileByOptions({_id: creatorId}).name
 		return name
 	else
 		return null
@@ -50,9 +41,9 @@ Template.model.invited = ->
 	names = []
 	invitedPeople = findOneModelByOptions({_id: Session.get('model')}).invited
 	if invitedPeople != undefined
-		names.push(findProfileById(i.userId).name) for i in invitedPeople
+		names.push({name: findOneProfileByOptions({_id: i.userId}).name,role: i.role}) for i in invitedPeople
 		if Template.model.isOwner()
-			names.push ""
+			names.push {name:"",role:""}
 		return names
 	else
 		return null
@@ -60,7 +51,7 @@ Template.model.invited = ->
 Template.model.predecessor = ->
 	predecessorId = findOneModelByOptions({_id: Session.get('model')}).predecessor
 	if predecessorId != ""
-		name = findModelById(predecessorId).name
+		name = findOneModelByOptions({_id:predecessorId}).name
 		return name
 	else
 		return null
@@ -89,8 +80,9 @@ Template.model.events
 							console.log error.reason
 			else if className == 'invited'
 				invitedName = $(e.target).html()
+				console.log invitedName
 				if invitedName.length == 0
-					$(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'>")
+					$(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><select id='invitedRole'><option value='owner'>Owner</option><option value='collaborator'>Collaborator</option><option value='viewer'>Viewer</option></select>")
 				else
 					options = {_id: Session.get('model'),invite: invitedName}
 					Meteor.call 'removeModelInvite', options, (error,result)->
@@ -132,7 +124,8 @@ Template.model.events
 	'blur #addInvite': (e)->
 		if $('#errorUpdateInvite')[0] != undefined
 			$('#errorUpdateInvite').remove()				
-		options = {_id: Session.get('model'),invite: e.target.value}
+		role = $('#invitedRole').val()
+		options = {_id: Session.get('model'),invite: e.target.value,role:role}
 		Meteor.call 'updateModelInvite',options, (error,result)->
 			if error
 				$('#addInvite').after("<div id='errorUpdateInvite'>"+error.reason+"</div>")		
@@ -148,6 +141,9 @@ Template.model.events
 		Profiles.update {_id: currentProfile()._id},{$pull:{favourites: Session.get('model')}}
 
 	'click #clone': (e)->
+		if $('#cloneModelName')[0] != undefined
+			$('#cloneModelName').remove()
+			$('#createCloneModel').remove()
 		$(e.target).after("<input type='text' id='cloneModelName' placeholder='Enter Modelname'><input type='button' id='createCloneModel' value='Create Clone'>")
 
 	'click #createCloneModel': ->
@@ -163,11 +159,16 @@ Template.model.events
 				Workspace.model(result)
 
 Template.model.profilesList = ->
-	Profiles.find({})
+	return Profiles.find({})
 
 Template.model.isFavourited = ->
-	favourited = Profiles.findOne({_id: currentProfile()._id,favourites: Session.get('model')})
+	favourited = findOneProfileByOptions({_id: currentProfile()._id,favourites: Session.get('model')})
 	if favourited == undefined
 		return true
 	else
 		return false
+
+
+Template.modelEdit.test = ->
+	console.log "test"
+	checkModelEditPermission(Session.get('model'))
