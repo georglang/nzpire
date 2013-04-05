@@ -47,11 +47,10 @@ Meteor.methods
 		if invitedProfile == undefined
 			throw new Meteor.Error(496, "Username does not exist");
 		else
-			findObject = {userId: invitedProfile._id}
-			checkAlreadyInvited = Models.findOne({_id: options._id,invited: findObject})
-			
+			findObject = {userId: invitedProfile._id, role:".*"}
+			checkAlreadyInvited = Models.findOne({_id: options._id,invited: findObject})	
 		if checkAlreadyInvited == undefined
-			updateObject = {userId: invitedProfile._id}
+			updateObject = {userId: invitedProfile._id, role: options.role}
 			Models.update({_id: options._id},{$push: {invited: updateObject}})				
 		else
 			throw new Meteor.Error(498, "User already invited")		
@@ -66,7 +65,12 @@ Meteor.methods
 		if options._id == undefined || options.invite == undefined
 			throw new Meteor.Error(490, "Undefined Parameter");
 		else
-			return Models.update({_id: options._id},{$pull: {invited: options.invite}})
+			profile = findOneProfileByOptions({name: options.invite})
+			if profile == undefined
+				throw new Meteor.Error(496, "Username does not exist");
+			else
+				removeObject = {invited:{userId:profile._id}}
+				return Models.update({_id: options._id},{$pull: removeObject})
 
 
 
@@ -77,3 +81,42 @@ findModelByName = (name)->
 
 findOneModelByOptions = (options)->
 	return Models.findOne(options)
+
+checkModelEditPermission = (modelId)->
+	console.log "in checkModelEditPermission"
+
+	options = {_id: modelId}
+	invitedArray = findOneModelByOptions(options).invited
+	if invitedArray != undefined
+		isInvited = $.grep(invitedArray,(e)->
+			return e.userId == currentProfile()._id
+			)
+	isCreator = findOneModelByOptions({_id:modelId,creator: currentProfile()._id})
+	console.log isCreator
+	console.log isInvited
+	if isInvited == undefined && isCreator == undefined
+		console.log "return 0"
+		Workspace.index()
+		return 0
+	else if isCreator
+		console.log "return 1"
+		return 1
+	else if isInvited != undefined	
+		if isInvited[0].role == "owner"
+			console.log "return 1"
+			return 1
+		else if isInvited[0].role == "collaborator"
+			console.log "return 2"
+			return 2
+		else if isInvited[0].role == "viewer"
+			console.log "return 3"
+			Workspace.model(Session.get('model'))
+			return 3
+		else
+			console.log "return 0"
+			Workspace.index()
+			return 0
+	else
+		console.log "return 0"
+		Workspace.index()
+		return 0	
