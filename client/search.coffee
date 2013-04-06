@@ -11,8 +11,13 @@ searchForProfiles = (searchQuery)->
 	###
 
 searchForModels = (searchQuery)->
-	Models.find
-		name: eval(searchQuery)
+	tmpResult = Models.find({name: eval(searchQuery)}).fetch()
+	modelsResult = []
+	tmpResult.forEach (i)->
+		permission = checkModelPermission i._id
+		if permission > Roles.none
+			modelsResult.push i
+	return modelsResult
 
 checkForFollowing = (_id)->
 	Profiles.find
@@ -39,23 +44,22 @@ order = (searchingFor,_id)->
 
 
 Template.search.getResults = ->
-	#console.log Session.get("searchQuery")
 	searchingFor = Session.get("searchQuery").charAt(0)
 
 	if searchingFor == "@"
 		searchQuery = "/" + Session.get("searchQuery").slice(1) + "/i"
-		result = searchForProfiles(searchQuery).fetch()
+		result = searchForProfiles(searchQuery)
 		i.searchingFor = "profileLink" for i in result
 		i.order = order("profileLink",i._id) for i in result
 	else if searchingFor == "#"
 	  searchQuery = "/" + Session.get("searchQuery").slice(1) + "/i"
-	  result = searchForModels(searchQuery).fetch()
+	  result = searchForModels(searchQuery)
 	  i.searchingFor = "modelLink" for i in result
 	  i.order = order("modelLink",i._id) for i in result
 	else
 		searchQuery = "/" + Session.get("searchQuery") + "/i"
 		result = searchForProfiles(searchQuery).fetch()
-		result2 = searchForModels(searchQuery).fetch()
+		result2 = searchForModels(searchQuery)
 		i.searchingFor = "profileLink" for i in result
 		i.order = order("profileLink", i._id) for i in result
 		i.searchingFor = "modelLink" for i in result2

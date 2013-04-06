@@ -1,17 +1,22 @@
-Template.model.isOwner = ->
+Template.model.handleModelPermission = ->
+	permission = checkModelPermission(Session.get('model'))
+	if permission <= Roles.none
+		Workspace.index()
+
+Template.modelSidebar.isOwner = ->
 	if currentProfile()._id == findOneModelByOptions({_id: Session.get('model')}).creator
 		return true
 	else
 		return false
 
-Template.model.modelname = ->
+Template.modelSidebar.modelname = ->
 	name = findOneModelByOptions({_id: Session.get('model')}).name
 	if name != undefined
 		return name
 	else
 		return null
 
-Template.model.updatedAt = ->
+Template.modelSidebar.updatedAt = ->
 	updatedAt = findOneModelByOptions({_id: Session.get('model')}).updatedAt
 	if updatedAt != undefined
 		d = new Date(updatedAt)
@@ -19,17 +24,17 @@ Template.model.updatedAt = ->
 	else
 		return null
 
-Template.model.tags = ->
+Template.modelSidebar.tags = ->
 	tags = findOneModelByOptions({_id: Session.get('model')}).tags
 
 	if tags != undefined
-		if Template.model.isOwner()		
+		if Template.modelSidebar.isOwner()		
 			tags.push ""
 		return tags
 	else
 		return null
 
-Template.model.creator = ->
+Template.modelSidebar.creator = ->
 	creatorId = findOneModelByOptions({_id: Session.get('model')}).creator
 	if creatorId != ""
 		name = findOneProfileByOptions({_id: creatorId}).name
@@ -37,18 +42,18 @@ Template.model.creator = ->
 	else
 		return null
 
-Template.model.invited = ->
+Template.modelSidebar.invited = ->
 	names = []
 	invitedPeople = findOneModelByOptions({_id: Session.get('model')}).invited
 	if invitedPeople != undefined
 		names.push({name: findOneProfileByOptions({_id: i.userId}).name,role: i.role}) for i in invitedPeople
-		if Template.model.isOwner()
+		if Template.modelSidebar.isOwner()
 			names.push {name:"",role:""}
 		return names
 	else
 		return null
 
-Template.model.predecessor = ->
+Template.modelSidebar.predecessor = ->
 	predecessorId = findOneModelByOptions({_id: Session.get('model')}).predecessor
 	if predecessorId != ""
 		name = findOneModelByOptions({_id:predecessorId}).name
@@ -56,19 +61,19 @@ Template.model.predecessor = ->
 	else
 		return null
 	
-Template.model.isPublic = ->
+Template.modelSidebar.isPublic = ->
 	isPublic = findOneModelByOptions({_id: Session.get('model')}).isPublic
 	if isPublic != undefined
 		return isPublic
 	else
 		return null
 
-Template.model.events
+Template.modelSidebar.events
 	'click #slideContainerListItems>li>ul>li': (e)->
-		if Template.model.isOwner()
+		if Template.modelSidebar.isOwner()
 			className = e.target.className
 			if className == 'modelname'
-				$(e.target).replaceWith("<input autofocus='autofocus' id='editModelName' type='text' value='"+Template.model.modelname()+"'>")
+				$(e.target).replaceWith("<input autofocus='autofocus' id='editModelName' type='text' value='"+Template.modelSidebar.modelname()+"'>")
 			else if className == 'tags'
 				tagName = $(e.target).html()
 				if tagName.length == 0
@@ -89,7 +94,7 @@ Template.model.events
 						if error
 							console.log error.reason
 			else if className == 'isPublic'
-				options = {_id: Session.get('model'),isPublic: Template.model.isPublic()}
+				options = {_id: Session.get('model'),isPublic: Template.modelSidebar.isPublic()}
 				Meteor.call 'updateModelIsPublic',options, (error,result)->
 					if error
 						console.log error.reason
@@ -158,10 +163,10 @@ Template.model.events
 			else
 				Workspace.model(result)
 
-Template.model.profilesList = ->
+Template.modelSidebar.profilesList = ->
 	return Profiles.find({})
 
-Template.model.isFavourited = ->
+Template.modelSidebar.isFavourited = ->
 	favourited = findOneProfileByOptions({_id: currentProfile()._id,favourites: Session.get('model')})
 	if favourited == undefined
 		return true
@@ -169,6 +174,11 @@ Template.model.isFavourited = ->
 		return false
 
 
-Template.modelEdit.test = ->
-	console.log "test"
-	checkModelEditPermission(Session.get('model'))
+Template.modelEdit.handleModelPermission = ->
+	#console.log "handleModelPermission"
+	#console.log checkModelPermission(Session.get('model'))
+	permission = checkModelPermission(Session.get('model'))
+	if permission < Roles.viewer
+		Workspace.model('index')
+	else if permission < Roles.collaborator
+		Workspace.model(Session.get('model'))

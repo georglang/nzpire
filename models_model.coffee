@@ -47,8 +47,7 @@ Meteor.methods
 		if invitedProfile == undefined
 			throw new Meteor.Error(496, "Username does not exist");
 		else
-			findObject = {userId: invitedProfile._id, role:".*"}
-			checkAlreadyInvited = Models.findOne({_id: options._id,invited: findObject})	
+			checkAlreadyInvited = Models.findOne({'invited.userId':invitedProfile._id})
 		if checkAlreadyInvited == undefined
 			updateObject = {userId: invitedProfile._id, role: options.role}
 			Models.update({_id: options._id},{$push: {invited: updateObject}})				
@@ -82,41 +81,40 @@ findModelByName = (name)->
 findOneModelByOptions = (options)->
 	return Models.findOne(options)
 
-checkModelEditPermission = (modelId)->
-	console.log "in checkModelEditPermission"
-
+checkModelPermission = (modelId) ->
+	#console.log "checkModelPermission"
 	options = {_id: modelId}
-	invitedArray = findOneModelByOptions(options).invited
-	if invitedArray != undefined
-		isInvited = $.grep(invitedArray,(e)->
-			return e.userId == currentProfile()._id
-			)
+	model = findOneModelByOptions(options)
 	isCreator = findOneModelByOptions({_id:modelId,creator: currentProfile()._id})
-	console.log isCreator
-	console.log isInvited
-	if isInvited == undefined && isCreator == undefined
-		console.log "return 0"
-		Workspace.index()
-		return 0
-	else if isCreator
-		console.log "return 1"
-		return 1
-	else if isInvited != undefined	
-		if isInvited[0].role == "owner"
-			console.log "return 1"
-			return 1
-		else if isInvited[0].role == "collaborator"
-			console.log "return 2"
-			return 2
-		else if isInvited[0].role == "viewer"
-			console.log "return 3"
-			Workspace.model(Session.get('model'))
-			return 3
-		else
-			console.log "return 0"
-			Workspace.index()
-			return 0
+	if model.invited != undefined
+		isInvited = $.grep(model.invited,(e)->
+			return e.userId == currentProfile()._id
+		)
+		if isInvited.length > 0
+			if isInvited[0].role == "owner"
+				#console.log "owner"
+				return Roles.owner
+			else if isInvited[0].role == "collaborator"
+				#console.log "collaborator"
+				return Roles.collaborator
+			else if isInvited[0].role == "viewer"
+				#console.log "viewer"
+				return Roles.viewer
+	if isCreator
+		#console.log "creator"
+		return Roles.creator
 	else
-		console.log "return 0"
-		Workspace.index()
-		return 0	
+		if model.isPublic == true
+			#console.log "isPublic true"
+			return Roles.viewer
+		else
+			return Roles.none	
+
+Roles =
+	none: 0,
+	viewer: 1,
+	collaborator: 2,
+	creator: 3,
+	owner: 3
+  
+  
