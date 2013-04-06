@@ -54,3 +54,7 @@ Template.menue.events
 			else if searchQuery.length <= 2
 				$('#searchresult').empty()
 				Workspace.search ""
+
+	'click #login-buttons-logout': ()->
+		console.log "logout"
+		Workspace.index()
