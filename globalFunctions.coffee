@@ -1,7 +1,7 @@
-currentProfile = ->
+@currentProfile = ->
 	Profiles.find(
 		email: currentEmail()
 	).fetch()[0]	
 
-currentEmail = ->
+@currentEmail = ->
 	Meteor.user().mail[0]

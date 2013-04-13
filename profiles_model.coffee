@@ -1,4 +1,4 @@
-Profiles = new Meteor.Collection 'profiles'
+@Profiles = new Meteor.Collection 'profiles'
 
-findOneProfileByOptions = (options)->
+@findOneProfileByOptions = (options)->
 	return Profiles.findOne(options)

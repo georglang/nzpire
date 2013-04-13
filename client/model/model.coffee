@@ -1,7 +1,7 @@
 camera = undefined
 lastMousePosition = undefined
 mouseDelta = undefined
-cubesNode = new THREE.Object3D()
+cubesNode = undefined
 
 Template.model.events
   'click canvas': (e) ->
@@ -25,6 +25,8 @@ Template.model.events
 
 Template.model.create = ->
   Meteor.defer ->
+    cubesNode = new THREE.Object3D()
+
     $(window).resize ->
       WIDTH = container.width()
       HEIGHT = container.height()

@@ -1,5 +1,5 @@
-Cubes = new Meteor.Collection 'cubes'
-Models = new Meteor.Collection 'models'
+@Cubes = new Meteor.Collection 'cubes'
+@Models = new Meteor.Collection 'models'
 
 
 Meteor.methods
@@ -75,13 +75,13 @@ Meteor.methods
 
 
 
-findModelByName = (name)->
+@findModelByName = (name)->
 	return Models.findOne({name: name})
 
-findOneModelByOptions = (options)->
+@findOneModelByOptions = (options)->
 	return Models.findOne(options)
 
-checkModelPermission = (modelId) ->
+@checkModelPermission = (modelId) ->
 	#console.log "checkModelPermission"
 	options = {_id: modelId}
 	model = findOneModelByOptions(options)
@@ -110,7 +110,7 @@ checkModelPermission = (modelId) ->
 		else
 			return Roles.none	
 
-Roles =
+@Roles =
 	none: 0,
 	viewer: 1,
 	collaborator: 2,

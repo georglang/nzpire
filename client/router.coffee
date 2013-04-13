@@ -83,6 +83,6 @@ WorkspaceRouter = Backbone.Router.extend(
       trigger: true
       replace: true
 )
-Workspace = new WorkspaceRouter()
+@Workspace = new WorkspaceRouter()
 Meteor.startup ->
   Backbone.history.start pushState: true
