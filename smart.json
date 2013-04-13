@@ -6,6 +6,11 @@
   "packages": {
     "three": {
       "path": "packages/three"
-    }
+    },
+    "keybindings": {},
+    "tracker": {},
+    "jquery-rateit": {},
+    "versioning": {},
+    "accounts-ui-bootstrap-dropdown": {}
   }
 }
