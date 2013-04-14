@@ -16,7 +16,7 @@ If not already done, install Pygments (syntax highlighter) and groc (documentati
 
 Now, create the documentation and upload it as the [project's github pages](http://spontaneousorder.github.io/qpt2b) by entering the following command from the repository's root folder:
 
-`groc --github "app/**/*.coffee" app/README.md`
+`groc "app/**/*.coffee" app/README.md --github`
 
 They will now be available under:
 
