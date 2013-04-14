@@ -26,7 +26,9 @@ WorkspaceRouter = Backbone.Router.extend(
   model: (_id)->
     console.log "model"
     Session.set "template", "model"
-    Session.set "model", _id
+    Session.set "modelId", _id
+    Meteor.subscribe 'model', Session.get 'modelId'
+      
     @navigate "model/" + _id,
       trigger: true
       replace: true
@@ -46,7 +48,6 @@ WorkspaceRouter = Backbone.Router.extend(
       trigger: true
       replace: true
 
-
   search: (query) ->
     console.log "search " + query 
     Session.set "searchQuery", decodeURIComponent(query)    
@@ -54,7 +55,6 @@ WorkspaceRouter = Backbone.Router.extend(
     @navigate "search/" + query,
       trigger: true
       replace: true
-
 
   test: (abc, page) ->
     console.log "test " + abc + " " + page

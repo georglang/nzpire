@@ -10,8 +10,13 @@ Meteor.publish "userData", ->
 Meteor.publish "allProfiles", ->
 	Profiles.find({})
 
-Meteor.publish "allCubes", ->
-	Cubes.find({})
-
 Meteor.publish "allModels", ->
 	Models.find({})
+
+Meteor.publish 'model', (modelId) ->
+  return  Models.find _id: modelId
+
+Meteor.publish 'modelContent', (modelContentId) ->
+  modelContent = ModelContents.find _id: modelContentId
+  console.log 'model content', modelContent
+  return modelContent

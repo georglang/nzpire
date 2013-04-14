@@ -1,6 +1,5 @@
-@Cubes = new Meteor.Collection 'cubes'
 @Models = new Meteor.Collection 'models'
-
+@ModelContents = new Meteor.Collection 'modelContents', versioned: true
 
 Meteor.methods
 	createModel: (options)->
@@ -8,7 +7,9 @@ Meteor.methods
 		if checkNameAvailability
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
-			return Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic})
+			contentId = ModelContents.insert({objects:[]})
+			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,contentId:contentId})
+			return modelId
 
 	updateModelName: (options)->
 		checkNameAvailability = findModelByName options.name
@@ -71,8 +72,14 @@ Meteor.methods
 				removeObject = {invited:{userId:profile._id}}
 				return Models.update({_id: options._id},{$pull: removeObject})
 
-
-
+	addObjectToModelContent: (options)->
+		if not options._id or not options.object
+			throw new Meteor.Error(490, "Undefined Parameter")
+		else
+			ModelContents.update {_id: options._id},
+				$push:
+					objects:
+						options.object
 
 
 @findModelByName = (name)->
@@ -115,6 +122,4 @@ Meteor.methods
 	viewer: 1,
 	collaborator: 2,
 	creator: 3,
-	owner: 3
-  
-  
+	owner: 4

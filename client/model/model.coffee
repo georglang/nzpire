@@ -1,12 +1,15 @@
 camera = undefined
 lastMousePosition = undefined
 mouseDelta = undefined
-cubesNode = undefined
+contentNode = undefined
 
 Template.model.events
   'click canvas': (e) ->
     console.log 'inserting cube into the scene'
-    Cubes.insert position: camera.position
+    Meteor.call 'addObjectToModelContent',
+      _id: Session.get 'modelContentId'
+      object:
+        position: camera.position
 
   'mouseover #modelContainer': (e) ->
     #$("#modelContainer").focus()
@@ -24,8 +27,16 @@ Template.model.events
       Cubes.remove {}
 
 Template.model.create = ->
+  Meteor.startup ->
+    Meteor.autorun ->
+      model = Models.findOne _id: Session.get 'modelId'
+      if model and model.contentId
+        console.log 'model for modelId', Session.get('modelId'), ':', model
+        Session.set 'modelContentId', model.contentId
+        Meteor.subscribe 'modelContent', Session.get 'modelContentId'
+
   Meteor.defer ->
-    cubesNode = new THREE.Object3D()
+    contentNode = new THREE.Object3D()
 
     $(window).resize ->
       WIDTH = container.width()
@@ -60,7 +71,7 @@ Template.model.create = ->
     scene.add camera
     camera.position.z = 300
 
-    scene.add cubesNode
+    scene.add contentNode
 
     cubeMaterial = new THREE.MeshLambertMaterial color: 0xCC0000
 
@@ -97,16 +108,17 @@ Template.model.create = ->
 
     Meteor.autorun ->
       console.log "running model autorun ..."
-      cubes = Cubes.find().fetch()
+      content = ModelContents.findOne Session.get 'modelContentId'
+      if content
+        console.log 'content', content
+        numOfObjects = contentNode.children.length
+        o = 0
+        while o < numOfObjects
+          ++o
+          contentNode.remove contentNode.children[0]
 
-      numOfCubes = cubesNode.children.length
-      c = 0
-      while c < numOfCubes
-        ++c
-        cubesNode.remove cubesNode.children[0]
+        content?.objects?.forEach (object) ->
+          cubeMesh = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), cubeMaterial)
+          cubeMesh.position = object.position
 
-      cubes.forEach (cube) ->
-        cubeMesh = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), cubeMaterial)
-        cubeMesh.position = cube.position
-
-        cubesNode.add cubeMesh
+          contentNode.add cubeMesh

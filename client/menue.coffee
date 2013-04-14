@@ -26,14 +26,12 @@ Template.menue.events
 			$('#errorNewModel').remove()
 
 		options = {name: modelName, predecessor: "", creator: currentProfile()._id,isPublic: false}
-		Meteor.call 'createModel',options, (error,result)->
+		Meteor.call 'createModel',options, (error,modelId)->
 			if error
 				$('#createNewModel').after("<div id='errorNewModel'>"+error.reason+"</div>")
 			else
 				$('#newModel')[0].remove()
-				Workspace.model(result)
-		
-				
+				Workspace.model(modelId)
 
 	'click #profile': ->
 		console.log "clicked profile"
