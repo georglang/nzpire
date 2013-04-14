@@ -1,24 +1,31 @@
 @Models = new Meteor.Collection 'models'
-@ModelContents = new Meteor.Collection 'modelContents', versioned: true
+@ModelContents = new Meteor.Collection 'modelContents',
+	versioned: true
+	props:
+		objects: 
+			type: '[{}]'
+			locator: '_id'
 
 Meteor.methods
-	createModel: (options)->
+	createModel: (options) ->
 		checkNameAvailability = findModelByName options.name
 		if checkNameAvailability
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
-			contentId = ModelContents.insert({objects:[]})
+			contentId = ModelContents.insertOne objects: []
+			transactionManager.commit()
+			console.log 'contentId', contentId
 			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,contentId:contentId})
 			return modelId
 
-	updateModelName: (options)->
+	updateModelName: (options) ->
 		checkNameAvailability = findModelByName options.name
 		if checkNameAvailability
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
 			return Models.update({_id: options._id},{$set: {name: options.name}})
 
-	updateModelIsPublic: (options)->
+	updateModelIsPublic: (options) ->
 		isPublic = options.isPublic
 		if options.isPublic == false
 			isPublic = true
@@ -26,7 +33,7 @@ Meteor.methods
 			isPublic = false
 		return Models.update({_id: options._id},{$set: {isPublic: isPublic}})
 
-	updateModelTag: (options)->
+	updateModelTag: (options) ->
 		if options._id == undefined || options.tag == undefined
 			throw new Meteor.Error(490, "Undefined Parameter");
 		tagName = options.tag
@@ -38,7 +45,7 @@ Meteor.methods
 		else
 			Models.update({_id: options._id},{$push: {tags: tagName}})
 
-	updateModelInvite: (options)->
+	updateModelInvite: (options) ->
 		if options._id == undefined || options.invite == undefined
 			throw new Meteor.Error(490, "Undefined Parameter");
 		if options.invite.length < 3
@@ -55,13 +62,13 @@ Meteor.methods
 		else
 			throw new Meteor.Error(498, "User already invited")		
 
-	removeModelTag: (options)->
+	removeModelTag: (options) ->
 		if options._id == undefined || options.tag == undefined
 			throw new Meteor.Error(490, "Undefined Parameter");
 		else
 			return Models.update({_id: options._id},{$pull: {tags: options.tag}})
 
-	removeModelInvite: (options)->
+	removeModelInvite: (options) ->
 		if options._id == undefined || options.invite == undefined
 			throw new Meteor.Error(490, "Undefined Parameter");
 		else
@@ -72,20 +79,11 @@ Meteor.methods
 				removeObject = {invited:{userId:profile._id}}
 				return Models.update({_id: options._id},{$pull: removeObject})
 
-	addObjectToModelContent: (options)->
-		if not options._id or not options.object
-			throw new Meteor.Error(490, "Undefined Parameter")
-		else
-			ModelContents.update {_id: options._id},
-				$push:
-					objects:
-						options.object
 
-
-@findModelByName = (name)->
+@findModelByName = (name) ->
 	return Models.findOne({name: name})
 
-@findOneModelByOptions = (options)->
+@findOneModelByOptions = (options) ->
 	return Models.findOne(options)
 
 @checkModelPermission = (modelId) ->
@@ -94,7 +92,7 @@ Meteor.methods
 	model = findOneModelByOptions(options)
 	isCreator = findOneModelByOptions({_id:modelId,creator: currentProfile()._id})
 	if model.invited != undefined
-		isInvited = $.grep(model.invited,(e)->
+		isInvited = $.grep(model.invited, (e) ->
 			return e.userId == currentProfile()._id
 		)
 		if isInvited.length > 0

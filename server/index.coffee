@@ -18,5 +18,4 @@ Meteor.publish 'model', (modelId) ->
 
 Meteor.publish 'modelContent', (modelContentId) ->
   modelContent = ModelContents.find _id: modelContentId
-  console.log 'model content', modelContent
   return modelContent

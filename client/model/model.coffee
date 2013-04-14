@@ -1,33 +1,38 @@
+transactionManager = Meteor.tx
 camera = undefined
 lastMousePosition = undefined
 mouseDelta = undefined
 contentNode = undefined
 
+addObjectToModelContent = (options) ->
+  if not options._id or not options.object
+    throw new Meteor.Error(490, "Undefined Parameter")
+  else
+    console.log 'adding object to model content with id:', options._id
+    newObject = options.object
+    newObject._id = new Meteor.Collection.ObjectID()
+    ModelContents.setProperty options._id, 'objects', newObject
+    if not options.deferTransactionCommit
+      transactionManager.commit()
+
+undoModelContentAction = (options)->
+  transactionManager.undo()
+
+redoModelContentAction = (options) ->
+  transactionManager.redo()
+
 Template.model.events
   'click canvas': (e) ->
     console.log 'inserting cube into the scene'
-    Meteor.call 'addObjectToModelContent',
+    addObjectToModelContent
       _id: Session.get 'modelContentId'
       object:
         position: camera.position
 
-  'mouseover #modelContainer': (e) ->
-    #$("#modelContainer").focus()
-
-  'mouseout #modelContainer': (e) ->
-    #$("#modelContainer").blur()
-
-  'mousemove #modelContainer': (e) ->
-    #console.log e
-
-  'keydown #modelContainer': (e) ->
-    # if 'l' is pressed delete all Cubes
-    if e.keyCode is 76
-      console.log 'removing all cubes from the scene'
-      Cubes.remove {}
-
 Template.model.create = ->
   Meteor.startup ->
+    setupKeybindings()
+
     Meteor.autorun ->
       model = Models.findOne _id: Session.get 'modelId'
       if model and model.contentId
@@ -122,3 +127,47 @@ Template.model.create = ->
           cubeMesh.position = object.position
 
           contentNode.add cubeMesh
+
+# # Keybindings
+# Find a reference at [meteor-keybindings](https://github.com/matteodem/meteor-keybindings)
+setupKeybindings = ->
+  # the context is the DOM element
+  # on which the keybinding is called
+  # (body by default)
+  keybindingsContext = undefined
+  # the event can be specified by a
+  # string, such as 'keydown' (= default)
+  keybindingsEvent = undefined
+  
+  # a list of undo shortcuts
+  undoShortcuts = [
+    'z'
+    'cmd+z'
+    'ctrl+z'
+    'shift+z'
+  ]
+
+  # a list of redo shortcuts
+  redoShortcuts = [
+    'y'
+    'ctrl+y'
+    'shift+y'
+  ]
+  
+  # for each undo shortcut being activated
+  for undoShortcut in undoShortcuts
+    Meteor.Keybindings.addOne undoShortcut,
+      ->
+        # undo the last commit
+        undoModelContentAction()
+      keybindingsContext
+      keybindingsEvent
+
+  # for each redo shortcut being activated
+  for redoShortcut in redoShortcuts
+    Meteor.Keybindings.addOne redoShortcut,
+      ->
+        # redo the last commit
+        redoModelContentAction()
+      keybindingsContext
+      keybindingsEvent
