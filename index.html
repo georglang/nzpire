@@ -27,23 +27,25 @@
                 <a href="#" id="home">Home</a>
               </li>
             -->
-              <li class="">
-                <a href="#" id="news">News</a>
-              </li>
-              <!--
-              <li class="">
-                <a href="#" id="search">Search</a>
-              </li>
-            -->
-              <li class="">
-                <a href="#" id="model">Create new Model</a>
-              </li>
-              <li class="">
-                <a href="#" id="profile">Profile</a>
-              </li>
-              <li class="">
-                <a href="#" id="edit">Edit</a>
-              </li>
+              {{#if currentUser.services}}
+                <li class="">
+                  <a href="#" id="news">News</a>
+                </li>
+                <!--
+                <li class="">
+                  <a href="#" id="search">Search</a>
+                </li>
+              -->
+                <li class="">
+                  <a href="#" id="model">Create new Model</a>
+                </li>
+                <li class="">
+                  <a href="#" id="profile">Profile</a>
+                </li>
+                <li class="">
+                  <a href="#" id="edit">Edit</a>
+                </li>
+              {{/if}}
               <li>
                 {{> login}}
               </li>
@@ -65,7 +67,9 @@
 
 <template name="index">
 	<div id="index"> INDEX TEMPLATE
+    {{> mochaTestReport}}
 		{{#if currentUser.services}}
+      {{redirectToNewsIfLoggedIn}}
 			{{#each connectButtons}}
 				<input type="button" id="connectWith{{this}}" value="ConnectWith{{this}}">
 			{{/each}}

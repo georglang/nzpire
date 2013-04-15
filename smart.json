@@ -11,6 +11,7 @@
     "tracker": {},
     "jquery-rateit": {},
     "versioning": {},
-    "accounts-ui-bootstrap-dropdown": {}
+    "accounts-ui-bootstrap-dropdown": {},
+    "mocha-web": {}
   }
 }

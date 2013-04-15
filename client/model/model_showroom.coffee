@@ -1,20 +1,30 @@
+Template.model.modelLoaded = ->
+	return modelLoaded()
+
 Template.model.handleModelPermission = ->
 	permission = checkModelPermission(Session.get('model'))
 	if permission <= Roles.none
 		Workspace.index()
 
 Template.modelSidebar.isOwner = ->
-	if currentProfile()._id == findOneModelByOptions({_id: Session.get('model')}).creator
-		return true
-	else
+	if Meteor.user() == null
 		return false
+	else
+		if currentProfile()._id == findOneModelByOptions({_id: Session.get('model')}).creator
+			return true
+		else
+			return false
 
 Template.modelSidebar.modelname = ->
-	name = findOneModelByOptions({_id: Session.get('model')}).name
-	if name != undefined
-		return name
-	else
+	model = findOneModelByOptions({_id: Session.get('model')})
+	if model == undefined
 		return null
+	else
+		name = model.name
+		if name != undefined
+			return name
+		else
+			return null
 
 Template.modelSidebar.updatedAt = ->
 	updatedAt = findOneModelByOptions({_id: Session.get('model')}).updatedAt
@@ -85,7 +95,7 @@ Template.modelSidebar.events
 							console.log error.reason
 			else if className == 'invited'
 				invitedName = $(e.target).html()
-				console.log invitedName
+				#console.log invitedName
 				if invitedName.length == 0
 					$(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><select id='invitedRole'><option value='owner'>Owner</option><option value='collaborator'>Collaborator</option><option value='viewer'>Viewer</option></select>")
 				else
@@ -109,6 +119,7 @@ Template.modelSidebar.events
 			Meteor.call 'updateModelName', options, (error,result) ->
 				if error
 					$('#editModelName').after("<div id='errorUpdateModelName'>"+error.reason+"</div>")
+
 
 	'keydown #editModelName': (e)->
 		if e.keyCode == 13
@@ -167,11 +178,14 @@ Template.modelSidebar.profilesList = ->
 	return Profiles.find({})
 
 Template.modelSidebar.isFavourited = ->
-	favourited = findOneProfileByOptions({_id: currentProfile()._id,favourites: Session.get('model')})
-	if favourited == undefined
-		return true
-	else
+	if Meteor.user() == null
 		return false
+	else
+		favourited = findOneProfileByOptions({_id: currentProfile()._id,favourites: Session.get('model')})
+		if favourited == undefined
+			return true
+		else
+			return false
 
 
 Template.modelEdit.handleModelPermission = ->

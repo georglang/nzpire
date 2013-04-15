@@ -1,7 +1,8 @@
 Session.set "template", "index"
 
 Template.page_controller.display_page = ->
-  console.log "controller display page"
+  #console.log "controller display page"
+  checkLoginProtection()
   Template[Session.get("template")]()
 
 WorkspaceRouter = Backbone.Router.extend(
@@ -17,14 +18,14 @@ WorkspaceRouter = Backbone.Router.extend(
     "news" : "news"
 
   index: ->
-    console.log "index"
+    #console.log "index"
     Session.set "template", "index"  
     @navigate "index",
       trigger: true
       replace: true
 
   model: (_id)->
-    console.log "model"
+    #console.log "model"
     Session.set "template", "model"
     Session.set "model", _id
     @navigate "model/" + _id,
@@ -32,7 +33,7 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true
 
   modelEdit: (_id)->
-    console.log "modelEdit"
+    #console.log "modelEdit"
     Session.set "template", "modelEdit"
     Session.set "model", _id
     @navigate "model/" + _id + "/edit"
@@ -40,7 +41,7 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true
 
   help: ->
-    console.log "help"
+    #console.log "help"
     Session.set "template", "help"
     @navigate "help",
       trigger: true
@@ -48,7 +49,7 @@ WorkspaceRouter = Backbone.Router.extend(
 
 
   search: (query) ->
-    console.log "search " + query 
+    #console.log "search " + query 
     Session.set "searchQuery", decodeURIComponent(query)    
     Session.set "template", "search"
     @navigate "search/" + query,
@@ -57,14 +58,14 @@ WorkspaceRouter = Backbone.Router.extend(
 
 
   test: (abc, page) ->
-    console.log "test " + abc + " " + page
+    #console.log "test " + abc + " " + page
     Session.set "template", "test"
     @navigate "test/" + abc + "/" + page,
       trigger: true
       replace: true
 
   profile: (_id) ->
-    console.log "profile id:" + _id
+    #console.log "profile id:" + _id
     Session.set "template", "profile"
     @navigate "profile/" + _id,
       trigger: true
@@ -77,7 +78,7 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true      
 
   news: ->
-    console.log "news"
+    #console.log "news" 
     Session.set "template", "news"
     @navigate "news",
       trigger: true

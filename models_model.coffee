@@ -12,7 +12,9 @@ Meteor.methods
 
 	updateModelName: (options)->
 		checkNameAvailability = findModelByName options.name
-		if checkNameAvailability
+		optionsFind = {_id: options._id}
+		currentModel = findOneModelByOptions(optionsFind)
+		if checkNameAvailability && options.name != currentModel.name
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
 			return Models.update({_id: options._id},{$set: {name: options.name}})
@@ -47,7 +49,7 @@ Meteor.methods
 		if invitedProfile == undefined
 			throw new Meteor.Error(496, "Username does not exist");
 		else
-			checkAlreadyInvited = Models.findOne({'invited.userId':invitedProfile._id})
+			checkAlreadyInvited = Models.findOne({_id: options._id,'invited.userId':invitedProfile._id})
 		if checkAlreadyInvited == undefined
 			updateObject = {userId: invitedProfile._id, role: options.role}
 			Models.update({_id: options._id},{$push: {invited: updateObject}})				
@@ -74,6 +76,14 @@ Meteor.methods
 
 
 
+@modelLoaded = ->
+	#console.log "modelLoaded"
+	model = Models.findOne({})
+	#console.log model
+	if model == undefined
+		return false
+	else
+		return true
 
 @findModelByName = (name)->
 	return Models.findOne({name: name})
@@ -85,6 +95,15 @@ Meteor.methods
 	#console.log "checkModelPermission"
 	options = {_id: modelId}
 	model = findOneModelByOptions(options)
+	if model == undefined
+		return Roles.none
+
+	if Meteor.userId() == null
+		if model.isPublic == true
+			return Roles.viewer
+		else
+			return Roles.none
+
 	isCreator = findOneModelByOptions({_id:modelId,creator: currentProfile()._id})
 	if model.invited != undefined
 		isInvited = $.grep(model.invited,(e)->

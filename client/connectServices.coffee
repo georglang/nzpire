@@ -19,6 +19,10 @@ connectProfiles = (tmpEmail,loginFunction)->
 	# Removes the created Profile
 	Profiles.remove {_id: newProfile._id}
 
+Template.index.redirectToNewsIfLoggedIn = ->
+	if Meteor.user() != null
+		Workspace.news()
+
 # Checks out which Services the User has already connected and Returns the rest
 Template.index.connectButtons = ->
 	# Provides Services

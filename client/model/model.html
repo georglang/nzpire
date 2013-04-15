@@ -1,15 +1,12 @@
 <template name="model">
   <div id="modelContainer" tabindex="1" autofocus="autofocus"></div>
-  {{#if currentUser.services}}
-    {{handleModelPermission}}
-  {{/if}}
+  {{handleModelPermission}}
   {{create}}
   {{>modelSidebar}}
 </template>
 
 
 <template name="modelSidebar">
-  {{#if currentUser.services}}
   <div class="slide-main">
     <div class="slideOutArrow">Infos</div>
     <div class="slide-container">
@@ -70,15 +67,16 @@
           </ul>
         </li>        
       </ul>
-      {{#if isFavourited}}
-        <input type="button" id="favourite" value="Favourite">
-      {{else}}
-        <input type="button" id="defavourite" value="Defavourite">
+      {{#if currentUser.services}}
+        {{#if isFavourited}}
+          <input type="button" id="favourite" value="Favourite">
+        {{else}}
+          <input type="button" id="defavourite" value="Defavourite">
+        {{/if}}
+        <input type="button" id="clone" value="Clone">
       {{/if}}
-      <input type="button" id="clone" value="Clone">
     </div>
   </div>  
-  {{/if}}
 
   <datalist hidden id="profilesDatalist">
     {{#each profilesList}}

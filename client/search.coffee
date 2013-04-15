@@ -30,12 +30,13 @@ checkForFavourites = (_id)->
 		favourites: _id
 
 order = (searchingFor,_id)->
-	if searchingFor == "profileLink"
+	loggedIn = Meteor.userId()
+	if searchingFor == "profileLink" && loggedIn != null
 		if checkForFollowing(_id).fetch().length > 0
 			return "unfollow"
 		else
 			return "follow"
-	else if searchingFor == "modelLink"
+	else if searchingFor == "modelLink" && loggedIn != null
 		if checkForFavourites(_id).fetch().length > 0
 			return "defavourite"
 		else
@@ -45,7 +46,6 @@ order = (searchingFor,_id)->
 
 Template.search.getResults = ->
 	searchingFor = Session.get("searchQuery").charAt(0)
-
 	if searchingFor == "@"
 		searchQuery = "/" + Session.get("searchQuery").slice(1) + "/i"
 		result = searchForProfiles(searchQuery)
