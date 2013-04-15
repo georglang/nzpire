@@ -1,0 +1,93 @@
+<template name="model">
+  <div id="modelContainer" tabindex="1" autofocus="autofocus"></div>
+  {{handleModelPermission}}
+  {{create}}
+  {{>modelSidebar}}
+</template>
+
+
+<template name="modelSidebar">
+  <div class="slide-main">
+    <div class="slideOutArrow">Infos</div>
+    <div class="slide-container">
+      <ul id="slideContainerListItems">
+        <li>Modelname
+          <ul>
+            <li>
+              <div class="modelname">{{modelname}}</div>
+            </li>
+          </ul>
+        </li>
+        <li>UpdatedAt
+          <ul>
+            <li>
+              <div class="updatedAt">{{updatedAt}}</div>
+            </li>
+          </ul>
+        </li>
+        <li>Invited
+          <ul>
+            {{#each invited}}          
+              <li>
+                <div class="invited">{{this.name}}</div><div class="invitedRole">{{this.role}}</div>
+              </li>
+            {{/each}}
+          </ul>
+        </li>      
+        <li>Tags
+          <ul>
+            {{#each tags}}          
+              <li>
+                <div class="tags">{{this}}</div>
+              </li>
+            {{/each}}
+          </ul>
+        </li>            
+        <li>Creator
+          <ul>
+            <li>
+              <div class="creator">{{creator}}</div>
+            </li>
+          </ul>
+        </li>        
+        {{#if predecessor}}
+          <li>Predecessor
+            <ul>
+              <li>
+                <div class="predecessor">{{predecessor}}</div>
+              </li>
+            </ul>
+          </li>
+        {{/if}}
+        <li>IsPublic
+          <ul>
+            <li>
+              <div class="isPublic">{{isPublic}}</div>
+            </li>
+          </ul>
+        </li>        
+      </ul>
+      {{#if currentUser.services}}
+        {{#if isFavourited}}
+          <input type="button" id="favourite" value="Favourite">
+        {{else}}
+          <input type="button" id="defavourite" value="Defavourite">
+        {{/if}}
+        <input type="button" id="clone" value="Clone">
+      {{/if}}
+    </div>
+  </div>  
+
+  <datalist hidden id="profilesDatalist">
+    {{#each profilesList}}
+      <option value="{{name}}">
+    {{/each}}
+  </datalist>
+</template>
+
+
+<template name="modelEdit">
+  {{#if currentUser.services}}
+    {{test}}
+  {{/if}}
+</template>

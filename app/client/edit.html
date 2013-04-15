@@ -1,0 +1,12 @@
+<template name="edit">
+	<div> Edit Template </div>
+		{{#if currentUser.services}}
+			<form action="" method="get">
+				Username: <input id="editUsername" type="text" name="firstname" value="{{userName}}"><br>
+				Email: <input id="editEmail" type="text" name="email" value="{{email}}" readonly="readonly"><br>
+				WWW: <input id="editWww" type="text" name="www" value="{{www}}"><br>
+				<div id="submitEdit" type="submit" value="Submit"> Submit </div>
+			</form>
+		{{/if}}
+	</div>
+</template>

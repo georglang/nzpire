@@ -1,0 +1,65 @@
+{
+  "meteor": {
+    "git": "https://github.com/meteor/meteor.git",
+    "branch": "master",
+    "commit": "0ffea1c4c308ed24906984f99b13b8fca5a0956c"
+  },
+  "dependencies": {
+    "basePackages": {
+      "three": {
+        "path": "packages/three"
+      },
+      "keybindings": {},
+      "tracker": {},
+      "jquery-rateit": {},
+      "versioning": {},
+      "accounts-ui-bootstrap-dropdown": {},
+      "mocha-web": {}
+    },
+    "packages": {
+      "three": {
+        "path": "packages/three"
+      },
+      "keybindings": {
+        "git": "https://github.com/matteodem/meteor-keybindings.git",
+        "tag": "v0.3.8",
+        "commit": "7102c7329453c18c63846d74d0b51ef35a23e945"
+      },
+      "tracker": {
+        "git": "https://github.com/svda/meteor-tracker.git",
+        "tag": "v0.1.0",
+        "commit": "e436fe8a097bf2090ab742306c9cc31a826e41b6"
+      },
+      "jquery-rateit": {
+        "git": "https://github.com/dandv/meteor-jquery-rateit.git",
+        "tag": "v1.0.9",
+        "commit": "194607727589055e84cd4dfbb311d5a1bdadc6fe"
+      },
+      "versioning": {
+        "git": "https://github.com/jerico-dev/meteor-versioning.git",
+        "tag": "v0.4.8",
+        "commit": "234f6639b7f1c2f6709fcd65df05f2ed2668022c"
+      },
+      "accounts-ui-bootstrap-dropdown": {
+        "git": "https://github.com/erobit/meteor-accounts-ui-bootstrap-dropdown.git",
+        "tag": "v0.1.0",
+        "commit": "e66558aaa4dc0d85c6ddb63bd2289b38c2b793f6"
+      },
+      "mocha-web": {
+        "git": "https://github.com/mad-eye/meteor-mocha-web.git",
+        "tag": "v0.1.3",
+        "commit": "a2481d418a0f2a6cdc3536d40a3cef2ff1b5b13e"
+      },
+      "i18n": {
+        "git": "https://github.com/jerico-dev/meteor-i18n.git",
+        "tag": "v0.0.9",
+        "commit": "2cd6c72107a0d4afde57fb765ce9d57ad8ba43e2"
+      },
+      "logger": {
+        "git": "https://github.com/jerico-dev/meteor-logger.git",
+        "tag": "v0.1.2",
+        "commit": "8811ff33e4787d7c564e030ff3afaa3d7c4981fc"
+      }
+    }
+  }
+}

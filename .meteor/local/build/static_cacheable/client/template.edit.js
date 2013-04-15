@@ -1,0 +1,3 @@
+(function(){ Meteor._def_template("edit",Handlebars.json_ast_to_func(["<div> Edit Template </div>\n\t\t",["#",[[0,"if"],[0,"currentUser","services"]],["\n\t\t\t<form action=\"\" method=\"get\">\n\t\t\t\tUsername: <input id=\"editUsername\" type=\"text\" name=\"firstname\" value=\"",["{",[[0,"userName"]]],"\"><br>\n\t\t\t\tEmail: <input id=\"editEmail\" type=\"text\" name=\"email\" value=\"",["{",[[0,"email"]]],"\" readonly=\"readonly\"><br>\n\t\t\t\tWWW: <input id=\"editWww\" type=\"text\" name=\"www\" value=\"",["{",[[0,"www"]]],"\"><br>\n\t\t\t\t<div id=\"submitEdit\" type=\"submit\" value=\"Submit\"> Submit </div>\n\t\t\t</form>\n\t\t"]],"\n\t</div>"]));
+
+})();
