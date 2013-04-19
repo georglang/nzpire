@@ -6,3 +6,6 @@ Template.profile.email = ->
 
 Template.profile.www = ->
 	currentProfile().www
+
+Template.profile.pictureUrl = ->
+	currentProfile().picture
