@@ -2,7 +2,7 @@
   "meteor": {
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master",
-    "commit": "0ffea1c4c308ed24906984f99b13b8fca5a0956c"
+    "commit": "1dfc7171f237a029cca74cbf25024acbf6ed5b75"
   },
   "dependencies": {
     "basePackages": {
@@ -14,7 +14,8 @@
       "jquery-rateit": {},
       "versioning": {},
       "accounts-ui-bootstrap-dropdown": {},
-      "mocha-web": {}
+      "mocha-web": {},
+      "i18next-meteor": {}
     },
     "packages": {
       "three": {
@@ -49,6 +50,11 @@
         "git": "https://github.com/mad-eye/meteor-mocha-web.git",
         "tag": "v0.1.3",
         "commit": "a2481d418a0f2a6cdc3536d40a3cef2ff1b5b13e"
+      },
+      "i18next-meteor": {
+        "git": "https://github.com/ckir/i18next-meteor.git",
+        "tag": "v1.6.0",
+        "commit": "6d922cc0adea92904e51a2a153d26dd66fb2789d"
       },
       "i18n": {
         "git": "https://github.com/jerico-dev/meteor-i18n.git",

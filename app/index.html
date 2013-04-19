@@ -46,6 +46,17 @@
                   <a href="#" id="edit">Edit</a>
                 </li>
               {{/if}}
+              <!--
+                <li>
+                  <a href="#" id="de">de</a>
+                </li>
+                <li>
+                  <a href="#" id="en_GB">en_GB</a>
+                </li>
+                <li>                  
+                  <a href="#" id="en_US">en_US</a>
+                </li>
+              -->
               <li>
                 {{> login}}
               </li>
@@ -68,6 +79,7 @@
 <template name="index">
 	<div id="index"> INDEX TEMPLATE
     {{> mochaTestReport}}
+    {{descriptionText}}
 		{{#if currentUser.services}}
       {{redirectToNewsIfLoggedIn}}
 			{{#each connectButtons}}

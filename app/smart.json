@@ -12,6 +12,7 @@
     "jquery-rateit": {},
     "versioning": {},
     "accounts-ui-bootstrap-dropdown": {},
-    "mocha-web": {}
+    "mocha-web": {},
+    "i18next-meteor": {}
   }
 }
