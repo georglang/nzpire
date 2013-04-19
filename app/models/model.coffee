@@ -83,6 +83,10 @@ Meteor.methods
 				removeObject = {invited:{userId:profile._id}}
 				return Models.update({_id: options._id},{$pull: removeObject})
 
+	removeModel: (options)->
+		#console.log options
+		return Models.remove(options)
+
 @modelLoaded = ->
 	#console.log "modelLoaded"
 	model = Models.findOne({})
