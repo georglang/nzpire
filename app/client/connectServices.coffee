@@ -19,12 +19,8 @@ connectProfiles = (tmpEmail,loginFunction)->
 	# Removes the created Profile
 	Profiles.remove {_id: newProfile._id}
 
-Template.index.redirectToNewsIfLoggedIn = ->
-	if Meteor.user() != null
-		Workspace.news()
-
 # Checks out which Services the User has already connected and Returns the rest
-Template.index.connectButtons = ->
+Template.connectServices.connectButtons = ->
 	# Provides Services
 	services = ["Facebook","Twitter","Google","Github"];
 
@@ -43,11 +39,10 @@ Template.index.connectButtons = ->
 	  if inArray != -1
 	  	services.splice inArray,1
 	  ++i	  
-	return services
-	
+	return services	
 
 # Connect Buttons Onclick login with the service and on callback calls the function connectProfiles
-Template.index.events
+Template.connectServices.events
 	'click input#connectWithFacebook': ->
 		tmpEmail = currentEmail()
 		Meteor.loginWithFacebook
@@ -78,14 +73,4 @@ Template.index.events
 			requestOfflineToken: [true]
 		, ->
 			connectProfiles(tmpEmail,Meteor.loginWithTwitter)
-		return true				
-
-Meteor.autorun ->
-	Meteor.subscribe "userData"
-	Meteor.subscribe "allProfiles"
-	Meteor.subscribe "allCubes"
-	Meteor.subscribe "allModels"
-
-Accounts.ui.config({
-  passwordSignupFields: 'USERNAME_AND_EMAIL'
-});
+		return true
