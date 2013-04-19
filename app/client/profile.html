@@ -3,8 +3,10 @@
 		{{#if currentUser.services}}
 			<p>Name: {{userName}} <br>
 			 Email: {{email}} <br>
-			 WWW: {{www}}
+			 WWW: {{www}} <br>
 			</p>
+			<img src="{{pictureUrl}}"
+			{{>connectServices}}		
 		{{/if}}
 	</div>
 </template>
