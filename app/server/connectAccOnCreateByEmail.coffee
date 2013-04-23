@@ -33,7 +33,12 @@ Accounts.onCreateUser( (options,user)->
 
 		# options.profile.email is an array with emails
 		options.profile.email = Meteor.http.get('https://api.github.com/user/emails?access_token=' + user.services[service].accessToken).data
-		emails = options.profile.email
+		if options.profile.email.message == 'Not Found'
+			options.profile.email = [username + "@" + twitterEmail + ".at"]
+			emails = []
+			emails.push options.profile.email
+		else
+			emails = options.profile.email
 		githubUser = Meteor.http.get('https://api.github.com/user?access_token=' + user.services[service].accessToken)		
 		pictureUrl = githubUser.data.avatar_url
 		#Is this email already in our collection
