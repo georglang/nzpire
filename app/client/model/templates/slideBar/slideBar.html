@@ -1,11 +1,3 @@
-<template name="model">
-  <div id="modelContainer" tabindex="1" autofocus="autofocus"></div>
-  {{handleModelPermission}}
-  {{create}}
-  {{>modelSidebar}}
-</template>
-
-
 <template name="modelSidebar">
   <div class="slide-main">
     <div class="slideOutArrow">Infos</div>
@@ -83,11 +75,4 @@
       <option value="{{name}}">
     {{/each}}
   </datalist>
-</template>
-
-
-<template name="modelEdit">
-  {{#if currentUser.services}}
-    {{test}}
-  {{/if}}
 </template>

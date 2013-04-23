@@ -1,4 +1,7 @@
-transactionManager = Meteor.tx
+# # Modeling interaction main file
+
+Modeling.interaction.history.start();
+
 camera = undefined
 lastMousePosition = undefined
 mouseDelta = undefined
@@ -13,13 +16,7 @@ addObjectToModelContent = (options) ->
     newObject._id = new Meteor.Collection.ObjectID()
     ModelContents.setProperty options._id, 'objects', newObject
     if not options.deferTransactionCommit
-      transactionManager.commit()
-
-undoModelContentAction = (options)->
-  transactionManager.undo()
-
-redoModelContentAction = (options) ->
-  transactionManager.redo()
+      Modeling.interaction.history.save()
 
 Template.model.events
   'click canvas': (e) ->
@@ -31,7 +28,7 @@ Template.model.events
 
 Template.model.create = ->
   Meteor.startup ->
-    setupKeybindings()
+    Modeling.interaction.keyBindings.setup()
 
     Meteor.autorun ->
       model = Models.findOne _id: Session.get 'modelId'
@@ -127,47 +124,3 @@ Template.model.create = ->
           cubeMesh.position = object.position
 
           contentNode.add cubeMesh
-
-# # Keybindings
-# Find a reference at [meteor-keybindings](https://github.com/matteodem/meteor-keybindings)
-setupKeybindings = ->
-  # the context is the DOM element
-  # on which the keybinding is called
-  # (body by default)
-  keybindingsContext = undefined
-  # the event can be specified by a
-  # string, such as 'keydown' (= default)
-  keybindingsEvent = undefined
-  
-  # a list of undo shortcuts
-  undoShortcuts = [
-    'z'
-    'cmd+z'
-    'ctrl+z'
-    'shift+z'
-  ]
-
-  # a list of redo shortcuts
-  redoShortcuts = [
-    'y'
-    'ctrl+y'
-    'shift+y'
-  ]
-  
-  # for each undo shortcut being activated
-  for undoShortcut in undoShortcuts
-    Meteor.Keybindings.addOne undoShortcut,
-      ->
-        # undo the last commit
-        undoModelContentAction()
-      keybindingsContext
-      keybindingsEvent
-
-  # for each redo shortcut being activated
-  for redoShortcut in redoShortcuts
-    Meteor.Keybindings.addOne redoShortcut,
-      ->
-        # redo the last commit
-        redoModelContentAction()
-      keybindingsContext
-      keybindingsEvent
