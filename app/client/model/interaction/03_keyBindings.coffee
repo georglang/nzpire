@@ -1,9 +1,10 @@
-@Modeling ?= {}
-@Modeling.interaction ?= {}
-@Modeling.interaction.keyBindings = keyBindings = {}
+# # Key bindings
 
-# # Keybindings
 # Find a reference at [meteor-keybindings](https://github.com/matteodem/meteor-keybindings)
+
+@Modeling ?= {}
+Modeling.interaction ?= {}
+Modeling.interaction.keyBindings = keyBindings = {}
 
 # ## Setup
 keyBindings.setup = ->
