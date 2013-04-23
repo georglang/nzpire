@@ -5,20 +5,22 @@
 # # Modeling history
 
 # The interaction history allows the user to
+
 # * save
 # * undo
 # * redo
+
 # during a session. The history belongs to a user.
 # 
-# **CAUTION***:
+# **CAUTION**:
 # After each, the user's interaction will be reset
 # after every:
-#
+
 # * page reload
 # * model change
-#
+
 # This problem will be tackled in the future!
-#
+
 # The transaction library in use is
 # [meteor-versioning](https://github.com/jerico-dev/meteor-versioning).
 
