@@ -1,5 +1,0 @@
-(function(){ if (!Accounts.github) {
-  Accounts.github = {};
-}
-
-})();

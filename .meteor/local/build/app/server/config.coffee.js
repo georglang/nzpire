@@ -1,3 +1,0 @@
-var twitterEmail;
-
-twitterEmail = "SirRender";
