@@ -51,7 +51,9 @@ scene.setup = ->
     scene.itself.add scene.content
 
     # ## Lights
-    Modeling.scene.lights.setup()
+    #Modeling.scene.lights.setup()
+    cameraLight = new THREE.PointLight 0xffffff, 1.0, 10000
+    camera.add cameraLight
 
     # ## Building plane
     plane = new THREE.Mesh(new THREE.PlaneGeometry(10000, 10000, 50, 50), new THREE.MeshLambertMaterial({color: 0x333333}))
