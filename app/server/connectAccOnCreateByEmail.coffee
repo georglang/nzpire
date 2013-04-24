@@ -6,19 +6,20 @@ Accounts.onCreateUser( (options,user)->
 	# Function to check if the Email is already in our Profile Collection
 
 	checkForEmail = (email)->
-		console.log "++++ checkForEmail ++++"
-		console.log email[0]
+		#console.log "++++ checkForEmail ++++"
+		#console.log email[0]
 		
 		result =  Profiles.find(
 			email: email[0]
 		).fetch()
-		console.log result
+		#console.log result
 		return result
 
 	# Get the service in string the user uses to log in AND the username and the serviceid
 	service = Object.keys(user.services)[0]
 
 	if service == "password"
+		username = options.username
 		service = twitterEmail
 		emails = []
 		emails.push(options.email)
