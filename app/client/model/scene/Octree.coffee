@@ -1,3 +1,5 @@
+# # Octree (currently not in use)
+
 class Point
   # x
   # y

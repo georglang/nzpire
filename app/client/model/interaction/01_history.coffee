@@ -9,7 +9,7 @@
 # during a session. The history belongs to a user.
 # 
 # **CAUTION**:
-# After each, the user's interaction will be reset
+# The user's interaction will be reset
 # after every:
 
 # * page reload
