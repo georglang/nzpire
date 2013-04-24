@@ -24,6 +24,8 @@ scene.setup = ->
 
     renderer = new THREE.WebGLRenderer()
     camera = scene.camera = new THREE.PerspectiveCamera viewAngle, aspect, near, far
+    camera.position.z = 1000
+    camera.position.y = 1000
 
     render = ->
       # Only render when template is active.
@@ -44,11 +46,17 @@ scene.setup = ->
     # ## Scene itself
     scene.itself = new THREE.Scene()
     scene.itself.add camera
+    camera.lookAt new THREE.Vector3 0, 0, -2000
     scene.content = new THREE.Object3D()
     scene.itself.add scene.content
 
     # ## Lights
     Modeling.scene.lights.setup()
+
+    # ## Building plane
+    plane = new THREE.Mesh(new THREE.PlaneGeometry(10000, 10000, 50, 50), new THREE.MeshLambertMaterial({color: 0x333333}))
+    plane.rotation.x = - Math.PI / 2
+    scene.itself.add plane
 
     # ## Insertion into DOM
     container = $ "#modelContainer"

@@ -5,23 +5,27 @@ Modeling.scene ?= {}
 Modeling.scene.lights = lights = {}
 
 lights.setup = ->
-  x = -1
+  lightDistance = 2000
+  numberOfLightsPerDimension = 3
+  
+  minXZ = - Math.round(numberOfLightsPerDimension / 2)
+  maxXZ = Math.round(numberOfLightsPerDimension / 2)
 
-  while x < 2
-    y = -1
-
-    while y < 2
-      ++y
-
-      z = -1
-
-      while z < 2
-        ++z
-        pointLight = new THREE.PointLight 0xFFFFFF
-        pointLight.position.x = x * 400
-        pointLight.position.y = z * 400
-        pointLight.position.z = y * 400
+  minY = 0
+  maxY = numberOfLightsPerDimension
+  
+  x = minXZ
+  while x <= maxXZ
+    y = minY
+    while y <= maxY
+      z = minXZ
+      while z <= maxXZ
+        pointLight = new THREE.PointLight 0xffffff, 0.75, lightDistance * 2
+        pointLight.position.x = z * lightDistance
+        pointLight.position.y = y * lightDistance
+        pointLight.position.z = x * lightDistance
 
         Modeling.scene.itself.add pointLight
-
+        ++z
+      ++y
     ++x

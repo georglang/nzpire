@@ -16,7 +16,7 @@ clearContent = ->
     ++o
     content.remove content.children[0]
 
-cubeMaterial = new THREE.MeshLambertMaterial color: 0xCC0000
+cubeMaterial = new THREE.MeshLambertMaterial color: 0x7FAD00
 
 refillContentWith = (newContent) ->
   content = Modeling.scene.content
