@@ -14,7 +14,7 @@ searchForModels = (searchQuery)->
 	tmpResult = Models.find({name: eval(searchQuery)}).fetch()
 	modelsResult = []
 	tmpResult.forEach (i)->
-		permission = checkModelPermission i._id
+		permission = checkModelPermission i._id,true
 		if permission > Roles.none
 			modelsResult.push i
 	return modelsResult

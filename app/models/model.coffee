@@ -95,14 +95,16 @@ Meteor.methods
 @findOneModelByOptions = (options) ->
 	return Models.findOne(options)
 
-@checkModelPermission = (modelId) ->
+# Gets the Modelid and a boolean (if isPublic should be used) as parameter
+# Returns the Users Role for the specified Model
+@checkModelPermission = (modelId, useIsPublic) ->
 	options = {_id: modelId}
 	model = findOneModelByOptions(options)
 	if model == undefined
 		return Roles.none
 
 	if Meteor.userId() == null
-		if model.isPublic == true
+		if model.isPublic == true && useIsPublic == true
 			return Roles.viewer
 		else
 			return Roles.none
@@ -126,7 +128,7 @@ Meteor.methods
 		#console.log "creator"
 		return Roles.creator
 	else
-		if model.isPublic == true
+		if model.isPublic == true && useIsPublic == true
 			#console.log "isPublic true"
 			return Roles.viewer
 		else

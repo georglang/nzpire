@@ -5,7 +5,7 @@ userInvitedModels = (role)->
 	tmpResult = Models.find({}).fetch()
 	modelsResult = []
 	tmpResult.forEach (i)->
-		permission = checkModelPermission i._id
+		permission = checkModelPermission i._id,false
 		if permission == role
 			modelsResult.push i
 	return modelsResult
