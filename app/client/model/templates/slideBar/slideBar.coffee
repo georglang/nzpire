@@ -93,6 +93,19 @@ Template.modelSidebar.isPublic = ->
     else
       return null
 
+Template.modelSidebar.profilesList = ->
+  return Profiles.find({})
+
+Template.modelSidebar.isFavourited = ->
+  if Meteor.user() == null
+    return false
+  else
+    favourited = findOneProfileByOptions({_id: currentProfile()._id,favourites: Session.get('modelId')})
+    if favourited == undefined
+      return true
+    else
+      return false
+
 Template.modelSidebar.events
   'click #slideContainerListItems>li>ul>li': (e)->
     if Template.modelSidebar.isOwner()
@@ -110,9 +123,8 @@ Template.modelSidebar.events
               console.log error.reason
       else if className == 'invited'
         invitedName = $(e.target).html()
-        #console.log invitedName
         if invitedName.length == 0
-          $(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><select id='invitedRole'><option value='owner'>Owner</option><option value='collaborator'>Collaborator</option><option value='viewer'>Viewer</option></select>")
+          $(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><select id='invitedRole'><option value='owner'>Owner</option><option value='collaborator'>Collaborator</option><option value='viewer'>Viewer</option></select><input id='addInviteButton' type='button' value='invite'>")
         else
           options = {_id: Session.get('modelId'),invite: invitedName}
           Meteor.call 'removeModelInvite', options, (error,result)->
@@ -152,18 +164,18 @@ Template.modelSidebar.events
     if e.keyCode == 13
       $('#addTag').blur()
 
-  'blur #addInvite': (e)->
+  'click #addInviteButton': (e)->
     if $('#errorUpdateInvite')[0] != undefined
       $('#errorUpdateInvite').remove()        
     role = $('#invitedRole').val()
-    options = {_id: Session.get('modelId'),invite: e.target.value,role:role}
+    options = {_id: Session.get('modelId'),invite: $('#addInvite').val(),role:role}
     Meteor.call 'updateModelInvite',options, (error,result)->
       if error
         $('#addInvite').after("<div id='errorUpdateInvite'>"+error.reason+"</div>")   
 
   'keydown #addInvite': (e)->
     if e.keyCode == 13
-      $('#addInvite').blur()      
+      $('#addInviteButton').click()      
 
   'click #favourite': ->
     Profiles.update {_id: currentProfile()._id},{$push: {favourites: Session.get('modelId')}}
@@ -189,15 +201,3 @@ Template.modelSidebar.events
       else
         Workspace.model(result)
 
-Template.modelSidebar.profilesList = ->
-  return Profiles.find({})
-
-Template.modelSidebar.isFavourited = ->
-  if Meteor.user() == null
-    return false
-  else
-    favourited = findOneProfileByOptions({_id: currentProfile()._id,favourites: Session.get('modelId')})
-    if favourited == undefined
-      return true
-    else
-      return false
