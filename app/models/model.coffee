@@ -96,7 +96,6 @@ Meteor.methods
 	return Models.findOne(options)
 
 @checkModelPermission = (modelId) ->
-	#console.log "checkModelPermission"
 	options = {_id: modelId}
 	model = findOneModelByOptions(options)
 	if model == undefined
