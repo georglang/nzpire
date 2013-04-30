@@ -195,7 +195,7 @@ Template.modelSidebar.events
       $('#errorCloneModel').remove()
 
     options = {name: modelName, predecessor: Session.get('modelId'), creator: currentProfile()._id,isPublic: false}
-    Meteor.call 'createModel',options, (error,result)->
+    Meteor.call 'cloneModel',options, (error,result)->
       if error
         $('#createNewModel').after("<div id='errorCloneModel'>"+error.reason+"</div>")
       else

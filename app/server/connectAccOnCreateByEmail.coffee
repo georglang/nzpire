@@ -15,11 +15,23 @@ Accounts.onCreateUser( (options,user)->
 		#console.log result
 		return result
 
+	# checks if the username is already in the profiles collection
+	checkUsernameUniqueness = (username)->
+		options = {name: username}
+		findOneProfileByOptions(options)
+
+	# Adds a random number to the username if the username is already in the profiles collection
+	preserveUsernameUniqueness = (username)->
+		if checkUsernameUniqueness(username) == undefined
+			return username
+		else
+			preserveUsernameUniqueness(username + Math.floor(Math.random()*100000))
+
 	# Get the service in string the user uses to log in AND the username and the serviceid
 	service = Object.keys(user.services)[0]
 
 	if service == "password"
-		username = options.username
+		username = preserveUsernameUniqueness(options.username)
 		service = twitterEmail
 		emails = []
 		emails.push(options.email)
@@ -28,7 +40,7 @@ Accounts.onCreateUser( (options,user)->
 
 	# Different handling for different services
 	else if service == "github"	
-		username = user.services[service].username
+		username = preserveUsernameUniqueness(user.services[service].username)
 		options.profile.name = username
 		service_id = user.services[service].id	
 
@@ -46,7 +58,7 @@ Accounts.onCreateUser( (options,user)->
 		checkedEmail = checkForEmail(emails)
 
 	else if service == "twitter"
-		username = options.profile.name
+		username = preserveUsernameUniqueness(options.profile.name)
 		service_id = user.services[service].id				
 		emails = []
 		emails.push(user.services[service].screenName + "@" + twitterEmail + ".at")
@@ -54,7 +66,7 @@ Accounts.onCreateUser( (options,user)->
 		checkedEmail = checkForEmail(emails)
 
 	else if service == "facebook"
-		username = options.profile.name
+		username = preserveUsernameUniqueness(options.profile.name)
 		service_id = user.services[service].id				
 		emails = []
 		emails.push(user.services[service].email)
@@ -63,7 +75,7 @@ Accounts.onCreateUser( (options,user)->
 		checkedEmail = checkForEmail(emails)
 
 	else if service == "google"
-		username = options.profile.name
+		username = preserveUsernameUniqueness(options.profile.name)
 		service_id = user.services[service].id				
 		emails = []
 		emails.push(user.services[service].email)

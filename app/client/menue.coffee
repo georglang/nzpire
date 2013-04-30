@@ -17,7 +17,7 @@ Template.menue.events
 	'click #model': ->
 		console.log "clicked model"
 		if $('#newModel')[0] == undefined
-			$('#model').after("<li id='newModel'><input id='modelName' type='text' placeholder='Modelname'><input type='button' id='createNewModel' value='Create'></li>")
+			$('#model').replaceWith("<li id='newModel'><input autofocus='autofocus' id='modelName' type='text' placeholder='Modelname'><input type='button' id='createNewModel' value='Create'></li>")
 		false
 
 	'click #createNewModel': ->
@@ -38,6 +38,8 @@ Template.menue.events
 			if e.keyCode == 13
 				console.log "test"
 				$('#createNewModel').click()
+			else if e.keyCode == 27
+				$('#newModel').replaceWith("<a href='#' id='model'>Create new Model</a>")
 
 	'click #profile': ->
 		console.log "clicked profile"

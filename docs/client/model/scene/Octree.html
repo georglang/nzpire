@@ -17,9 +17,9 @@ can be used to calculate points on the outside without calculating the value of 
   <span class="nv">constructor: </span><span class="nf">(x, y, z, @width, @height, @depth) -&gt;</span>
     <span class="vi">@center = </span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span>
 
-    <span class="vi">@halfWidth = </span><span class="nx">@width</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="vi">@halfHeight = </span><span class="nx">@height</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="vi">@halfDepth = </span><span class="nx">@depth</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="vi">@halfWidth = </span><span class="nx">@width</span> <span class="err">/ 2</span>
+    <span class="vi">@halfHeight = </span><span class="nx">@height</span> <span class="err">/ 2</span>
+    <span class="vi">@halfDepth = </span><span class="nx">@depth</span> <span class="err">/ 2</span>
   
   <span class="nv">intersects: </span><span class="nf">(point) -&gt;</span>
     <span class="k">return</span> <span class="kc">false</span> <span class="k">if</span> <span class="nx">point</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">@center</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">@halfWidth</span> <span class="o">||</span> <span class="nx">point</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">@center</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">@halfWidth</span> <span class="o">||</span>
@@ -63,7 +63,7 @@ these are the children of the note</p></div></div><div class="code"><div class="
     
     <span class="nx">@split</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@currentLevel</span> <span class="o">&lt;</span> <span class="nx">@minLevel</span>
     
-  <span class="nv">split: </span><span class="nf">-&gt;</span>
+  <span class="nv">split: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;----------------------------------------------- split&quot;</span>
     <span class="k">return</span> <span class="k">if</span> <span class="nx">@maxLevel</span> <span class="o">&lt;=</span> <span class="nx">@currentLevel</span> <span class="o">||</span> <span class="nx">@topLeftFront</span> <span class="o">!=</span> <span class="kc">undefined</span>
 
@@ -75,7 +75,7 @@ these are the children of the note</p></div></div><div class="code"><div class="
 
     <span class="k">return</span>
   
-  <span class="nv">instantiateChildren: </span><span class="nf">-&gt;</span>
+  <span class="nv">instantiateChildren: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;----------------------------------------------- instantiateChildren&quot;</span>
     
     <span class="nv">x = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">center</span><span class="p">.</span><span class="nx">x</span>
@@ -90,9 +90,9 @@ these are the children of the note</p></div></div><div class="code"><div class="
     <span class="nv">halfHeight = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">halfHeight</span>
     <span class="nv">halfDepth = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">halfDepth</span>
 
-    <span class="nv">halfHalfWidth = </span><span class="nx">halfWidth</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="nv">halfHalfHeight = </span><span class="nx">halfHeight</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="nv">halfHalfDepth = </span><span class="nx">halfDepth</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="nv">halfHalfWidth = </span><span class="nx">halfWidth</span> <span class="err">/ 2</span>
+    <span class="nv">halfHalfHeight = </span><span class="nx">halfHeight</span> <span class="err">/ 2</span>
+    <span class="nv">halfHalfDepth = </span><span class="nx">halfDepth</span> <span class="err">/ 2</span>
 
     <span class="nv">newCurrentLevel = </span><span class="nx">@currentLevel</span> <span class="o">+</span> <span class="mi">1</span>
 
@@ -124,7 +124,7 @@ these are the children of the note</p></div></div><div class="code"><div class="
     
     <span class="k">return</span>
   
-  <span class="nv">fillAllChildren: </span><span class="nf">-&gt;</span>
+  <span class="nv">fillAllChildren: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;----------------------------------------------- fillAllChildren&quot;</span>
     <span class="nx">@topLeftFront</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
     <span class="nx">@topRightFront</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
@@ -138,7 +138,7 @@ these are the children of the note</p></div></div><div class="code"><div class="
 
     <span class="k">return</span>
 
-  <span class="nv">fill: </span><span class="nf">-&gt;</span>
+  <span class="nv">fill: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;----------------------------------------------- fill&quot;</span>
     <span class="vi">@isInUse = </span><span class="kc">true</span>
 
@@ -175,12 +175,12 @@ these are the children of the note</p></div></div><div class="code"><div class="
       <span class="nx">@insertPointInChildren</span><span class="p">(</span><span class="nx">point</span><span class="p">,</span> <span class="nx">level</span><span class="p">)</span>
     <span class="k">else</span> <span class="k">if</span> <span class="nx">level</span> <span class="o">==</span> <span class="nx">@currentLevel</span>
       <span class="vi">@isInUse = </span><span class="kc">true</span>
-      <span class="cm">###</span>
-<span class="cm">      console.log &quot;inserted point&quot;</span>
-<span class="cm">      console.log &quot;level: &quot; + @currentLevel</span>
-<span class="cm">      console.log &quot;position:&quot;</span>
-<span class="cm">      console.log @boundingBox.center</span>
-<span class="cm">      ###</span>
+      <span class="c1">###</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;inserted point&quot;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;level: &quot;</span> <span class="o">+</span> <span class="nx">@currentLevel</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;position:&quot;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">center</span>
+      <span class="c1">###</span>
     <span class="k">return</span>
   
   <span class="nv">removePointInChildren: </span><span class="nf">(point, level)-&gt;</span>
@@ -212,12 +212,12 @@ these are the children of the note</p></div></div><div class="code"><div class="
       <span class="nx">@removePointInChildren</span><span class="p">(</span><span class="nx">point</span><span class="p">,</span> <span class="nx">level</span><span class="p">)</span>
     <span class="k">else</span> <span class="k">if</span> <span class="nx">level</span> <span class="o">==</span> <span class="nx">@currentLevel</span>
       <span class="vi">@isInUse = </span><span class="kc">false</span>
-      <span class="cm">###</span>
-<span class="cm">      console.log &quot;removed point&quot;</span>
-<span class="cm">      console.log &quot;level: &quot; + @currentLevel</span>
-<span class="cm">      console.log &quot;position:&quot;</span>
-<span class="cm">      console.log @boundingBox.center</span>
-<span class="cm">      ###</span>
+      <span class="c1">###</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;removed point&quot;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;level: &quot;</span> <span class="o">+</span> <span class="nx">@currentLevel</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;position:&quot;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">center</span>
+      <span class="c1">###</span>
     <span class="k">return</span>
 
   <span class="nv">draw: </span><span class="nf">(scene)-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>experimental!!!!!!!!!!!!!!!!!!!!!!!!!!!</p></div></div><div class="code"><div class="wrapper">    <span class="k">if</span><span class="p">(</span><span class="nx">isInUse</span><span class="p">)</span>

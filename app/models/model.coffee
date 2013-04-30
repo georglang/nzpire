@@ -13,6 +13,17 @@ Meteor.methods
 			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic})
 			return modelId
 
+	cloneModel: (options) ->
+		checkNameAvailability = findModelByName options.name
+		if checkNameAvailability
+			throw new Meteor.Error(499, "Modelname already taken");
+		else
+			transactionManager.commit()
+			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic})
+			predecessorModelObjects = ModelObjects.find({modelId:options.predecessor}).fetch()
+			ModelObjects.insert({position: i.position, modelId: modelId}) for i in predecessorModelObjects
+			return modelId		
+
 	updateModelName: (options) ->
 		checkNameAvailability = findModelByName options.name
 		optionsFind = {_id: options._id}

@@ -1,75 +1,69 @@
 <!DOCTYPE html><html lang="en"><head><title>client/menue</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/menue"><meta name="groc-project-path" content="app/client/menue.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/menue.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">menue</span><span class="p">.</span><span class="nx">events</span>
-  <span class="s">&#39;click #news&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;clicked news&quot;</span>
+  <span class="s1">&#39;click #news&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;clicked news&quot;</span>
     <span class="nx">Workspace</span><span class="p">.</span><span class="nx">news</span><span class="p">()</span>
     <span class="kc">false</span>
 
-  <span class="s">&#39;click #home&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;clicked home&quot;</span>
+  <span class="s1">&#39;click #home&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;clicked home&quot;</span>
     <span class="nx">Workspace</span><span class="p">.</span><span class="nx">index</span><span class="p">()</span>
     <span class="kc">false</span>
 
-  <span class="s">&#39;click #search&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;clicked search&quot;</span>
-    <span class="nx">Workspace</span><span class="p">.</span><span class="nx">search</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s">&quot;searchQuery&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">)</span>
+  <span class="s1">&#39;click #search&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;clicked search&quot;</span>
+    <span class="nx">Workspace</span><span class="p">.</span><span class="nx">search</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;searchQuery&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">)</span>
     <span class="kc">false</span>
 
-  <span class="s">&#39;click #model&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;clicked model&quot;</span>
-    <span class="k">if</span> <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#newModel&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="kc">undefined</span>
-      <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#model&#39;</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="s">&quot;&lt;li id=&#39;newModel&#39;&gt;&lt;input id=&#39;modelName&#39; type=&#39;text&#39; placeholder=&#39;Modelname&#39;&gt;&lt;input type=&#39;button&#39; id=&#39;createNewModel&#39; value=&#39;Create&#39;&gt;&lt;/li&gt;&quot;</span><span class="p">)</span>
+  <span class="s1">&#39;click #model&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;clicked model&quot;</span>
+    <span class="k">if</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#newModel&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#model&#39;</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s2">&quot;&lt;li id=&#39;newModel&#39;&gt;&lt;input autofocus=&#39;autofocus&#39; id=&#39;modelName&#39; type=&#39;text&#39; placeholder=&#39;Modelname&#39;&gt;&lt;input type=&#39;button&#39; id=&#39;createNewModel&#39; value=&#39;Create&#39;&gt;&lt;/li&gt;&quot;</span><span class="p">)</span>
     <span class="kc">false</span>
 
-  <span class="s">&#39;click #createNewModel&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
-    <span class="nv">modelName = </span><span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelName&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
-    <span class="k">if</span> <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#errorNewModel&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">undefined</span>
-      <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#errorNewModel&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">()</span>
+  <span class="s1">&#39;click #createNewModel&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nv">modelName = </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modelName&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#errorNewModel&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">undefined</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#errorNewModel&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">()</span>
 
-    <span class="nv">options = </span><span class="p">{</span><span class="nv">name: </span><span class="nx">modelName</span><span class="p">,</span> <span class="nv">predecessor: </span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nv">creator: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">,</span><span class="nv">isPublic: </span><span class="kc">false</span><span class="p">}</span>
-    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;createModel&#39;</span><span class="p">,</span><span class="nx">options</span><span class="p">,</span> <span class="nf">(error,modelId)-&gt;</span>
+    <span class="nv">options = </span><span class="p">{</span><span class="nv">name: </span><span class="nx">modelName</span><span class="p">,</span> <span class="nv">predecessor: </span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nv">creator: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">,</span><span class="nv">isPublic: </span><span class="kc">false</span><span class="p">}</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s1">&#39;createModel&#39;</span><span class="p">,</span><span class="nx">options</span><span class="p">,</span> <span class="nf">(error,modelId)-&gt;</span>
       <span class="k">if</span> <span class="nx">error</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#createNewModel&#39;</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="s">&quot;&lt;div id=&#39;errorNewModel&#39;&gt;&quot;</span><span class="o">+</span><span class="nx">error</span><span class="p">.</span><span class="nx">reason</span><span class="o">+</span><span class="s">&quot;&lt;/div&gt;&quot;</span><span class="p">)</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#createNewModel&#39;</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="s2">&quot;&lt;div id=&#39;errorNewModel&#39;&gt;&quot;</span><span class="o">+</span><span class="nx">error</span><span class="p">.</span><span class="nx">reason</span><span class="o">+</span><span class="s2">&quot;&lt;/div&gt;&quot;</span><span class="p">)</span>
       <span class="k">else</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#newModel&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">remove</span><span class="p">()</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#newModel&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">remove</span><span class="p">()</span>
         <span class="nx">Workspace</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="nx">modelId</span><span class="p">)</span>
 
-  <span class="s">&#39;keydown #modelName&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
-    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">defer</span> <span class="nf">-&gt;</span>
+  <span class="s1">&#39;keydown #modelName&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">defer</span> <span class="o">-&gt;</span>
       <span class="k">if</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;test&quot;</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#createNewModel&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">()</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;test&quot;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#createNewModel&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">()</span>
+      <span class="k">else</span> <span class="k">if</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">27</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#newModel&#39;</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s2">&quot;&lt;a href=&#39;#&#39; id=&#39;model&#39;&gt;Create new Model&lt;/a&gt;&quot;</span><span class="p">)</span>
 
-  <span class="s">&#39;click #profile&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;clicked profile&quot;</span>
+  <span class="s1">&#39;click #profile&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;clicked profile&quot;</span>
     <span class="nx">Workspace</span><span class="p">.</span><span class="nx">profile</span><span class="p">(</span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">)</span>
     <span class="kc">false</span>
 
-  <span class="s">&#39;click #edit&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;clicked edit&quot;</span>
+  <span class="s1">&#39;click #edit&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;clicked edit&quot;</span>
     <span class="nx">Workspace</span><span class="p">.</span><span class="nx">edit</span><span class="p">()</span>
 
-  <span class="s">&#39;keydown #searchQuery&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
-    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">defer</span> <span class="nf">-&gt;</span>
+  <span class="s1">&#39;keydown #searchQuery&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">defer</span> <span class="o">-&gt;</span>
       <span class="c1">#console.log &quot;onchange search&quot;</span>
-      <span class="nv">searchQuery = </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s">&quot;searchQuery&quot;</span><span class="p">).</span><span class="nx">value</span>
+      <span class="nv">searchQuery = </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;searchQuery&quot;</span><span class="p">).</span><span class="nx">value</span>
       <span class="k">if</span> <span class="nx">searchQuery</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">||</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span>
         <span class="c1">#console.log encodeURIComponent(searchQuery)</span>
         <span class="nx">Workspace</span><span class="p">.</span><span class="nx">search</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)</span>
       <span class="k">else</span> <span class="k">if</span> <span class="nx">searchQuery</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">2</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#searchresult&#39;</span><span class="p">).</span><span class="nx">empty</span><span class="p">()</span>
-        <span class="nx">Workspace</span><span class="p">.</span><span class="nx">search</span> <span class="s">&quot;&quot;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#searchresult&#39;</span><span class="p">).</span><span class="nx">empty</span><span class="p">()</span>
+        <span class="nx">Workspace</span><span class="p">.</span><span class="nx">search</span> <span class="s2">&quot;&quot;</span>
 
-  <span class="s">&#39;click #login-buttons-logout&#39;</span><span class="o">:</span> <span class="p">()</span><span class="nf">-&gt;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;logout&quot;</span>
+  <span class="s1">&#39;click #login-buttons-logout&#39;</span><span class="o">:</span> <span class="nf">()-&gt;</span>
+    <span class="c1">#console.log &quot;logout&quot;</span>
     <span class="nx">Workspace</span><span class="p">.</span><span class="nx">index</span><span class="p">()</span>
 
-<span class="cm">###</span>
-<span class="cm">  &#39;click #de&#39;:()-&gt;</span>
-<span class="cm">    Meteor.setLocale(&#39;de&#39;)</span>
-
-<span class="cm">  &#39;click #en_GB&#39;:()-&gt;</span>
-<span class="cm">    Meteor.setLocale(&#39;en_GB&#39;)</span>
-
-<span class="cm">  &#39;click #en_US&#39;:()-&gt;</span>
-<span class="cm">    Meteor.setLocale(&#39;en_US&#39;)       </span>
-<span class="cm">###</span></div></div></div></div></body></html>
+  <span class="s1">&#39;click #modelShowroom&#39;</span><span class="o">:</span> <span class="nf">()-&gt;</span>
+    <span class="nx">Workspace</span><span class="p">.</span><span class="nx">modelShowroom</span><span class="p">()</span></div></div></div></div></body></html>

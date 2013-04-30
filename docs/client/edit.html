@@ -1,16 +1,16 @@
-<!DOCTYPE html><html lang="en"><head><title>client/edit</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/edit"><meta name="groc-project-path" content="app/client/edit.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/edit.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nv">Template.edit.userName = </span><span class="nf">-&gt;</span>
+<!DOCTYPE html><html lang="en"><head><title>client/edit</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/edit"><meta name="groc-project-path" content="app/client/edit.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/edit.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nv">Template.edit.userName = </span><span class="o">-&gt;</span>
   <span class="nx">currentProfile</span><span class="p">().</span><span class="nx">name</span>
 
-<span class="nv">Template.edit.email = </span><span class="nf">-&gt;</span>
+<span class="nv">Template.edit.email = </span><span class="o">-&gt;</span>
   <span class="nx">currentEmail</span><span class="p">()</span>
 
-<span class="nv">Template.edit.www = </span><span class="nf">-&gt;</span>
+<span class="nv">Template.edit.www = </span><span class="o">-&gt;</span>
   <span class="nx">currentProfile</span><span class="p">().</span><span class="nx">www</span>
 
 <span class="nx">Template</span><span class="p">.</span><span class="nx">edit</span><span class="p">.</span><span class="nx">events</span>
-  <span class="s">&#39;click div#submitEdit&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
-    <span class="nv">editUsername = </span><span class="nx">$</span><span class="p">(</span><span class="s">&quot;</span><span class="err">#</span><span class="s">editUsername&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
-    <span class="nv">editWww = </span><span class="nx">$</span><span class="p">(</span><span class="s">&quot;</span><span class="err">#</span><span class="s">editWww&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span> 
+  <span class="s1">&#39;click div#submitEdit&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nv">editUsername = </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#editUsername&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+    <span class="nv">editWww = </span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#editWww&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span> 
     
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">},</span> <span class="p">{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">name: </span><span class="nx">editUsername</span><span class="p">}});</span>
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">},</span> <span class="p">{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">www: </span><span class="nx">editWww</span><span class="p">}});</span></div></div></div></div></body></html>
