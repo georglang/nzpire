@@ -60,16 +60,8 @@ Template.menue.events
 				Workspace.search ""
 
 	'click #login-buttons-logout': ()->
-		console.log "logout"
+		#console.log "logout"
 		Workspace.index()
 
-###
-	'click #de':()->
-		Meteor.setLocale('de')
-
-	'click #en_GB':()->
-		Meteor.setLocale('en_GB')
-
-	'click #en_US':()->
-		Meteor.setLocale('en_US')				
-###
+	'click #modelShowroom': ()->
+		Workspace.modelShowroom()

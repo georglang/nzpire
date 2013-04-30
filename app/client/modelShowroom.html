@@ -1,0 +1,32 @@
+<template name="modelShowroom">
+	{{#if currentUser.services}}
+	<div id="modelShowroom">
+		<ul>
+			<li>Creator:</li>
+			<ul>
+				{{#each Creator}}
+					<li><div class="modelLink" id="{{this._id}}">{{this.name}}</div></li>	
+				{{/each}}
+			</ul>		
+			<li>Owner:</li>		
+			<ul>
+				{{#each Owner}}
+					<li><div class="modelLink" id="{{this._id}}">{{this.name}}</div></li>	
+				{{/each}}
+			</ul>
+			<li>Collaborator:</li>		
+			<ul>			
+				{{#each Collaborator}}
+					<li><div class="modelLink" id="{{this._id}}">{{this.name}}</div></li>	
+				{{/each}}
+			</ul>
+			<li>Viewer:</li>		
+			<ul>			
+				{{#each Viewer}}
+					<li><div class="modelLink" id="{{this._id}}">{{this.name}}</div></li>	
+				{{/each}}									
+			</ul>
+		</ul>		
+	</div>
+	{{/if}}
+</template>

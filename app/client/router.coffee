@@ -14,6 +14,7 @@ WorkspaceRouter = Backbone.Router.extend(
     "index": "index"
     "model/:id": "model"
     "model/:id/edit": "modelEdit"
+    "modelshowroom" : "modelshowroom"
     "help": "help" # #help
     "search": "search" # #search
     "search/:query": "search" # #search/kiwis
@@ -44,6 +45,12 @@ WorkspaceRouter = Backbone.Router.extend(
     Session.set "template", "modelEdit"
     Session.set "model", _id
     @navigate "model/" + _id + "/edit"
+      trigger: true
+      replace: true
+
+  modelShowroom: ->
+    Session.set "template", "modelShowroom"
+    @navigate "modelshowroom",
       trigger: true
       replace: true
 
