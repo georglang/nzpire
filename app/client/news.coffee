@@ -1,3 +1,5 @@
+# #News
+
 getModelNews = ->
 	#console.log "getModelNewsFunc"
 	#profiles = Profiles.find({},{sort: {updatedAt: 1}).fetch()
@@ -23,3 +25,11 @@ Template.news.getNews = ->
 	jQuery.merge(result,result2)
 	result.sort(sortArrayByTimestamp)
 	return result
+
+
+
+Template.news.rendered = ()->
+	$('#newsTemplate').addClass('activeTemplate')
+
+Template.news.destroyed = ()->
+	$('#newsTemplate').removeClass('activeTemplate')

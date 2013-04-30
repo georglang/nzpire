@@ -30,3 +30,12 @@ Template.modelShowroom.Viewer = ()->
 Template.modelShowroom.events
 	'click div.modelLink': (e)->
 		Workspace.model e.target.id
+
+
+
+
+Template.modelShowroom.rendered = ()->
+	$('#modelShowroomTemplate').addClass('activeTemplate')
+
+Template.modelShowroom.destroyed = ()->
+	$('#modelShowroomTemplate').removeClass('activeTemplate')

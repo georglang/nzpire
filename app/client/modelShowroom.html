@@ -1,6 +1,6 @@
 <template name="modelShowroom">
-	{{#if currentUser.services}}
-	<div id="modelShowroom">
+	{{#if currentUser.services}}	
+	<div id="modelShowroomTemplate">
 		<ul>
 			<li>Creator:</li>
 			<ul>
@@ -29,4 +29,5 @@
 		</ul>		
 	</div>
 	{{/if}}
+	{{activateCSS}}
 </template>
