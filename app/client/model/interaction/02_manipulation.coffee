@@ -18,10 +18,12 @@ object.add = (options) ->
   if not options.object
     throw new Meteor.Error(490, "Object to be added is not defined.")
   else
-    newObject = options.object
-    newObject.modelId = Session.get 'modelId'
-    ModelObjects.insert newObject
-    Modeling.interaction.history.save()
+    options.object.modelId = Session.get 'modelId'
+    Meteor.call 'doModelAction',
+      modelId: Session.get 'modelId'
+      type: 'addObject'
+      specifics:
+        object: options.object
 
 # ### Remove
 

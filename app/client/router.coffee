@@ -35,6 +35,12 @@ WorkspaceRouter = Backbone.Router.extend(
     Session.set "template", "loading"
     Meteor.subscribe 'model', Session.get('modelId'), ()->
       Session.set "template", "model"
+      Modeling.scene.setup()
+      Meteor.defer Modeling.scene.update
+      Modeling.interaction.mouseBindings.setup()
+      Meteor.autorun ->
+        Meteor.subscribe 'modelObjects', Session.get 'modelId'
+        Meteor.subscribe 'modelActions', Session.get 'modelId'
           
     @navigate "model/" + _id,
       trigger: true

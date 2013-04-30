@@ -58,16 +58,19 @@ mouseBindings.setup = ->
       e.stopImmediatePropagation()
 
   # When mouse is moved, save the
-  Meteor.defer ->
-    $('#modelContainer').mousemove (e) ->      
-      offset = $(this).offset()
-      width = $(this).width()
-      height = $(this).height()
+  mouseMove = (e) ->
+    offset = $(this).offset()
+    width = $(this).width()
+    height = $(this).height()
 
-      # absolute and
-      position.absolute.x = e.pageX - offset.left
-      position.absolute.y = e.pageY - offset.top
-      
-      # relative positions
-      position.relative.x =   (position.absolute.x / width  * 2) - 1
-      position.relative.y = - (position.absolute.y / height * 2) + 1
+    # absolute and
+    position.absolute.x = e.pageX - offset.left
+    position.absolute.y = e.pageY - offset.top
+    
+    # relative positions
+    position.relative.x =   (position.absolute.x / width  * 2) - 1
+    position.relative.y = - (position.absolute.y / height * 2) + 1
+  
+  Meteor.defer ->
+    $('#modelContainer').off 'mousemove', mouseMove
+    $('#modelContainer').on 'mousemove', mouseMove 

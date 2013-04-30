@@ -13,7 +13,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "commentsOnly": true,
           "name": "Markdown"
         },
-        "sourcePath": "/home/morathil/qpt2b/README.md",
+        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/README.md",
         "projectPath": "README.md",
         "targetPath": "index",
         "firstHeader": {
@@ -84,7 +84,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/config.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/config.coffee",
             "projectPath": "app/client/config.coffee",
             "targetPath": "client/config",
             "title": "config"
@@ -100,7 +100,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/connectServices.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/connectServices.coffee",
             "projectPath": "app/client/connectServices.coffee",
             "targetPath": "client/connectServices",
             "title": "connectServices"
@@ -116,7 +116,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/edit.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/edit.coffee",
             "projectPath": "app/client/edit.coffee",
             "targetPath": "client/edit",
             "title": "edit"
@@ -132,7 +132,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/i18n.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/i18n.coffee",
             "projectPath": "app/client/i18n.coffee",
             "targetPath": "client/i18n",
             "title": "i18n"
@@ -148,7 +148,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/index.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/index.coffee",
             "projectPath": "app/client/index.coffee",
             "targetPath": "client/index",
             "title": "index"
@@ -164,7 +164,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/menue.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/menue.coffee",
             "projectPath": "app/client/menue.coffee",
             "targetPath": "client/menue",
             "title": "menue"
@@ -196,7 +196,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/01_history.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/01_history.coffee",
                     "projectPath": "app/client/model/interaction/01_history.coffee",
                     "targetPath": "client/model/interaction/01_history",
                     "firstHeader": {
@@ -243,7 +243,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/02_manipulation.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/02_manipulation.coffee",
                     "projectPath": "app/client/model/interaction/02_manipulation.coffee",
                     "targetPath": "client/model/interaction/02_manipulation",
                     "firstHeader": {
@@ -392,7 +392,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/03_keyBindings.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/03_keyBindings.coffee",
                     "projectPath": "app/client/model/interaction/03_keyBindings.coffee",
                     "targetPath": "client/model/interaction/03_keyBindings",
                     "firstHeader": {
@@ -439,7 +439,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/04_mouseBindings.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/04_mouseBindings.coffee",
                     "projectPath": "app/client/model/interaction/04_mouseBindings.coffee",
                     "targetPath": "client/model/interaction/04_mouseBindings",
                     "firstHeader": {
@@ -508,7 +508,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/main.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/main.coffee",
                     "projectPath": "app/client/model/interaction/main.coffee",
                     "targetPath": "client/model/interaction/main",
                     "firstHeader": {
@@ -544,7 +544,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/01_update.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/01_update.coffee",
                     "projectPath": "app/client/model/scene/01_update.coffee",
                     "targetPath": "client/model/scene/01_update",
                     "firstHeader": {
@@ -561,51 +561,42 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "type": "heading",
                           "data": {
                             "level": 2,
-                            "title": "Parallelization of update process",
-                            "slug": "parallelization-of-update-process"
+                            "title": "Creating a mesh for a given database object",
+                            "slug": "creating-a-mesh-for-a-given-database-object"
                           },
-                          "depth": 2,
-                          "children": [
-                            {
-                              "type": "heading",
-                              "data": {
-                                "level": 3,
-                                "title": "Identify changes",
-                                "slug": "identify-changes"
-                              },
-                              "depth": 3,
-                              "children": [
-                                {
-                                  "type": "heading",
-                                  "data": {
-                                    "level": 4,
-                                    "title": "TODO",
-                                    "slug": "todo"
-                                  },
-                                  "depth": 4
-                                }
-                              ]
-                            }, {
-                              "type": "heading",
-                              "data": {
-                                "level": 3,
-                                "title": "Incorporate changes into the scene",
-                                "slug": "incorporate-changes-into-the-scene"
-                              },
-                              "depth": 3,
-                              "children": [
-                                {
-                                  "type": "heading",
-                                  "data": {
-                                    "level": 4,
-                                    "title": "TODO",
-                                    "slug": "todo"
-                                  },
-                                  "depth": 4
-                                }
-                              ]
-                            }
-                          ]
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Adding the mesh to the scene",
+                            "slug": "adding-the-mesh-to-the-scene"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Removing an existing mesh from the scene",
+                            "slug": "removing-an-existing-mesh-from-the-scene"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Updating a mesh (= remove old one + add new one)",
+                            "slug": "updating-a-mesh--remove-old-one--add-new-one"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Registration of observer callbacks",
+                            "slug": "registration-of-observer-callbacks"
+                          },
+                          "depth": 2
                         }
                       ]
                     },
@@ -617,51 +608,42 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "type": "heading",
                       "data": {
                         "level": 2,
-                        "title": "Parallelization of update process",
-                        "slug": "parallelization-of-update-process"
+                        "title": "Creating a mesh for a given database object",
+                        "slug": "creating-a-mesh-for-a-given-database-object"
                       },
-                      "depth": 2,
-                      "children": [
-                        {
-                          "type": "heading",
-                          "data": {
-                            "level": 3,
-                            "title": "Identify changes",
-                            "slug": "identify-changes"
-                          },
-                          "depth": 3,
-                          "children": [
-                            {
-                              "type": "heading",
-                              "data": {
-                                "level": 4,
-                                "title": "TODO",
-                                "slug": "todo"
-                              },
-                              "depth": 4
-                            }
-                          ]
-                        }, {
-                          "type": "heading",
-                          "data": {
-                            "level": 3,
-                            "title": "Incorporate changes into the scene",
-                            "slug": "incorporate-changes-into-the-scene"
-                          },
-                          "depth": 3,
-                          "children": [
-                            {
-                              "type": "heading",
-                              "data": {
-                                "level": 4,
-                                "title": "TODO",
-                                "slug": "todo"
-                              },
-                              "depth": 4
-                            }
-                          ]
-                        }
-                      ]
+                      "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "Adding the mesh to the scene",
+                        "slug": "adding-the-mesh-to-the-scene"
+                      },
+                      "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "Removing an existing mesh from the scene",
+                        "slug": "removing-an-existing-mesh-from-the-scene"
+                      },
+                      "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "Updating a mesh (= remove old one + add new one)",
+                        "slug": "updating-a-mesh--remove-old-one--add-new-one"
+                      },
+                      "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "Registration of observer callbacks",
+                        "slug": "registration-of-observer-callbacks"
+                      },
+                      "depth": 2
                     }
                   ]
                 }, {
@@ -673,7 +655,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/02_lights.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/02_lights.coffee",
                     "projectPath": "app/client/model/scene/02_lights.coffee",
                     "targetPath": "client/model/scene/02_lights",
                     "firstHeader": {
@@ -699,7 +681,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/03_picking.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/03_picking.coffee",
                     "projectPath": "app/client/model/scene/03_picking.coffee",
                     "targetPath": "client/model/scene/03_picking",
                     "firstHeader": {
@@ -778,7 +760,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/04_setup.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/04_setup.coffee",
                     "projectPath": "app/client/model/scene/04_setup.coffee",
                     "targetPath": "client/model/scene/04_setup",
                     "firstHeader": {
@@ -937,7 +919,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/Octree.coffee",
+                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/Octree.coffee",
                     "projectPath": "app/client/model/scene/Octree.coffee",
                     "targetPath": "client/model/scene/Octree",
                     "firstHeader": {
@@ -981,7 +963,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/edit/edit.coffee",
+                        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/templates/edit/edit.coffee",
                         "projectPath": "app/client/model/templates/edit/edit.coffee",
                         "targetPath": "client/model/templates/edit/edit",
                         "title": "edit"
@@ -1007,7 +989,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/show/show.coffee",
+                        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/templates/show/show.coffee",
                         "projectPath": "app/client/model/templates/show/show.coffee",
                         "targetPath": "client/model/templates/show/show",
                         "title": "show"
@@ -1033,7 +1015,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/slideBar/slideBar.coffee",
+                        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/templates/slideBar/slideBar.coffee",
                         "projectPath": "app/client/model/templates/slideBar/slideBar.coffee",
                         "targetPath": "client/model/templates/slideBar/slideBar",
                         "title": "slideBar"
@@ -1055,7 +1037,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/modelShowroom.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/modelShowroom.coffee",
             "projectPath": "app/client/modelShowroom.coffee",
             "targetPath": "client/modelShowroom",
             "firstHeader": {
@@ -1081,7 +1063,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/news.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/news.coffee",
             "projectPath": "app/client/news.coffee",
             "targetPath": "client/news",
             "title": "news"
@@ -1097,7 +1079,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/profile.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/profile.coffee",
             "projectPath": "app/client/profile.coffee",
             "targetPath": "client/profile",
             "title": "profile"
@@ -1113,7 +1095,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/router.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/router.coffee",
             "projectPath": "app/client/router.coffee",
             "targetPath": "client/router",
             "title": "router"
@@ -1129,7 +1111,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/search.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/search.coffee",
             "projectPath": "app/client/search.coffee",
             "targetPath": "client/search",
             "title": "search"
@@ -1147,7 +1129,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "singleLineComment": ["#"],
           "name": "CoffeeScript"
         },
-        "sourcePath": "/home/morathil/qpt2b/app/globalFunctions.coffee",
+        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/globalFunctions.coffee",
         "projectPath": "app/globalFunctions.coffee",
         "targetPath": "globalFunctions",
         "title": "globalFunctions"
@@ -1171,7 +1153,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/models/model.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/models/model.coffee",
             "projectPath": "app/models/model.coffee",
             "targetPath": "models/model",
             "title": "model"
@@ -1187,7 +1169,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/models/profile.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/models/profile.coffee",
             "projectPath": "app/models/profile.coffee",
             "targetPath": "models/profile",
             "title": "profile"
@@ -1213,7 +1195,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/server/config.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/server/config.coffee",
             "projectPath": "app/server/config.coffee",
             "targetPath": "server/config",
             "title": "config"
@@ -1229,7 +1211,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/server/connectAccOnCreateByEmail.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/server/connectAccOnCreateByEmail.coffee",
             "projectPath": "app/server/connectAccOnCreateByEmail.coffee",
             "targetPath": "server/connectAccOnCreateByEmail",
             "title": "connectAccOnCreateByEmail"
@@ -1245,7 +1227,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/server/index.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/server/index.coffee",
             "projectPath": "app/server/index.coffee",
             "targetPath": "server/index",
             "title": "index"
@@ -1261,7 +1243,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/server/publish.coffee",
+            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/server/publish.coffee",
             "projectPath": "app/server/publish.coffee",
             "targetPath": "server/publish",
             "title": "publish"
@@ -1295,7 +1277,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["#"],
                   "name": "CoffeeScript"
                 },
-                "sourcePath": "/home/morathil/qpt2b/app/tests/unit_tests/testing.coffee",
+                "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/tests/unit_tests/testing.coffee",
                 "projectPath": "app/tests/unit_tests/testing.coffee",
                 "targetPath": "tests/unit_tests/testing",
                 "title": "testing"
