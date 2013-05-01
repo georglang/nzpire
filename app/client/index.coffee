@@ -1,3 +1,6 @@
+# # Landing_page
+
+# Checks the Browserlanguage
 language = window.navigator.userLanguage || window.navigator.language
 if language.length > 2
 	language = language.replace(/-/g,"_")
@@ -16,6 +19,7 @@ Template.index.descriptionText = ->
 	text = __('someNamespace.optionalSubNamespace.appDescription')
 	return text
 
+# Redirecits logged in Users to News Template
 Template.index.redirectToNewsIfLoggedIn = ->
 	if Meteor.user() != null
 		Workspace.news()

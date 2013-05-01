@@ -1,6 +1,8 @@
 # #Model_Showroom
 
-# Function takes a Roles as parameter and returns all Models where the User has the expected Role
+# Gets all Models where the User has the expected Role    
+# * params: Roles    
+# * return: Array (models)   
 userInvitedModels = (role)->
 	tmpResult = Models.find({}).fetch()
 	modelsResult = []
@@ -10,30 +12,39 @@ userInvitedModels = (role)->
 			modelsResult.push i
 	return modelsResult
 
-# Template Method that returns all Models where the Users Role is Owner
+# ## Owner
+# Template Method that returns all Models where the Users Role is Owner    
+# * return: array (models)    
 Template.modelShowroom.Owner = ()->
 	userInvitedModels(Roles.owner)
 
-# Template Method that returns all Models where the Users Role is Creator
+# ## Creator
+# Template Method that returns all Models where the Users Role is Creator    
+# * return: array (models)    
 Template.modelShowroom.Creator = ()->
 	userInvitedModels(Roles.creator)
 
-# Template Method that returns all Models where the Users Role is Collaborator
+# ## Collaborator
+# Template Method that returns all Models where the Users Role is Collaborator    
+# * return: array (models)    
 Template.modelShowroom.Collaborator = ()->
 	userInvitedModels(Roles.collaborator)
 
-# Template Method that returns all Models where the Users Role is Viewer
+# ## Viewer
+# Template Method that returns all Models where the Users Role is Viewer    
+# * return: array (models)    
 Template.modelShowroom.Viewer = ()->
 	userInvitedModels(Roles.viewer)
 
+# ## Events
 # Model_Showroom events: click event for redirecting to the specified Model
 Template.modelShowroom.events
 	'click div.modelLink': (e)->
 		Workspace.model e.target.id
 
 
-
-
+# ## Rendered and Destroyed
+# Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy
 Template.modelShowroom.rendered = ()->
 	$('#modelShowroomTemplate').addClass('activeTemplate')
 

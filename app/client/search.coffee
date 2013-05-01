@@ -1,3 +1,9 @@
+# #Search
+
+# ## Profilesearch
+# Gets the profiles where the evaluated searchQuery matches    
+# params: string (i.e. "/max_mustermann/i")    
+# return: cursor
 searchForProfiles = (searchQuery)->
 	Profiles.find
 		name: eval(searchQuery)
@@ -10,6 +16,11 @@ searchForProfiles = (searchQuery)->
 		])
 	###
 
+# ## Modelsearch
+# Gets the models where the evaluated searchQuery matches    
+# Checks if the user has permissions to get the model returned    
+# params: string (i.e. "/my_model/i")    
+# return: cursor
 searchForModels = (searchQuery)->
 	tmpResult = Models.find({name: eval(searchQuery)}).fetch()
 	modelsResult = []
@@ -19,16 +30,28 @@ searchForModels = (searchQuery)->
 			modelsResult.push i
 	return modelsResult
 
+# ## Check Follow
+# Checks if the currentUser follows the given profile(_id)    
+# params: _id    
+# return: cursor
 checkForFollowing = (_id)->
 	Profiles.find
 		_id: currentProfile()._id
 		following: _id
 
+# ## Check Favourite
+# Checks if the currentUser favourites the given model(_id)    
+# params: _id    
+# return: cursor
 checkForFavourites = (_id)->
 	Profiles.find
 		_id: currentProfile()._id
 		favourites: _id
 
+# ## Follow/Favourite
+# Handles the result of checkForFollowing and checkForFavourite    
+# params: string ("profileLink" || modelLink) , _id    
+# return: string ("unfollow"/"follow" || "defavourite"/"favourite")
 order = (searchingFor,_id)->
 	loggedIn = Meteor.userId()
 	if searchingFor == "profileLink" && loggedIn != null
@@ -42,8 +65,13 @@ order = (searchingFor,_id)->
 		else
 			return "favourite"
 
-
-
+# ## Search Result
+# Checks if the first char of the search query is "@" (profiles) or "#" (models) else (profiles && models)    
+# Creates the searchQuery with "/query/i" to enable that the search query has not to match exactly and is case insensitive    
+# Calls the order function to check if the user follows/favourites  profiles/models    
+# If # and @ not given the function gets models and profiles and merges them    
+# params:    
+# return: array (with #models or @profiles or both) (+ .searchingFor" and .order)
 Template.search.getResults = ->
 	searchingFor = Session.get("searchQuery").charAt(0)
 	if searchingFor == "@"
@@ -68,6 +96,8 @@ Template.search.getResults = ->
 
 	return result
 
+# ## Events
+# Search click events to redirect to models or profiles or to update Profiles with follow/favourite
 Template.search.events
 	'click div.profileLink': (e)->
 		Workspace.profile e.target.id

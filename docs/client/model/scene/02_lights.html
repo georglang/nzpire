@@ -2,12 +2,12 @@
 <span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span> <span class="o">?=</span> <span class="p">{}</span>
 <span class="nv">Modeling.scene.lights = lights = </span><span class="p">{}</span>
 
-<span class="nv">lights.setup = </span><span class="nf">-&gt;</span>
+<span class="nv">lights.setup = </span><span class="o">-&gt;</span>
   <span class="nv">lightDistance = </span><span class="mi">2000</span>
   <span class="nv">numberOfLightsPerDimension = </span><span class="mi">3</span>
   
-  <span class="nv">minXZ = </span><span class="o">-</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">numberOfLightsPerDimension</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-  <span class="nv">maxXZ = </span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">numberOfLightsPerDimension</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="nv">minXZ = </span><span class="o">-</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">numberOfLightsPerDimension</span> <span class="err">/ 2)</span>
+  <span class="nv">maxXZ = </span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">numberOfLightsPerDimension</span> <span class="err">/ 2)</span>
 
   <span class="nv">minY = </span><span class="mi">0</span>
   <span class="nv">maxY = </span><span class="nx">numberOfLightsPerDimension</span>

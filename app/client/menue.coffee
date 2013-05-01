@@ -1,25 +1,28 @@
+# # Navigation Events
+
 Template.menue.events
+	# ## News
 	'click #news': ->
 		console.log "clicked news"
 		Workspace.news()
 		false
 
+	# ## Index
 	'click #home': ->
 		console.log "clicked home"
 		Workspace.index()
 		false
 
-	'click #search': ->
-		console.log "clicked search"
-		Workspace.search encodeURIComponent(document.getElementById("searchQuery").value)
-		false
-
+	# ## Model
+	# Replaces the navigation Elemente with an input field where a new model can be created
 	'click #model': ->
 		console.log "clicked model"
 		if $('#newModel')[0] == undefined
 			$('#model').replaceWith("<li id='newModel'><input autofocus='autofocus' id='modelName' type='text' placeholder='Modelname'><input type='button' id='createNewModel' value='Create'></li>")
 		false
 
+	# ## Create Model
+	# Checks if the input field is empty and tries to create a new model and handels the callback
 	'click #createNewModel': ->
 		modelName = $('#modelName').val()
 		if $('#errorNewModel')[0] != undefined
@@ -33,33 +36,40 @@ Template.menue.events
 				$('#newModel')[0].remove()
 				Workspace.model(modelId)
 
+	# Triggers a click Event on #createNewModel if the input key == Enter button 
 	'keydown #modelName': (e)->
 		Meteor.defer ->
 			if e.keyCode == 13
-				console.log "test"
 				$('#createNewModel').click()
 			else if e.keyCode == 27
 				$('#newModel').replaceWith("<a href='#' id='model'>Create new Model</a>")
 
+	# ## Profile
 	'click #profile': ->
 		console.log "clicked profile"
 		Workspace.profile(currentProfile()._id)
 		false
 
+	# ## Search
+	'click #search': ->
+		console.log "clicked search"
+		Workspace.search encodeURIComponent(document.getElementById("searchQuery").value)
+		false
+
+	# Triggers a search if the query length > 2 or keydown == Enter button
 	'keydown #searchQuery': (e)->
 		Meteor.defer ->
-			#console.log "onchange search"
 			searchQuery = document.getElementById("searchQuery").value
 			if searchQuery.length > 2 || e.keyCode == 13
-				#console.log encodeURIComponent(searchQuery)
 				Workspace.search encodeURIComponent(searchQuery)
 			else if searchQuery.length <= 2
 				$('#searchresult').empty()
 				Workspace.search ""
 
-	'click #login-buttons-logout': ()->
-		#console.log "logout"
-		Workspace.index()
-
+	# ## Model Showroom
 	'click #modelShowroom': ()->
 		Workspace.modelShowroom()
+
+	# Redirects to Index on logout
+	'click #login-buttons-logout': ()->
+		Workspace.index()

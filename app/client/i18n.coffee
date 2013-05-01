@@ -1,3 +1,5 @@
+# # Internationalization Definitions
+
 Meteor.i18nMessages.someNamespace =
   optionalSubNamespace:
     yourMessage:
