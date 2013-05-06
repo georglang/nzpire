@@ -50,10 +50,10 @@ mouseBindings.setup = ->
         Modeling.interaction.manipulation.object.add
           object:
             position: buildingPoint
-      # prevents default action for event
-      e.preventDefault()
-      # prevents event from bubbling up to parent elements
-      e.stopPropagation()
+
+        console.log '================================================='
+
+      e.stopImmediatePropagation()
 
   # When mouse is moved, save the
   Meteor.defer ->
