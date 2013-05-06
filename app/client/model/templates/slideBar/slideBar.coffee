@@ -19,55 +19,79 @@ Template.modelSidebar.modelname = ->
       return null
 
 Template.modelSidebar.updatedAt = ->
-  updatedAt = findOneModelByOptions({_id: Session.get('modelId')}).updatedAt
-  if updatedAt != undefined
-    d = new Date(updatedAt)
-    return d.toUTCString()
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    updatedAt = model.updatedAt
+    if updatedAt != undefined
+      d = new Date(updatedAt)
+      return d.toUTCString()
+    else
+      return null
 
 Template.modelSidebar.tags = ->
-  tags = findOneModelByOptions({_id: Session.get('modelId')}).tags
-  if tags != undefined
-    if Template.modelSidebar.isOwner()    
-      tags.push ""
-    return tags
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    tags = model.tags
+    if tags != undefined
+      if Template.modelSidebar.isOwner()    
+        tags.push ""
+      return tags
+    else
+      return null
 
 Template.modelSidebar.creator = ->
-  creatorId = findOneModelByOptions({_id: Session.get('modelId')}).creator
-  if creatorId != ""
-    name = findOneProfileByOptions({_id: creatorId}).name
-    return name
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    creatorId = model.creator
+    if creatorId != ""
+      name = findOneProfileByOptions({_id: creatorId}).name
+      return name
+    else
+      return null
 
 Template.modelSidebar.invited = ->
   names = []
-  invitedPeople = findOneModelByOptions({_id: Session.get('modelId')}).invited
-  if invitedPeople != undefined
-    names.push({name: findOneProfileByOptions({_id: i.userId}).name,role: i.role}) for i in invitedPeople
-    if Template.modelSidebar.isOwner()
-      names.push {name:"",role:""}
-    return names
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    invitedPeople = model.invited
+    if invitedPeople != undefined
+      names.push({name: findOneProfileByOptions({_id: i.userId}).name,role: i.role}) for i in invitedPeople
+      if Template.modelSidebar.isOwner()
+        names.push {name:"",role:""}
+      return names
+    else
+      return null
 
 Template.modelSidebar.predecessor = ->
-  predecessorId = findOneModelByOptions({_id: Session.get('modelId')}).predecessor
-  if predecessorId != ""
-    name = findOneModelByOptions({_id:predecessorId}).name
-    return name
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    predecessorId = model.predecessor
+    if predecessorId != ""
+      name = findOneModelByOptions({_id:predecessorId}).name
+      return name
+    else
+      return null
   
 Template.modelSidebar.isPublic = ->
-  isPublic = findOneModelByOptions({_id: Session.get('modelId')}).isPublic
-  if isPublic != undefined
-    return isPublic
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    isPublic = model.isPublic
+    if isPublic != undefined
+      return isPublic
+    else
+      return null
 
 Template.modelSidebar.events
   'click #slideContainerListItems>li>ul>li': (e)->

@@ -17,7 +17,7 @@ Template.menue.events
 	'click #model': ->
 		console.log "clicked model"
 		if $('#newModel')[0] == undefined
-			$('#model').after("<li id='newModel'><input id='modelName' type='text' placeholder='Modelname'><a href='#' id='createNewModel'>Create</a></li>")
+			$('#model').after("<li id='newModel'><input id='modelName' type='text' placeholder='Modelname'><input type='button' id='createNewModel' value='Create'></li>")
 		false
 
 	'click #createNewModel': ->
@@ -32,6 +32,12 @@ Template.menue.events
 			else
 				$('#newModel')[0].remove()
 				Workspace.model(modelId)
+
+	'keydown #modelName': (e)->
+		Meteor.defer ->
+			if e.keyCode == 13
+				console.log "test"
+				$('#createNewModel').click()
 
 	'click #profile': ->
 		console.log "clicked profile"
