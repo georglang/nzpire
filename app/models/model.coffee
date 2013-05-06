@@ -1,12 +1,7 @@
 transactionManager = Meteor.tx
 
 @Models = new Meteor.Collection 'models'
-@ModelContents = new Meteor.Collection 'modelContents',
-	versioned: true
-	props:
-		objects: 
-			type: '[{}]'
-			locator: '_id'
+@ModelObjects = new Meteor.Collection 'modelObjects', versioned: true
 
 Meteor.methods
 	createModel: (options) ->
@@ -14,10 +9,8 @@ Meteor.methods
 		if checkNameAvailability
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
-			contentId = ModelContents.insertOne objects: []
 			transactionManager.commit()
-			console.log 'contentId', contentId
-			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,contentId:contentId})
+			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic})
 			return modelId
 
 	updateModelName: (options) ->

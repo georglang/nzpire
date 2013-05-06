@@ -39,6 +39,7 @@ history.start = (options) ->
 
   # * undo
   history.undo = (options) ->
+    console.log 'UNDO'
     transactionManager.undo()
 
   # * redo

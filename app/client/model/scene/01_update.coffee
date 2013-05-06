@@ -5,7 +5,8 @@ Modeling.scene ?= {}
 scene = Modeling.scene
 
 getContent = ->
-  ModelContents.findOne Session.get 'modelContentId'
+  content = 
+    objects: ModelObjects.find {modelId: Session.get 'modelId'}
 
 clearContent = ->
   content = Modeling.scene.content

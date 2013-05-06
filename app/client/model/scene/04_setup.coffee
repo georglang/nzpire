@@ -6,10 +6,7 @@ scene = Modeling.scene
 
 scene.setup = ->
   subscribeToModelContent = ->
-    model = Models.findOne _id: Session.get 'modelId'
-    if model and model.contentId
-      Session.set 'modelContentId', model.contentId
-      Meteor.subscribe 'modelContent', Session.get 'modelContentId'
+    Meteor.subscribe 'modelObjects', Session.get 'modelId'
 
   # Always get the correct model content
   Meteor.autorun subscribeToModelContent
