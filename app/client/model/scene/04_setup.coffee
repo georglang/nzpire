@@ -3,13 +3,15 @@
 @Modeling ?= {}
 Modeling.scene ?= {}
 scene = Modeling.scene
+Modeling.renderer ?= new THREE.WebGLRenderer()
+renderer = Modeling.renderer
 
 scene.setup = ->
-  subscribeToModelContent = ->
-    Meteor.subscribe 'modelObjects', Session.get 'modelId'
+  scene.currentObjects = []
 
   # Always get the correct model content
-  Meteor.autorun subscribeToModelContent
+  Meteor.autorun ->
+    Meteor.subscribe 'modelObjects', Session.get 'modelId'
 
   # Ensure that the DOM is ready for take-off! 
   Meteor.defer ->
@@ -19,7 +21,6 @@ scene.setup = ->
     near = 0.1
     far = 10000
 
-    renderer = new THREE.WebGLRenderer()
     camera = scene.camera = new THREE.PerspectiveCamera viewAngle, aspect, near, far
     camera.position.z = 1000
     camera.position.y = 1000

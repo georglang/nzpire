@@ -3,7 +3,6 @@
 @Modeling ?= {}
 Modeling.scene ?= {}
 scene = Modeling.scene
-scene.currentObjects ?= []
 
 cubeMaterial = new THREE.MeshLambertMaterial color: 0x7FAD00
 
@@ -12,6 +11,9 @@ scene.update = ->
   parallelizationContext =
     latestDBObjects: ModelObjects.find({modelId: Session.get 'modelId'}).fetch()
     currentSceneObjects: Modeling.scene.currentObjects
+
+  console.log '# curr objects', parallelizationContext.currentSceneObjects
+  console.log '# db   objects', parallelizationContext.latestDBObjects.length
 
   parallelSceneUpdater = new Parallel parallelizationContext
 
