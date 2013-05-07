@@ -2,5 +2,5 @@
 	"glob": ["app/**/*.coffee", "README.md"],
   "index": "README.md",
   "root": ".",
-	"github": true
+	"out": "./docs"
 }

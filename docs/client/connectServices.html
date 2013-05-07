@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><title>client/connectServices</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/connectServices"><meta name="groc-project-path" content="app/client/connectServices.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/connectServices.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><p>Inserts the new Mail into the old Account and Deletes the created User and reloggs the User</p></div></div><div class="code"><div class="wrapper"><span class="nv">connectProfiles = </span><span class="nf">(tmpEmail,loginFunction)-&gt;</span>
+  <span class="nv">tmpProfile = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span>
+    <span class="nv">email: </span><span class="nx">tmpEmail</span>
+
+  <span class="nv">newProfile = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span>
+    <span class="nv">email: </span><span class="nx">currentEmail</span><span class="p">()</span>
+
+  <span class="nv">service = </span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">().</span><span class="nx">services</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nv">service_id = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">().</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">id</span>
+  <span class="nv">updateObject =</span>
+    <span class="nv">services: </span><span class="p">{}</span>
+  <span class="nx">updateObject</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">]</span> <span class="o">=</span> <span class="nx">service_id</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Adds the service and the email</p></div></div><div class="code"><div class="wrapper">  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">tmpProfile</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$push: </span><span class="nx">updateObject</span><span class="p">}</span>
+  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">tmpProfile</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$push: </span><span class="p">{</span><span class="nv">email: </span><span class="nx">currentEmail</span><span class="p">()}}</span>
+  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">tmpProfile</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">updatedAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()}}</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Removes the created Profile</p></div></div><div class="code"><div class="wrapper">  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">remove</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">newProfile</span><span class="p">.</span><span class="nx">_id</span><span class="p">}</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Checks out which Services the User has already connected and Returns the rest</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.connectServices.connectButtons = </span><span class="nf">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Provides Services</p></div></div><div class="code"><div class="wrapper">  <span class="nv">services = </span><span class="p">[</span><span class="s">&quot;Facebook&quot;</span><span class="p">,</span><span class="s">&quot;Twitter&quot;</span><span class="p">,</span><span class="s">&quot;Google&quot;</span><span class="p">,</span><span class="s">&quot;Github&quot;</span><span class="p">];</span>
+
+  <span class="nv">tmpProfile = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
+    <span class="nv">email: </span><span class="nx">currentEmail</span><span class="p">()</span>
+    <span class="p">).</span><span class="nx">fetch</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Array of Services the User has already connected</p></div></div><div class="code"><div class="wrapper">  <span class="nv">serviceArray = </span><span class="nx">tmpProfile</span><span class="p">.</span><span class="nx">services</span>
+
+  <span class="nv">i = </span><span class="mi">0</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Compares the User Services with the Provided services and slices the matches out of the provided</p></div></div><div class="code"><div class="wrapper">  <span class="k">while</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">serviceArray</span><span class="p">.</span><span class="nx">length</span>
+    <span class="nv">element = </span><span class="nx">serviceArray</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+    <span class="nv">service = </span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">element</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">element</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nv">inArray = </span><span class="nx">$</span><span class="p">.</span><span class="nx">inArray</span><span class="p">(</span><span class="nx">service</span><span class="p">,</span> <span class="nx">services</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">inArray</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+      <span class="nx">services</span><span class="p">.</span><span class="nx">splice</span> <span class="nx">inArray</span><span class="p">,</span><span class="mi">1</span>
+    <span class="o">++</span><span class="nx">i</span>   
+  <span class="k">return</span> <span class="nx">services</span> </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Connect Buttons Onclick login with the service and on callback calls the function connectProfiles</p></div></div><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">connectServices</span><span class="p">.</span><span class="nx">events</span>
+  <span class="s">&#39;click input#connectWithFacebook&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
+    <span class="nv">tmpEmail = </span><span class="nx">currentEmail</span><span class="p">()</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithFacebook</span>
+      <span class="nv">requestOfflineToken: </span><span class="p">[</span><span class="kc">true</span><span class="p">]</span>
+    <span class="p">,</span> <span class="nf">-&gt;</span>
+      <span class="nx">connectProfiles</span><span class="p">(</span><span class="nx">tmpEmail</span><span class="p">,</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithFacebook</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">true</span>
+
+  <span class="s">&#39;click input#connectWithGithub&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
+    <span class="nv">tmpEmail = </span><span class="nx">currentEmail</span><span class="p">()</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithGithub</span>
+      <span class="nv">requestOfflineToken: </span><span class="p">[</span><span class="kc">true</span><span class="p">]</span>
+    <span class="p">,</span> <span class="nf">-&gt;</span>
+      <span class="nx">connectProfiles</span><span class="p">(</span><span class="nx">tmpEmail</span><span class="p">,</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithGithub</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">true</span>
+
+  <span class="s">&#39;click input#connectWithGoogle&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
+    <span class="nv">tmpEmail = </span><span class="nx">currentEmail</span><span class="p">()</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithGoogle</span>
+      <span class="nv">requestOfflineToken: </span><span class="p">[</span><span class="kc">true</span><span class="p">]</span>
+    <span class="p">,</span> <span class="nf">-&gt;</span>
+      <span class="nx">connectProfiles</span><span class="p">(</span><span class="nx">tmpEmail</span><span class="p">,</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithGoogle</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">true</span>
+
+  <span class="s">&#39;click input#connectWithTwitter&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
+    <span class="nv">tmpEmail = </span><span class="nx">currentEmail</span><span class="p">()</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithTwitter</span>
+      <span class="nv">requestOfflineToken: </span><span class="p">[</span><span class="kc">true</span><span class="p">]</span>
+    <span class="p">,</span> <span class="nf">-&gt;</span>
+      <span class="nx">connectProfiles</span><span class="p">(</span><span class="nx">tmpEmail</span><span class="p">,</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithTwitter</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">true</span></div></div></div></div></body></html>
