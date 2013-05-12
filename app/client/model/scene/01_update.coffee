@@ -6,40 +6,30 @@ scene = Modeling.scene
 
 cubeMaterial = new THREE.MeshLambertMaterial color: 0x7FAD00
 
+# ## Creating a mesh for a given database object
+meshForObject = (object) ->
+  mesh = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), cubeMaterial)
+  mesh.position = object.position
+  mesh.name = object._id
+  return mesh
+
+# ## Adding the mesh to the scene
+addObject = (object) ->
+  Modeling.scene.content.add meshForObject object
+
+# ## Removing an existing mesh from the scene
+removeObject = (object) ->
+  objectMesh = Modeling.scene.content.getChildByName object._id
+  Modeling.scene.content.remove objectMesh
+
+# ## Updating a mesh (= remove old one + add new one)
+updateObject = (object) ->
+  removeObject object
+  addObject object
+
 scene.update = ->
-  # ## Parallelization of update process
-  parallelizationContext =
-    latestDBObjects: ModelObjects.find({modelId: Session.get 'modelId'}).fetch()
-    currentSceneObjects: Modeling.scene.currentObjects
-
-  console.log '# curr objects', parallelizationContext.currentSceneObjects
-  console.log '# db   objects', parallelizationContext.latestDBObjects.length
-
-  parallelSceneUpdater = new Parallel parallelizationContext
-
-  # ### Identify changes
-  parallelSceneUpdater.spawn (context) ->
-    currentSceneObjects = context.currentSceneObjects
-    objectsToBeAdded = []
-    objectsToBeUpdated = []
-    for objectDB in context.latestDBObjects
-      objectCurrentlyInScene = context.currentSceneObjects[objectDB._id]
-      if not objectCurrentlyInScene
-        objectsToBeAdded.push objectDB
-        currentSceneObjects[objectDB._id] = objectDB
-      # #### TODO
-      # Register all objects that were updated according to field 'updatedAt'
-    updateData =
-      currentSceneObjects: currentSceneObjects
-      objectsToBeAdded: objectsToBeAdded
-      objectsToBeUpdated: objectsToBeUpdated
-
-  # ### Incorporate changes into the scene
-  parallelSceneUpdater.then (updateData) ->
-    Modeling.scene.currentObjects = updateData.currentSceneObjects
-    for newObject in updateData.objectsToBeAdded
-      cubeMesh = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), cubeMaterial)
-      cubeMesh.position = newObject.position
-      Modeling.scene.content.add cubeMesh
-    # #### TODO
-    # Incorporate all object updates
+  # ## Registration of observer callbacks
+  ModelObjects.find({modelId: Session.get 'modelId'}).observe
+    added: addObject
+    updated: updateObject
+    removed: removeObject
