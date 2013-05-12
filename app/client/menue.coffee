@@ -38,10 +38,6 @@ Template.menue.events
 		Workspace.profile(currentProfile()._id)
 		false
 
-	'click #edit': ->
-		console.log "clicked edit"
-		Workspace.edit()
-
 	'keydown #searchQuery': (e)->
 		Meteor.defer ->
 			#console.log "onchange search"
