@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><title>client/model/interaction/01_history</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="client/model/interaction/01_history"><meta name="groc-project-path" content="app/client/model/interaction/01_history.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/model/interaction/01_history.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="history">History</h1></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>The interaction history allows the user to</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ul>
+<li>save</li>
+<li>undo</li>
+<li>redo</li>
+</ul></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>during a session. The history belongs to a user.</p>
+
+<p><strong>CAUTION</strong>:
+The user's interaction will be reset
+after every:</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ul>
+<li>page reload</li>
+<li>model change</li>
+</ul></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>This problem will be tackled in the future!</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>The transaction library in use is
+<a href="https://github.com/jerico-dev/meteor-versioning">meteor-versioning</a>.</p></div></div><div class="code"><div class="wrapper"><span class="nx">@Modeling</span> <span class="o">?=</span> <span class="p">{}</span>
+<span class="nx">Modeling</span><span class="p">.</span><span class="nx">interaction</span> <span class="o">?=</span> <span class="p">{}</span>
+<span class="nv">Modeling.interaction.history = history = </span><span class="p">{}</span>
+
+<span class="nv">transactionManager = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">tx</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="start">Start</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="nv">history.start = </span><span class="nf">(options) -&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>resets the history and</p></div></div><div class="code"><div class="wrapper">  <span class="nx">transactionManager</span><span class="p">.</span><span class="nx">_purgeUndoRedo</span><span class="p">()</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>allows the following actions to be performed:</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ul>
+<li>save</li>
+</ul></div></div><div class="code"><div class="wrapper">  <span class="nv">history.save = </span><span class="nf">(options) -&gt;</span>
+    <span class="nx">transactionManager</span><span class="p">.</span><span class="nx">commit</span><span class="p">()</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ul>
+<li>undo</li>
+</ul></div></div><div class="code"><div class="wrapper">  <span class="nv">history.undo = </span><span class="nf">(options) -&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;UNDO&#39;</span>
+    <span class="nx">transactionManager</span><span class="p">.</span><span class="nx">undo</span><span class="p">()</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ul>
+<li>redo</li>
+</ul></div></div><div class="code"><div class="wrapper">  <span class="nv">history.redo = </span><span class="nf">(options) -&gt;</span>
+    <span class="nx">transactionManager</span><span class="p">.</span><span class="nx">redo</span><span class="p">()</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>If any actions are performed before the history is
+initialized by</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p><code>Modeling.interaction.history.start()</code></p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>error messages will be thrown!</p></div></div><div class="code"><div class="wrapper"><span class="nv">history.save = history.undo = history.redo = </span><span class="o">-&gt;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span> <span class="s1">&#39;History has not been started yet! Use Modeling.interaction.history.start() to start the interaction history.&#39;</span></div></div></div></div></body></html>

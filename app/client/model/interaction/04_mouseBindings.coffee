@@ -24,25 +24,29 @@ mouseBindings.setup = ->
 
       if pick
         blockSize = 50
-        buildingPoint = pick.point.add pick.face.normal.clone().setLength(blockSize / 2)
         # ### Snap to grid
+        # Put the normal of the face clicked on into world space
+        matrixNormal = new THREE.Matrix3().getNormalMatrix pick.object.matrixWorld
+        normalWorld = pick.face.normal.clone().applyMatrix3(matrixNormal).normalize()
+        buildingPoint = pick.point.add normalWorld.setLength(blockSize / 2)
+        # For all 3 dimensions x, y and z:
+        
+        # * normalize to positive values
+        # * get the modulo rest, applying block size
+        # * round up or down
+        # * add offset
+        # * denormalize from positive values
         dimensions = ['x', 'y', 'z']
-        # For all 3 dimensions x, y and z
         for d in dimensions
           isNegative = buildingPoint[d] < 0
-          # normalize to positive values
           if isNegative
             buildingPoint[d] *= -1
-          # get the modulo rest, applying block size
           rest = buildingPoint[d] % blockSize
-          # round up or down
           roundUp = rest >= blockSize / 2
           summand = if roundUp then blockSize - rest else -rest
           buildingPoint[d] = buildingPoint[d] + summand
-          # add offset
           offsetDirection = if roundUp then -1 else 1
           buildingPoint[d] += offsetDirection * blockSize / 2
-          # denormalize from positive values
           if isNegative
             buildingPoint[d] *= -1
 
@@ -50,10 +54,8 @@ mouseBindings.setup = ->
         Modeling.interaction.manipulation.object.add
           object:
             position: buildingPoint
-      # prevents default action for event
-      e.preventDefault()
-      # prevents event from bubbling up to parent elements
-      e.stopPropagation()
+      # stop event from being called more than once for a click!
+      e.stopImmediatePropagation()
 
   # When mouse is moved, save the
   Meteor.defer ->

@@ -19,55 +19,92 @@ Template.modelSidebar.modelname = ->
       return null
 
 Template.modelSidebar.updatedAt = ->
-  updatedAt = findOneModelByOptions({_id: Session.get('modelId')}).updatedAt
-  if updatedAt != undefined
-    d = new Date(updatedAt)
-    return d.toUTCString()
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    updatedAt = model.updatedAt
+    if updatedAt != undefined
+      d = new Date(updatedAt)
+      return d.toUTCString()
+    else
+      return null
 
 Template.modelSidebar.tags = ->
-  tags = findOneModelByOptions({_id: Session.get('modelId')}).tags
-  if tags != undefined
-    if Template.modelSidebar.isOwner()    
-      tags.push ""
-    return tags
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    tags = model.tags
+    if tags != undefined
+      if Template.modelSidebar.isOwner()    
+        tags.push ""
+      return tags
+    else
+      return null
 
 Template.modelSidebar.creator = ->
-  creatorId = findOneModelByOptions({_id: Session.get('modelId')}).creator
-  if creatorId != ""
-    name = findOneProfileByOptions({_id: creatorId}).name
-    return name
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    creatorId = model.creator
+    if creatorId != ""
+      name = findOneProfileByOptions({_id: creatorId}).name
+      return name
+    else
+      return null
 
 Template.modelSidebar.invited = ->
   names = []
-  invitedPeople = findOneModelByOptions({_id: Session.get('modelId')}).invited
-  if invitedPeople != undefined
-    names.push({name: findOneProfileByOptions({_id: i.userId}).name,role: i.role}) for i in invitedPeople
-    if Template.modelSidebar.isOwner()
-      names.push {name:"",role:""}
-    return names
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    invitedPeople = model.invited
+    if invitedPeople != undefined
+      names.push({name: findOneProfileByOptions({_id: i.userId}).name,role: i.role}) for i in invitedPeople
+      if Template.modelSidebar.isOwner()
+        names.push {name:"",role:""}
+      return names
+    else
+      return null
 
 Template.modelSidebar.predecessor = ->
-  predecessorId = findOneModelByOptions({_id: Session.get('modelId')}).predecessor
-  if predecessorId != ""
-    name = findOneModelByOptions({_id:predecessorId}).name
-    return name
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    predecessorId = model.predecessor
+    if predecessorId != ""
+      name = findOneModelByOptions({_id:predecessorId}).name
+      return name
+    else
+      return null
   
 Template.modelSidebar.isPublic = ->
-  isPublic = findOneModelByOptions({_id: Session.get('modelId')}).isPublic
-  if isPublic != undefined
-    return isPublic
-  else
+  model = findOneModelByOptions({_id: Session.get('modelId')})
+  if model == undefined
     return null
+  else
+    isPublic = model.isPublic
+    if isPublic != undefined
+      return isPublic
+    else
+      return null
+
+Template.modelSidebar.profilesList = ->
+  return Profiles.find({})
+
+Template.modelSidebar.isFavourited = ->
+  if Meteor.user() == null
+    return false
+  else
+    favourited = findOneProfileByOptions({_id: currentProfile()._id,favourites: Session.get('modelId')})
+    if favourited == undefined
+      return true
+    else
+      return false
 
 Template.modelSidebar.events
   'click #slideContainerListItems>li>ul>li': (e)->
@@ -86,9 +123,8 @@ Template.modelSidebar.events
               console.log error.reason
       else if className == 'invited'
         invitedName = $(e.target).html()
-        #console.log invitedName
         if invitedName.length == 0
-          $(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><select id='invitedRole'><option value='owner'>Owner</option><option value='collaborator'>Collaborator</option><option value='viewer'>Viewer</option></select>")
+          $(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><select id='invitedRole'><option value='owner'>Owner</option><option value='collaborator'>Collaborator</option><option value='viewer'>Viewer</option></select><input id='addInviteButton' type='button' value='invite'>")
         else
           options = {_id: Session.get('modelId'),invite: invitedName}
           Meteor.call 'removeModelInvite', options, (error,result)->
@@ -128,18 +164,18 @@ Template.modelSidebar.events
     if e.keyCode == 13
       $('#addTag').blur()
 
-  'blur #addInvite': (e)->
+  'click #addInviteButton': (e)->
     if $('#errorUpdateInvite')[0] != undefined
       $('#errorUpdateInvite').remove()        
     role = $('#invitedRole').val()
-    options = {_id: Session.get('modelId'),invite: e.target.value,role:role}
+    options = {_id: Session.get('modelId'),invite: $('#addInvite').val(),role:role}
     Meteor.call 'updateModelInvite',options, (error,result)->
       if error
         $('#addInvite').after("<div id='errorUpdateInvite'>"+error.reason+"</div>")   
 
   'keydown #addInvite': (e)->
     if e.keyCode == 13
-      $('#addInvite').blur()      
+      $('#addInviteButton').click()      
 
   'click #favourite': ->
     Profiles.update {_id: currentProfile()._id},{$push: {favourites: Session.get('modelId')}}
@@ -159,21 +195,9 @@ Template.modelSidebar.events
       $('#errorCloneModel').remove()
 
     options = {name: modelName, predecessor: Session.get('modelId'), creator: currentProfile()._id,isPublic: false}
-    Meteor.call 'createModel',options, (error,result)->
+    Meteor.call 'cloneModel',options, (error,result)->
       if error
         $('#createNewModel').after("<div id='errorCloneModel'>"+error.reason+"</div>")
       else
         Workspace.model(result)
 
-Template.modelSidebar.profilesList = ->
-  return Profiles.find({})
-
-Template.modelSidebar.isFavourited = ->
-  if Meteor.user() == null
-    return false
-  else
-    favourited = findOneProfileByOptions({_id: currentProfile()._id,favourites: Session.get('modelId')})
-    if favourited == undefined
-      return true
-    else
-      return false

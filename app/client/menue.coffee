@@ -17,7 +17,7 @@ Template.menue.events
 	'click #model': ->
 		console.log "clicked model"
 		if $('#newModel')[0] == undefined
-			$('#model').after("<li id='newModel'><input id='modelName' type='text' placeholder='Modelname'><a href='#' id='createNewModel'>Create</a></li>")
+			$('#model').replaceWith("<li id='newModel'><input autofocus='autofocus' id='modelName' type='text' placeholder='Modelname'><input type='button' id='createNewModel' value='Create'></li>")
 		false
 
 	'click #createNewModel': ->
@@ -32,6 +32,14 @@ Template.menue.events
 			else
 				$('#newModel')[0].remove()
 				Workspace.model(modelId)
+
+	'keydown #modelName': (e)->
+		Meteor.defer ->
+			if e.keyCode == 13
+				console.log "test"
+				$('#createNewModel').click()
+			else if e.keyCode == 27
+				$('#newModel').replaceWith("<a href='#' id='model'>Create new Model</a>")
 
 	'click #profile': ->
 		console.log "clicked profile"
@@ -50,16 +58,8 @@ Template.menue.events
 				Workspace.search ""
 
 	'click #login-buttons-logout': ()->
-		console.log "logout"
+		#console.log "logout"
 		Workspace.index()
 
-###
-	'click #de':()->
-		Meteor.setLocale('de')
-
-	'click #en_GB':()->
-		Meteor.setLocale('en_GB')
-
-	'click #en_US':()->
-		Meteor.setLocale('en_US')				
-###
+	'click #modelShowroom': ()->
+		Workspace.modelShowroom()

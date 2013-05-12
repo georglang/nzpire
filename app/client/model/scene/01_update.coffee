@@ -4,34 +4,42 @@
 Modeling.scene ?= {}
 scene = Modeling.scene
 
-getContent = ->
-  ModelContents.findOne Session.get 'modelContentId'
-
-clearContent = ->
-  content = Modeling.scene.content
-  # removes all children from the content node
-  numOfObjects = content.children.length
-  o = 0
-  while o < numOfObjects
-    ++o
-    content.remove content.children[0]
-
 cubeMaterial = new THREE.MeshLambertMaterial color: 0x7FAD00
 
-refillContentWith = (newContent) ->
-  content = Modeling.scene.content
-  # adds content to content node
-  newContent?.objects?.forEach (object) ->
-    cubeMesh = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), cubeMaterial)
-    cubeMesh.position = object.position
-
-    content.add cubeMesh
-
-# for updating:
 scene.update = ->
-  newContent = getContent()
-  if newContent
-    # * clear content
-    clearContent()
-    # * refill content
-    refillContentWith newContent
+  # ## Parallelization of update process
+  parallelizationContext =
+    latestDBObjects: ModelObjects.find({modelId: Session.get 'modelId'}).fetch()
+    currentSceneObjects: Modeling.scene.currentObjects
+
+  console.log '# curr objects', parallelizationContext.currentSceneObjects
+  console.log '# db   objects', parallelizationContext.latestDBObjects.length
+
+  parallelSceneUpdater = new Parallel parallelizationContext
+
+  # ### Identify changes
+  parallelSceneUpdater.spawn (context) ->
+    currentSceneObjects = context.currentSceneObjects
+    objectsToBeAdded = []
+    objectsToBeUpdated = []
+    for objectDB in context.latestDBObjects
+      objectCurrentlyInScene = context.currentSceneObjects[objectDB._id]
+      if not objectCurrentlyInScene
+        objectsToBeAdded.push objectDB
+        currentSceneObjects[objectDB._id] = objectDB
+      # #### TODO
+      # Register all objects that were updated according to field 'updatedAt'
+    updateData =
+      currentSceneObjects: currentSceneObjects
+      objectsToBeAdded: objectsToBeAdded
+      objectsToBeUpdated: objectsToBeUpdated
+
+  # ### Incorporate changes into the scene
+  parallelSceneUpdater.then (updateData) ->
+    Modeling.scene.currentObjects = updateData.currentSceneObjects
+    for newObject in updateData.objectsToBeAdded
+      cubeMesh = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), cubeMaterial)
+      cubeMesh.position = newObject.position
+      Modeling.scene.content.add cubeMesh
+    # #### TODO
+    # Incorporate all object updates

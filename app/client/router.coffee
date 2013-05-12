@@ -1,15 +1,20 @@
-Session.set "template", "index"
-
 Template.page_controller.display_page = ->
   #console.log "controller display page"
+  #console.log "display_page"
+  if Session.get('template') == undefined
+    #console.log "undefined == true"
+    Session.set "template", "index"
+  #console.log "Template act:" + Session.get 'template'
   checkLoginProtection()
   Template[Session.get("template")]()
 
 WorkspaceRouter = Backbone.Router.extend(
   routes:
+    "/": "index"
     "index": "index"
     "model/:id": "model"
     "model/:id/edit": "modelEdit"
+    "modelshowroom" : "modelshowroom"
     "help": "help" # #help
     "search": "search" # #search
     "search/:query": "search" # #search/kiwis
@@ -18,18 +23,19 @@ WorkspaceRouter = Backbone.Router.extend(
     "news" : "news"
 
   index: ->
-    #console.log "index"
+    #console.log "indexRouter"
     Session.set "template", "index"  
     @navigate "index",
       trigger: true
       replace: true
 
   model: (_id)->
-    #console.log "model"
-    Session.set "template", "model"
+    #console.log "modelRouter"
     Session.set "modelId", _id
-    Meteor.subscribe 'model', Session.get 'modelId'
-      
+    Session.set "template", "loading"
+    Meteor.subscribe 'model', Session.get('modelId'), ()->
+      Session.set "template", "model"
+          
     @navigate "model/" + _id,
       trigger: true
       replace: true
@@ -39,6 +45,12 @@ WorkspaceRouter = Backbone.Router.extend(
     Session.set "template", "modelEdit"
     Session.set "model", _id
     @navigate "model/" + _id + "/edit"
+      trigger: true
+      replace: true
+
+  modelShowroom: ->
+    Session.set "template", "modelShowroom"
+    @navigate "modelshowroom",
       trigger: true
       replace: true
 

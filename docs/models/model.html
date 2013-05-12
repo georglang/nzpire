@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="en"><head><title>models/model</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="models/model"><meta name="groc-project-path" content="app/models/model.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/models/model.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nv">transactionManager = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">tx</span>
+
+<span class="vi">@Models = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s1">&#39;models&#39;</span>
+<span class="vi">@ModelObjects = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s1">&#39;modelObjects&#39;</span><span class="p">,</span> <span class="nv">versioned: </span><span class="kc">true</span>
+
+<span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span>
+  <span class="nv">createModel: </span><span class="nf">(options) -&gt;</span>
+    <span class="nv">checkNameAvailability = </span><span class="nx">findModelByName</span> <span class="nx">options</span><span class="p">.</span><span class="nx">name</span>
+    <span class="k">if</span> <span class="nx">checkNameAvailability</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">499</span><span class="p">,</span> <span class="s2">&quot;Modelname already taken&quot;</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nx">transactionManager</span><span class="p">.</span><span class="nx">commit</span><span class="p">()</span>
+      <span class="nv">modelId = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="nv">name: </span><span class="nx">options</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="nv">createdAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span><span class="nx">updatedAt</span><span class="o">:</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span><span class="nx">tags</span><span class="o">:</span><span class="p">[],</span><span class="nx">creator</span><span class="o">:</span><span class="nx">options</span><span class="p">.</span><span class="nx">creator</span><span class="p">,</span><span class="nx">invited</span><span class="o">:</span><span class="p">[],</span><span class="nx">predecessor</span><span class="o">:</span><span class="nx">options</span><span class="p">.</span><span class="nx">predecessor</span><span class="p">,</span><span class="nx">isPublic</span><span class="o">:</span><span class="nx">options</span><span class="p">.</span><span class="nx">isPublic</span><span class="p">})</span>
+      <span class="k">return</span> <span class="nx">modelId</span>
+
+  <span class="nv">cloneModel: </span><span class="nf">(options) -&gt;</span>
+    <span class="nv">checkNameAvailability = </span><span class="nx">findModelByName</span> <span class="nx">options</span><span class="p">.</span><span class="nx">name</span>
+    <span class="k">if</span> <span class="nx">checkNameAvailability</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">499</span><span class="p">,</span> <span class="s2">&quot;Modelname already taken&quot;</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nx">transactionManager</span><span class="p">.</span><span class="nx">commit</span><span class="p">()</span>
+      <span class="nv">modelId = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="nv">name: </span><span class="nx">options</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="nv">createdAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span><span class="nx">updatedAt</span><span class="o">:</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span><span class="nx">tags</span><span class="o">:</span><span class="p">[],</span><span class="nx">creator</span><span class="o">:</span><span class="nx">options</span><span class="p">.</span><span class="nx">creator</span><span class="p">,</span><span class="nx">invited</span><span class="o">:</span><span class="p">[],</span><span class="nx">predecessor</span><span class="o">:</span><span class="nx">options</span><span class="p">.</span><span class="nx">predecessor</span><span class="p">,</span><span class="nx">isPublic</span><span class="o">:</span><span class="nx">options</span><span class="p">.</span><span class="nx">isPublic</span><span class="p">})</span>
+      <span class="nv">predecessorModelObjects = </span><span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">modelId</span><span class="o">:</span><span class="nx">options</span><span class="p">.</span><span class="nx">predecessor</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
+      <span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span><span class="nv">position: </span><span class="nx">i</span><span class="p">.</span><span class="nx">position</span><span class="p">,</span> <span class="nv">modelId: </span><span class="nx">modelId</span><span class="p">})</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">predecessorModelObjects</span>
+      <span class="k">return</span> <span class="nx">modelId</span>    
+
+  <span class="nv">updateModelName: </span><span class="nf">(options) -&gt;</span>
+    <span class="nv">checkNameAvailability = </span><span class="nx">findModelByName</span> <span class="nx">options</span><span class="p">.</span><span class="nx">name</span>
+    <span class="nv">optionsFind = </span><span class="p">{</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">}</span>
+    <span class="nv">currentModel = </span><span class="nx">findOneModelByOptions</span><span class="p">(</span><span class="nx">optionsFind</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">checkNameAvailability</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">name</span> <span class="o">!=</span> <span class="nx">currentModel</span><span class="p">.</span><span class="nx">name</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">499</span><span class="p">,</span> <span class="s2">&quot;Modelname already taken&quot;</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">name: </span><span class="nx">options</span><span class="p">.</span><span class="nx">name</span><span class="p">}})</span>
+
+  <span class="nv">updateModelIsPublic: </span><span class="nf">(options) -&gt;</span>
+    <span class="nv">isPublic = </span><span class="nx">options</span><span class="p">.</span><span class="nx">isPublic</span>
+    <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">isPublic</span> <span class="o">==</span> <span class="kc">false</span>
+      <span class="nv">isPublic = </span><span class="kc">true</span>
+    <span class="k">else</span>
+      <span class="nv">isPublic = </span><span class="kc">false</span>
+    <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">isPublic: </span><span class="nx">isPublic</span><span class="p">}})</span>
+
+  <span class="nv">updateModelTag: </span><span class="nf">(options) -&gt;</span>
+    <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">_id</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tag</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="s2">&quot;Undefined Parameter&quot;</span><span class="p">);</span>
+    <span class="nv">tagName = </span><span class="nx">options</span><span class="p">.</span><span class="nx">tag</span>
+    <span class="nv">checkForAvailability = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nv">tags: </span><span class="nx">tagName</span><span class="p">})</span>
+    <span class="k">if</span> <span class="nx">tagName</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">3</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">497</span><span class="p">,</span> <span class="s2">&quot;Tagname too short&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="nx">checkForAvailability</span> <span class="o">!=</span> <span class="kc">undefined</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">498</span><span class="p">,</span> <span class="s2">&quot;Tagname already added&quot;</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nx">Models</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$push: </span><span class="p">{</span><span class="nv">tags: </span><span class="nx">tagName</span><span class="p">}})</span>
+
+  <span class="nv">updateModelInvite: </span><span class="nf">(options) -&gt;</span>
+    <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">_id</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="nx">options</span><span class="p">.</span><span class="nx">invite</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="s2">&quot;Undefined Parameter&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">invite</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">3</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">497</span><span class="p">,</span> <span class="s2">&quot;Username too short&quot;</span><span class="p">);</span>
+    <span class="nv">invitedProfile = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">name: </span><span class="nx">options</span><span class="p">.</span><span class="nx">invite</span><span class="p">})</span>
+
+    <span class="k">if</span> <span class="nx">invitedProfile</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">496</span><span class="p">,</span> <span class="s2">&quot;Username does not exist&quot;</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nv">checkAlreadyInvited = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span><span class="s1">&#39;invited.userId&#39;</span><span class="o">:</span><span class="nx">invitedProfile</span><span class="p">.</span><span class="nx">_id</span><span class="p">})</span>
+    <span class="k">if</span> <span class="nx">checkAlreadyInvited</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="nv">updateObject = </span><span class="p">{</span><span class="nv">userId: </span><span class="nx">invitedProfile</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nv">role: </span><span class="nx">options</span><span class="p">.</span><span class="nx">role</span><span class="p">}</span>
+      <span class="nx">Models</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$push: </span><span class="p">{</span><span class="nv">invited: </span><span class="nx">updateObject</span><span class="p">}})</span>        
+    <span class="k">else</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">498</span><span class="p">,</span> <span class="s2">&quot;User already invited&quot;</span><span class="p">)</span>   
+
+  <span class="nv">removeModelTag: </span><span class="nf">(options) -&gt;</span>
+    <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">_id</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tag</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="s2">&quot;Undefined Parameter&quot;</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$pull: </span><span class="p">{</span><span class="nv">tags: </span><span class="nx">options</span><span class="p">.</span><span class="nx">tag</span><span class="p">}})</span>
+
+  <span class="nv">removeModelInvite: </span><span class="nf">(options) -&gt;</span>
+    <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">_id</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="nx">options</span><span class="p">.</span><span class="nx">invite</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="s2">&quot;Undefined Parameter&quot;</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nv">profile = </span><span class="nx">findOneProfileByOptions</span><span class="p">({</span><span class="nv">name: </span><span class="nx">options</span><span class="p">.</span><span class="nx">invite</span><span class="p">})</span>
+      <span class="k">if</span> <span class="nx">profile</span> <span class="o">==</span> <span class="kc">undefined</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">496</span><span class="p">,</span> <span class="s2">&quot;Username does not exist&quot;</span><span class="p">);</span>
+      <span class="k">else</span>
+        <span class="nv">removeObject = </span><span class="p">{</span><span class="nx">invited</span><span class="o">:</span><span class="p">{</span><span class="nx">userId</span><span class="o">:</span><span class="nx">profile</span><span class="p">.</span><span class="nx">_id</span><span class="p">}}</span>
+        <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$pull: </span><span class="nx">removeObject</span><span class="p">})</span>
+
+  <span class="nv">removeModel: </span><span class="nf">(options)-&gt;</span>
+    <span class="c1">#console.log options</span>
+    <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+
+<span class="vi">@modelLoaded = </span><span class="o">-&gt;</span>
+  <span class="c1">#console.log &quot;modelLoaded&quot;</span>
+  <span class="nv">model = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({})</span>
+  <span class="c1">#console.log model</span>
+  <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
+    <span class="k">return</span> <span class="kc">false</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="kc">true</span>
+
+<span class="vi">@findModelByName = </span><span class="nf">(name)-&gt;</span>
+  <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">name: </span><span class="nx">name</span><span class="p">})</span>
+
+<span class="vi">@findOneModelByOptions = </span><span class="nf">(options) -&gt;</span>
+  <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Gets the Modelid and a boolean (if isPublic should be used) as parameter
+Returns the Users Role for the specified Model</p></div></div><div class="code"><div class="wrapper"><span class="vi">@checkModelPermission = </span><span class="nf">(modelId, useIsPublic) -&gt;</span>
+  <span class="nv">options = </span><span class="p">{</span><span class="nv">_id: </span><span class="nx">modelId</span><span class="p">}</span>
+  <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
+    <span class="k">return</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">none</span>
+
+  <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">userId</span><span class="p">()</span> <span class="o">==</span> <span class="kc">null</span>
+    <span class="k">if</span> <span class="nx">model</span><span class="p">.</span><span class="nx">isPublic</span> <span class="o">==</span> <span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">useIsPublic</span> <span class="o">==</span> <span class="kc">true</span>
+      <span class="k">return</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">viewer</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">none</span>
+
+  <span class="nv">isCreator = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nx">_id</span><span class="o">:</span><span class="nx">modelId</span><span class="p">,</span><span class="nv">creator: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">})</span>
+  <span class="k">if</span> <span class="nx">model</span><span class="p">.</span><span class="nx">invited</span> <span class="o">!=</span> <span class="kc">undefined</span>
+    <span class="nv">isInvited = </span><span class="nx">$</span><span class="p">.</span><span class="nx">grep</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">invited</span><span class="p">,</span> <span class="nf">(e) -&gt;</span>
+      <span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">userId</span> <span class="o">==</span> <span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="nx">isInvited</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="k">if</span> <span class="nx">isInvited</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">role</span> <span class="o">==</span> <span class="s2">&quot;owner&quot;</span>
+        <span class="c1">#console.log &quot;owner&quot;</span>
+        <span class="k">return</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">owner</span>
+      <span class="k">else</span> <span class="k">if</span> <span class="nx">isInvited</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">role</span> <span class="o">==</span> <span class="s2">&quot;collaborator&quot;</span>
+        <span class="c1">#console.log &quot;collaborator&quot;</span>
+        <span class="k">return</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">collaborator</span>
+      <span class="k">else</span> <span class="k">if</span> <span class="nx">isInvited</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">role</span> <span class="o">==</span> <span class="s2">&quot;viewer&quot;</span>
+        <span class="c1">#console.log &quot;viewer&quot;</span>
+        <span class="k">return</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">viewer</span>
+  <span class="k">if</span> <span class="nx">isCreator</span>
+    <span class="c1">#console.log &quot;creator&quot;</span>
+    <span class="k">return</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">creator</span>
+  <span class="k">else</span>
+    <span class="k">if</span> <span class="nx">model</span><span class="p">.</span><span class="nx">isPublic</span> <span class="o">==</span> <span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">useIsPublic</span> <span class="o">==</span> <span class="kc">true</span>
+      <span class="c1">#console.log &quot;isPublic true&quot;</span>
+      <span class="k">return</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">viewer</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">none</span> 
+
+<span class="vi">@Roles =</span>
+  <span class="nv">none: </span><span class="mi">0</span><span class="p">,</span>
+  <span class="nv">viewer: </span><span class="mi">1</span><span class="p">,</span>
+  <span class="nv">collaborator: </span><span class="mi">2</span><span class="p">,</span>
+  <span class="nv">creator: </span><span class="mi">3</span><span class="p">,</span>
+  <span class="nv">owner: </span><span class="mi">4</span></div></div></div></div></body></html>

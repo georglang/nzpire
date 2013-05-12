@@ -1,12 +1,7 @@
 transactionManager = Meteor.tx
 
 @Models = new Meteor.Collection 'models'
-@ModelContents = new Meteor.Collection 'modelContents',
-	versioned: true
-	props:
-		objects: 
-			type: '[{}]'
-			locator: '_id'
+@ModelObjects = new Meteor.Collection 'modelObjects', versioned: true
 
 Meteor.methods
 	createModel: (options) ->
@@ -14,11 +9,20 @@ Meteor.methods
 		if checkNameAvailability
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
-			contentId = ModelContents.insertOne objects: []
 			transactionManager.commit()
-			console.log 'contentId', contentId
-			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,contentId:contentId})
+			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic})
 			return modelId
+
+	cloneModel: (options) ->
+		checkNameAvailability = findModelByName options.name
+		if checkNameAvailability
+			throw new Meteor.Error(499, "Modelname already taken");
+		else
+			transactionManager.commit()
+			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic})
+			predecessorModelObjects = ModelObjects.find({modelId:options.predecessor}).fetch()
+			ModelObjects.insert({position: i.position, modelId: modelId}) for i in predecessorModelObjects
+			return modelId		
 
 	updateModelName: (options) ->
 		checkNameAvailability = findModelByName options.name
@@ -102,15 +106,16 @@ Meteor.methods
 @findOneModelByOptions = (options) ->
 	return Models.findOne(options)
 
-@checkModelPermission = (modelId) ->
-	#console.log "checkModelPermission"
+# Gets the Modelid and a boolean (if isPublic should be used) as parameter
+# Returns the Users Role for the specified Model
+@checkModelPermission = (modelId, useIsPublic) ->
 	options = {_id: modelId}
 	model = findOneModelByOptions(options)
 	if model == undefined
 		return Roles.none
 
 	if Meteor.userId() == null
-		if model.isPublic == true
+		if model.isPublic == true && useIsPublic == true
 			return Roles.viewer
 		else
 			return Roles.none
@@ -134,7 +139,7 @@ Meteor.methods
 		#console.log "creator"
 		return Roles.creator
 	else
-		if model.isPublic == true
+		if model.isPublic == true && useIsPublic == true
 			#console.log "isPublic true"
 			return Roles.viewer
 		else

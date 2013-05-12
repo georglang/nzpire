@@ -27,3 +27,25 @@
 .navbar{
 	margin-bottom: 0px;
 }
+
+.footer{
+	margin-bottom:0px;
+	color:white;
+	width: 100%;
+	text-align:center;
+	position:fixed;
+	bottom:0px;
+}
+
+.footer > .navbar-inner{
+	min-height: 0px;
+	border-radius: 0px;
+}
+
+#modelName{
+	margin-top: 5px;
+}
+
+#createNewModel{
+	margin-bottom:5px;
+}

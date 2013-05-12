@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><title>client/model/scene/02_lights</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="client/model/scene/02_lights"><meta name="groc-project-path" content="app/client/model/scene/02_lights.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/model/scene/02_lights.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="lights">Lights</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="nx">@Modeling</span> <span class="o">?=</span> <span class="p">{}</span>
+<span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span> <span class="o">?=</span> <span class="p">{}</span>
+<span class="nv">Modeling.scene.lights = lights = </span><span class="p">{}</span>
+
+<span class="nv">lights.setup = </span><span class="o">-&gt;</span>
+  <span class="nv">lightDistance = </span><span class="mi">2000</span>
+  <span class="nv">numberOfLightsPerDimension = </span><span class="mi">3</span>
+  
+  <span class="nv">minXZ = </span><span class="o">-</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">numberOfLightsPerDimension</span> <span class="err">/ 2)</span>
+  <span class="nv">maxXZ = </span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">numberOfLightsPerDimension</span> <span class="err">/ 2)</span>
+
+  <span class="nv">minY = </span><span class="mi">0</span>
+  <span class="nv">maxY = </span><span class="nx">numberOfLightsPerDimension</span>
+  
+  <span class="nv">x = </span><span class="nx">minXZ</span>
+  <span class="k">while</span> <span class="nx">x</span> <span class="o">&lt;=</span> <span class="nx">maxXZ</span>
+    <span class="nv">y = </span><span class="nx">minY</span>
+    <span class="k">while</span> <span class="nx">y</span> <span class="o">&lt;=</span> <span class="nx">maxY</span>
+      <span class="nv">z = </span><span class="nx">minXZ</span>
+      <span class="k">while</span> <span class="nx">z</span> <span class="o">&lt;=</span> <span class="nx">maxXZ</span>
+        <span class="nv">pointLight = </span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">PointLight</span> <span class="mh">0xffffff</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="nx">lightDistance</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="nv">pointLight.position.x = </span><span class="nx">z</span> <span class="o">*</span> <span class="nx">lightDistance</span>
+        <span class="nv">pointLight.position.y = </span><span class="nx">y</span> <span class="o">*</span> <span class="nx">lightDistance</span>
+        <span class="nv">pointLight.position.z = </span><span class="nx">x</span> <span class="o">*</span> <span class="nx">lightDistance</span>
+
+        <span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">itself</span><span class="p">.</span><span class="nx">add</span> <span class="nx">pointLight</span>
+        <span class="o">++</span><span class="nx">z</span>
+      <span class="o">++</span><span class="nx">y</span>
+    <span class="o">++</span><span class="nx">x</span></div></div></div></div></body></html>

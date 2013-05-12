@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="en"><head><title>client/model/scene/Octree</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="client/model/scene/Octree"><meta name="groc-project-path" content="app/client/model/scene/Octree.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/model/scene/Octree.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="octree-currently-not-in-use">Octree (currently not in use)</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="k">class</span> <span class="nx">Point</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>x
+y
+z
+these are the three values which define the point</p></div></div><div class="code"><div class="wrapper">  
+  <span class="nv">constructor: </span><span class="nf">(@x, @y, @z) -&gt;</span>
+
+
+<span class="k">class</span> <span class="nx">BoundingBox</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>center
+this is the center of the bounding box</p></div></div><div class="code"><div class="wrapper">  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>width
+height
+depth
+lengths of each sides of the bounding box</p></div></div><div class="code"><div class="wrapper">  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>halfWidth
+halfHeight
+halfDepth
+these are the lengths half's
+can be used to calculate points on the outside without calculating the value of the half of the lengths</p></div></div><div class="code"><div class="wrapper">  
+  <span class="nv">constructor: </span><span class="nf">(x, y, z, @width, @height, @depth) -&gt;</span>
+    <span class="vi">@center = </span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span>
+
+    <span class="vi">@halfWidth = </span><span class="nx">@width</span> <span class="err">/ 2</span>
+    <span class="vi">@halfHeight = </span><span class="nx">@height</span> <span class="err">/ 2</span>
+    <span class="vi">@halfDepth = </span><span class="nx">@depth</span> <span class="err">/ 2</span>
+  
+  <span class="nv">intersects: </span><span class="nf">(point) -&gt;</span>
+    <span class="k">return</span> <span class="kc">false</span> <span class="k">if</span> <span class="nx">point</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">@center</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">@halfWidth</span> <span class="o">||</span> <span class="nx">point</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">@center</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">@halfWidth</span> <span class="o">||</span>
+                    <span class="nx">point</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">@center</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">@halfHeight</span> <span class="o">||</span> <span class="nx">point</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">@center</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">@halfHeight</span> <span class="o">||</span>
+                    <span class="nx">point</span><span class="p">.</span><span class="nx">z</span> <span class="o">&lt;</span> <span class="nx">@center</span><span class="p">.</span><span class="nx">z</span> <span class="o">-</span> <span class="nx">@halfDepth</span> <span class="o">||</span> <span class="nx">point</span><span class="p">.</span><span class="nx">z</span> <span class="o">&gt;</span> <span class="nx">@center</span><span class="p">.</span><span class="nx">z</span> <span class="o">+</span> <span class="nx">@halfDepth</span>
+    <span class="k">return</span> <span class="kc">true</span>
+
+<span class="k">class</span> <span class="nx">Octree</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>minLevel
+the minimum level says what the minimum level of the tree has to be
+for example the minimum is 5 then the tree has to be split to level 5 and
+the biggest voxel can be one 5th of the octree
+it has to be at least 1</p></div></div><div class="code"><div class="wrapper">  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>maxLevel
+the maximum level is the exact opposite of the minimum level
+the tree cannot be split further than the maximum level, so it is the deepest level in the tree</p></div></div><div class="code"><div class="wrapper">  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>currentLevel
+is the current level in the tree</p></div></div><div class="code"><div class="wrapper">  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>isInUse
+says whether the voxel is set and should be drawn</p></div></div><div class="code"><div class="wrapper">  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>boundingBox
+the bounding box of the current note in the tree</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>topLeftFront
+topRightFront
+bottomLeftFront
+bottomRightFront
+topLeftBack
+topRightBack
+bottomLeftBack
+bottomRightBack
+these are the children of the note</p></div></div><div class="code"><div class="wrapper">  
+  <span class="nv">constructor: </span><span class="nf">(minLevel, maxLevel, currentLevel, boundingBox)-&gt;</span>
+    <span class="c1">#console.log &quot;----------------------------------------------- ctor&quot;</span>
+    <span class="k">if</span> <span class="nx">minLevel</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+      <span class="vi">@minLevel = </span><span class="nx">minLevel</span>
+    <span class="k">else</span>
+      <span class="vi">@minLevel = </span><span class="mi">0</span>
+    
+    <span class="k">if</span> <span class="nx">maxLevel</span> <span class="o">&gt;</span> <span class="nx">minLevel</span>
+      <span class="vi">@maxLevel = </span><span class="nx">maxLevel</span>  
+    <span class="k">else</span>
+      <span class="vi">@maxLevel = </span><span class="nx">minLevel</span>
+    
+    <span class="vi">@currentLevel = </span><span class="nx">currentLevel</span>
+    
+    <span class="vi">@boundingBox = </span><span class="nx">boundingBox</span>
+    
+    <span class="nx">@split</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@currentLevel</span> <span class="o">&lt;</span> <span class="nx">@minLevel</span>
+    
+  <span class="nv">split: </span><span class="o">-&gt;</span>
+    <span class="c1">#console.log &quot;----------------------------------------------- split&quot;</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="nx">@maxLevel</span> <span class="o">&lt;=</span> <span class="nx">@currentLevel</span> <span class="o">||</span> <span class="nx">@topLeftFront</span> <span class="o">!=</span> <span class="kc">undefined</span>
+
+    <span class="nx">@instantiateChildren</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nx">@isInUse</span>
+      <span class="nx">@fillAllChildren</span><span class="p">()</span>
+      <span class="vi">@isInUse = </span><span class="kc">false</span>
+
+    <span class="k">return</span>
+  
+  <span class="nv">instantiateChildren: </span><span class="o">-&gt;</span>
+    <span class="c1">#console.log &quot;----------------------------------------------- instantiateChildren&quot;</span>
+    
+    <span class="nv">x = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">center</span><span class="p">.</span><span class="nx">x</span>
+    <span class="nv">y = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">center</span><span class="p">.</span><span class="nx">y</span>
+    <span class="nv">z = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">center</span><span class="p">.</span><span class="nx">z</span>
+    
+    <span class="nv">width = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">width</span>
+    <span class="nv">height = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">height</span>
+    <span class="nv">depth = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">depth</span>
+
+    <span class="nv">halfWidth = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">halfWidth</span>
+    <span class="nv">halfHeight = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">halfHeight</span>
+    <span class="nv">halfDepth = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">halfDepth</span>
+
+    <span class="nv">halfHalfWidth = </span><span class="nx">halfWidth</span> <span class="err">/ 2</span>
+    <span class="nv">halfHalfHeight = </span><span class="nx">halfHeight</span> <span class="err">/ 2</span>
+    <span class="nv">halfHalfDepth = </span><span class="nx">halfDepth</span> <span class="err">/ 2</span>
+
+    <span class="nv">newCurrentLevel = </span><span class="nx">@currentLevel</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+    <span class="nv">boundingBox = </span><span class="k">new</span> <span class="nx">BoundingBox</span><span class="p">(</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">halfHalfWidth</span><span class="p">,</span> <span class="nx">y</span> <span class="o">+</span> <span class="nx">halfHalfHeight</span><span class="p">,</span> <span class="nx">z</span> <span class="o">-</span> <span class="nx">halfHalfDepth</span><span class="p">,</span> <span class="nx">halfWidth</span><span class="p">,</span> <span class="nx">halfHeight</span><span class="p">,</span> <span class="nx">halfDepth</span><span class="p">)</span>
+    <span class="vi">@topLeftFront = </span><span class="k">new</span> <span class="nx">Octree</span><span class="p">(</span><span class="nx">@minLevel</span><span class="p">,</span> <span class="nx">@maxLevel</span><span class="p">,</span> <span class="nx">newCurrentLevel</span><span class="p">,</span> <span class="nx">boundingBox</span><span class="p">)</span>
+
+    <span class="nv">boundingBox = </span><span class="k">new</span> <span class="nx">BoundingBox</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">halfHalfWidth</span><span class="p">,</span> <span class="nx">y</span> <span class="o">+</span> <span class="nx">halfHalfHeight</span><span class="p">,</span> <span class="nx">z</span> <span class="o">-</span> <span class="nx">halfHalfDepth</span><span class="p">,</span> <span class="nx">halfWidth</span><span class="p">,</span> <span class="nx">halfHeight</span><span class="p">,</span> <span class="nx">halfDepth</span><span class="p">)</span>
+    <span class="vi">@topRightFront = </span><span class="k">new</span> <span class="nx">Octree</span><span class="p">(</span><span class="nx">@minLevel</span><span class="p">,</span> <span class="nx">@maxLevel</span><span class="p">,</span> <span class="nx">newCurrentLevel</span><span class="p">,</span> <span class="nx">boundingBox</span><span class="p">)</span>
+
+    <span class="nv">boundingBox = </span><span class="k">new</span> <span class="nx">BoundingBox</span><span class="p">(</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">halfHalfWidth</span><span class="p">,</span> <span class="nx">y</span> <span class="o">-</span> <span class="nx">halfHalfHeight</span><span class="p">,</span> <span class="nx">z</span> <span class="o">-</span> <span class="nx">halfHalfDepth</span><span class="p">,</span> <span class="nx">halfWidth</span><span class="p">,</span> <span class="nx">halfHeight</span><span class="p">,</span> <span class="nx">halfDepth</span><span class="p">)</span>
+    <span class="vi">@bottomLeftFront = </span><span class="k">new</span> <span class="nx">Octree</span><span class="p">(</span><span class="nx">@minLevel</span><span class="p">,</span> <span class="nx">@maxLevel</span><span class="p">,</span> <span class="nx">newCurrentLevel</span><span class="p">,</span> <span class="nx">boundingBox</span><span class="p">)</span>
+
+    <span class="nv">boundingBox = </span><span class="k">new</span> <span class="nx">BoundingBox</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">halfHalfWidth</span><span class="p">,</span> <span class="nx">y</span> <span class="o">-</span> <span class="nx">halfHalfHeight</span><span class="p">,</span> <span class="nx">z</span> <span class="o">-</span> <span class="nx">halfHalfDepth</span><span class="p">,</span> <span class="nx">halfWidth</span><span class="p">,</span> <span class="nx">halfHeight</span><span class="p">,</span> <span class="nx">halfDepth</span><span class="p">)</span>
+    <span class="vi">@bottomRightFront = </span><span class="k">new</span> <span class="nx">Octree</span><span class="p">(</span><span class="nx">@minLevel</span><span class="p">,</span> <span class="nx">@maxLevel</span><span class="p">,</span> <span class="nx">newCurrentLevel</span><span class="p">,</span> <span class="nx">boundingBox</span><span class="p">)</span>
+    
+
+    <span class="nv">boundingBox = </span><span class="k">new</span> <span class="nx">BoundingBox</span><span class="p">(</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">halfHalfWidth</span><span class="p">,</span> <span class="nx">y</span> <span class="o">+</span> <span class="nx">halfHalfHeight</span><span class="p">,</span> <span class="nx">z</span> <span class="o">+</span> <span class="nx">halfHalfDepth</span><span class="p">,</span> <span class="nx">halfWidth</span><span class="p">,</span> <span class="nx">halfHeight</span><span class="p">,</span> <span class="nx">halfDepth</span><span class="p">)</span>
+    <span class="vi">@topLeftBack = </span><span class="k">new</span> <span class="nx">Octree</span><span class="p">(</span><span class="nx">@minLevel</span><span class="p">,</span> <span class="nx">@maxLevel</span><span class="p">,</span> <span class="nx">newCurrentLevel</span><span class="p">,</span> <span class="nx">boundingBox</span><span class="p">)</span>
+
+    <span class="nv">boundingBox = </span><span class="k">new</span> <span class="nx">BoundingBox</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">halfHalfWidth</span><span class="p">,</span> <span class="nx">y</span> <span class="o">+</span> <span class="nx">halfHalfHeight</span><span class="p">,</span> <span class="nx">z</span> <span class="o">+</span> <span class="nx">halfHalfDepth</span><span class="p">,</span> <span class="nx">halfWidth</span><span class="p">,</span> <span class="nx">halfHeight</span><span class="p">,</span> <span class="nx">halfDepth</span><span class="p">)</span>
+    <span class="vi">@topRightBack = </span><span class="k">new</span> <span class="nx">Octree</span><span class="p">(</span><span class="nx">@minLevel</span><span class="p">,</span> <span class="nx">@maxLevel</span><span class="p">,</span> <span class="nx">newCurrentLevel</span><span class="p">,</span> <span class="nx">boundingBox</span><span class="p">)</span>
+
+    <span class="nv">boundingBox = </span><span class="k">new</span> <span class="nx">BoundingBox</span><span class="p">(</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">halfHalfWidth</span><span class="p">,</span> <span class="nx">y</span> <span class="o">-</span> <span class="nx">halfHalfHeight</span><span class="p">,</span> <span class="nx">z</span> <span class="o">+</span> <span class="nx">halfHalfDepth</span><span class="p">,</span> <span class="nx">halfWidth</span><span class="p">,</span> <span class="nx">halfHeight</span><span class="p">,</span> <span class="nx">halfDepth</span><span class="p">)</span>
+    <span class="vi">@bottomLeftBack = </span><span class="k">new</span> <span class="nx">Octree</span><span class="p">(</span><span class="nx">@minLevel</span><span class="p">,</span> <span class="nx">@maxLevel</span><span class="p">,</span> <span class="nx">newCurrentLevel</span><span class="p">,</span> <span class="nx">boundingBox</span><span class="p">)</span>
+
+    <span class="nv">boundingBox = </span><span class="k">new</span> <span class="nx">BoundingBox</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">halfHalfWidth</span><span class="p">,</span> <span class="nx">y</span> <span class="o">-</span> <span class="nx">halfHalfHeight</span><span class="p">,</span> <span class="nx">z</span> <span class="o">+</span> <span class="nx">halfHalfDepth</span><span class="p">,</span> <span class="nx">halfWidth</span><span class="p">,</span> <span class="nx">halfHeight</span><span class="p">,</span> <span class="nx">halfDepth</span><span class="p">)</span>
+    <span class="vi">@bottomRightBack = </span><span class="k">new</span> <span class="nx">Octree</span><span class="p">(</span><span class="nx">@minLevel</span><span class="p">,</span> <span class="nx">@maxLevel</span><span class="p">,</span> <span class="nx">newCurrentLevel</span><span class="p">,</span> <span class="nx">boundingBox</span><span class="p">)</span>
+    
+    <span class="k">return</span>
+  
+  <span class="nv">fillAllChildren: </span><span class="o">-&gt;</span>
+    <span class="c1">#console.log &quot;----------------------------------------------- fillAllChildren&quot;</span>
+    <span class="nx">@topLeftFront</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+    <span class="nx">@topRightFront</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+    <span class="nx">@bottomLeftFront</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+    <span class="nx">@bottomRightFront</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+
+    <span class="nx">@topLeftBack</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+    <span class="nx">@topRightBack</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+    <span class="nx">@bottomLeftBack</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+    <span class="nx">@bottomRightBack</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
+
+    <span class="k">return</span>
+
+  <span class="nv">fill: </span><span class="o">-&gt;</span>
+    <span class="c1">#console.log &quot;----------------------------------------------- fill&quot;</span>
+    <span class="vi">@isInUse = </span><span class="kc">true</span>
+
+    <span class="k">return</span>
+
+  <span class="nv">insertPointInChildren: </span><span class="nf">(point, level)-&gt;</span>
+    <span class="c1">#console.log &quot;----------------------------------------------- insertPointInChildren&quot;</span>
+    <span class="nx">@split</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@topLeftFront</span> <span class="o">==</span> <span class="kc">undefined</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>if we are in the maximum level right now, we cannot split and we have to set the current voxel to isInUse, so it will be drawn</p></div></div><div class="code"><div class="wrapper">    <span class="k">if</span> <span class="nx">@topLeftFront</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="vi">@isInUse = </span><span class="kc">true</span>
+      <span class="k">return</span>
+
+    <span class="nx">@topLeftFront</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@topRightFront</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@bottomLeftFront</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@bottomRightFront</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    
+    <span class="nx">@topLeftBack</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@topRightBack</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@bottomLeftBack</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@bottomRightBack</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    
+    <span class="k">return</span>
+  
+  <span class="nv">insert: </span><span class="nf">(point, level) -&gt;</span>
+    <span class="c1">#console.log &quot;----------------------------------------------- insert&quot;</span>
+    
+    <span class="k">if</span> <span class="o">!</span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">intersects</span> <span class="nx">point</span> <span class="o">||</span> <span class="nx">@isInUse</span>
+      <span class="k">return</span>
+    
+    <span class="nv">level = </span><span class="nx">@minLevel</span> <span class="k">if</span> <span class="nx">level</span> <span class="o">&lt;</span> <span class="nx">@minLevel</span>
+    <span class="nv">level = </span><span class="nx">@maxLevel</span> <span class="k">if</span> <span class="nx">level</span> <span class="o">&gt;</span> <span class="nx">@maxLevel</span>
+
+    <span class="k">if</span> <span class="nx">level</span> <span class="o">&gt;</span> <span class="nx">@currentLevel</span>
+      <span class="nx">@insertPointInChildren</span><span class="p">(</span><span class="nx">point</span><span class="p">,</span> <span class="nx">level</span><span class="p">)</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="nx">level</span> <span class="o">==</span> <span class="nx">@currentLevel</span>
+      <span class="vi">@isInUse = </span><span class="kc">true</span>
+      <span class="c1">###</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;inserted point&quot;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;level: &quot;</span> <span class="o">+</span> <span class="nx">@currentLevel</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;position:&quot;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">center</span>
+      <span class="c1">###</span>
+    <span class="k">return</span>
+  
+  <span class="nv">removePointInChildren: </span><span class="nf">(point, level)-&gt;</span>
+    <span class="c1">#console.log &quot;----------------------------------------------- removePointInChildren&quot;</span>
+    <span class="nx">@split</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@topLeftFront</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="p">(</span><span class="nx">@isInUse</span> <span class="o">&amp;&amp;</span> <span class="nx">level</span> <span class="o">&gt;</span> <span class="nx">@currentLevel</span> <span class="o">&amp;&amp;</span> <span class="nx">@currentLevel</span> <span class="o">&lt;=</span> <span class="nx">@maxLevel</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>if we are in the maximum level right now, we cannot split and we have to set the current voxel to isInUse, so it will be drawn</p></div></div><div class="code"><div class="wrapper">    <span class="k">if</span> <span class="nx">@topLeftFront</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="vi">@isInUse = </span><span class="kc">false</span>
+      <span class="k">return</span>
+
+    <span class="nx">@topLeftFront</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@topRightFront</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@bottomLeftFront</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@bottomRightFront</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    
+    <span class="nx">@topLeftBack</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@topRightBack</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@bottomLeftBack</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    <span class="nx">@bottomRightBack</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">level</span>
+    
+    <span class="k">return</span>
+  
+  <span class="nv">remove: </span><span class="nf">(point, level) -&gt;</span>
+    <span class="c1">#console.log &quot;----------------------------------------------- remove&quot;</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="o">!</span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">intersects</span> <span class="nx">point</span>
+
+    <span class="nv">level = </span><span class="nx">@minLevel</span> <span class="k">if</span> <span class="nx">level</span> <span class="o">&lt;</span> <span class="nx">@minLevel</span>
+    <span class="nv">level = </span><span class="nx">@maxLevel</span> <span class="k">if</span> <span class="nx">level</span> <span class="o">&gt;</span> <span class="nx">@maxLevel</span>
+
+    <span class="k">if</span> <span class="nx">level</span> <span class="o">&gt;</span> <span class="nx">@currentLevel</span>
+      <span class="nx">@removePointInChildren</span><span class="p">(</span><span class="nx">point</span><span class="p">,</span> <span class="nx">level</span><span class="p">)</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="nx">level</span> <span class="o">==</span> <span class="nx">@currentLevel</span>
+      <span class="vi">@isInUse = </span><span class="kc">false</span>
+      <span class="c1">###</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;removed point&quot;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;level: &quot;</span> <span class="o">+</span> <span class="nx">@currentLevel</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s2">&quot;position:&quot;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">center</span>
+      <span class="c1">###</span>
+    <span class="k">return</span>
+
+  <span class="nv">draw: </span><span class="nf">(scene)-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>experimental!!!!!!!!!!!!!!!!!!!!!!!!!!!</p></div></div><div class="code"><div class="wrapper">    <span class="k">if</span><span class="p">(</span><span class="nx">isInUse</span><span class="p">)</span>
+      <span class="nv">cubeMesh = </span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">(</span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">CubeGeometry</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="nx">cubeMaterial</span><span class="p">)</span>
+      <span class="nv">cubeMesh.position = </span><span class="nx">cube</span><span class="p">.</span><span class="nx">position</span>
+
+      <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span> <span class="nx">cubeMesh</span>
+
+    <span class="k">if</span> <span class="nx">@topLeftFront</span> <span class="o">!=</span> <span class="kc">undefined</span>
+      <span class="nx">@topLeftFront</span><span class="p">.</span><span class="nx">draw</span> <span class="nx">scene</span>
+      <span class="nx">@topRightFront</span><span class="p">.</span><span class="nx">draw</span> <span class="nx">scene</span>
+      <span class="nx">@bottomLeftFront</span><span class="p">.</span><span class="nx">draw</span> <span class="nx">scene</span>
+      <span class="nx">@bottomRightFront</span><span class="p">.</span><span class="nx">draw</span> <span class="nx">scene</span>
+      
+      <span class="nx">@topLeftBack</span><span class="p">.</span><span class="nx">draw</span> <span class="nx">scene</span>
+      <span class="nx">@topRightBack</span><span class="p">.</span><span class="nx">draw</span> <span class="nx">scene</span>
+      <span class="nx">@bottomLeftBack</span><span class="p">.</span><span class="nx">draw</span> <span class="nx">scene</span>
+      <span class="nx">@bottomRightBack</span><span class="p">.</span><span class="nx">draw</span> <span class="nx">scene</span>
+
+    <span class="k">return</span></div></div></div></div></body></html>

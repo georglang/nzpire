@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="en"><head><title>server/connectAccOnCreateByEmail</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="server/connectAccOnCreateByEmail"><meta name="groc-project-path" content="app/server/connectAccOnCreateByEmail.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/server/connectAccOnCreateByEmail.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span> <span class="o">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>code to run on server at startup</p></div></div><div class="code"><div class="wrapper"><span class="nx">Accounts</span><span class="p">.</span><span class="nx">onCreateUser</span><span class="p">(</span> <span class="nf">(options,user)-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Email and Services are Arrays in the Profile Collections
+Function to check if the Email is already in our Profile Collection</p></div></div><div class="code"><div class="wrapper">  <span class="nv">checkForEmail = </span><span class="nf">(email)-&gt;</span>
+    <span class="c1">#console.log &quot;++++ checkForEmail ++++&quot;</span>
+    <span class="c1">#console.log email[0]</span>
+    
+    <span class="nv">result = </span> <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
+      <span class="nv">email: </span><span class="nx">email</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="p">).</span><span class="nx">fetch</span><span class="p">()</span>
+    <span class="c1">#console.log result</span>
+    <span class="k">return</span> <span class="nx">result</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>checks if the username is already in the profiles collection</p></div></div><div class="code"><div class="wrapper">  <span class="nv">checkUsernameUniqueness = </span><span class="nf">(username)-&gt;</span>
+    <span class="nv">options = </span><span class="p">{</span><span class="nv">name: </span><span class="nx">username</span><span class="p">}</span>
+    <span class="nx">findOneProfileByOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Adds a random number to the username if the username is already in the profiles collection</p></div></div><div class="code"><div class="wrapper">  <span class="nv">preserveUsernameUniqueness = </span><span class="nf">(username)-&gt;</span>
+    <span class="k">if</span> <span class="nx">checkUsernameUniqueness</span><span class="p">(</span><span class="nx">username</span><span class="p">)</span> <span class="o">==</span> <span class="kc">undefined</span>
+      <span class="k">return</span> <span class="nx">username</span>
+    <span class="k">else</span>
+      <span class="nx">preserveUsernameUniqueness</span><span class="p">(</span><span class="nx">username</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">100000</span><span class="p">))</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Get the service in string the user uses to log in AND the username and the serviceid</p></div></div><div class="code"><div class="wrapper">  <span class="nv">service = </span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+  <span class="k">if</span> <span class="nx">service</span> <span class="o">==</span> <span class="s2">&quot;password&quot;</span>
+    <span class="nv">username = </span><span class="nx">preserveUsernameUniqueness</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">username</span><span class="p">)</span>
+    <span class="nv">service = </span><span class="nx">twitterEmail</span>
+    <span class="nv">emails = </span><span class="p">[]</span>
+    <span class="nx">emails</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">email</span><span class="p">)</span>
+    <span class="nv">pictureUrl = </span><span class="s2">&quot;dummyPic.jpg&quot;</span>
+    <span class="nv">checkedEmail = </span><span class="nx">checkForEmail</span><span class="p">(</span><span class="nx">emails</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Different handling for different services</p></div></div><div class="code"><div class="wrapper">  <span class="k">else</span> <span class="k">if</span> <span class="nx">service</span> <span class="o">==</span> <span class="s2">&quot;github&quot;</span> 
+    <span class="nv">username = </span><span class="nx">preserveUsernameUniqueness</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">username</span><span class="p">)</span>
+    <span class="nv">options.profile.name = </span><span class="nx">username</span>
+    <span class="nv">service_id = </span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">id</span>  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>options.profile.email is an array with emails</p></div></div><div class="code"><div class="wrapper">    <span class="nv">options.profile.email = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://api.github.com/user/emails?access_token=&#39;</span> <span class="o">+</span> <span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">).</span><span class="nx">data</span>
+    <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">message</span> <span class="o">==</span> <span class="s1">&#39;Not Found&#39;</span>
+      <span class="nv">options.profile.email = </span><span class="p">[</span><span class="nx">username</span> <span class="o">+</span> <span class="s2">&quot;@&quot;</span> <span class="o">+</span> <span class="nx">twitterEmail</span> <span class="o">+</span> <span class="s2">&quot;.at&quot;</span><span class="p">]</span>
+      <span class="nv">emails = </span><span class="p">[]</span>
+      <span class="nx">emails</span><span class="p">.</span><span class="nx">push</span> <span class="nx">options</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">email</span>
+    <span class="k">else</span>
+      <span class="nv">emails = </span><span class="nx">options</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">email</span>
+    <span class="nv">githubUser = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://api.github.com/user?access_token=&#39;</span> <span class="o">+</span> <span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">)</span>    
+    <span class="nv">pictureUrl = </span><span class="nx">githubUser</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">avatar_url</span>
+    <span class="c1">#Is this email already in our collection</span>
+    <span class="nv">checkedEmail = </span><span class="nx">checkForEmail</span><span class="p">(</span><span class="nx">emails</span><span class="p">)</span>
+
+  <span class="k">else</span> <span class="k">if</span> <span class="nx">service</span> <span class="o">==</span> <span class="s2">&quot;twitter&quot;</span>
+    <span class="nv">username = </span><span class="nx">preserveUsernameUniqueness</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+    <span class="nv">service_id = </span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">id</span>        
+    <span class="nv">emails = </span><span class="p">[]</span>
+    <span class="nx">emails</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">screenName</span> <span class="o">+</span> <span class="s2">&quot;@&quot;</span> <span class="o">+</span> <span class="nx">twitterEmail</span> <span class="o">+</span> <span class="s2">&quot;.at&quot;</span><span class="p">)</span>
+    <span class="nv">pictureUrl = </span><span class="s2">&quot;dummyPic.jpg&quot;</span>
+    <span class="nv">checkedEmail = </span><span class="nx">checkForEmail</span><span class="p">(</span><span class="nx">emails</span><span class="p">)</span>
+
+  <span class="k">else</span> <span class="k">if</span> <span class="nx">service</span> <span class="o">==</span> <span class="s2">&quot;facebook&quot;</span>
+    <span class="nv">username = </span><span class="nx">preserveUsernameUniqueness</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+    <span class="nv">service_id = </span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">id</span>        
+    <span class="nv">emails = </span><span class="p">[]</span>
+    <span class="nx">emails</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">email</span><span class="p">)</span>
+    <span class="nv">pictureUrl = </span><span class="s2">&quot;http://graph.facebook.com/#{service_id}/picture?type=large&quot;</span>
+    <span class="c1">#Is this email already in our collection</span>
+    <span class="nv">checkedEmail = </span><span class="nx">checkForEmail</span><span class="p">(</span><span class="nx">emails</span><span class="p">)</span>
+
+  <span class="k">else</span> <span class="k">if</span> <span class="nx">service</span> <span class="o">==</span> <span class="s2">&quot;google&quot;</span>
+    <span class="nv">username = </span><span class="nx">preserveUsernameUniqueness</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+    <span class="nv">service_id = </span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">id</span>        
+    <span class="nv">emails = </span><span class="p">[]</span>
+    <span class="nx">emails</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">email</span><span class="p">)</span>
+    <span class="nv">googleUser = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;https://www.googleapis.com/plus/v1/people/#{service_id}?key=AIzaSyD68GWWS0wgHMljgpbrKNyQqlQxaVqIwGo&quot;</span><span class="p">)</span>
+    <span class="nv">pictureUrl = </span><span class="nx">googleUser</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">url</span>
+    <span class="c1">#Is this email already in our collection</span>
+    <span class="nv">checkedEmail = </span><span class="nx">checkForEmail</span><span class="p">(</span><span class="nx">emails</span><span class="p">)</span>    </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>If the Email is already in our Collection adds the service</p></div></div><div class="code"><div class="wrapper">  <span class="k">if</span> <span class="nx">checkedEmail</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="nv">updateObject =</span>
+      <span class="nv">services: </span><span class="p">{}</span>
+    <span class="nx">updateObject</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">]</span> <span class="o">=</span> <span class="nx">service_id</span>
+
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s1">&#39;addServiceToProfile&#39;</span><span class="p">,</span><span class="nx">checkedEmail</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">updateObject</span><span class="p">,</span> <span class="nf">(error,result)-&gt;</span>
+      <span class="k">if</span> <span class="nx">error</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">error</span><span class="p">.</span><span class="nx">reason</span>    
+
+  <span class="k">else</span>
+    <span class="nv">insertObject =</span>
+      <span class="nv">name: </span><span class="nx">username</span>
+      <span class="nv">email: </span><span class="nx">emails</span>
+      <span class="nv">following: </span><span class="p">[]</span>
+      <span class="nv">favourites: </span><span class="p">[]</span>
+      <span class="nv">updatedAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+      <span class="nv">services: </span><span class="p">[]</span>
+      <span class="nv">www: </span><span class="s2">&quot;&quot;</span>
+      <span class="nv">picture: </span><span class="nx">pictureUrl</span>
+    <span class="nv">serviceObject = </span><span class="p">{}</span>
+    <span class="nx">serviceObject</span><span class="p">[</span><span class="nx">service</span><span class="p">]</span> <span class="o">=</span> <span class="nx">service_id</span>
+    <span class="nx">insertObject</span><span class="p">.</span><span class="nx">services</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">serviceObject</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Creates a new Entry in our Profile Collection</p></div></div><div class="code"><div class="wrapper">    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s1">&#39;createProfile&#39;</span><span class="p">,</span> <span class="nx">insertObject</span><span class="p">,</span> <span class="nf">(error,result)-&gt;</span>
+      <span class="k">if</span> <span class="nx">error</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">error</span><span class="p">.</span><span class="nx">reason</span>  
+
+  <span class="nv">user.emails = </span><span class="nx">emails</span>
+  <span class="nv">user.profile = </span><span class="nx">options</span><span class="p">.</span><span class="nx">profile</span>
+  <span class="nv">user.mail = </span><span class="nx">emails</span>
+
+  <span class="k">return</span> <span class="nx">user</span>
+<span class="p">)</span></div></div></div></div></body></html>
