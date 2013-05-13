@@ -1,12 +1,11 @@
 <template name="profile">
 	<div> Profile TEMPLATE </div>
 		{{#if currentUser.services}}
-			<p>Name: {{userName}} <br>
-			 Email: {{email}} <br>
-			 WWW: {{www}} <br>
+			<div>Name: <span id="name" class="editable">{{userName}}</span><div>
+			<div>Email: <span id="email">{{email}}</span> </div>
+			<div>Website: <span id="www" class="editable"> {{www}}</span> </div>
+			<input type="filepicker" id='uploadWidget'/>
 			</p>
-			<img src="{{pictureUrl}}"
-			{{>connectServices}}		
 		{{/if}}
 	</div>
 </template>
