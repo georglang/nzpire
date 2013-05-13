@@ -33,7 +33,7 @@ keyBindings.setup = ->
     for undoShortcut in undoShortcuts
       Meteor.Keybindings.addOne undoShortcut,
         ->
-          # undo the last commit
+          # undo the last step
           Modeling.interaction.history.undo()
         keybindingsContext
         keybindingsEvent
@@ -42,7 +42,7 @@ keyBindings.setup = ->
     for redoShortcut in redoShortcuts
       Meteor.Keybindings.addOne redoShortcut,
         ->
-          # redo the last commit
+          # redo the last step
           Modeling.interaction.history.redo()
         keybindingsContext
         keybindingsEvent

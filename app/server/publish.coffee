@@ -18,8 +18,10 @@ Meteor.publish "allModels", ->
 	Models.find({})
 
 Meteor.publish 'model', (modelId) ->
-  return  Models.find _id: modelId
+  Models.find _id: modelId
 
 Meteor.publish 'modelObjects', (modelId) ->
   modelObjects = ModelObjects.find modelId: modelId
-  return modelObjects
+
+Meteor.publish 'modelActions', (modelId) ->
+  modelActions = ModelActions.find modelId: modelId

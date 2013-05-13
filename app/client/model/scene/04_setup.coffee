@@ -9,10 +9,6 @@ renderer = Modeling.renderer
 scene.setup = ->
   scene.currentObjects = []
 
-  # Always get the correct model content
-  Meteor.autorun ->
-    Meteor.subscribe 'modelObjects', Session.get 'modelId'
-
   # Ensure that the DOM is ready for take-off! 
   Meteor.defer ->
     # ## Rendering
@@ -77,6 +73,3 @@ scene.setup = ->
 
     # Kick off rendering loop!
     render()
-
-    # Always keep the scene aligned with the current model content
-    Meteor.autorun Modeling.scene.update
