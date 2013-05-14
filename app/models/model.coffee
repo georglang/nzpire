@@ -123,42 +123,51 @@ ModelActionConstructors.addObject = ModelActionAddObject
 
 Meteor.methods
 	doModelAction: (options) ->
-		ActionConstructor = ModelActionConstructors[options?.type]
-		if ActionConstructor
-			action = new ActionConstructor options
-			action.do()
-			setModelActionIds
-				modelId: action.modelId
-				undoActionId: action._id
-				redoActionId: null
+		modelPermission = checkModelPermission options.modelId, true
+		mayDoAction = modelPermission >= Roles.collaborator
+		if mayDoAction
+			ActionConstructor = ModelActionConstructors[options?.type]
+			if ActionConstructor
+				action = new ActionConstructor options
+				action.do()
+				setModelActionIds
+					modelId: action.modelId
+					undoActionId: action._id
+					redoActionId: null
 		else
 			throw new Meteor.Error 490, 'Model action ' + options?.type + ' does not exist!'
 
 	undoModelAction: (options) ->
-		actionObject = getModelActionToUndo options?.modelId
-		if actionObject
-			ActionConstructor = ModelActionConstructors[actionObject.type]
-			if ActionConstructor
-				action = new ActionConstructor actionObject
-				action.undo()
-				previousActionId = actionObject.previousActionId ? null
-				setModelActionIds
-					modelId: action.modelId
-					undoActionId: previousActionId
-					redoActionId: action._id
+		modelPermission = checkModelPermission options.modelId, true
+		mayDoAction = modelPermission >= Roles.owner
+		if mayDoAction
+			actionObject = getModelActionToUndo options?.modelId
+			if actionObject
+				ActionConstructor = ModelActionConstructors[actionObject.type]
+				if ActionConstructor
+					action = new ActionConstructor actionObject
+					action.undo()
+					previousActionId = actionObject.previousActionId ? null
+					setModelActionIds
+						modelId: action.modelId
+						undoActionId: previousActionId
+						redoActionId: action._id
 
 	redoModelAction: (options) ->
-		actionObject = getModelActionToRedo options?.modelId
-		if actionObject
-			ActionConstructor = ModelActionConstructors[actionObject.type]
-			if ActionConstructor
-				action = new ActionConstructor actionObject
-				action.do()
-				nextActionId = actionObject.nextActionId ? null
-				setModelActionIds
-					modelId: action.modelId
-					undoActionId: action._id
-					redoActionId: nextActionId
+		modelPermission = checkModelPermission options.modelId, true
+		mayDoAction = modelPermission >= Roles.owner
+		if mayDoAction
+			actionObject = getModelActionToRedo options?.modelId
+			if actionObject
+				ActionConstructor = ModelActionConstructors[actionObject.type]
+				if ActionConstructor
+					action = new ActionConstructor actionObject
+					action.do()
+					nextActionId = actionObject.nextActionId ? null
+					setModelActionIds
+						modelId: action.modelId
+						undoActionId: action._id
+						redoActionId: nextActionId
 
 	createModel: (options) ->
 		checkNameAvailability = findModelByName options.name
@@ -277,9 +286,10 @@ Meteor.methods
 
 	isCreator = findOneModelByOptions({_id:modelId,creator: currentProfile()._id})
 	if model.invited != undefined
-		isInvited = $.grep(model.invited, (e) ->
-			return e.userId == currentProfile()._id
-		)
+		isInvited = []
+		for invitation in model.invited
+			if invitation.userId == currentProfile()._id
+				isInvited.push invitation
 		if isInvited.length > 0
 			if isInvited[0].role == "owner"
 				#console.log "owner"
@@ -305,4 +315,4 @@ Meteor.methods
 	viewer: 1,
 	collaborator: 2,
 	creator: 3,
-	owner: 4
+	owner: 3
