@@ -314,5 +314,5 @@ Meteor.methods
 	none: 0,
 	viewer: 1,
 	collaborator: 2,
-	creator: 3,
-	owner: 3
+	owner: 3,
+	creator: 4
