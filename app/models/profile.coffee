@@ -1,3 +1,5 @@
+# # Profile
+
 @Profiles = new Meteor.Collection 'profiles'
 
 @findOneProfileByOptions = (options)->

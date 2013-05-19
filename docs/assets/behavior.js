@@ -1244,10 +1244,385 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                         "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/slideBar/slideBar.coffee",
                         "projectPath": "app/client/model/templates/slideBar/slideBar.coffee",
                         "targetPath": "client/model/templates/slideBar/slideBar",
-                        "title": "slideBar"
+                        "firstHeader": {
+                          "type": "heading",
+                          "data": {
+                            "level": 1,
+                            "title": "Model_Sidebar",
+                            "slug": "model-sidebar",
+                            "isFileHeader": true
+                          },
+                          "depth": 1,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Owner",
+                                "slug": "owner"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Modelname",
+                                "slug": "modelname"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "UpdatedAt",
+                                "slug": "updatedat"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Tags",
+                                "slug": "tags"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Creator",
+                                "slug": "creator"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Invited",
+                                "slug": "invited"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Predecessor",
+                                "slug": "predecessor"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Publicity",
+                                "slug": "publicity"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Profilelist",
+                                "slug": "profilelist"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Favourite",
+                                "slug": "favourite"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Events",
+                                "slug": "events"
+                              },
+                              "depth": 2,
+                              "children": [
+                                {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 3,
+                                    "title": "Model Owner Events",
+                                    "slug": "model-owner-events"
+                                  },
+                                  "depth": 3,
+                                  "children": [
+                                    {
+                                      "type": "heading",
+                                      "data": {
+                                        "level": 4,
+                                        "title": "Manages create, edit and delete for:",
+                                        "slug": "manages-create-edit-and-delete-for"
+                                      },
+                                      "depth": 4,
+                                      "children": [
+                                        {
+                                          "type": "heading",
+                                          "data": {
+                                            "level": 5,
+                                            "title": "* Modelname",
+                                            "slug": "-modelname"
+                                          },
+                                          "depth": 5
+                                        }, {
+                                          "type": "heading",
+                                          "data": {
+                                            "level": 5,
+                                            "title": "* Tags",
+                                            "slug": "-tags"
+                                          },
+                                          "depth": 5
+                                        }, {
+                                          "type": "heading",
+                                          "data": {
+                                            "level": 5,
+                                            "title": "* Invites",
+                                            "slug": "-invites"
+                                          },
+                                          "depth": 5
+                                        }, {
+                                          "type": "heading",
+                                          "data": {
+                                            "level": 5,
+                                            "title": "* Publicity",
+                                            "slug": "-publicity"
+                                          },
+                                          "depth": 5
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }, {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 3,
+                                    "title": "Viewer Events:",
+                                    "slug": "viewer-events"
+                                  },
+                                  "depth": 3,
+                                  "children": [
+                                    {
+                                      "type": "heading",
+                                      "data": {
+                                        "level": 4,
+                                        "title": "* Favourite",
+                                        "slug": "-favourite"
+                                      },
+                                      "depth": 4
+                                    }, {
+                                      "type": "heading",
+                                      "data": {
+                                        "level": 4,
+                                        "title": "* Defavourite",
+                                        "slug": "-defavourite"
+                                      },
+                                      "depth": 4
+                                    }, {
+                                      "type": "heading",
+                                      "data": {
+                                        "level": 4,
+                                        "title": "* Clone",
+                                        "slug": "-clone"
+                                      },
+                                      "depth": 4
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "title": "Model_Sidebar"
                       },
                       "depth": 5,
-                      "outline": []
+                      "outline": [
+                        {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Owner",
+                            "slug": "owner"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Modelname",
+                            "slug": "modelname"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "UpdatedAt",
+                            "slug": "updatedat"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Tags",
+                            "slug": "tags"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Creator",
+                            "slug": "creator"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Invited",
+                            "slug": "invited"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Predecessor",
+                            "slug": "predecessor"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Publicity",
+                            "slug": "publicity"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Profilelist",
+                            "slug": "profilelist"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Favourite",
+                            "slug": "favourite"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Events",
+                            "slug": "events"
+                          },
+                          "depth": 2,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "Model Owner Events",
+                                "slug": "model-owner-events"
+                              },
+                              "depth": 3,
+                              "children": [
+                                {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 4,
+                                    "title": "Manages create, edit and delete for:",
+                                    "slug": "manages-create-edit-and-delete-for"
+                                  },
+                                  "depth": 4,
+                                  "children": [
+                                    {
+                                      "type": "heading",
+                                      "data": {
+                                        "level": 5,
+                                        "title": "* Modelname",
+                                        "slug": "-modelname"
+                                      },
+                                      "depth": 5
+                                    }, {
+                                      "type": "heading",
+                                      "data": {
+                                        "level": 5,
+                                        "title": "* Tags",
+                                        "slug": "-tags"
+                                      },
+                                      "depth": 5
+                                    }, {
+                                      "type": "heading",
+                                      "data": {
+                                        "level": 5,
+                                        "title": "* Invites",
+                                        "slug": "-invites"
+                                      },
+                                      "depth": 5
+                                    }, {
+                                      "type": "heading",
+                                      "data": {
+                                        "level": 5,
+                                        "title": "* Publicity",
+                                        "slug": "-publicity"
+                                      },
+                                      "depth": 5
+                                    }
+                                  ]
+                                }
+                              ]
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "Viewer Events:",
+                                "slug": "viewer-events"
+                              },
+                              "depth": 3,
+                              "children": [
+                                {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 4,
+                                    "title": "* Favourite",
+                                    "slug": "-favourite"
+                                  },
+                                  "depth": 4
+                                }, {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 4,
+                                    "title": "* Defavourite",
+                                    "slug": "-defavourite"
+                                  },
+                                  "depth": 4
+                                }, {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 4,
+                                    "title": "* Clone",
+                                    "slug": "-clone"
+                                  },
+                                  "depth": 4
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -1681,10 +2056,89 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
         "sourcePath": "/home/morathil/qpt2b/app/globalFunctions.coffee",
         "projectPath": "app/globalFunctions.coffee",
         "targetPath": "globalFunctions",
-        "title": "globalFunctions"
+        "firstHeader": {
+          "type": "heading",
+          "data": {
+            "level": 1,
+            "title": "Global_Functions",
+            "slug": "global-functions",
+            "isFileHeader": true
+          },
+          "depth": 1,
+          "children": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Current Profile",
+                "slug": "current-profile"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Current Users Email",
+                "slug": "current-users-email"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Check Login Protection",
+                "slug": "check-login-protection"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Login Protected Sites",
+                "slug": "login-protected-sites"
+              },
+              "depth": 2
+            }
+          ]
+        },
+        "title": "Global_Functions"
       },
       "depth": 1,
-      "outline": []
+      "outline": [
+        {
+          "type": "heading",
+          "data": {
+            "level": 2,
+            "title": "Current Profile",
+            "slug": "current-profile"
+          },
+          "depth": 2
+        }, {
+          "type": "heading",
+          "data": {
+            "level": 2,
+            "title": "Current Users Email",
+            "slug": "current-users-email"
+          },
+          "depth": 2
+        }, {
+          "type": "heading",
+          "data": {
+            "level": 2,
+            "title": "Check Login Protection",
+            "slug": "check-login-protection"
+          },
+          "depth": 2
+        }, {
+          "type": "heading",
+          "data": {
+            "level": 2,
+            "title": "Login Protected Sites",
+            "slug": "login-protected-sites"
+          },
+          "depth": 2
+        }
+      ]
     }, {
       "type": "folder",
       "data": {
@@ -1752,7 +2206,17 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "sourcePath": "/home/morathil/qpt2b/app/models/profile.coffee",
             "projectPath": "app/models/profile.coffee",
             "targetPath": "models/profile",
-            "title": "profile"
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Profile",
+                "slug": "profile",
+                "isFileHeader": true
+              },
+              "depth": 1
+            },
+            "title": "Profile"
           },
           "depth": 2,
           "outline": []

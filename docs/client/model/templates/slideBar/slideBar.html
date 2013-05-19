@@ -1,13 +1,18 @@
-<!DOCTYPE html><html lang="en"><head><title>client/model/templates/slideBar/slideBar</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../../"><meta name="groc-document-path" content="client/model/templates/slideBar/slideBar"><meta name="groc-project-path" content="app/client/model/templates/slideBar/slideBar.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../../assets/style.css"><script type="text/javascript" src="../../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/model/templates/slideBar/slideBar.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.isOwner = </span><span class="o">-&gt;</span>
+<!DOCTYPE html><html lang="en"><head><title>client/model/templates/slideBar/slideBar</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../../"><meta name="groc-document-path" content="client/model/templates/slideBar/slideBar"><meta name="groc-project-path" content="app/client/model/templates/slideBar/slideBar.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../../assets/style.css"><script type="text/javascript" src="../../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/model/templates/slideBar/slideBar.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="model-sidebar">Model_Sidebar</h1></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="owner">Owner</h2>
+
+<p>Checks if the current User the models owner is <br />
+ * return: bool</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.isOwner = </span><span class="o">-&gt;</span>
   <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span> <span class="o">==</span> <span class="kc">null</span>
     <span class="k">return</span> <span class="kc">false</span>
   <span class="k">else</span>
     <span class="k">if</span> <span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span> <span class="o">==</span> <span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)}).</span><span class="nx">creator</span>
       <span class="k">return</span> <span class="kc">true</span>
     <span class="k">else</span>
-      <span class="k">return</span> <span class="kc">false</span>
+      <span class="k">return</span> <span class="kc">false</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="modelname">Modelname</h2>
 
-<span class="nv">Template.modelSidebar.modelname = </span><span class="o">-&gt;</span>
+<ul>
+<li>return: string</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.modelname = </span><span class="o">-&gt;</span>
   <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)})</span>
   <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
     <span class="k">return</span> <span class="kc">null</span>
@@ -16,9 +21,11 @@
     <span class="k">if</span> <span class="nx">name</span> <span class="o">!=</span> <span class="kc">undefined</span>
       <span class="k">return</span> <span class="nx">name</span>
     <span class="k">else</span>
-      <span class="k">return</span> <span class="kc">null</span>
+      <span class="k">return</span> <span class="kc">null</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="updatedat">UpdatedAt</h2>
 
-<span class="nv">Template.modelSidebar.updatedAt = </span><span class="o">-&gt;</span>
+<ul>
+<li>return: date</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.updatedAt = </span><span class="o">-&gt;</span>
   <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)})</span>
   <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
     <span class="k">return</span> <span class="kc">null</span>
@@ -28,9 +35,11 @@
       <span class="nv">d = </span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">updatedAt</span><span class="p">)</span>
       <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toUTCString</span><span class="p">()</span>
     <span class="k">else</span>
-      <span class="k">return</span> <span class="kc">null</span>
+      <span class="k">return</span> <span class="kc">null</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="tags">Tags</h2>
 
-<span class="nv">Template.modelSidebar.tags = </span><span class="o">-&gt;</span>
+<ul>
+<li>return: array</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.tags = </span><span class="o">-&gt;</span>
   <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)})</span>
   <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
     <span class="k">return</span> <span class="kc">null</span>
@@ -41,9 +50,11 @@
         <span class="nx">tags</span><span class="p">.</span><span class="nx">push</span> <span class="s2">&quot;&quot;</span>
       <span class="k">return</span> <span class="nx">tags</span>
     <span class="k">else</span>
-      <span class="k">return</span> <span class="kc">null</span>
+      <span class="k">return</span> <span class="kc">null</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="creator">Creator</h2>
 
-<span class="nv">Template.modelSidebar.creator = </span><span class="o">-&gt;</span>
+<ul>
+<li>return: string</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.creator = </span><span class="o">-&gt;</span>
   <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)})</span>
   <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
     <span class="k">return</span> <span class="kc">null</span>
@@ -53,9 +64,11 @@
       <span class="nv">name = </span><span class="nx">findOneProfileByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">creatorId</span><span class="p">}).</span><span class="nx">name</span>
       <span class="k">return</span> <span class="nx">name</span>
     <span class="k">else</span>
-      <span class="k">return</span> <span class="kc">null</span>
+      <span class="k">return</span> <span class="kc">null</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="invited">Invited</h2>
 
-<span class="nv">Template.modelSidebar.invited = </span><span class="o">-&gt;</span>
+<ul>
+<li>return: array</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.invited = </span><span class="o">-&gt;</span>
   <span class="nv">names = </span><span class="p">[]</span>
   <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)})</span>
   <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
@@ -68,9 +81,11 @@
         <span class="nx">names</span><span class="p">.</span><span class="nx">push</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nx">role</span><span class="o">:</span><span class="s2">&quot;&quot;</span><span class="p">}</span>
       <span class="k">return</span> <span class="nx">names</span>
     <span class="k">else</span>
-      <span class="k">return</span> <span class="kc">null</span>
+      <span class="k">return</span> <span class="kc">null</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="predecessor">Predecessor</h2>
 
-<span class="nv">Template.modelSidebar.predecessor = </span><span class="o">-&gt;</span>
+<ul>
+<li>return: string</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.predecessor = </span><span class="o">-&gt;</span>
   <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)})</span>
   <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
     <span class="k">return</span> <span class="kc">null</span>
@@ -81,8 +96,11 @@
       <span class="k">return</span> <span class="nx">name</span>
     <span class="k">else</span>
       <span class="k">return</span> <span class="kc">null</span>
-  
-<span class="nv">Template.modelSidebar.isPublic = </span><span class="o">-&gt;</span>
+ </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="publicity">Publicity</h2>
+
+<ul>
+<li>return: bool  </li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.isPublic = </span><span class="o">-&gt;</span>
   <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)})</span>
   <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
     <span class="k">return</span> <span class="kc">null</span>
@@ -91,12 +109,16 @@
     <span class="k">if</span> <span class="nx">isPublic</span> <span class="o">!=</span> <span class="kc">undefined</span>
       <span class="k">return</span> <span class="nx">isPublic</span>
     <span class="k">else</span>
-      <span class="k">return</span> <span class="kc">null</span>
+      <span class="k">return</span> <span class="kc">null</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="profilelist">Profilelist</h2>
 
-<span class="nv">Template.modelSidebar.profilesList = </span><span class="o">-&gt;</span>
-  <span class="k">return</span> <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({})</span>
+<ul>
+<li>return: cursor</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.profilesList = </span><span class="o">-&gt;</span>
+  <span class="k">return</span> <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({})</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="favourite">Favourite</h2>
 
-<span class="nv">Template.modelSidebar.isFavourited = </span><span class="o">-&gt;</span>
+<ul>
+<li>return: bool</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelSidebar.isFavourited = </span><span class="o">-&gt;</span>
   <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span> <span class="o">==</span> <span class="kc">null</span>
     <span class="k">return</span> <span class="kc">false</span>
   <span class="k">else</span>
@@ -104,15 +126,12 @@
     <span class="k">if</span> <span class="nx">favourited</span> <span class="o">==</span> <span class="kc">undefined</span>
       <span class="k">return</span> <span class="kc">true</span>
     <span class="k">else</span>
-      <span class="k">return</span> <span class="kc">false</span>
+      <span class="k">return</span> <span class="kc">false</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="events">Events</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">modelSidebar</span><span class="p">.</span><span class="nx">events</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="model-owner-events">Model Owner Events</h3>
 
-<span class="nx">Template</span><span class="p">.</span><span class="nx">modelSidebar</span><span class="p">.</span><span class="nx">events</span>
-  <span class="s1">&#39;click #slideContainerListItems&gt;li&gt;ul&gt;li&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
+<h4 id="manages-create-edit-and-delete-for">Manages create, edit and delete for:</h4></div></div><div class="code"><div class="wrapper">  <span class="s1">&#39;click #slideContainerListItems&gt;li&gt;ul&gt;li&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
     <span class="k">if</span> <span class="nx">Template</span><span class="p">.</span><span class="nx">modelSidebar</span><span class="p">.</span><span class="nx">isOwner</span><span class="p">()</span>
-      <span class="nv">className = </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span>
-      <span class="k">if</span> <span class="nx">className</span> <span class="o">==</span> <span class="s1">&#39;modelname&#39;</span>
-        <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s2">&quot;&lt;input autofocus=&#39;autofocus&#39; id=&#39;editModelName&#39; type=&#39;text&#39; value=&#39;&quot;</span><span class="o">+</span><span class="nx">Template</span><span class="p">.</span><span class="nx">modelSidebar</span><span class="p">.</span><span class="nx">modelname</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot;&#39;&gt;&quot;</span><span class="p">)</span>
-      <span class="k">else</span> <span class="k">if</span> <span class="nx">className</span> <span class="o">==</span> <span class="s1">&#39;tags&#39;</span>
+      <span class="nv">className = </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h5 id="-modelname">* Modelname</h5></div></div></div><div class="segment"><div class="code"><div class="wrapper">      <span class="k">if</span> <span class="nx">className</span> <span class="o">==</span> <span class="s1">&#39;modelname&#39;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s2">&quot;&lt;input autofocus=&#39;autofocus&#39; id=&#39;editModelName&#39; type=&#39;text&#39; value=&#39;&quot;</span><span class="o">+</span><span class="nx">Template</span><span class="p">.</span><span class="nx">modelSidebar</span><span class="p">.</span><span class="nx">modelname</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot;&#39;&gt;&quot;</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h5 id="-tags">* Tags</h5></div></div></div><div class="segment"><div class="code"><div class="wrapper">      <span class="k">else</span> <span class="k">if</span> <span class="nx">className</span> <span class="o">==</span> <span class="s1">&#39;tags&#39;</span>
         <span class="nv">tagName = </span><span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">html</span><span class="p">()</span>
         <span class="k">if</span> <span class="nx">tagName</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span>
           <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s2">&quot;&lt;input autofocus=&#39;autofocus&#39; id=&#39;addTag&#39; type=&#39;text&#39; placeholder=&#39;Tagname&#39;&gt;&quot;</span><span class="p">)</span>
@@ -120,8 +139,7 @@
           <span class="nv">options = </span><span class="p">{</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">),</span><span class="nv">tag: </span><span class="nx">tagName</span><span class="p">}</span>
           <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s1">&#39;removeModelTag&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nf">(error,result)-&gt;</span>
             <span class="k">if</span> <span class="nx">error</span>
-              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">error</span><span class="p">.</span><span class="nx">reason</span>
-      <span class="k">else</span> <span class="k">if</span> <span class="nx">className</span> <span class="o">==</span> <span class="s1">&#39;invited&#39;</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">error</span><span class="p">.</span><span class="nx">reason</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h5 id="-invites">* Invites</h5></div></div></div><div class="segment"><div class="code"><div class="wrapper">      <span class="k">else</span> <span class="k">if</span> <span class="nx">className</span> <span class="o">==</span> <span class="s1">&#39;invited&#39;</span>
         <span class="nv">invitedName = </span><span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">html</span><span class="p">()</span>
         <span class="k">if</span> <span class="nx">invitedName</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span>
           <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s2">&quot;&lt;input autofocus=&#39;autofocus&#39; id=&#39;addInvite&#39; type=&#39;text&#39; list=&#39;profilesDatalist&#39; placeholder=&#39;Username&#39;&gt;&lt;select id=&#39;invitedRole&#39;&gt;&lt;option value=&#39;owner&#39;&gt;Owner&lt;/option&gt;&lt;option value=&#39;collaborator&#39;&gt;Collaborator&lt;/option&gt;&lt;option value=&#39;viewer&#39;&gt;Viewer&lt;/option&gt;&lt;/select&gt;&lt;input id=&#39;addInviteButton&#39; type=&#39;button&#39; value=&#39;invite&#39;&gt;&quot;</span><span class="p">)</span>
@@ -129,8 +147,7 @@
           <span class="nv">options = </span><span class="p">{</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">),</span><span class="nv">invite: </span><span class="nx">invitedName</span><span class="p">}</span>
           <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s1">&#39;removeModelInvite&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nf">(error,result)-&gt;</span>
             <span class="k">if</span> <span class="nx">error</span>
-              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">error</span><span class="p">.</span><span class="nx">reason</span>
-      <span class="k">else</span> <span class="k">if</span> <span class="nx">className</span> <span class="o">==</span> <span class="s1">&#39;isPublic&#39;</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">error</span><span class="p">.</span><span class="nx">reason</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h5 id="-publicity">* Publicity</h5></div></div></div><div class="segment"><div class="code"><div class="wrapper">      <span class="k">else</span> <span class="k">if</span> <span class="nx">className</span> <span class="o">==</span> <span class="s1">&#39;isPublic&#39;</span>
         <span class="nv">options = </span><span class="p">{</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">),</span><span class="nv">isPublic: </span><span class="nx">Template</span><span class="p">.</span><span class="nx">modelSidebar</span><span class="p">.</span><span class="nx">isPublic</span><span class="p">()}</span>
         <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s1">&#39;updateModelIsPublic&#39;</span><span class="p">,</span><span class="nx">options</span><span class="p">,</span> <span class="nf">(error,result)-&gt;</span>
           <span class="k">if</span> <span class="nx">error</span>
@@ -175,15 +192,12 @@
 
   <span class="s1">&#39;keydown #addInvite&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
     <span class="k">if</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span>
-      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#addInviteButton&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">()</span>      
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#addInviteButton&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">()</span>      </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="viewer-events">Viewer Events:</h3>
 
-  <span class="s1">&#39;click #favourite&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+<h4 id="-favourite">* Favourite</h4></div></div><div class="code"><div class="wrapper">  <span class="s1">&#39;click #favourite&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$push: </span><span class="p">{</span><span class="nv">favourites: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)}}</span>
-
-  <span class="s1">&#39;click #defavourite&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
-    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">},{</span><span class="nx">$pull</span><span class="o">:</span><span class="p">{</span><span class="nv">favourites: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)}}</span>
-
-  <span class="s1">&#39;click #clone&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
+    </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="-defavourite">* Defavourite</h4></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="s1">&#39;click #defavourite&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">},{</span><span class="nx">$pull</span><span class="o">:</span><span class="p">{</span><span class="nv">favourites: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)}}</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h4 id="-clone">* Clone</h4></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="s1">&#39;click #clone&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
     <span class="k">if</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#cloneModelName&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">undefined</span>
       <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#cloneModelName&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">()</span>
       <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#createCloneModel&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">()</span>
