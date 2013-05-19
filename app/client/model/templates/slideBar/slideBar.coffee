@@ -1,3 +1,5 @@
+# ## Model_Sidebar
+
 Template.modelSidebar.isOwner = ->
   if Meteor.user() == null
     return false
