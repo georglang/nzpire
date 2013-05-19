@@ -2,15 +2,14 @@ Meteor.startup ->
   filepicker.setKey "AgE9nNiTnRKy1s8bU4zbuz"
   filepicker.constructWidget document.getElementById("attachment")
 
-
 Template.profile.userName = ->
-	currentProfile().name
+	Profiles.findOne(_id: Session.get("profileId")).name
 
 Template.profile.email = ->
-	currentEmail()
+	Profiles.findOne(_id: Session.get("profileId")).email
 
 Template.profile.www = ->
-	currentProfile().www
+	Profiles.findOne(_id: Session.get("profileId")).www
 
 Template.profile.rendered = ->
 	filepicker.constructWidget document.getElementById('uploadWidget')
@@ -22,7 +21,7 @@ Template.profile.events
 		attrValue = target.text()
 		attrName = target.attr('id')
 		console.log attrName
-		input = $("<input id='"+attrName+"' class='editable' placeholder='Enter your Website' type='text' value='"+attrValue+"'>")
+		input = $("<input id='"+attrName+"' rel='Your e-mail here' class='editable' type='text' value='"+attrValue+"'>")
 		target.replaceWith(input)
 		input.focus()
 
@@ -30,7 +29,7 @@ Template.profile.events
 		target = $(e.currentTarget)
 		attrValue = target.val()
 		attrName = target.attr('id')
-		target.replaceWith("<span id='"+attrName+"' class='editable' placeholder='Enter your Website' type='text'>"+attrValue+"")
+		target.replaceWith("<span id='"+attrName+"' class='editable' type='text'>"+attrValue+"")
 		updateObject = {$set: {}}
 		updateObject.$set[attrName] = attrValue #define variable for db query
 		console.log updateObject
