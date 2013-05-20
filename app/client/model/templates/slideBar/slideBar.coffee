@@ -1,3 +1,8 @@
+# # Model_Sidebar
+
+# ##Owner
+# Checks if the current User the models owner is    
+#  * return: bool
 Template.modelSidebar.isOwner = ->
   if Meteor.user() == null
     return false
@@ -7,6 +12,8 @@ Template.modelSidebar.isOwner = ->
     else
       return false
 
+# ## Modelname
+# * return: string
 Template.modelSidebar.modelname = ->
   model = findOneModelByOptions({_id: Session.get('modelId')})
   if model == undefined
@@ -18,6 +25,8 @@ Template.modelSidebar.modelname = ->
     else
       return null
 
+# ## UpdatedAt
+# * return: date
 Template.modelSidebar.updatedAt = ->
   model = findOneModelByOptions({_id: Session.get('modelId')})
   if model == undefined
@@ -30,6 +39,8 @@ Template.modelSidebar.updatedAt = ->
     else
       return null
 
+# ## Tags
+# * return: array
 Template.modelSidebar.tags = ->
   model = findOneModelByOptions({_id: Session.get('modelId')})
   if model == undefined
@@ -43,6 +54,8 @@ Template.modelSidebar.tags = ->
     else
       return null
 
+# ## Creator
+# * return: string
 Template.modelSidebar.creator = ->
   model = findOneModelByOptions({_id: Session.get('modelId')})
   if model == undefined
@@ -55,6 +68,8 @@ Template.modelSidebar.creator = ->
     else
       return null
 
+# ## Invited
+# * return: array
 Template.modelSidebar.invited = ->
   names = []
   model = findOneModelByOptions({_id: Session.get('modelId')})
@@ -70,6 +85,8 @@ Template.modelSidebar.invited = ->
     else
       return null
 
+# ## Predecessor
+# * return: string
 Template.modelSidebar.predecessor = ->
   model = findOneModelByOptions({_id: Session.get('modelId')})
   if model == undefined
@@ -81,7 +98,9 @@ Template.modelSidebar.predecessor = ->
       return name
     else
       return null
-  
+ 
+# ## Publicity
+# * return: bool  
 Template.modelSidebar.isPublic = ->
   model = findOneModelByOptions({_id: Session.get('modelId')})
   if model == undefined
@@ -93,9 +112,13 @@ Template.modelSidebar.isPublic = ->
     else
       return null
 
+# ## Profilelist
+# * return: cursor
 Template.modelSidebar.profilesList = ->
   return Profiles.find({})
 
+# ## Favourite
+# * return: bool
 Template.modelSidebar.isFavourited = ->
   if Meteor.user() == null
     return false
@@ -106,12 +129,18 @@ Template.modelSidebar.isFavourited = ->
     else
       return false
 
+# ## Events
 Template.modelSidebar.events
+
+  # ### Model Owner Events
+  # #### Manages create, edit and delete for:
   'click #slideContainerListItems>li>ul>li': (e)->
     if Template.modelSidebar.isOwner()
       className = e.target.className
+      # ##### * Modelname
       if className == 'modelname'
         $(e.target).replaceWith("<input autofocus='autofocus' id='editModelName' type='text' value='"+Template.modelSidebar.modelname()+"'>")
+      # ##### * Tags
       else if className == 'tags'
         tagName = $(e.target).html()
         if tagName.length == 0
@@ -121,6 +150,7 @@ Template.modelSidebar.events
           Meteor.call 'removeModelTag', options, (error,result)->
             if error
               console.log error.reason
+      # ##### * Invites
       else if className == 'invited'
         invitedName = $(e.target).html()
         if invitedName.length == 0
@@ -130,6 +160,7 @@ Template.modelSidebar.events
           Meteor.call 'removeModelInvite', options, (error,result)->
             if error
               console.log error.reason
+      # ##### * Publicity
       else if className == 'isPublic'
         options = {_id: Session.get('modelId'),isPublic: Template.modelSidebar.isPublic()}
         Meteor.call 'updateModelIsPublic',options, (error,result)->
@@ -177,12 +208,16 @@ Template.modelSidebar.events
     if e.keyCode == 13
       $('#addInviteButton').click()      
 
+  # ### Viewer Events:
+  # #### * Favourite
   'click #favourite': ->
     Profiles.update {_id: currentProfile()._id},{$push: {favourites: Session.get('modelId')}}
-
+    
+  # #### * Defavourite
   'click #defavourite': ->
     Profiles.update {_id: currentProfile()._id},{$pull:{favourites: Session.get('modelId')}}
 
+  # #### * Clone
   'click #clone': (e)->
     if $('#cloneModelName')[0] != undefined
       $('#cloneModelName').remove()

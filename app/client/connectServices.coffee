@@ -1,4 +1,9 @@
-# Inserts the new Mail into the old Account and Deletes the created User and reloggs the User
+# # Connect various Accounts
+
+# ## Connect Profiles
+# Inserts the new Mail into the old Account and Deletes the created User and reloggs the User    
+# * params: string (oldAccounts email), function (i.e. Meteor.loginWithFacebook)    
+# * return:    
 connectProfiles = (tmpEmail,loginFunction)->
 	tmpProfile = Profiles.findOne
 		email: tmpEmail
@@ -19,19 +24,22 @@ connectProfiles = (tmpEmail,loginFunction)->
 	# Removes the created Profile
 	Profiles.remove {_id: newProfile._id}
 
-# Checks out which Services the User has already connected and Returns the rest
+# ## Connect Buttons
+# Checks out which Services the User has already connected and Returns the rest    
+# * params:    
+# * return: array (i.e. ["Facebook","Twitter"])    
 Template.connectServices.connectButtons = ->
-	# Provides Services
+	# ### Provides Services
 	services = ["Facebook","Twitter","Google","Github"];
 
 	tmpProfile = Profiles.find(
 		email: currentEmail()
 		).fetch()[0]
-	# Array of Services the User has already connected
+	# Array of Services the User has already connected    
 	serviceArray = tmpProfile.services
 
 	i = 0
-	# Compares the User Services with the Provided services and slices the matches out of the provided
+	# Compares the User Services with the Provided services and slices the matches out of the provided    
 	while i < serviceArray.length
 	  element = serviceArray[i]
 	  service = Object.keys(element)[0].charAt(0).toUpperCase() + Object.keys(element)[0].slice(1)
@@ -41,7 +49,8 @@ Template.connectServices.connectButtons = ->
 	  ++i	  
 	return services	
 
-# Connect Buttons Onclick login with the service and on callback calls the function connectProfiles
+# ## Connect Button Events
+# Connect Buttons Onclick login with the service and on callback calls the function connectProfiles    
 Template.connectServices.events
 	'click input#connectWithFacebook': ->
 		tmpEmail = currentEmail()
