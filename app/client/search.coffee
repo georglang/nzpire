@@ -54,7 +54,7 @@ checkForFavourites = (_id)->
 # return: string ("unfollow"/"follow" || "defavourite"/"favourite")
 order = (searchingFor,_id)->
 	loggedIn = Meteor.userId()
-	if searchingFor == "profileLink" && loggedIn != null
+	if (searchingFor == "profileLink" && loggedIn != null) && (_id != currentProfile()._id)
 		if checkForFollowing(_id).fetch().length > 0
 			return "unfollow"
 		else
@@ -72,6 +72,7 @@ order = (searchingFor,_id)->
 # If # and @ not given the function gets models and profiles and merges them    
 # params:    
 # return: array (with #models or @profiles or both) (+ .searchingFor" and .order)
+
 Template.search.getResults = ->
 	searchingFor = Session.get("searchQuery").charAt(0)
 	if searchingFor == "@"
