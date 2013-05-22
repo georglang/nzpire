@@ -335,3 +335,11 @@ Meteor.methods
 	{index: 8, color: "#ffffff"}
 	{index: 9, color: "#000000"}
 	]
+
+@DefaultVoxelSizes = [
+	{index: 0, size: 1}
+	{index: 1, size: 2}
+	{index: 2, size: 3}
+	{index: 3, size: 4}
+	{index: 4, size: 5}
+	]
