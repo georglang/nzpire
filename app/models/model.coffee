@@ -121,6 +121,11 @@ class ModelActionAddObject extends ModelAction
 
 ModelActionConstructors.addObject = ModelActionAddObject
 
+
+###################################################################################################
+################################### METHODS #######################################################
+###################################################################################################
+
 Meteor.methods
 	doModelAction: (options) ->
 		modelPermission = checkModelPermission options.modelId, true
@@ -174,7 +179,7 @@ Meteor.methods
 		if checkNameAvailability
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
-			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic})
+			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:DefaultModelColors})
 			return modelId
 
 	cloneModel: (options) ->
@@ -182,7 +187,8 @@ Meteor.methods
 		if checkNameAvailability
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
-			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic})
+			predecessorModel = Models.findOneModelByOptions({_id:options.predecessor})
+			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:predecessorModel.colors})
 			predecessorModelObjects = ModelObjects.find({modelId:options.predecessor}).fetch()
 			ModelObjects.insert({position: i.position, modelId: modelId}) for i in predecessorModelObjects
 			return modelId		
@@ -315,3 +321,17 @@ Meteor.methods
 	collaborator: 2,
 	owner: 3,
 	creator: 4
+
+
+@DefaultModelColors = [
+	{index: 0, color: "#FF0000"}
+	{index: 1, color: "#FF00D9"}
+	{index: 2, color: "#2600FF"}
+	{index: 3, color: "#00E1FF"}
+	{index: 4, color: "#00FF2F"}
+	{index: 5, color: "#EAFF00"}
+	{index: 6, color: "#FF9D00"}
+	{index: 7, color: "#FF3C00"}
+	{index: 8, color: "#ffffff"}
+	{index: 9, color: "#000000"}
+	]

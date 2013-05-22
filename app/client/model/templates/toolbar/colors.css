@@ -1,0 +1,14 @@
+#colors{
+	position: fixed;
+	bottom: 25px;
+}
+
+.modelColor{
+	width:20px;
+	height:20px;
+	float:left;
+	border: 2px solid #42424A;
+	border-radius: 2px;
+	margin-right: 2px;
+	cursor: pointer;
+}

@@ -1,0 +1,7 @@
+<template name="colors">
+	<div id="colors">
+		{{#each getModelColors}}
+			<div id="{{this.index}}" style="background-color:{{this.color}}" class="modelColor"></div>
+		{{/each}}
+	</div>
+</template>
