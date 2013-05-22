@@ -1,7 +1,11 @@
 <template name="colors">
 	<div id="colors">
 		{{#each getModelColors}}
+			{{#if isCurrentColor}}
+				<div id="{{this.index}}" style="background-color:{{this.color}}" class="modelColor activeColor"></div>
+			{{else}}
 			<div id="{{this.index}}" style="background-color:{{this.color}}" class="modelColor"></div>
+			{{/if}}
 		{{/each}}
 	</div>
 </template>

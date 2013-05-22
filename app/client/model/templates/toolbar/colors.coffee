@@ -3,7 +3,11 @@ Template.colors.getModelColors = ->
 	if model == undefined
 		return null
 	return model.colors
-
+Template.colors.isCurrentColor = ()->
+	if Session.get('modelColor') == this.color
+		return true
+	else
+		return false
 
 Template.colors.events
 	'click .modelColor': (e)->

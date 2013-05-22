@@ -12,3 +12,7 @@
 	margin-right: 2px;
 	cursor: pointer;
 }
+
+.activeColor{
+	border: 2px solid darkred;
+}
