@@ -187,7 +187,7 @@ Meteor.methods
 		if checkNameAvailability
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
-			predecessorModel = Models.findOneModelByOptions({_id:options.predecessor})
+			predecessorModel = findOneModelByOptions({_id:options.predecessor})
 			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:predecessorModel.colors})
 			predecessorModelObjects = ModelObjects.find({modelId:options.predecessor}).fetch()
 			ModelObjects.insert({position: i.position, modelId: modelId}) for i in predecessorModelObjects
