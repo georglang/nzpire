@@ -14,7 +14,7 @@ Template.voxelSizes.getBottom = ->
 	return DefaultVoxelSizes[DefaultVoxelSizes.length-1].size * 10 - this.size * 10
 
 Template.voxelSizes.getBackground = ->
-	return Session.get 'voxelColor'
+	return Session.get 'modelingColor'
 
 Template.voxelSizes.events
 	'click .voxelSize': (e)->

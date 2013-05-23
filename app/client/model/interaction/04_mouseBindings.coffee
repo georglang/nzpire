@@ -58,7 +58,10 @@ mouseBindings.setup = ->
           # add a new object
           Modeling.interaction.manipulation.object.add
             object:
+              type: 'voxel'
               position: buildingPoint
+              color: Session.get 'modelingColor'
+              size: Session.get 'voxelSize'
         # stop event from being called more than once for a click!
         e.stopImmediatePropagation()
 

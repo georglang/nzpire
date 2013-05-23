@@ -8,6 +8,9 @@
 @ModelActions = new Meteor.Collection 'modelActions'
 
 ModelActionConstructors = {}
+ModelObjectTypes = [
+	'voxel'
+]
 
 getModelActionToUndo = (modelId) ->
 	model = Models.findOne _id: modelId
@@ -100,6 +103,10 @@ class ModelActionAddObject extends ModelAction
 	validateSpecifics: (options) ->
 		if not options.specifics.object
 			throw new Meteor.Error 490, 'No object passed to specifics (options.specifics.object) of model action addObject!'
+		if not options.specifics.object.type
+			throw new Meteor.Error 490, 'No type passed to specifics object (options.specifics.object.type) of model action addObject!'
+		if ModelObjectTypes.indexOf(options.specifics.object.type) is -1
+			throw new Meteor.Error 490, 'Invalid type ' + options.specifics.object.type + ' passed to specifics object (options.specifics.object.type) of model action addObject. Valid object types are: ' + ModelObjectTypes.join ', '
 		if not options.specifics.object.position
 			throw new Meteor.Error 490, 'No position passed to specifics object (options.specifics.object.position) of model action addObject!'
 		if not options.specifics.object.position.x
@@ -112,6 +119,16 @@ class ModelActionAddObject extends ModelAction
 			throw new Meteor.Error 490, 'No model id passed to specifics object (options.specifics.object.modelId) of model action addObject!'
 		if options.specifics.object.modelId isnt options.modelId
 			throw new Meteor.Error 490, 'Incorrect model id passed to specifics object (options.specifics.object.modelId) of model action addObject. Must be the same as options.modelId!'
+		if not options.specifics.object.color
+			throw new Meteor.Error 490, 'No color passed to specifics object (options.specifics.object.color) of model action addObject!'
+		colorAsInteger = parseInt options.specifics.object.color, 16
+		if isNaN(colorAsInteger) or colorAsInteger < 0 or colorAsInteger > 16777215
+			throw new Meteor.Error 490, 'Invalid color passed to specifics object (options.specifics.object.color) of model action addObject. Valid color values are hexadecimal strings from 000000 to FFFFFF.'
+		# Specifics for type 'voxel':
+		# * size
+		if options.specifics.object.type == 'voxel'
+			if not options.specifics.object.size
+				throw new Meteor.Error 490, 'No size passed to specifics object for type voxel (options.specifics.object.size) of model action addModel!'
 	do: ->
 		if @specifics.objectId
 			@specifics.object._id = @specifics.objectId
@@ -328,16 +345,16 @@ Meteor.methods
 
 
 @DefaultModelColors = [
-	{index: 0, color: "#FF0000"}
-	{index: 1, color: "#FF00D9"}
-	{index: 2, color: "#2600FF"}
-	{index: 3, color: "#00E1FF"}
-	{index: 4, color: "#00FF2F"}
-	{index: 5, color: "#EAFF00"}
-	{index: 6, color: "#FF9D00"}
-	{index: 7, color: "#FF3C00"}
-	{index: 8, color: "#ffffff"}
-	{index: 9, color: "#000000"}
+	{index: 0, color: "FF0000"}
+	{index: 1, color: "FF00D9"}
+	{index: 2, color: "2600FF"}
+	{index: 3, color: "00E1FF"}
+	{index: 4, color: "00FF2F"}
+	{index: 5, color: "EAFF00"}
+	{index: 6, color: "FF9D00"}
+	{index: 7, color: "FF3C00"}
+	{index: 8, color: "ffffff"}
+	{index: 9, color: "000000"}
 	]
 
 @DefaultVoxelSizes = [
