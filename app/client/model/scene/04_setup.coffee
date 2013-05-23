@@ -11,6 +11,10 @@ scene.setup = ->
 
   # Ensure that the DOM is ready for take-off! 
   Meteor.defer ->
+    # ## DOM element
+    container = $ "#modelContainer"
+    container.focus()
+
     # ## Rendering
     viewAngle = 45
     aspect = 1
@@ -21,7 +25,7 @@ scene.setup = ->
     camera.position.z = 1000
     camera.position.y = 1000
 
-    controls = new THREE.TrackballControls( camera )
+    controls = new THREE.TrackballControls camera, container[0]
 
     controls.rotateSpeed = 1.0
     controls.zoomSpeed = 1.2
@@ -61,8 +65,6 @@ scene.setup = ->
     scene.itself.add plane
 
     # ## Insertion into DOM
-    container = $ "#modelContainer"
-    container.focus()
     container.append renderer.domElement
 
     # ## Window resizing
