@@ -21,18 +21,24 @@ scene.setup = ->
     camera.position.z = 1000
     camera.position.y = 1000
 
+    controls = new THREE.TrackballControls( camera )
+
+    controls.rotateSpeed = 1.0
+    controls.zoomSpeed = 1.2
+    controls.panSpeed = 0.8
+
+    controls.noZoom = false
+    controls.noPan = false
+
+    controls.staticMoving = true
+    controls.dynamicDampingFactor = 0.3
+
     render = ->
       # Only render when template is active.
       if Session.get("template") == "model"
         renderer.render scene.itself, camera
-        controls.update clock.getDelta()
+        controls.update()
       requestAnimationFrame render
-
-    # ## Controls
-    controls = new THREE.FlyControls camera, document.getElementById 'modelContainer'
-    controls.movementSpeed = 1000
-    controls.rollSpeed = 1.0
-    controls.dragToLook = true
 
     # ## Clock
     clock = new THREE.Clock()
