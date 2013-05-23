@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><title>client/news</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/news"><meta name="groc-project-path" content="app/client/news.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/news.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="news">News</h1></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="model-news">Model News</h2>
 
 <p>Gets the 10 latest updated models the current user favourites <br />
-* return: cursor</p></div></div><div class="code"><div class="wrapper"><span class="nv">getModelNews = </span><span class="o">-&gt;</span>
+* return: cursor</p></div></div><div class="code"><div class="wrapper"><span class="nv">getModelNews = </span><span class="nf">-&gt;</span>
   <span class="c1">#console.log &quot;getModelNewsFunc&quot;</span>
   <span class="c1">#profiles = Profiles.find({},{sort: {updatedAt: 1}).fetch()</span>
   <span class="nv">models = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">_id: </span><span class="p">{</span><span class="nv">$in: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">favourites</span><span class="p">}},{</span><span class="nv">sort: </span><span class="p">{</span><span class="nx">updatedAt</span><span class="o">:-</span><span class="mi">1</span><span class="p">},</span><span class="nv">limit: </span><span class="mi">10</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
@@ -9,7 +9,7 @@
   <span class="k">return</span> <span class="nx">models</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="profile-news">Profile News</h2>
 
 <p>Gets the 10 latest updated profiles the current user follows <br />
-* return: cursor</p></div></div><div class="code"><div class="wrapper"><span class="nv">getProfileNews = </span><span class="o">-&gt;</span>
+* return: cursor</p></div></div><div class="code"><div class="wrapper"><span class="nv">getProfileNews = </span><span class="nf">-&gt;</span>
   <span class="c1">#console.log &quot;getProfileNewsFunc&quot;</span>
   <span class="nv">profiles = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">_id: </span><span class="p">{</span><span class="nv">$in: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">following</span><span class="p">}},{</span><span class="nv">sort: </span><span class="p">{</span><span class="nx">updatedAt</span><span class="o">:-</span><span class="mi">1</span><span class="p">},</span><span class="nv">limit: </span><span class="mi">10</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
   <span class="k">return</span> <span class="nx">profiles</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="sort-function">Sort Function</h2>
@@ -22,7 +22,7 @@
   <span class="k">return</span> <span class="mi">0</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="news">News</h2>
 
 <p>Gets the model and profile news and merges them <br />
-* return: array () (models and profiles merged and sorted)</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.news.getNews = </span><span class="o">-&gt;</span>
+* return: array () (models and profiles merged and sorted)</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.news.getNews = </span><span class="nf">-&gt;</span>
   <span class="c1">#console.log &quot;getNews&quot;</span>
   <span class="nv">result = </span><span class="nx">getModelNews</span><span class="p">()</span>
   <span class="nv">result2 = </span><span class="nx">getProfileNews</span><span class="p">()</span>
@@ -30,8 +30,8 @@
   <span class="nx">result</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">sortArrayByTimestamp</span><span class="p">)</span>
   <span class="k">return</span> <span class="nx">result</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="rendered-and-destroyed">Rendered and Destroyed</h2>
 
-<p>Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.news.rendered = </span><span class="nf">()-&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#newsTemplate&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;activeTemplate&#39;</span><span class="p">)</span>
+<p>Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.news.rendered = </span><span class="p">()</span><span class="nf">-&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#newsTemplate&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span>
 
-<span class="nv">Template.news.destroyed = </span><span class="nf">()-&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#newsTemplate&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;activeTemplate&#39;</span><span class="p">)</span></div></div></div></div></body></html>
+<span class="nv">Template.news.destroyed = </span><span class="p">()</span><span class="nf">-&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#newsTemplate&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span></div></div></div></div></body></html>

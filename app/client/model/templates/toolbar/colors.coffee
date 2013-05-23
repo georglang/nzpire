@@ -1,19 +1,19 @@
-Template.voxelColors.getModelColors = ->
+Template.modelingColors.getModelColors = ->
 	model = findOneModelByOptions({_id: Session.get('modelId')})
 	if model == undefined
 		return null
 	return model.colors
 
-Template.voxelColors.isCurrentColor = ()->
-	if Session.get('voxelColor') == this.color
+Template.modelingColors.isCurrentColor = ()->
+	if Session.get('modelingColor') == this.color
 		return true
 	else
 		return false
 
-Template.voxelColors.events
-	'click .voxelColor': (e)->
+Template.modelingColors.events
+	'click .modelingColor': (e)->
 		model = findOneModelByOptions({_id: Session.get 'modelId'})
 		if model == undefined
 			return null
 		else
-			Session.set 'voxelColor', model.colors[e.target.id].color
+			Session.set 'modelingColor', model.colors[e.target.id].color

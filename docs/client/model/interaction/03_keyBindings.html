@@ -1,23 +1,47 @@
 <!DOCTYPE html><html lang="en"><head><title>client/model/interaction/03_keyBindings</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../"><meta name="groc-document-path" content="client/model/interaction/03_keyBindings"><meta name="groc-project-path" content="app/client/model/interaction/03_keyBindings.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../assets/style.css"><script type="text/javascript" src="../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/model/interaction/03_keyBindings.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="key-bindings">Key bindings</h1></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Find a reference at <a href="https://github.com/matteodem/meteor-keybindings">meteor-keybindings</a></p></div></div><div class="code"><div class="wrapper"><span class="nx">@Modeling</span> <span class="o">?=</span> <span class="p">{}</span>
 <span class="nx">Modeling</span><span class="p">.</span><span class="nx">interaction</span> <span class="o">?=</span> <span class="p">{}</span>
-<span class="nv">Modeling.interaction.keyBindings = keyBindings = </span><span class="p">{}</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="setup">Setup</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="nv">keyBindings.setup = </span><span class="o">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>the context is the DOM element
+<span class="nv">Modeling.interaction.keyBindings = keyBindings = </span><span class="p">{}</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="setup">Setup</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="nv">keyBindings.setup = </span><span class="nf">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>the context is the DOM element
 on which the keybinding is called
-(body by default)</p></div></div><div class="code"><div class="wrapper">    <span class="nv">keybindingsContext = </span><span class="kc">undefined</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>the event can be specified by a
-string, such as 'keydown' (= default)</p></div></div><div class="code"><div class="wrapper">    <span class="nv">keybindingsEvent = </span><span class="kc">undefined</span>
-    </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>a list of undo shortcuts</p></div></div><div class="code"><div class="wrapper">    <span class="nv">undoShortcuts = </span><span class="p">[</span>
-      <span class="s1">&#39;cmd+z&#39;</span>
-      <span class="s1">&#39;ctrl+z&#39;</span>
-      <span class="s1">&#39;shift+z&#39;</span>
-    <span class="p">]</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>a list of redo shortcuts</p></div></div><div class="code"><div class="wrapper">    <span class="nv">redoShortcuts = </span><span class="p">[</span>
-      <span class="s1">&#39;ctrl+y&#39;</span>
-      <span class="s1">&#39;shift+y&#39;</span>
-    <span class="p">]</span>
-    </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>for each undo shortcut being activated</p></div></div><div class="code"><div class="wrapper">    <span class="k">for</span> <span class="nx">undoShortcut</span> <span class="k">in</span> <span class="nx">undoShortcuts</span>
-      <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Keybindings</span><span class="p">.</span><span class="nx">addOne</span> <span class="nx">undoShortcut</span><span class="p">,</span>
-        <span class="o">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>undo the last step</p></div></div><div class="code"><div class="wrapper">          <span class="nx">Modeling</span><span class="p">.</span><span class="nx">interaction</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">undo</span><span class="p">()</span>
-        <span class="nx">keybindingsContext</span>
-        <span class="nx">keybindingsEvent</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>for each redo shortcut being activated</p></div></div><div class="code"><div class="wrapper">    <span class="k">for</span> <span class="nx">redoShortcut</span> <span class="k">in</span> <span class="nx">redoShortcuts</span>
-      <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Keybindings</span><span class="p">.</span><span class="nx">addOne</span> <span class="nx">redoShortcut</span><span class="p">,</span>
-        <span class="o">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>redo the last step</p></div></div><div class="code"><div class="wrapper">          <span class="nx">Modeling</span><span class="p">.</span><span class="nx">interaction</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">redo</span><span class="p">()</span>
-        <span class="nx">keybindingsContext</span>
-        <span class="nx">keybindingsEvent</span></div></div></div></div></body></html>
+(body by default)</p></div></div><div class="code"><div class="wrapper">  <span class="nv">keybindingsContext = </span><span class="kc">undefined</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>the event can be specified by a
+string, such as 'keydown' (= default)</p></div></div><div class="code"><div class="wrapper">  <span class="nv">keybindingsEvent = </span><span class="kc">undefined</span>
+  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>a list of undo shortcuts</p></div></div><div class="code"><div class="wrapper">  <span class="nv">undoShortcuts = </span><span class="p">[</span>
+    <span class="s">&#39;cmd+z&#39;</span>
+    <span class="s">&#39;ctrl+z&#39;</span>
+    <span class="s">&#39;shift+z&#39;</span>
+  <span class="p">]</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>a list of redo shortcuts</p></div></div><div class="code"><div class="wrapper">  <span class="nv">redoShortcuts = </span><span class="p">[</span>
+    <span class="s">&#39;ctrl+y&#39;</span>
+    <span class="s">&#39;shift+y&#39;</span>
+  <span class="p">]</span>
+  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>for each undo shortcut being activated
+undo the last step</p></div></div><div class="code"><div class="wrapper">  <span class="k">for</span> <span class="nx">undoShortcut</span> <span class="k">in</span> <span class="nx">undoShortcuts</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Keybindings</span><span class="p">.</span><span class="nx">addOne</span> <span class="nx">undoShortcut</span><span class="p">,</span>
+      <span class="nf">-&gt;</span>
+        <span class="nx">Modeling</span><span class="p">.</span><span class="nx">interaction</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">undo</span><span class="p">()</span>
+      <span class="nx">keybindingsContext</span>
+      <span class="nx">keybindingsEvent</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>for each redo shortcut being activated
+redo the last step</p></div></div><div class="code"><div class="wrapper">  <span class="k">for</span> <span class="nx">redoShortcut</span> <span class="k">in</span> <span class="nx">redoShortcuts</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Keybindings</span><span class="p">.</span><span class="nx">addOne</span> <span class="nx">redoShortcut</span><span class="p">,</span>
+      <span class="nf">-&gt;</span>
+        <span class="nx">Modeling</span><span class="p">.</span><span class="nx">interaction</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">redo</span><span class="p">()</span>
+      <span class="nx">keybindingsContext</span>
+      <span class="nx">keybindingsEvent</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>a list of color shortcuts</p></div></div><div class="code"><div class="wrapper">  <span class="nv">colorShortcuts = </span><span class="p">[</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#0&#39;</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#1&#39;</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#2&#39;</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;4&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#3&#39;</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;5&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#4&#39;</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;6&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#5&#39;</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;7&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#6&#39;</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;8&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#7&#39;</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;9&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#8&#39;</span> <span class="p">}</span>
+    <span class="p">{</span> <span class="nv">key: </span><span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="nv">id: </span><span class="s">&#39;#9&#39;</span> <span class="p">}</span>
+  <span class="p">]</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>for each color shortcut begin activated
+choose a color</p></div></div><div class="code"><div class="wrapper">  <span class="nv">installColorShortcut = </span><span class="nf">(key, id) -&gt;</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Keybindings</span><span class="p">.</span><span class="nx">addOne</span> <span class="nx">key</span><span class="p">,</span>
+      <span class="nf">-&gt;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">id</span><span class="p">).</span><span class="nx">click</span><span class="p">()</span>
+      <span class="nx">keybindingsContext</span>
+      <span class="nx">keybindingsEvent</span>
+
+  <span class="k">for</span> <span class="nx">colorShortcut</span> <span class="k">in</span> <span class="nx">colorShortcuts</span>
+    <span class="nx">installColorShortcut</span> <span class="nx">colorShortcut</span><span class="p">.</span><span class="nx">key</span><span class="p">,</span> <span class="nx">colorShortcut</span><span class="p">.</span><span class="nx">id</span></div></div></div></div></body></html>

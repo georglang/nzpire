@@ -4,11 +4,20 @@
 Modeling.scene ?= {}
 scene = Modeling.scene
 
-cubeMaterial = new THREE.MeshLambertMaterial color: 0x7FAD00
+materials =
+  default: new THREE.MeshLambertMaterial(color: 0x7FAD00)
 
 # ## Creating a mesh for a given database object
 meshForObject = (object) ->
-  mesh = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), cubeMaterial)
+  colorKey = object.color ? 'default'
+  material = undefined
+  materialInMap = materials[colorKey]
+  if materialInMap
+    material = materialInMap
+  else
+    colorAsInteger = parseInt colorKey, 16
+    materials[colorKey] = material = new THREE.MeshLambertMaterial color: colorAsInteger
+  mesh = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), material)
   mesh.position = object.position
   mesh.name = object._id
   return mesh

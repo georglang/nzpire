@@ -1,10 +1,10 @@
-<template name="voxelColors">
+<template name="modelingColors">
 	<div id="colors">
 		{{#each getModelColors}}
 			{{#if isCurrentColor}}
-				<div id="{{this.index}}" style="background-color:{{this.color}}" class="voxelColor activeColor"></div>
+				<div id="{{this.index}}" style="background-color:#{{this.color}}" class="modelingColor activeColor"></div>
 			{{else}}
-			<div id="{{this.index}}" style="background-color:{{this.color}}" class="voxelColor"></div>
+			<div id="{{this.index}}" style="background-color:#{{this.color}}" class="modelingColor"></div>
 			{{/if}}
 		{{/each}}
 	</div>
