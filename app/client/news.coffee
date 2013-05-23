@@ -38,6 +38,46 @@ Template.news.getNews = ->
 	result.sort(sortArrayByTimestamp)
 	return result
 
+
+Template.news.getRandomModels = ->
+	allModels = Models.find({}).fetch()
+	models = _.shuffle(allModels).slice(0,10)
+	return models
+
+
+sortArrayByFavouritedCount = (a,b)->
+	return -1 if a.favCounts > b.favCounts
+	return 1 if a.favCounts < b.favCounts
+	return 0
+
+checkForFavourites = (_id)->
+	Profiles.find({
+		_id: currentProfile()._id
+		favourites: _id
+		}).fetch()
+
+Template.news.getMostPopularModels = ->
+	allModels = Models.find({}).fetch()
+	allProfiles = Profiles.find({}).fetch()
+	models = []
+	allModels.forEach (m)->
+		counter = 0
+		permission = checkModelPermission m._id,true
+		if permission > Roles.none
+			allProfiles.forEach (p)->
+			modelFavourite = checkForFavourites m._id
+			if modelFavourite.length > 0
+				counter++
+			m.favCounts = counter
+			models.push m
+	models.sort(sortArrayByFavouritedCount)
+	return models
+
+Template.news.events
+	'click div.modelLink': (e)->
+		Workspace.model e.target.title
+
+
 # ## Rendered and Destroyed
 # Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy
 Template.news.rendered = ()->

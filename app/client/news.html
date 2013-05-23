@@ -1,8 +1,29 @@
 <template name="news">
-	<div id="newsTemplate"> NEWS TEMPLATE </div>
+	<div id="newsTemplate"> NEWS TEMPLATE
 	{{#if currentUser.services}}
-		{{#each getNews}}
-		<div> {{name}}_{{updatedAt}} </div>
+	{{#each getNews}}
+	<div> {{name}}_{{updatedAt}} </div>
+	{{/each}}
+	<ul>
+		<li><h4>Random Models:</h4></li>
+		{{#each getRandomModels}}
+		<li>
+			<div title="{{this._id}}" class="modelLink test">
+				{{this.name}}
+			</div>
+		</li>
 		{{/each}}
+	</ul>
+	<ul>
+		<li><h4>Most Popular Models:</h4></li>
+		{{#each getMostPopularModels}}
+		<li>
+			<div title="{{this._id}}" class="modelLink">
+				{{this.name}} {{this.favCounts}}
+			</div>
+		</li>
+		{{/each}}
+	</ul>	
 	{{/if}}
+	</div>
 </template>

@@ -1,9 +1,11 @@
 <template name="model">
-  {{handleModelPermission}}
-  {{>modelSidebar}}
-  {{>voxelColors}}
-  {{>voxelSizes}}
-  {{#constant}}
-    <div id="modelContainer" tabindex="1" autofocus="autofocus"></div>
-  {{/constant}}
+  <div id="modelTemplate">
+	  {{handleModelPermission}}
+	  {{>modelSidebar}}
+	  {{>voxelColors}}
+	  {{>voxelSizes}}
+	  {{#constant}}
+	    <div id="modelContainer" tabindex="1" autofocus="autofocus"></div>
+	  {{/constant}}
+  </div>
 </template>

@@ -65,3 +65,13 @@ Template.profile.events
 
 	'click div.unfollow': (e) ->
 		Profiles.update {_id: currentProfile()._id},{$pull:{following: e.target.id}}
+
+
+
+# ## Rendered and Destroyed
+# Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy
+Template.profile.rendered = ()->
+	$('#profileTemplate').addClass('activeTemplate')
+
+Template.profile.destroyed = ()->
+	$('#profileTemplate').removeClass('activeTemplate')
