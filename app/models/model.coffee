@@ -113,8 +113,12 @@ class ModelActionAddObject extends ModelAction
 		if options.specifics.object.modelId isnt options.modelId
 			throw new Meteor.Error 490, 'Incorrect model id passed to specifics object (options.specifics.object.modelId) of model action addObject. Must be the same as options.modelId!'
 	do: ->
-		@specifics.objectId = ModelObjects.insert @specifics.object
-		@update $set: 'specifics.objectId': @specifics.objectId
+		if @specifics.objectId
+			@specifics.object._id = @specifics.objectId
+			ModelObjects.insert @specifics.object
+		else
+			@specifics.objectId = ModelObjects.insert @specifics.object
+			@update $set: 'specifics.objectId': @specifics.objectId
 
 	undo: ->
 		ModelObjects.remove _id: @specifics.objectId
