@@ -353,7 +353,7 @@ Meteor.methods
 	{index: 3, color: "00E1FF"}
 	{index: 4, color: "00FF2F"}
 	{index: 5, color: "EAFF00"}
-	{index: 6, color: "FF9D00"}
+	{index: 6, color: "FFCC99"}
 	{index: 7, color: "FF3C00"}
 	{index: 8, color: "ffffff"}
 	{index: 9, color: "000000"}
