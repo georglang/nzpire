@@ -41,8 +41,15 @@ Template.news.getNews = ->
 
 Template.news.getRandomModels = ->
 	allModels = Models.find({}).fetch()
-	models = _.shuffle(allModels).slice(0,10)
-	return models
+	models = []
+	allModels.forEach (m)->
+		permission = checkModelPermission m._id,true
+		if permission > Roles.none	
+			models.push m
+
+
+	modelsShuffled = _.shuffle(models).slice(0,10)
+	return modelsShuffled
 
 
 sortArrayByFavouritedCount = (a,b)->
