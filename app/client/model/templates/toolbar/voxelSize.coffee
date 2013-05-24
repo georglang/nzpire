@@ -18,4 +18,4 @@ Template.voxelSizes.getBackground = ->
 
 Template.voxelSizes.events
 	'click .voxelSize': (e)->
-		Session.set 'voxelSize', DefaultVoxelSizes[e.target.id].size
+		Session.set 'voxelSize', DefaultVoxelSizes[$(e.target).data('index')].size
