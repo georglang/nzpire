@@ -30,7 +30,7 @@ mouseBindings.setup = ->
         if pick
           # add object on left mouse button
           if e.which is 1
-            blockSize = 50
+            blockSize = Session.get 'voxelSize'
             # ### Snap to grid
             # Put the normal of the face clicked on into world space
             matrixNormal = new THREE.Matrix3().getNormalMatrix pick.object.matrixWorld

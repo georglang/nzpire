@@ -124,7 +124,14 @@ class ModelActionAddObject extends ModelAction
 		# * size
 		if options.specifics.object.type == 'voxel'
 			if not options.specifics.object.size
-				throw new Meteor.Error 490, 'No size passed to specifics object for type voxel (options.specifics.object.size) of model action addModel!'
+				throw new Meteor.Error 490, 'No size passed to specifics object for type voxel (options.specifics.object.size) of model action addObject!'
+			validSize = false
+			for voxelSize in DefaultVoxelSizes
+				if voxelSize.size == options.specifics.object.size
+					validSize = true
+					break
+			if not validSize
+				throw new Meteor.Error 490, 'Invalid voxel size ' + options.specifics.object.size + ' passed to specifics object for type voxel (options.specifics.object.size) of model action addObject!'
 		options.specifics.object.modelId = options.modelId
 	do: ->
 		if @specifics.objectId
@@ -356,22 +363,22 @@ Meteor.methods
 
 
 @DefaultModelColors = [
-	{index: 0, color: "FF0000"}
-	{index: 1, color: "FF00D9"}
-	{index: 2, color: "2600FF"}
-	{index: 3, color: "00E1FF"}
-	{index: 4, color: "00FF2F"}
-	{index: 5, color: "EAFF00"}
-	{index: 6, color: "FF9D00"}
-	{index: 7, color: "FF3C00"}
-	{index: 8, color: "ffffff"}
-	{index: 9, color: "000000"}
+	{index: 0, color: "FF0000", shortcut: "1"}
+	{index: 1, color: "FF00D9", shortcut: "2"}
+	{index: 2, color: "2600FF", shortcut: "3"}
+	{index: 3, color: "00E1FF", shortcut: "4"}
+	{index: 4, color: "00FF2F", shortcut: "5"}
+	{index: 5, color: "EAFF00", shortcut: "6"}
+	{index: 6, color: "FF9D00", shortcut: "7"}
+	{index: 7, color: "FF3C00", shortcut: "8"}
+	{index: 8, color: "ffffff", shortcut: "9"}
+	{index: 9, color: "000000", shortcut: "0"}
 	]
 
 @DefaultVoxelSizes = [
-	{index: 0, size: 1}
-	{index: 1, size: 2}
-	{index: 2, size: 3}
-	{index: 3, size: 4}
-	{index: 4, size: 5}
+	{index: 0, name: 1, size: 1}
+	{index: 1, name: 2, size: 2}
+	{index: 2, name: 3, size: 4}
+	{index: 3, name: 4, size: 8}
+	{index: 4, name: 5, size: 16}
 	]

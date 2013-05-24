@@ -52,20 +52,6 @@ keyBindings.setup = ->
       keybindingsContext
       keybindingsEvent
 
-  # a list of color shortcuts
-  colorShortcuts = [
-    { key: '1', id: '#0' }
-    { key: '2', id: '#1' }
-    { key: '3', id: '#2' }
-    { key: '4', id: '#3' }
-    { key: '5', id: '#4' }
-    { key: '6', id: '#5' }
-    { key: '7', id: '#6' }
-    { key: '8', id: '#7' }
-    { key: '9', id: '#8' }
-    { key: '0', id: '#9' }
-  ]
-
   # for each color shortcut begin activated
   # choose a color
   installColorShortcut = (key, id) ->
@@ -75,5 +61,35 @@ keyBindings.setup = ->
       keybindingsContext
       keybindingsEvent
 
-  for colorShortcut in colorShortcuts
-    installColorShortcut colorShortcut.key, colorShortcut.id
+  for modelingColor in DefaultModelColors
+    installColorShortcut modelingColor.shortcut, "#modelingColor_" + modelingColor.index
+
+  voxelSizeIncreaseShortcut = 'l'
+
+  Meteor.Keybindings.addOne voxelSizeIncreaseShortcut,
+    ->
+      activeSizeBox = $('.activeSize')
+      siblings = activeSizeBox.siblings()
+      nextActiveSizeBox = null
+      if activeSizeBox.index() == siblings.length
+        nextActiveSizeBox = siblings[0]
+      else
+        nextActiveSizeBox = activeSizeBox.next()
+      nextActiveSizeBox.click()
+    keybindingsContext,
+    keybindingsEvent
+
+  voxelSizeDecreaseShortcut = 'k'
+
+  Meteor.Keybindings.addOne voxelSizeDecreaseShortcut,
+    ->
+      activeSizeBox = $('.activeSize')
+      siblings = activeSizeBox.siblings()
+      prevActiveSizeBox = null
+      if activeSizeBox.index() == 0
+        prevActiveSizeBox = siblings[siblings.length - 1]
+      else
+        prevActiveSizeBox = activeSizeBox.prev()
+      prevActiveSizeBox.click()
+    keybindingsContext,
+    keybindingsEvent

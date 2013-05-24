@@ -2,9 +2,9 @@
 	<div id="sizes">
 		{{#each getVoxelSizes}}
 			{{#if isCurrentVoxelSize}}
-				<div id="voxelSize_{{this.index}}" data-index="{{this.index}}" style="width:{{getSize}}px;height:{{getSize}}px;bottom:-{{getBottom}}px;background-color:#{{getBackground}}" class="voxelSize activeSize">{{this.size}}</div>
+				<div id="voxelSize_{{this.index}}" data-index="{{this.index}}" style="width:{{getSize}}px;height:{{getSize}}px;bottom:-{{getBottom}}px;background-color:#{{getBackground}}" class="voxelSize activeSize">{{this.name}}</div>
 			{{else}}
-			<div id="voxelSize_{{this.index}}" data-index="{{this.index}}" style="width:{{getSize}}px;height:{{getSize}}px;bottom:-{{getBottom}}px;background-color:#{{getBackground}}" class="voxelSize">{{this.size}}</div>
+			<div id="voxelSize_{{this.index}}" data-index="{{this.index}}" style="width:{{getSize}}px;height:{{getSize}}px;bottom:-{{getBottom}}px;background-color:#{{getBackground}}" class="voxelSize">{{this.name}}</div>
 			{{/if}}
 		{{/each}}
 	</div></template>
