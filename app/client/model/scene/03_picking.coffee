@@ -10,12 +10,11 @@ raycaster = new THREE.Raycaster()
 # ## Pick
 picking.pick = pick = ->
   camera = Modeling.scene.camera
-  scene = Modeling.scene.itself
   relativeMousePosition = Modeling.interaction.mouseBindings.getPosition.relative()
   vector = new THREE.Vector3 relativeMousePosition.x, relativeMousePosition.y, 1
   projector.unprojectVector vector, camera
   raycaster.set camera.position, vector.sub(camera.position).normalize()
-  intersects = raycaster.intersectObject scene, true
+  intersects = raycaster.intersectObject Modeling.scene.pickable, true
   intersects[0]
 
 # ## Pick object

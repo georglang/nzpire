@@ -4,8 +4,9 @@
 Modeling.scene ?= {}
 scene = Modeling.scene
 
-materials =
-  default: new THREE.MeshLambertMaterial(color: 0x7FAD00)
+scene.materials ?= 
+  default: new THREE.MeshLambertMaterial(color: 0xFFFFFF)
+materials = scene.materials
 
 # ## Creating a mesh for a given database object
 meshForObject = (object) ->
