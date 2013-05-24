@@ -115,10 +115,6 @@ class ModelActionAddObject extends ModelAction
 			throw new Meteor.Error 490, 'No y value passed to specifics object\'s position (options.specifics.object.position.y) of model action addObject!'
 		if not options.specifics.object.position.z
 			throw new Meteor.Error 490, 'No z value passed to specifics object\'s position (options.specifics.object.position.z) of model action addObject!'
-		if not options.specifics.object.modelId
-			throw new Meteor.Error 490, 'No model id passed to specifics object (options.specifics.object.modelId) of model action addObject!'
-		if options.specifics.object.modelId isnt options.modelId
-			throw new Meteor.Error 490, 'Incorrect model id passed to specifics object (options.specifics.object.modelId) of model action addObject. Must be the same as options.modelId!'
 		if not options.specifics.object.color
 			throw new Meteor.Error 490, 'No color passed to specifics object (options.specifics.object.color) of model action addObject!'
 		colorAsInteger = parseInt options.specifics.object.color, 16
@@ -129,6 +125,7 @@ class ModelActionAddObject extends ModelAction
 		if options.specifics.object.type == 'voxel'
 			if not options.specifics.object.size
 				throw new Meteor.Error 490, 'No size passed to specifics object for type voxel (options.specifics.object.size) of model action addModel!'
+		options.specifics.object.modelId = options.modelId
 	do: ->
 		if @specifics.objectId
 			@specifics.object._id = @specifics.objectId
@@ -136,11 +133,25 @@ class ModelActionAddObject extends ModelAction
 		else
 			@specifics.objectId = ModelObjects.insert @specifics.object
 			@update $set: 'specifics.objectId': @specifics.objectId
-
 	undo: ->
 		ModelObjects.remove _id: @specifics.objectId
 
 ModelActionConstructors.addObject = ModelActionAddObject
+
+class ModelActionRemoveObject extends ModelAction
+	validateSpecifics: (options) ->
+		if not options.specifics.objectId
+			throw new Meteor.Error 490, 'No object id passed to specifics (options.specifics.objectId) of model action removeObject!'
+		if not options._id
+			options.specifics.object = ModelObjects.findOne _id: options.specifics.objectId
+			if not options.specifics.object
+				throw new Meteor.Error 490, 'Invalid object id ' + options.specifics.objectId + ' passed to specifics (options.specifics.objectId) of model action removeObject!'
+	do: ->
+		ModelObjects.remove _id: @specifics.objectId
+	undo: ->
+		ModelObjects.insert @specifics.object
+
+ModelActionConstructors.removeObject = ModelActionRemoveObject
 
 
 ###################################################################################################

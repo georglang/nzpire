@@ -21,12 +21,17 @@ keyBindings.setup = ->
     'cmd+z'
     'ctrl+z'
     'shift+z'
+    'z'
   ]
 
   # a list of redo shortcuts
   redoShortcuts = [
     'ctrl+y'
     'shift+y'
+    'y'
+    'ctrl+r'
+    'shift+r'
+    'r'
   ]
   
   # for each undo shortcut being activated
