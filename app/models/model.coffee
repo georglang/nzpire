@@ -201,6 +201,7 @@ Meteor.methods
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
 			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:DefaultModelColors})
+			Profiles.update {_id: currentProfile()._id},{$push: {favourites: modelId}}
 			return modelId
 
 	cloneModel: (options) ->
@@ -212,6 +213,7 @@ Meteor.methods
 			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:predecessorModel.colors})
 			predecessorModelObjects = ModelObjects.find({modelId:options.predecessor}).fetch()
 			ModelObjects.insert({position: i.position, modelId: modelId}) for i in predecessorModelObjects
+			Profiles.update {_id: currentProfile()._id},{$push: {favourites: modelId}}
 			return modelId		
 
 	updateModelName: (options) ->
