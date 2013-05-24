@@ -5,8 +5,9 @@
 # params: string (i.e. "/max_mustermann/i")    
 # return: cursor
 searchForProfiles = (searchQuery)->
-	Profiles.find
+	Profiles.find({
 		name: eval(searchQuery)
+		}).fetch()
 
 	###
 	Profiles.find( $or:[
@@ -87,7 +88,7 @@ Template.search.getResults = ->
 	  i.order = order("modelLink",i._id) for i in result
 	else
 		searchQuery = "/" + Session.get("searchQuery") + "/i"
-		result = searchForProfiles(searchQuery).fetch()
+		result = searchForProfiles(searchQuery)
 		result2 = searchForModels(searchQuery)
 		i.searchingFor = "profileLink" for i in result
 		i.order = order("profileLink", i._id) for i in result
