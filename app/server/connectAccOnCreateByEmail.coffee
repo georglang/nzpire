@@ -34,7 +34,7 @@ Accounts.onCreateUser( (options,user)->
 		username = preserveUsernameUniqueness(options.username)
 		service = twitterEmail
 		emails = []
-		emails.push(options.email)
+		emails.push(user.emails[0].address)
 		pictureUrl = "dummyPic.jpg"
 		checkedEmail = checkForEmail(emails)
 
