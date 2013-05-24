@@ -69,6 +69,7 @@ scene.setup = ->
 
     # ## Window resizing
     $(window).resize ->
+      container.height($(window).height() - container.offset().top)
       width = container.width()
       height = container.height()
       aspect = width / height
