@@ -9,6 +9,13 @@
 			<input type="filepicker" id='uploadWidget'/>
 			</p>
 			<div class="{{show}}" id="{{id}}">{{show}}<div>
+
+			<div id="followingPersons">
+				<h3> Persons I follow </h3>
+			{{#each getFollowingProfiles}}
+				<div> {{name}} </div>
+			{{/each}}
+			</div>
 		{{/if}}
 	</div>
 </template>

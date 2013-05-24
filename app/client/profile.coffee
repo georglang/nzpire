@@ -38,6 +38,12 @@ getFollowingStatus = (_id)->
 		else
 			return "follow"
 
+Template.profile.getFollowingProfiles = ->
+	currentUser = Profiles.findOne(_id : Session.get("profileId"))
+	profiles = Profiles.find({_id: {$in: currentUser.following}})
+	return profiles
+
+
 
 Template.profile.events
 
@@ -65,7 +71,6 @@ Template.profile.events
 
 	'click div.unfollow': (e) ->
 		Profiles.update {_id: currentProfile()._id},{$pull:{following: e.target.id}}
-
 
 
 # ## Rendered and Destroyed

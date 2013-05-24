@@ -16,4 +16,4 @@ Template.modelingColors.events
 		if model == undefined
 			return null
 		else
-			Session.set 'modelingColor', model.colors[e.target.id].color
+			Session.set 'modelingColor', model.colors[$(e.target).data('index')].color

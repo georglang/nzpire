@@ -115,10 +115,6 @@ class ModelActionAddObject extends ModelAction
 			throw new Meteor.Error 490, 'No y value passed to specifics object\'s position (options.specifics.object.position.y) of model action addObject!'
 		if not options.specifics.object.position.z
 			throw new Meteor.Error 490, 'No z value passed to specifics object\'s position (options.specifics.object.position.z) of model action addObject!'
-		if not options.specifics.object.modelId
-			throw new Meteor.Error 490, 'No model id passed to specifics object (options.specifics.object.modelId) of model action addObject!'
-		if options.specifics.object.modelId isnt options.modelId
-			throw new Meteor.Error 490, 'Incorrect model id passed to specifics object (options.specifics.object.modelId) of model action addObject. Must be the same as options.modelId!'
 		if not options.specifics.object.color
 			throw new Meteor.Error 490, 'No color passed to specifics object (options.specifics.object.color) of model action addObject!'
 		colorAsInteger = parseInt options.specifics.object.color, 16
@@ -128,7 +124,15 @@ class ModelActionAddObject extends ModelAction
 		# * size
 		if options.specifics.object.type == 'voxel'
 			if not options.specifics.object.size
-				throw new Meteor.Error 490, 'No size passed to specifics object for type voxel (options.specifics.object.size) of model action addModel!'
+				throw new Meteor.Error 490, 'No size passed to specifics object for type voxel (options.specifics.object.size) of model action addObject!'
+			validSize = false
+			for voxelSize in DefaultVoxelSizes
+				if voxelSize.size == options.specifics.object.size
+					validSize = true
+					break
+			if not validSize
+				throw new Meteor.Error 490, 'Invalid voxel size ' + options.specifics.object.size + ' passed to specifics object for type voxel (options.specifics.object.size) of model action addObject!'
+		options.specifics.object.modelId = options.modelId
 	do: ->
 		if @specifics.objectId
 			@specifics.object._id = @specifics.objectId
@@ -136,11 +140,25 @@ class ModelActionAddObject extends ModelAction
 		else
 			@specifics.objectId = ModelObjects.insert @specifics.object
 			@update $set: 'specifics.objectId': @specifics.objectId
-
 	undo: ->
 		ModelObjects.remove _id: @specifics.objectId
 
 ModelActionConstructors.addObject = ModelActionAddObject
+
+class ModelActionRemoveObject extends ModelAction
+	validateSpecifics: (options) ->
+		if not options.specifics.objectId
+			throw new Meteor.Error 490, 'No object id passed to specifics (options.specifics.objectId) of model action removeObject!'
+		if not options._id
+			options.specifics.object = ModelObjects.findOne _id: options.specifics.objectId
+			if not options.specifics.object
+				throw new Meteor.Error 490, 'Invalid object id ' + options.specifics.objectId + ' passed to specifics (options.specifics.objectId) of model action removeObject!'
+	do: ->
+		ModelObjects.remove _id: @specifics.objectId
+	undo: ->
+		ModelObjects.insert @specifics.object
+
+ModelActionConstructors.removeObject = ModelActionRemoveObject
 
 
 ###################################################################################################
@@ -347,22 +365,22 @@ Meteor.methods
 
 
 @DefaultModelColors = [
-	{index: 0, color: "FF0000"}
-	{index: 1, color: "FF00D9"}
-	{index: 2, color: "2600FF"}
-	{index: 3, color: "00E1FF"}
-	{index: 4, color: "00FF2F"}
-	{index: 5, color: "EAFF00"}
-	{index: 6, color: "FFCC99"}
-	{index: 7, color: "FF3C00"}
-	{index: 8, color: "ffffff"}
-	{index: 9, color: "000000"}
-	]
+	{index: 0, color: "FF0000", shortcut: "1"}
+	{index: 1, color: "FF00D9", shortcut: "2"}
+	{index: 2, color: "2600FF", shortcut: "3"}
+	{index: 3, color: "00E1FF", shortcut: "4"}
+	{index: 4, color: "00FF2F", shortcut: "5"}
+	{index: 5, color: "EAFF00", shortcut: "6"}
+	{index: 6, color: "FFCC99", shortcut: "7"}
+	{index: 7, color: "FF3C00", shortcut: "8"}
+	{index: 8, color: "ffffff", shortcut: "9"}
+	{index: 9, color: "000000", shortcut: "0"}
+]
 
 @DefaultVoxelSizes = [
-	{index: 0, size: 1}
-	{index: 1, size: 2}
-	{index: 2, size: 3}
-	{index: 3, size: 4}
-	{index: 4, size: 5}
-	]
+	{index: 0, name: 1, size: 1}
+	{index: 1, name: 2, size: 2}
+	{index: 2, name: 3, size: 4}
+	{index: 3, name: 4, size: 8}
+	{index: 4, name: 5, size: 16}
+]

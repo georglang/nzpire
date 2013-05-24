@@ -2,9 +2,9 @@
 	<div id="colors">
 		{{#each getModelColors}}
 			{{#if isCurrentColor}}
-				<div id="{{this.index}}" style="background-color:#{{this.color}}" class="modelingColor activeColor"></div>
+				<div id="modelingColor_{{this.index}}" data-index="{{this.index}}" style="background-color:#{{this.color}}" class="modelingColor activeColor"></div>
 			{{else}}
-			<div id="{{this.index}}" style="background-color:#{{this.color}}" class="modelingColor"></div>
+			<div id="modelingColor_{{this.index}}" data-index="{{this.index}}" style="background-color:#{{this.color}}" class="modelingColor"></div>
 			{{/if}}
 		{{/each}}
 	</div>

@@ -8,14 +8,14 @@ Template.voxelSizes.isCurrentVoxelSize = ()->
 		return false
 
 Template.voxelSizes.getSize = ->
-	return this.size*10+10
+	return this.name*10+10
 
 Template.voxelSizes.getBottom = ->
-	return DefaultVoxelSizes[DefaultVoxelSizes.length-1].size * 10 - this.size * 10
+	return DefaultVoxelSizes[DefaultVoxelSizes.length-1].name * 10 - this.name * 10
 
 Template.voxelSizes.getBackground = ->
 	return Session.get 'modelingColor'
 
 Template.voxelSizes.events
 	'click .voxelSize': (e)->
-		Session.set 'voxelSize', DefaultVoxelSizes[e.target.id].size
+		Session.set 'voxelSize', DefaultVoxelSizes[$(e.target).data('index')].size
