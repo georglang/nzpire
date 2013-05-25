@@ -219,6 +219,7 @@ Meteor.methods
 			throw new Meteor.Error(499, "Modelname already taken");
 		else
 			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:DefaultModelColors})
+			Profiles.update {_id: currentProfile()._id},{$push: {favourites: modelId}}
 			return modelId
 
 	cloneModel: (options) ->
@@ -230,6 +231,7 @@ Meteor.methods
 			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:predecessorModel.colors})
 			predecessorModelObjects = ModelObjects.find({modelId:options.predecessor}).fetch()
 			ModelObjects.insert({position: i.position, modelId: modelId}) for i in predecessorModelObjects
+			Profiles.update {_id: currentProfile()._id},{$push: {favourites: modelId}}
 			return modelId		
 
 	updateModelName: (options) ->
@@ -373,7 +375,7 @@ Meteor.methods
 	{index: 7, color: "FF3C00", shortcut: "8"}
 	{index: 8, color: "ffffff", shortcut: "9"}
 	{index: 9, color: "000000", shortcut: "0"}
-	]
+]
 
 @DefaultVoxelSizes = [
 	{index: 0, name: 1, size: 1}
@@ -381,4 +383,4 @@ Meteor.methods
 	{index: 2, name: 3, size: 4}
 	{index: 3, name: 4, size: 8}
 	{index: 4, name: 5, size: 16}
-	]
+]

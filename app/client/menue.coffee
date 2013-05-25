@@ -33,7 +33,7 @@ Template.menue.events
 			if error
 				$('#createNewModel').after("<div id='errorNewModel'>"+error.reason+"</div>")
 			else
-				$('#newModel')[0].remove()
+				$('#newModel').replaceWith("<a href='#' id='model'>Create new Model</a>")
 				Workspace.model(modelId)
 
 	# Triggers a click Event on #createNewModel if the input key == Enter button 
