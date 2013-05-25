@@ -371,7 +371,7 @@ Meteor.methods
 	{index: 3, color: "00E1FF", shortcut: "4"}
 	{index: 4, color: "00FF2F", shortcut: "5"}
 	{index: 5, color: "EAFF00", shortcut: "6"}
-	{index: 6, color: "FF9D00", shortcut: "7"}
+	{index: 6, color: "FFCC99", shortcut: "7"}
 	{index: 7, color: "FF3C00", shortcut: "8"}
 	{index: 8, color: "ffffff", shortcut: "9"}
 	{index: 9, color: "000000", shortcut: "0"}
