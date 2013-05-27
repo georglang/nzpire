@@ -1,4 +1,12 @@
-/* CSS declarations go here */
+html{
+    height: 100%;
+}
+
+body{
+    background-color:#e3e0e0;
+    height:100%; 
+}
+
 .profileLink{
 	background-color:lightgreen;
 }
@@ -28,6 +36,10 @@
 	margin-bottom: 0px;
 }
 
+.navbar navbar-inverse{
+    background-color: #333333;
+}
+
 .footer{
 	margin-bottom:0px;
 	color:white;
@@ -49,28 +61,6 @@
 #createNewModel{
 	margin-bottom:5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .activeTemplate {
     animation: fadein 1s;

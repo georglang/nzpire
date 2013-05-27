@@ -1,29 +1,32 @@
 <template name="profile">
 	<div id="profileTemplate">
-		<div> Profile TEMPLATE</div>
 		{{#if currentUser.services}}
-			<img src="{{pictureUrl}}"/>
-			<div>Name: <span id="name" class="editable">{{userName}}</span><div>
-			<div>Email: <span id="email">{{email}}</span> </div>
-			<div>Website: <span id="www" class="editable"> {{www}}</span> </div>
-			<input type="filepicker" id='uploadWidget'/>
-			</p>
-			<div class="{{show}}" id="{{id}}">{{show}}<div>
+			<div id="profileContainer">
+				<img id="profileImg" src="{{pictureUrl}}" alt="profile image"/>
+				<div id="name"><span class="editable">{{userName}}</span></div>
+				<div><span id="email">{{email}}</span></div>
+				<!--<div><span id="www" class="editable"> {{www}}</span> </div> -->
+				<input type="filepicker" id='uploadWidget'/>
+				<div class="{{show}}" id="{{id}}">{{show}}</div>
+				<div id="following">Following</div>
+				<div id="followers"> <img src="/img/followers.png"> Follower
+				</div>
+
+			</div>
 
 			<div id="currentProfileFollowPersons">
-				<h3> Persons I follow </h3>
-			{{#each currentProfileFollowProfiles}}
-				<div> {{name}} </div>
-			{{/each}}
+				<h3> Following </h3>
+				{{#each currentProfileFollowProfiles}}
+					<div> {{name}} <img id="followImg" src="{{picture}}"></div>
+				{{/each}}
 			</div>
 
 			<div id="personsThatFollowCurrentProfile">
-				<h3> Persons follow me</h3>
-			{{#each getProfilesThatFollowCurrentProfile}}
-				<div> {{name}} </div>
-			{{/each}}
+				<h3 id="follower"> Follower <img src="/img/followers.png"> </h3>
+				{{#each getProfilesThatFollowCurrentProfile}}
+					<div> {{name}} <img id="followImg" src="{{picture}}"></div>
+				{{/each}}
 			</div>
-
 		{{/if}}
 	</div>
 </template>

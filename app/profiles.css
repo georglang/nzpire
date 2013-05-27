@@ -1,5 +1,91 @@
+
 #www{
 	display: block;
 	width:100px;
 	height: 50px;
 }
+#profileTemplate{
+	height:100%;
+}
+
+
+#profileContainer{
+padding:4%;
+width:22%;
+background-color: #FFFFFF;
+float:left;
+height: 100%;
+
+}
+
+#name{
+	font-size:160%;
+	margin-top:4%;
+	margin-bottom:4%;
+}
+
+#name div{
+	margin-top:6%;
+	border-bottom:dotted black 1px;
+}
+
+#email{
+margin-top: 11%;
+font-size: 100%;
+}
+
+#www{
+
+}
+
+#profileImg{
+	width:120px;
+	height:120px;
+	padding:2%;
+	border: 1px solid #c8c8c8;
+	background-color: #FFFFFF;
+}
+
+#currentProfileFollowPersons{
+width: 28%;
+float: left;
+margin-left: 4%;
+background-color: #FFFFFF;
+margin-top: 3%;
+height: 270px;
+-moz-box-shadow: 2px 2px 8px #bab8ba;
+-webkit-box-shadow: 2px 2px 8px #bab8ba;
+box-shadow: 2px 2px 8px #bab8ba;
+}
+
+#personsThatFollowCurrentProfile{
+	width: 28%;
+	float: left;
+	background-color: #FFFFFF;
+	margin-top: 3%;
+	margin-left: 4%;
+	min-height: 270px;
+-moz-box-shadow: 2px 2px 8px #bab8ba;
+-webkit-box-shadow: 2px 2px 8px #bab8ba;
+box-shadow: 2px 2px 8px #bab8ba;
+}
+
+#follower{
+	border-bottom:#333333 dotted;
+	padding-bottom:3%;
+}
+
+#follower img{
+	width:32px;
+	height:32px;
+}
+
+/*profile img followers */
+#followImg{
+	width:50px;
+	height:50px;
+	-webkit-border-radius: 10px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+

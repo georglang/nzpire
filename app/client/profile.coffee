@@ -45,9 +45,9 @@ Template.profile.currentProfileFollowProfiles = ->
 
 Template.profile.getProfilesThatFollowCurrentProfile = ->
 	currentUser = Profiles.findOne(_id : Session.get("profileId"))
-	test = Profiles.find({ following : currentUser._id})
-	console.log "PROFILE", test
-	return test
+	profiles = Profiles.find({ following : currentUser._id})
+	console.log "PROVILLLLLL", profiles
+	return profiles
 
 
 Template.profile.events
