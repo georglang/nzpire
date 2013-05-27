@@ -54,7 +54,6 @@ Template.profile.getFollowingLength = ->
 Template.profile.getFollowerLength = ->
 	currentUser = Profiles.findOne(_id : Session.get("profileId"))
 	profiles = Profiles.find({ following : currentUser._id}).fetch()
-	console.log "PPPPPP", profiles
 	return profiles.length
 
 
@@ -85,6 +84,8 @@ Template.profile.events
 	'click div.unfollow': (e) ->
 		Profiles.update {_id: currentProfile()._id},{$pull:{following: e.target.id}}
 
+	'click span.linkToOtherProfile': (e)->
+		Workspace.profile e.target.id
 
 # ## Rendered and Destroyed
 # Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy

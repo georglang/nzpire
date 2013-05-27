@@ -3,12 +3,20 @@
 		{{#if currentUser.services}}
 			<div id="profileContainer">
 				<img id="profileImg" src="{{pictureUrl}}" alt="profile image"/>
+
+				<div id="followState">
+					<div class="{{show}} btn" id="{{id}}">{{show}}</div>
+				</div>
+
 				<div id="name"><span class="editable">{{userName}}</span></div>
-				<div><span id="email">{{email}}</span></div>
+				<div class="profilListItem" id="email"><img src="/img/email.png"><span>{{email}}</span></div>
 				<!--<div><span id="www" class="editable"> {{www}}</span> </div> -->
-				<input type="filepicker" id='uploadWidget'/>
-				<div class="{{show}}" id="{{id}}">{{show}}</div>
-				<div class="profilListItem"><img class="imgFollow" src="/img/following.png"><span>Following</span><span class="number">{{getFollowingLength}}</span></div>
+				<!-- <input type="filepicker" id='uploadWidget'/> -->
+
+				<div class="profilListItem"><img class="imgFollow" src="/img/following.png">
+					<span>Following</span>
+					<div class="number"><span>{{getFollowingLength}}</span></div>
+				</div>
 				
 				<div class="profilListItem"><img class="imgFollow" src="/img/followers.png"><span>Follower</span><span class="number">{{getFollowerLength}}</span></div>
 			</div>
@@ -16,14 +24,14 @@
 			<div id="currentProfileFollowPersons">
 				<h3 id="follower"> Following <img class="imgFollow" src="/img/following.png"></h3>
 				{{#each currentProfileFollowProfiles}}
-					<div> <span>{{name}}<span> <img id="followImg" src="{{picture}}"></div>
+					<div><span span class="linkToOtherProfile" id="{{_id}}">{{name}}<span> <img id="followImg" src="{{picture}}"></div>
 				{{/each}}
 			</div>
 
 			<div id="personsThatFollowCurrentProfile">
 				<h3 id="follower"> Follower <img class="imgFollow" src="/img/followers.png"> </h3>
 				{{#each getProfilesThatFollowCurrentProfile}}
-					<div> <span>{{name}}<span>  <img id="followImg" src="{{picture}}"></div>
+					<div><span class="linkToOtherProfile" id="{{_id}}">{{name}}<span>  <img id="followImg" src="{{picture}}"></div>
 				{{/each}}
 			</div>
 		{{/if}}

@@ -160,16 +160,12 @@ class ModelActionRemoveObject extends ModelAction
 
 ModelActionConstructors.removeObject = ModelActionRemoveObject
 
-
-###################################################################################################
-################################### METHODS #######################################################
-###################################################################################################
+# ## Methods
 
 Meteor.methods
+	# ### Do model action
 	doModelAction: (options) ->
-		modelPermission = checkModelPermission options.modelId, true
-		mayDoAction = modelPermission >= Roles.collaborator
-		if mayDoAction
+		if userHasAtLeastRole options?.modelId, Roles.collaborator
 			ActionConstructor = ModelActionConstructors[options?.type]
 			if ActionConstructor
 				action = new ActionConstructor options
@@ -181,10 +177,9 @@ Meteor.methods
 		else
 			throw new Meteor.Error 490, 'Model action ' + options?.type + ' does not exist!'
 
+	# ### Undo model action
 	undoModelAction: (options) ->
-		modelPermission = checkModelPermission options.modelId, true
-		mayDoAction = modelPermission >= Roles.owner
-		if mayDoAction
+		if userHasAtLeastRole options?.modelId, Roles.owner
 			actionObject = getModelActionToUndo options?.modelId
 			if actionObject
 				ActionConstructor = ModelActionConstructors[actionObject.type]
@@ -197,10 +192,9 @@ Meteor.methods
 						undoActionId: previousActionId
 						redoActionId: action._id
 
+	# ### Redo model action
 	redoModelAction: (options) ->
-		modelPermission = checkModelPermission options.modelId, true
-		mayDoAction = modelPermission >= Roles.owner
-		if mayDoAction
+		if userHasAtLeastRole options?.modelId, Roles.owner
 			actionObject = getModelActionToRedo options?.modelId
 			if actionObject
 				ActionConstructor = ModelActionConstructors[actionObject.type]
@@ -213,6 +207,7 @@ Meteor.methods
 						undoActionId: action._id
 						redoActionId: nextActionId
 
+	# ### Create model
 	createModel: (options) ->
 		checkNameAvailability = findModelByName options.name
 		if checkNameAvailability
@@ -222,89 +217,109 @@ Meteor.methods
 			Profiles.update {_id: currentProfile()._id},{$push: {favourites: modelId}}
 			return modelId
 
+	# ### Clone model
 	cloneModel: (options) ->
-		checkNameAvailability = findModelByName options.name
-		if checkNameAvailability
-			throw new Meteor.Error(499, "Modelname already taken");
-		else
-			predecessorModel = findOneModelByOptions({_id:options.predecessor})
-			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:predecessorModel.colors})
-			predecessorModelObjects = ModelObjects.find({modelId:options.predecessor}).fetch()
-			ModelObjects.insert({position: i.position, modelId: modelId}) for i in predecessorModelObjects
-			Profiles.update {_id: currentProfile()._id},{$push: {favourites: modelId}}
-			return modelId		
+		if userHasAtLeastRole options?.predecessor, Roles.viewer
+			checkNameAvailability = findModelByName options.name
+			if checkNameAvailability
+				throw new Meteor.Error(499, "Modelname already taken");
+			else
+				predecessorModel = findOneModelByOptions({_id:options.predecessor})
+				modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:predecessorModel.colors})
+				predecessorModelObjects = ModelObjects.find({modelId:options.predecessor}).fetch()
+				for predecessorModelObject in predecessorModelObjects
+					delete predecessorModelObject._id
+					predecessorModelObject.modelId = modelId
+					ModelObjects.insert predecessorModelObject
+				Profiles.update {_id: currentProfile()._id},{$push: {favourites: modelId}}
+				return modelId
 
+	# ### Update model name
 	updateModelName: (options) ->
-		checkNameAvailability = findModelByName options.name
-		optionsFind = {_id: options._id}
-		currentModel = findOneModelByOptions(optionsFind)
-		if checkNameAvailability && options.name != currentModel.name
-			throw new Meteor.Error(499, "Modelname already taken");
-		else
-			return Models.update({_id: options._id},{$set: {name: options.name}})
+		if userHasAtLeastRole options?._id, Roles.owner
+			checkNameAvailability = findModelByName options.name
+			optionsFind = {_id: options._id}
+			currentModel = findOneModelByOptions(optionsFind)
+			if checkNameAvailability && options.name != currentModel.name
+				throw new Meteor.Error(499, "Modelname already taken");
+			else
+				return Models.update({_id: options._id},{$set: {name: options.name}})
 
+	# ### Update model's public state
 	updateModelIsPublic: (options) ->
-		isPublic = options.isPublic
-		if options.isPublic == false
-			isPublic = true
-		else
-			isPublic = false
-		return Models.update({_id: options._id},{$set: {isPublic: isPublic}})
+		if userHasAtLeastRole options?._id, Roles.owner
+			isPublic = options.isPublic
+			if options.isPublic == false
+				isPublic = true
+			else
+				isPublic = false
+			return Models.update({_id: options._id},{$set: {isPublic: isPublic}})
 
+	# ### Update model tag
 	updateModelTag: (options) ->
-		if options._id == undefined || options.tag == undefined
-			throw new Meteor.Error(490, "Undefined Parameter");
-		tagName = options.tag
-		checkForAvailability = Models.findOne({_id: options._id, tags: tagName})
-		if tagName.length < 3
-			throw new Meteor.Error(497, "Tagname too short");
-		else if checkForAvailability != undefined
-			throw new Meteor.Error(498, "Tagname already added");
-		else
-			Models.update({_id: options._id},{$push: {tags: tagName}})
+		if userHasAtLeastRole options?._id, Roles.collaborator
+			if options._id == undefined || options.tag == undefined
+				throw new Meteor.Error(490, "Undefined Parameter");
+			tagName = options.tag
+			checkForAvailability = Models.findOne({_id: options._id, tags: tagName})
+			if tagName.length < 3
+				throw new Meteor.Error(497, "Tagname too short");
+			else if checkForAvailability != undefined
+				throw new Meteor.Error(498, "Tagname already added");
+			else
+				Models.update({_id: options._id},{$push: {tags: tagName}})
 
+	# ### Update model invite
 	updateModelInvite: (options) ->
-		if options._id == undefined || options.invite == undefined
-			throw new Meteor.Error(490, "Undefined Parameter");
-		if options.invite.length < 3
-			throw new Meteor.Error(497, "Username too short");
-		invitedProfile = Profiles.findOne({name: options.invite})
+		if userHasAtLeastRole options?._id, Roles.owner
+			if options._id == undefined || options.invite == undefined
+				throw new Meteor.Error(490, "Undefined Parameter");
+			if options.invite.length < 3
+				throw new Meteor.Error(497, "Username too short");
+			invitedProfile = Profiles.findOne({name: options.invite})
 
-		if invitedProfile == undefined
-			throw new Meteor.Error(496, "Username does not exist");
-		else
-			checkAlreadyInvited = Models.findOne({_id: options._id,'invited.userId':invitedProfile._id})
-		if checkAlreadyInvited == undefined
-			updateObject = {userId: invitedProfile._id, role: options.role}
-			Models.update({_id: options._id},{$push: {invited: updateObject}})				
-		else
-			throw new Meteor.Error(498, "User already invited")		
-
-	removeModelTag: (options) ->
-		if options._id == undefined || options.tag == undefined
-			throw new Meteor.Error(490, "Undefined Parameter");
-		else
-			return Models.update({_id: options._id},{$pull: {tags: options.tag}})
-
-	removeModelInvite: (options) ->
-		if options._id == undefined || options.invite == undefined
-			throw new Meteor.Error(490, "Undefined Parameter");
-		else
-			profile = findOneProfileByOptions({name: options.invite})
-			if profile == undefined
+			if invitedProfile == undefined
 				throw new Meteor.Error(496, "Username does not exist");
 			else
-				removeObject = {invited:{userId:profile._id}}
-				return Models.update({_id: options._id},{$pull: removeObject})
+				checkAlreadyInvited = Models.findOne({_id: options._id,'invited.userId':invitedProfile._id})
+			if checkAlreadyInvited == undefined
+				updateObject = {userId: invitedProfile._id, role: options.role}
+				Models.update({_id: options._id},{$push: {invited: updateObject}})				
+			else
+				throw new Meteor.Error(498, "User already invited")		
 
+	# ### Remove model tag
+	removeModelTag: (options) ->
+		if userHasAtLeastRole options?._id, Roles.collaborator
+			if options._id == undefined || options.tag == undefined
+				throw new Meteor.Error(490, "Undefined Parameter");
+			else
+				return Models.update({_id: options._id},{$pull: {tags: options.tag}})
+
+	# ### Remove model invite
+	removeModelInvite: (options) ->
+		if userHasAtLeastRole options?._id, Roles.owner
+			if options._id == undefined || options.invite == undefined
+				throw new Meteor.Error(490, "Undefined Parameter");
+			else
+				profile = findOneProfileByOptions({name: options.invite})
+				if profile == undefined
+					throw new Meteor.Error(496, "Username does not exist");
+				else
+					removeObject = {invited:{userId:profile._id}}
+					return Models.update({_id: options._id},{$pull: removeObject})
+
+	# ### Remove model
 	removeModel: (options)->
-		#console.log options
-		return Models.remove(options)
+		if userHasAtLeastRole options?._id, Roles.owner
+			if options._id == undefined || options.invite == undefined
+				throw new Meteor.Error(490, "Undefined Parameter");
+			ModelObjects.remove modelId: options._id
+			ModelActions.remove modelId: options._id
+			Models.remove options
 
 @modelLoaded = ->
-	#console.log "modelLoaded"
 	model = Models.findOne({})
-	#console.log model
 	if model == undefined
 		return false
 	else
@@ -338,23 +353,25 @@ Meteor.methods
 				isInvited.push invitation
 		if isInvited.length > 0
 			if isInvited[0].role == "owner"
-				#console.log "owner"
 				return Roles.owner
 			else if isInvited[0].role == "collaborator"
-				#console.log "collaborator"
 				return Roles.collaborator
 			else if isInvited[0].role == "viewer"
-				#console.log "viewer"
 				return Roles.viewer
 	if isCreator
-		#console.log "creator"
 		return Roles.creator
 	else
 		if model.isPublic == true && useIsPublic == true
-			#console.log "isPublic true"
 			return Roles.viewer
 		else
-			return Roles.none	
+			return Roles.none
+
+@userHasAtLeastRole = (modelId, role) ->
+	modelPermission = checkModelPermission modelId, true
+	mayDoAction = modelPermission >= role
+	if mayDoAction
+		return true
+	throw new Meteor.Error 490, 'You don\'t have the permission to do this operation!'
 
 @Roles =
 	none: 0,
@@ -362,7 +379,6 @@ Meteor.methods
 	collaborator: 2,
 	owner: 3,
 	creator: 4
-
 
 @DefaultModelColors = [
 	{index: 0, color: "FF0000", shortcut: "1"}
