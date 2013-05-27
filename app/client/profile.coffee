@@ -39,11 +39,8 @@ getFollowingStatus = (_id)->
 			return "follow"
 
 Template.profile.getFollowingProfiles = ->
-	console.log "getFollowingProfiles"
-	
-	profiles = Profiles.find({_id: {$in: currentProfile().following}})
-	#profiles = Profiles.find({_id: {$in: currentProfile().following}},{sort: {updatedAt:-1},limit: 10}).fetch()
-	#profiles = Profiles.find(_id: Session.get("profileId")).following
+	currentUser = Profiles.findOne(_id : Session.get("profileId"))
+	profiles = Profiles.find({_id: {$in: currentUser.following}})
 	return profiles
 
 
