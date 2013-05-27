@@ -38,11 +38,16 @@ getFollowingStatus = (_id)->
 		else
 			return "follow"
 
-Template.profile.getFollowingProfiles = ->
+Template.profile.currentProfileFollowProfiles = ->
 	currentUser = Profiles.findOne(_id : Session.get("profileId"))
 	profiles = Profiles.find({_id: {$in: currentUser.following}})
 	return profiles
 
+Template.profile.getProfilesThatFollowCurrentProfile = ->
+	currentUser = Profiles.findOne(_id : Session.get("profileId"))
+	test = Profiles.find({ following : currentUser._id})
+	console.log "PROFILE", test
+	return test
 
 
 Template.profile.events

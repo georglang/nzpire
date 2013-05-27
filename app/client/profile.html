@@ -10,12 +10,20 @@
 			</p>
 			<div class="{{show}}" id="{{id}}">{{show}}<div>
 
-			<div id="followingPersons">
+			<div id="currentProfileFollowPersons">
 				<h3> Persons I follow </h3>
-			{{#each getFollowingProfiles}}
+			{{#each currentProfileFollowProfiles}}
 				<div> {{name}} </div>
 			{{/each}}
 			</div>
+
+			<div id="personsThatFollowCurrentProfile">
+				<h3> Persons follow me</h3>
+			{{#each getProfilesThatFollowCurrentProfile}}
+				<div> {{name}} </div>
+			{{/each}}
+			</div>
+
 		{{/if}}
 	</div>
 </template>
