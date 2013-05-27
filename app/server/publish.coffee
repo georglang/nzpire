@@ -17,7 +17,7 @@ Meteor.publish "allProfiles", ->
 Meteor.publish "allModels", ->
   userMail = Meteor.users.findOne({_id: this.userId}).mail[0]
   currentProfile = Profiles.find({email:userMail}).fetch()[0]
-  models = Models.find({$or: [{isPublic: true},{'invited.userId': currentProfile._id},{creator: currentProfile._id}]})
+  models = Models.find({$or: [{isPublic: true},{'invited.userId': currentProfile._id},{creator: currentProfile._id}]},{fields: actionIds: 0, colors: 0, invited: 0})
   return models
 
   ###
