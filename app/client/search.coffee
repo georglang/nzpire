@@ -1,21 +1,14 @@
 # #Search
 
 # ## Profilesearch
-# Gets the profiles where the evaluated searchQuery matches    
+# Gets the profiles where the evaluated searchQuery matches without the current User  
 # params: string (i.e. "/max_mustermann/i")    
 # return: cursor
 searchForProfiles = (searchQuery)->
-	Profiles.find({
-		name: eval(searchQuery)
-		}).fetch()
-
-	###
-	Profiles.find( $or:[
-			email: eval(searchQuery)
-		,
-			name: eval(searchQuery)
-		])
-	###
+	if Meteor.user()?.services
+		Profiles.find({$and:[{name:eval(searchQuery)},{_id: {$ne: currentProfile()._id}}]}).fetch()
+	else
+		Profiles.find({name:eval(searchQuery)}).fetch()	
 
 # ## Modelsearch
 # Gets the models where the evaluated searchQuery matches    
@@ -60,6 +53,16 @@ order = (searchingFor,_id)->
 		else
 			return "favourite"
 
+
+
+buttonDesign = (link,id)->
+	tmp = order(link,id)
+	if tmp == "follow" || tmp == "favourite"
+		return "btn btn-mini btn-primary"
+	else
+		return "btn btn-mini btn-danger"
+
+
 # ## Search Result
 # Checks if the first char of the search query is "@" (profiles) or "#" (models) else (profiles && models)    
 # Creates the searchQuery with "/query/i" to enable that the search query has not to match exactly and is case insensitive    
@@ -69,6 +72,7 @@ order = (searchingFor,_id)->
 # return: array (with #models or @profiles or both) (+ .searchingFor" and .order)
 
 Template.search.getResults = ->
+	console.log "1"
 	searchingFor = Session.get("searchQuery").charAt(0)
 	if searchingFor == "@"
 		searchQuery = "/" + Session.get("searchQuery").slice(1) + "/i"
@@ -86,8 +90,10 @@ Template.search.getResults = ->
 		result2 = searchForModels(searchQuery)
 		i.searchingFor = "profileLink" for i in result
 		i.order = order("profileLink", i._id) for i in result
+		i.button = buttonDesign("profileLink",i._id) for i in result
 		i.searchingFor = "modelLink" for i in result2
 		i.order = order("modelLink",i._id) for i in result2
+		i.button = buttonDesign("modelLink",i._id) for i in result2
 		jQuery.merge(result,result2)
 
 	return result

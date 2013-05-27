@@ -1,5 +1,4 @@
 # # Navigation Events
-
 Template.menue.events
 	# ## News
 	'click #news': ->
@@ -8,7 +7,7 @@ Template.menue.events
 		false
 
 	# ## Index
-	'click #home': ->
+	'click .brand': ->
 		console.log "clicked home"
 		Workspace.index()
 		false
@@ -77,3 +76,15 @@ Template.menue.events
 	# Redirects to Index on logout
 	'click #login-buttons-logout': ()->
 		Workspace.index()
+
+
+Template.menue.searching = ->
+	if not Session.get 'search'
+		return false
+	return true
+
+Meteor.startup ->
+	$(document).mouseup (e)->
+		searchParent = $("#searchParent")
+		if searchParent?.has(e.target).length is 0
+			Session.set 'search', null

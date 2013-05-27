@@ -1,10 +1,20 @@
 <template name="search">
-	<div> SEARCH TEMPLATE </div>
-	<div id="searchresult">
-		<ul>
-		{{#each getResults}}
-			<li><div class="{{this.searchingFor}}" id="{{this._id}}">{{this.name}}</div><div class="{{this.order}}" id="{{this._id}}">{{this.order}}</div></li>
-		{{/each}}
-	</ul>
+	<div class="searchTemplate">
+		<div id="searchresult">
+			{{#each getResults}}
+				<div class="searchEntry">
+					<div class="{{this.searchingFor}} searchItem" id="{{this._id}}">
+						{{this.name}}
+					</div>
+					{{> socialItem}}
+				</div>
+			{{/each}}
+		</div>
+	</div>
+</template>
+
+<template name="socialItem">
+	<div class="socialItem {{this.order}} {{this.button}}" id="{{this._id}}">
+		{{this.order}}
 	</div>
 </template>

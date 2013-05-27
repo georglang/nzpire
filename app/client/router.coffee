@@ -72,7 +72,8 @@ WorkspaceRouter = Backbone.Router.extend(
   search: (query) ->
     #console.log "search " + query 
     Session.set "searchQuery", decodeURIComponent(query)    
-    Session.set "template", "search"
+    Session.set "search", query
+    #Session.set("template", "search")
     @navigate "search/" + query,
       trigger: true
       replace: true

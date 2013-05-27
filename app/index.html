@@ -17,11 +17,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="brand" href="/">nzpire.me</a>
+        <a class="brand" href="#">nzpire.me</a>
         <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="">
-                <input type="text" id="searchQuery" placeholder="@People or #Models">
+                <div  tabindex="-1" id="searchParent">
+                  <input type="text" id="searchQuery" placeholder="@People or #Models">
+                  {{#if searching}}
+                    {{> search}}
+                  {{/if}}
+                </div>
               </li>
               <!--              
               <li class="">
@@ -78,12 +83,10 @@
 </template>
 
 <template name="index">
-	<div id="index"> INDEX TEMPLATE
+	<div id="indexTemplate"> INDEX TEMPLATE
     {{> mochaTestReport}}
     {{descriptionText}}
-		{{#if currentUser.services}}
-      {{redirectToNewsIfLoggedIn}}
-		{{/if}}
+    {{redirectLoggedIn}}
 	</div>	
 </template>
 
