@@ -35,7 +35,7 @@ Accounts.onCreateUser( (options,user)->
 		service = twitterEmail
 		emails = []
 		emails.push(user.emails[0].address)
-		pictureUrl = "dummyPic.jpg"
+		pictureUrl = "/img/dummyPic.jpg"
 		checkedEmail = checkForEmail(emails)
 
 	# Different handling for different services
@@ -62,7 +62,7 @@ Accounts.onCreateUser( (options,user)->
 		service_id = user.services[service].id				
 		emails = []
 		emails.push(user.services[service].screenName + "@" + twitterEmail + ".at")
-		pictureUrl = "dummyPic.jpg"
+		pictureUrl = "/img/dummyPic.jpg"
 		checkedEmail = checkForEmail(emails)
 
 	else if service == "facebook"
