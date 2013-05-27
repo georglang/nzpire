@@ -33,6 +33,8 @@ WorkspaceRouter = Backbone.Router.extend(
     #console.log "modelRouter"
     Session.set "modelId", _id
     Session.set "template", "loading"
+    Session.set "modelingColor", DefaultModelColors[7].color
+    Session.set "voxelSize", DefaultVoxelSizes[2].size
     Meteor.subscribe 'model', Session.get('modelId'), ()->
       Session.set "template", "model"
       Modeling.scene.setup()

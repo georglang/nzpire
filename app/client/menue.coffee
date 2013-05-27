@@ -33,7 +33,7 @@ Template.menue.events
 			if error
 				$('#createNewModel').after("<div id='errorNewModel'>"+error.reason+"</div>")
 			else
-				$('#newModel')[0].remove()
+				$('#newModel').replaceWith("<a href='#' id='model'>Create new Model</a>")
 				Workspace.model(modelId)
 
 	# Triggers a click Event on #createNewModel if the input key == Enter button 
@@ -65,6 +65,10 @@ Template.menue.events
 			else if searchQuery.length <= 2
 				$('#searchresult').empty()
 				Workspace.search ""
+		# the keydown event must not propagate further,
+		# because this might evoke shortcuts (like undo / redo)
+		# in the 3D scene!
+		e.stopImmediatePropagation()
 
 	# ## Model Showroom
 	'click #modelShowroom': ()->

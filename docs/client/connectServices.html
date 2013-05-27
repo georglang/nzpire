@@ -19,7 +19,7 @@
 
 <p>Checks out which Services the User has already connected and Returns the rest <br />
 * params: <br />
-* return: array (i.e. ["Facebook","Twitter"])    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.connectServices.connectButtons = </span><span class="o">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="provides-services">Provides Services</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">services = </span><span class="p">[</span><span class="s2">&quot;Facebook&quot;</span><span class="p">,</span><span class="s2">&quot;Twitter&quot;</span><span class="p">,</span><span class="s2">&quot;Google&quot;</span><span class="p">,</span><span class="s2">&quot;Github&quot;</span><span class="p">];</span>
+* return: array (i.e. ["Facebook","Twitter"])    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.connectServices.connectButtons = </span><span class="nf">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="provides-services">Provides Services</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">services = </span><span class="p">[</span><span class="s">&quot;Facebook&quot;</span><span class="p">,</span><span class="s">&quot;Twitter&quot;</span><span class="p">,</span><span class="s">&quot;Google&quot;</span><span class="p">,</span><span class="s">&quot;Github&quot;</span><span class="p">];</span>
 
   <span class="nv">tmpProfile = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
     <span class="nv">email: </span><span class="nx">currentEmail</span><span class="p">()</span>
@@ -35,34 +35,34 @@
   <span class="k">return</span> <span class="nx">services</span> </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="connect-button-events">Connect Button Events</h2>
 
 <p>Connect Buttons Onclick login with the service and on callback calls the function connectProfiles    </p></div></div><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">connectServices</span><span class="p">.</span><span class="nx">events</span>
-  <span class="s1">&#39;click input#connectWithFacebook&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+  <span class="s">&#39;click input#connectWithFacebook&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
     <span class="nv">tmpEmail = </span><span class="nx">currentEmail</span><span class="p">()</span>
     <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithFacebook</span>
       <span class="nv">requestOfflineToken: </span><span class="p">[</span><span class="kc">true</span><span class="p">]</span>
-    <span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="p">,</span> <span class="nf">-&gt;</span>
       <span class="nx">connectProfiles</span><span class="p">(</span><span class="nx">tmpEmail</span><span class="p">,</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithFacebook</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">true</span>
 
-  <span class="s1">&#39;click input#connectWithGithub&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+  <span class="s">&#39;click input#connectWithGithub&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
     <span class="nv">tmpEmail = </span><span class="nx">currentEmail</span><span class="p">()</span>
     <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithGithub</span>
       <span class="nv">requestOfflineToken: </span><span class="p">[</span><span class="kc">true</span><span class="p">]</span>
-    <span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="p">,</span> <span class="nf">-&gt;</span>
       <span class="nx">connectProfiles</span><span class="p">(</span><span class="nx">tmpEmail</span><span class="p">,</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithGithub</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">true</span>
 
-  <span class="s1">&#39;click input#connectWithGoogle&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+  <span class="s">&#39;click input#connectWithGoogle&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
     <span class="nv">tmpEmail = </span><span class="nx">currentEmail</span><span class="p">()</span>
     <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithGoogle</span>
       <span class="nv">requestOfflineToken: </span><span class="p">[</span><span class="kc">true</span><span class="p">]</span>
-    <span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="p">,</span> <span class="nf">-&gt;</span>
       <span class="nx">connectProfiles</span><span class="p">(</span><span class="nx">tmpEmail</span><span class="p">,</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithGoogle</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">true</span>
 
-  <span class="s1">&#39;click input#connectWithTwitter&#39;</span><span class="o">:</span> <span class="o">-&gt;</span>
+  <span class="s">&#39;click input#connectWithTwitter&#39;</span><span class="o">:</span> <span class="nf">-&gt;</span>
     <span class="nv">tmpEmail = </span><span class="nx">currentEmail</span><span class="p">()</span>
     <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithTwitter</span>
       <span class="nv">requestOfflineToken: </span><span class="p">[</span><span class="kc">true</span><span class="p">]</span>
-    <span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="p">,</span> <span class="nf">-&gt;</span>
       <span class="nx">connectProfiles</span><span class="p">(</span><span class="nx">tmpEmail</span><span class="p">,</span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithTwitter</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">true</span></div></div></div></div></body></html>

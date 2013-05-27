@@ -1,7 +1,11 @@
 <template name="model">
-  {{handleModelPermission}}
-  {{>modelSidebar}}
-  {{#constant}}
-    <div id="modelContainer" tabindex="1" autofocus="autofocus"></div>
-  {{/constant}}
+	<div id="modelTemplate">
+	  {{handleModelPermission}}
+	  {{>modelSidebar}}
+	  {{>modelingColors}}
+	  {{>voxelSizes}}
+	  {{#constant}}
+	    <div id="modelContainer" tabindex="1" autofocus="autofocus"></div>
+	  {{/constant}}
+	</div>
 </template>

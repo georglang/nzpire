@@ -12,11 +12,6 @@ From the repository's root folder:
 
 `groc`
 
-The docs will now be available under:
-
-[spontaneousorder.github.io/qpt2b](http://spontaneousorder.github.io/qpt2b)
-
-
 ## Authors
 
 * Christoph Altmann

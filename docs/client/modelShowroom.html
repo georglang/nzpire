@@ -10,27 +10,27 @@
   <span class="k">return</span> <span class="nx">modelsResult</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="owner">Owner</h2>
 
 <p>Template Method that returns all Models where the Users Role is Owner <br />
-* return: array (models)    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.Owner = </span><span class="nf">()-&gt;</span>
+* return: array (models)    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.Owner = </span><span class="p">()</span><span class="nf">-&gt;</span>
   <span class="nx">userInvitedModels</span><span class="p">(</span><span class="nx">Roles</span><span class="p">.</span><span class="nx">owner</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="creator">Creator</h2>
 
 <p>Template Method that returns all Models where the Users Role is Creator <br />
-* return: array (models)    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.Creator = </span><span class="nf">()-&gt;</span>
+* return: array (models)    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.Creator = </span><span class="p">()</span><span class="nf">-&gt;</span>
   <span class="nx">userInvitedModels</span><span class="p">(</span><span class="nx">Roles</span><span class="p">.</span><span class="nx">creator</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="collaborator">Collaborator</h2>
 
 <p>Template Method that returns all Models where the Users Role is Collaborator <br />
-* return: array (models)    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.Collaborator = </span><span class="nf">()-&gt;</span>
+* return: array (models)    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.Collaborator = </span><span class="p">()</span><span class="nf">-&gt;</span>
   <span class="nx">userInvitedModels</span><span class="p">(</span><span class="nx">Roles</span><span class="p">.</span><span class="nx">collaborator</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="viewer">Viewer</h2>
 
 <p>Template Method that returns all Models where the Users Role is Viewer <br />
-* return: array (models)    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.Viewer = </span><span class="nf">()-&gt;</span>
+* return: array (models)    </p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.Viewer = </span><span class="p">()</span><span class="nf">-&gt;</span>
   <span class="nx">userInvitedModels</span><span class="p">(</span><span class="nx">Roles</span><span class="p">.</span><span class="nx">viewer</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="events">Events</h2>
 
 <p>Model_Showroom events: click event for redirecting to the specified Model</p></div></div><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">modelShowroom</span><span class="p">.</span><span class="nx">events</span>
-  <span class="s1">&#39;click div.modelLink&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
+  <span class="s">&#39;click div.modelLink&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
     <span class="nx">Workspace</span><span class="p">.</span><span class="nx">model</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">id</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="rendered-and-destroyed">Rendered and Destroyed</h2>
 
-<p>Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.rendered = </span><span class="nf">()-&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modelShowroomTemplate&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;activeTemplate&#39;</span><span class="p">)</span>
+<p>Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelShowroom.rendered = </span><span class="p">()</span><span class="nf">-&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelShowroomTemplate&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span>
 
-<span class="nv">Template.modelShowroom.destroyed = </span><span class="nf">()-&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modelShowroomTemplate&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;activeTemplate&#39;</span><span class="p">)</span></div></div></div></div></body></html>
+<span class="nv">Template.modelShowroom.destroyed = </span><span class="p">()</span><span class="nf">-&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelShowroomTemplate&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span></div></div></div></div></body></html>
