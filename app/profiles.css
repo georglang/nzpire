@@ -1,3 +1,6 @@
+h3{
+	font-size:20.5px;
+}
 
 #www{
 	display: block;
@@ -38,6 +41,28 @@ font-size: 100%;
 
 }
 
+.profilListItem{
+	padding-top:20px;
+	padding-bottom:20px;
+	border-bottom: #ccc7c7 1px dotted;
+}
+
+.profilListItem span{
+	padding-left:8%;
+}
+
+.number{
+	float:right;
+	/*background-color:#56c4f7;
+	padding-top:2%;
+	padding-right:2%;
+	padding-bottom:2%;
+*/
+-webkit-border-radius: 100px;
+-moz-border-radius: 100px;
+border-radius: 100px;
+}
+
 #profileImg{
 	width:120px;
 	height:120px;
@@ -47,45 +72,77 @@ font-size: 100%;
 }
 
 #currentProfileFollowPersons{
-width: 28%;
-float: left;
-margin-left: 4%;
-background-color: #FFFFFF;
-margin-top: 3%;
-height: 270px;
--moz-box-shadow: 2px 2px 8px #bab8ba;
--webkit-box-shadow: 2px 2px 8px #bab8ba;
-box-shadow: 2px 2px 8px #bab8ba;
+	width: 20%;
+	position:relative;
+	float: left;
+	margin-left: 4%;
+	background-color: #FFFFFF;
+	margin-top: 3%;
+	height: 270px;
+	-moz-box-shadow: 2px 2px 8px #bab8ba;
+	-webkit-box-shadow: 2px 2px 8px #bab8ba;
+	box-shadow: 2px 2px 8px #bab8ba;
+}
+
+#currentProfileFollowPersons div{
+	height:50px;
+	font-size:120%;
+	padding-left:4%;
+	vertical-align:middle;
+}
+
+#currentProfileFollowPersons span{
+	padding-top: 3%;
+	display: block;
+	border-bottom: #ccc7c7 1px dotted;
 }
 
 #personsThatFollowCurrentProfile{
-	width: 28%;
+	width: 20%;
+	position:relative;
 	float: left;
+	margin-left: 4%;
 	background-color: #FFFFFF;
 	margin-top: 3%;
-	margin-left: 4%;
-	min-height: 270px;
--moz-box-shadow: 2px 2px 8px #bab8ba;
--webkit-box-shadow: 2px 2px 8px #bab8ba;
-box-shadow: 2px 2px 8px #bab8ba;
+	height: 270px;
+	-moz-box-shadow: 2px 2px 8px #bab8ba;
+	-webkit-box-shadow: 2px 2px 8px #bab8ba;
+	box-shadow: 2px 2px 8px #bab8ba;
+}
+
+#personsThatFollowCurrentProfile div{
+	height:50px;
+	font-size:120%;
+	padding-left:4%;
+	vertical-align:middle;
+}
+
+#personsThatFollowCurrentProfile span{
+	padding-top: 3%;
+	display: block;
+	border-bottom: #ccc7c7 1px dotted;
 }
 
 #follower{
-	border-bottom:#333333 dotted;
+	text-align: center;
+	border-bottom:#ccc7c7 dotted;
 	padding-bottom:3%;
 }
 
-#follower img{
-	width:32px;
-	height:32px;
+.imgFollow{
+	width:26px;
+	height:26px;
 }
 
 /*profile img followers */
 #followImg{
-	width:50px;
-	height:50px;
+	width: 30px;
+	height: 30px;
+	float:right;
+	margin-top: -16%;
+	margin-right:4%;
 	-webkit-border-radius: 10px;
--moz-border-radius: 4px;
-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 

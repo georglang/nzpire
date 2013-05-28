@@ -8,23 +8,22 @@
 				<!--<div><span id="www" class="editable"> {{www}}</span> </div> -->
 				<input type="filepicker" id='uploadWidget'/>
 				<div class="{{show}}" id="{{id}}">{{show}}</div>
-				<div id="following">Following</div>
-				<div id="followers"> <img src="/img/followers.png"> Follower
-				</div>
-
+				<div class="profilListItem"><img class="imgFollow" src="/img/following.png"><span>Following</span><span class="number">{{getFollowingLength}}</span></div>
+				
+				<div class="profilListItem"><img class="imgFollow" src="/img/followers.png"><span>Follower</span><span class="number">{{getFollowerLength}}</span></div>
 			</div>
 
 			<div id="currentProfileFollowPersons">
-				<h3> Following </h3>
+				<h3 id="follower"> Following <img class="imgFollow" src="/img/following.png"></h3>
 				{{#each currentProfileFollowProfiles}}
-					<div> {{name}} <img id="followImg" src="{{picture}}"></div>
+					<div> <span>{{name}}<span> <img id="followImg" src="{{picture}}"></div>
 				{{/each}}
 			</div>
 
 			<div id="personsThatFollowCurrentProfile">
-				<h3 id="follower"> Follower <img src="/img/followers.png"> </h3>
+				<h3 id="follower"> Follower <img class="imgFollow" src="/img/followers.png"> </h3>
 				{{#each getProfilesThatFollowCurrentProfile}}
-					<div> {{name}} <img id="followImg" src="{{picture}}"></div>
+					<div> <span>{{name}}<span>  <img id="followImg" src="{{picture}}"></div>
 				{{/each}}
 			</div>
 		{{/if}}
