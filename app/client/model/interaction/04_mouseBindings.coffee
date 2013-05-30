@@ -57,28 +57,29 @@ updateObjectPreview = ->
 # ### By moving,
 # save the absolute and relative (to the canvas)
 # positions of the mouse cursor
+Template.model.events
+  'mousedown canvas': (e) ->
+    position.mouseDown = mouseBindings.getPosition.relative().clone();
+  'mouseup canvas': (e) ->
+    console.log 'mouse up on canvas'
+    if mouseBindings.getPosition.relative().equals mouseBindings.getPosition.mouseDown()
+      pick = Modeling.scene.picking.pick()
+
+      if pick
+        if e.which is 1
+          Modeling.interaction.manipulation.object.add
+            object:
+              type: 'voxel'
+              position: getBuildingPointFromPick pick
+              color: Session.get 'modelingColor'
+              size: Session.get 'voxelSize'
+        else if e.which is 3
+          if pick.object.name
+            Modeling.interaction.manipulation.object.remove
+              objectId: pick.object.name
+            Modeling.scene.content.remove pick.object
+              
 mouseBindings.setup = ->
-  Template.model.events
-    'mousedown canvas': (e) ->
-      position.mouseDown = mouseBindings.getPosition.relative().clone();
-    'mouseup canvas': (e) ->
-      if mouseBindings.getPosition.relative().equals mouseBindings.getPosition.mouseDown()
-        pick = Modeling.scene.picking.pick()
-
-        if pick
-          if e.which is 1
-            Modeling.interaction.manipulation.object.add
-              object:
-                type: 'voxel'
-                position: getBuildingPointFromPick pick
-                color: Session.get 'modelingColor'
-                size: Session.get 'voxelSize'
-          else if e.which is 3
-            if pick.object.name
-              Modeling.interaction.manipulation.object.remove
-                objectId: pick.object.name
-              Modeling.scene.content.remove pick.object
-
   mouseMove = (e) ->
     offset = $(this).offset()
     width = $(this).width()
