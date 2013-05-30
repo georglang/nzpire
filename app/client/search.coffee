@@ -23,13 +23,7 @@ searchForProfiles = (searchQuery)->
 # params: string (i.e. "/my_model/i")    
 # return: cursor
 searchForModels = (searchQuery)->
-	tmpResult = Models.find({name: eval(searchQuery)}).fetch()
-	modelsResult = []
-	tmpResult.forEach (i)->
-		permission = checkModelPermission i._id,true
-		if permission > Roles.none
-			modelsResult.push i
-	return modelsResult
+  tmpResult = Models.find({$or: [{name: eval(searchQuery)},tags: eval(searchQuery)]}).fetch()
 
 # ## Check Follow
 # Checks if the currentUser follows the given profile(_id)    
