@@ -14,7 +14,7 @@ keyBindings.setup = ->
       'INPUT'
       'TEXTAREA'
     ]
-    inputShouldNotBeIgnored = tagNamesToIgnore.indexOf(tagName) isnt -1
+    doNotIgnoreInput = tagNamesToIgnore.indexOf(tagName) is -1
 
   # the context is the DOM element
   # on which the keybinding is called
