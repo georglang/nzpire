@@ -65,10 +65,6 @@ Template.menue.events
 			else if searchQuery.length <= 2
 				$('#searchresult').empty()
 				Workspace.search ""
-		# the keydown event must not propagate further,
-		# because this might evoke shortcuts (like undo / redo)
-		# in the 3D scene!
-		e.stopImmediatePropagation()
 
 	# ## Model Showroom
 	'click #modelShowroom': ()->
