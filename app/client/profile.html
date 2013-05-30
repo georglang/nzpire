@@ -24,15 +24,14 @@
 			<div id="currentProfileFollowPersons">
 				<h3 id="follower"> Following <img class="imgFollow" src="/img/following.png"></h3>
 				{{#each currentProfileFollowProfiles}}
-					<div> <span>{{name}}<span> <img id="followImg" src="{{picture}}"></div>
+					<div><span span class="linkToOtherProfile" id="{{_id}}">{{name}}<span> <img id="followImg" src="{{picture}}"></div>
 				{{/each}}
 			</div>
 
 			<div id="personsThatFollowCurrentProfile">
 				<h3 id="follower"> Follower <img class="imgFollow" src="/img/followers.png"> </h3>
 				{{#each getProfilesThatFollowCurrentProfile}}
-
-					<div> <span class="linkToOtherProfile" id="{{_id}}">{{name}}<span>  <img id="followImg" src="{{picture}}"></div>
+					<div><span class="linkToOtherProfile" id="{{_id}}">{{name}}<span>  <img id="followImg" src="{{picture}}"></div>
 				{{/each}}
 			</div>
 		{{/if}}
