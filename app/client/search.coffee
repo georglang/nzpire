@@ -62,6 +62,10 @@ buttonDesign = (link,id)->
 	else
 		return "btn btn-small btn-danger"
 
+sortArrayByFollowing = (a,b)->
+	return -1 if a.order.length > b.order.length
+	return 1 if a.order.length < b.order.length
+	return 0
 
 # ## Search Result
 # Checks if the first char of the search query is "@" (profiles) or "#" (models) else (profiles && models)    
@@ -97,6 +101,7 @@ Template.search.getResults = ->
 		i.button = buttonDesign("modelLink",i._id) for i in result2
 		jQuery.merge(result,result2)
 
+	result.sort(sortArrayByFollowing)
 	return result
 
 # ## Events
