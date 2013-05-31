@@ -1,10 +1,16 @@
 # # Connect various Accounts
 
+loginFunctions =
+	'facebook': Meteor.loginWithFacebook 
+	'google': Meteor.loginWithGoogle
+	'github': Meteor.loginWithGithub
+	'twitter': Meteor.loginWithTwitter
+
 # ## Connect Profiles
 # Inserts the new Mail into the old Account and Deletes the created User and reloggs the User    
 # * params: string (oldAccounts email), function (i.e. Meteor.loginWithFacebook)    
 # * return:    
-connectProfiles = (tmpEmail,loginFunction)->
+connectProfiles = (tmpEmail,tmpService)->
 	tmpProfile = Profiles.findOne
 		email: tmpEmail
 
@@ -17,12 +23,21 @@ connectProfiles = (tmpEmail,loginFunction)->
 		services: {}
 	updateObject.services[service] = service_id
 
+	loginFunctions[tmpService]
+		requestOfflineToken: [true]
+	, ->
+		relogInCallback(updateObject, newProfile.email[0], tmpProfile, newProfile)
+
+	Profiles.remove {_id: newProfile._id}
+
+relogInCallback = (updateObject, email, tmpProfile, newProfile)->
 	# Adds the service and the email
 	Profiles.update {_id: tmpProfile._id},{$push: updateObject}
-	Profiles.update {_id: tmpProfile._id},{$push: {email: currentEmail()}}
+	Profiles.update {_id: tmpProfile._id},{$push: {email: email}}
 	Profiles.update {_id: tmpProfile._id},{$set: {updatedAt: new Date()}}
 	# Removes the created Profile
-	Profiles.remove {_id: newProfile._id}
+	#Profiles.remove {_id: newProfile._id}
+
 
 # ## Connect Buttons
 # Checks out which Services the User has already connected and Returns the rest    
@@ -52,34 +67,38 @@ Template.connectServices.connectButtons = ->
 # ## Connect Button Events
 # Connect Buttons Onclick login with the service and on callback calls the function connectProfiles    
 Template.connectServices.events
-	'click input#connectWithFacebook': ->
+	'click img#connectWithFacebook': ->
 		tmpEmail = currentEmail()
+		tmpService = service = Object.keys(Meteor.user().services)[0]
 		Meteor.loginWithFacebook
 			requestOfflineToken: [true]
 		, ->
-			connectProfiles(tmpEmail,Meteor.loginWithFacebook)
+			connectProfiles(tmpEmail,tmpService)
 		return true
 
-	'click input#connectWithGithub': ->
+	'click img#connectWithGithub': ->
 		tmpEmail = currentEmail()
+		tmpService = service = Object.keys(Meteor.user().services)[0]
 		Meteor.loginWithGithub
 			requestOfflineToken: [true]
 		, ->
-			connectProfiles(tmpEmail,Meteor.loginWithGithub)
+			connectProfiles(tmpEmail,tmpService)
 		return true
 
-	'click input#connectWithGoogle': ->
+	'click img#connectWithGoogle': ->
 		tmpEmail = currentEmail()
+		tmpService = service = Object.keys(Meteor.user().services)[0]
 		Meteor.loginWithGoogle
 			requestOfflineToken: [true]
 		, ->
-			connectProfiles(tmpEmail,Meteor.loginWithGoogle)
+			connectProfiles(tmpEmail,tmpService)
 		return true
 
-	'click input#connectWithTwitter': ->
+	'click img#connectWithTwitter': ->
 		tmpEmail = currentEmail()
+		tmpService = service = Object.keys(Meteor.user().services)[0]
 		Meteor.loginWithTwitter
 			requestOfflineToken: [true]
 		, ->
-			connectProfiles(tmpEmail,Meteor.loginWithTwitter)
+			connectProfiles(tmpEmail,tmpService)
 		return true

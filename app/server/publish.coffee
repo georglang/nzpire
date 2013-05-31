@@ -1,11 +1,11 @@
 Meteor.startup ->
   Profiles.allow
     update: (userId, doc, fields, modifier) ->
-      if currentProfile()._id ==  doc._id
+      if currentProfile()?._id ==  doc._id
         return true
       return false
     remove: (userId, doc) ->
-      if currentProfile()._id ==  doc._id
+      if currentProfile()?._id ==  doc._id
         return true
       return false
 

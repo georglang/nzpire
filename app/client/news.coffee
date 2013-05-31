@@ -6,6 +6,9 @@
 getModelNews = ->
 	#console.log "getModelNewsFunc"
 	#profiles = Profiles.find({},{sort: {updatedAt: 1}).fetch()
+	if not currentProfile()?.favourites
+		console.log "not currentProfile favourites"
+		return null
 	models = Models.find({_id: {$in: currentProfile().favourites}},{sort: {updatedAt:-1},limit: 10}).fetch()
 	#jQuery.merge(profiles,models)
 	return models
@@ -14,6 +17,9 @@ getModelNews = ->
 # Gets the 10 latest updated profiles the current user follows    
 # * return: cursor
 getProfileNews = ->
+	if not currentProfile()?.following
+		console.log "not currentProfile following"
+		return null	
 	#console.log "getProfileNewsFunc"
 	profiles = Profiles.find({_id: {$in: currentProfile().following}},{sort: {updatedAt:-1},limit: 10}).fetch()
 	return profiles
@@ -34,6 +40,9 @@ Template.news.getNews = ->
 	#console.log "getNews"
 	result = getModelNews()
 	result2 = getProfileNews()
+	if not result or not result2
+		console.log "not result or not result 2"
+		return null
 	jQuery.merge(result,result2)
 	result.sort(sortArrayByTimestamp)
 	return result
@@ -58,6 +67,9 @@ sortArrayByFavouritedCount = (a,b)->
 	return 0
 
 checkForFavourites = (_id)->
+	if not currentProfile()?._id
+		console.log "not currentProfile id"
+		return null
 	Profiles.find({
 		_id: currentProfile()._id
 		favourites: _id

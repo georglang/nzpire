@@ -88,7 +88,6 @@ Template.menue.searching = ->
 Template.menue.searchQueryClass = ->
 	if $('#searchQuery').is(':focus') == false
 		if not Session.get 'search'
-			console.log "false ljö"
 			return false
 	return 'activeSearchQuery'
 
@@ -96,6 +95,5 @@ Meteor.startup ->
 	$(document).mouseup (e)->
 		searchParent = $("#searchParent")
 		if searchParent?.has(e.target).length is 0
-			console.log "Search Session null"
 			Session.set 'search', null
 			$('#searchQuery').removeClass('activeSearchQuery')
