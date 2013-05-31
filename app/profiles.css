@@ -13,20 +13,39 @@ h3{
 
 
 #profileContainer{
-padding:4%;
-width:22%;
-background-color: #FFFFFF;
-float:left;
-height: 100%;
-
+	padding:4%;
+	width:26%;
+	background-color: #FFFFFF;
+	float:left;
+	height: 100%;
+	-moz-box-shadow: 2px 2px 8px #bab8ba;
+	-webkit-box-shadow: 2px 2px 8px #bab8ba;
+	box-shadow: 2px 2px 8px #bab8ba;
 }
 
-#name{
+#nameField{
 	font-size: 198%;
 	margin-top: 8%;
 	margin-bottom: 4%;
 	border-bottom: #ccc7c7 1px dotted;
 	padding-bottom: 7%;
+}
+
+#name{
+	padding:2%;
+	cursor: pointer;
+}
+
+#nameField span:hover{
+  background-image: -webkit-linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+   background-image:    -moz-linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+   background-image:     -ms-linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+   background-image:      -o-linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+   background-image:         linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+   -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+   border-radius: 8px;
+   padding:2%;
 }
 
 #email{
@@ -63,6 +82,10 @@ height: 100%;
 	height: 24px;
 }
 
+.connectBtn{
+	margin-right:2%;
+}
+
 #profileImg{
 	width:120px;
 	height:120px;
@@ -71,60 +94,45 @@ height: 100%;
 	background-color: #FFFFFF;
 }
 
-#currentProfileFollowPersons{
+#followBoxes{
 	width: 20%;
 	position:relative;
 	float: left;
 	margin-left: 4%;
 	background-color: #FFFFFF;
 	margin-top: 3%;
-	height: 270px;
+	min-height: 270px;
 	-moz-box-shadow: 2px 2px 8px #bab8ba;
 	-webkit-box-shadow: 2px 2px 8px #bab8ba;
 	box-shadow: 2px 2px 8px #bab8ba;
 }
 
-#currentProfileFollowPersons div{
-	height:50px;
-	font-size:120%;
-	padding-left:4%;
-	vertical-align:middle;
-}
-
-#currentProfileFollowPersons span{
-	padding-top: 3%;
-	display: block;
-	border-bottom: #ccc7c7 1px dotted;
-}
-
-#personsThatFollowCurrentProfile{
-	width: 20%;
-	position:relative;
-	float: left;
-	margin-left: 4%;
-	background-color: #FFFFFF;
-	margin-top: 3%;
-	height: 270px;
-	-moz-box-shadow: 2px 2px 8px #bab8ba;
-	-webkit-box-shadow: 2px 2px 8px #bab8ba;
-	box-shadow: 2px 2px 8px #bab8ba;
-}
-
-#personsThatFollowCurrentProfile div{
-	height:50px;
-	font-size:120%;
-	padding-left:4%;
-	vertical-align:middle;
-}
-
-#personsThatFollowCurrentProfile span{
-	padding-top: 3%;
-	display: block;
-	border-bottom: #ccc7c7 1px dotted;
+#followBoxes div{
+	height: 33px;
 }
 
 .linkToOtherProfile{
+	margin-top:5%;
 	cursor: pointer;
+	border-bottom: 1px dotted #ccc7c7;
+}
+
+.linkToOtherProfile span{
+	padding-left: 5%;
+}
+
+.linkToOtherProfile:hover{
+	background-color: #ccc7c7;
+	opacity: 0.6;
+	cursor: pointer;
+	background-image: -webkit-linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+	background-image:    -moz-linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+	background-image:     -ms-linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+	background-image:      -o-linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+	background-image:         linear-gradient(top, rgba(230,230,230,1) 40%,rgba(255,255,255,1) 100%);
+   	-webkit-border-radius: 8px;
+  	-moz-border-radius: 8px;
+       border-radius: 8px;
 }
 
 #follower{
@@ -143,7 +151,7 @@ height: 100%;
 	width: 30px;
 	height: 30px;
 	float:right;
-	margin-top: -16%;
+	margin-top: -10%;
 	margin-right:4%;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 4px;
@@ -154,3 +162,10 @@ height: 100%;
 	float: right;
 }
 
+h4{
+	font-size:12.5px;
+}
+
+.editabel:hover{
+	background-color: grey;
+}
