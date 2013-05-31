@@ -65,6 +65,9 @@ buttonDesign = (link,id)->
 sortArrayByFollowing = (a,b)->
 	return -1 if a.order.length > b.order.length
 	return 1 if a.order.length < b.order.length
+	if a.order.length == b.order.length
+		return -1 if a.name < b.name
+		return 1 if  a.name > b.name
 	return 0
 
 # ## Search Result
