@@ -73,7 +73,6 @@ checkForFavourites = (_id)->
 		console.log "not currentProfile id"
 		return null
 	Profiles.find({
-		_id: currentProfile()._id
 		favourites: _id
 		}).fetch()
 
@@ -83,14 +82,11 @@ Template.news.getMostPopularModels = ->
 	models = []
 	allModels.forEach (m)->
 		counter = 0
-		permission = checkModelPermission m._id,true
-		if permission > Roles.none
-			allProfiles.forEach (p)->
-				modelFavourite = checkForFavourites m._id
-				if modelFavourite.length > 0
-					counter++
-			m.favCounts = counter
-			models.push m
+		modelFavourite = checkForFavourites m._id
+		if modelFavourite.length > 0
+			counter = modelFavourite.length
+		m.favCounts = counter
+		models.push m
 	models.sort(sortArrayByFavouritedCount)
 	return models
 
