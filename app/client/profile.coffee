@@ -65,6 +65,11 @@ Template.profile.followBtn = ->
 	else
 		return "btn-danger"
 
+Template.profile.notOwnProfile = ->
+	loggedIn = Meteor.userId()
+	return (loggedIn != null) && (Session.get("profileId") != currentProfile()._id)
+
+
 
 Template.profile.events
 
@@ -81,11 +86,13 @@ Template.profile.events
 		target = $(e.currentTarget)
 		attrValue = target.val()
 		attrName = target.attr('id')
-		target.replaceWith("<span id='"+attrName+"' class='editable' type='text'>"+attrValue+"")
 		updateObject = {$set: {}}
 		updateObject.$set[attrName] = attrValue #define variable for db query
 		console.log updateObject
+		console.log 'currentProfile id', currentProfile()._id
 		Profiles.update({_id : currentProfile()._id}, updateObject)
+		target.replaceWith("<span id='"+attrName+"' class='editable' type='text'>"+attrValue+"")
+		
 
 	'click div.follow': (e)->
 		Profiles.update {_id: currentProfile()._id},{$push: {following: e.target.id}}
@@ -93,8 +100,9 @@ Template.profile.events
 	'click div.unfollow': (e) ->
 		Profiles.update {_id: currentProfile()._id},{$pull:{following: e.target.id}}
 
-	'click span.linkToOtherProfile': (e)->
-		Workspace.profile $(e.target).data("id")
+	'click div.linkToOtherProfile' : (e)->
+		Workspace.profile $(e.currentTarget).data("id")
+		console.log "Target", e.currentTarget
 
 # ## Rendered and Destroyed
 # Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy

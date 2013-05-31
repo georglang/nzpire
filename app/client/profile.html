@@ -4,12 +4,14 @@
 			<div id="profileContainer">
 				<img id="profileImg" src="{{pictureUrl}}" alt="profile image"/>
 
-				<div id="followState">
-					<div class="{{show}} btn {{followBtn}}" id="{{id}}">{{show}}</div>
-				</div>
+				{{#if notOwnProfile}}   
+					<div id="followState">
+						<div class="{{show}} btn {{followBtn}}" id="{{id}}">{{show}}</div>
+					</div>
+				{{/if}}
 
-				<div id="name">
-					<span class="editable">{{userName}}</span>
+				<div id="nameField">
+					<span id="name" class="editable">{{userName}}</span>
 				</div>
 
 				<div class="profilListItem" id="email">
@@ -32,24 +34,31 @@
 					<span>Follower</span>
 					<span class="number">{{getFollowerLength}}</span>
 				</div>
-				{{>connectServices}}
+				<div class="profilListItem">
+					<h4>Connect Your Social Media Profiles</h4>
+					{{>connectServices}}
+				</div>
 			</div>
 
-			<div id="currentProfileFollowPersons">
-				<h3 id="follower"> Following <img class="imgFollow" src="/img/following.png"></h3>
+			<div id="followBoxes">
+				<h3 id="follower"> Follower <img class="imgFollow" src="/img/followers.png"> </h3>
 				{{#each currentProfileFollowProfiles}}
 					<div>
-						<span span class="linkToOtherProfile" data-id="{{_id}}">{{name}}<span> 
+						<div class="linkToOtherProfile" data-id="{{_id}}">
+							<span>{{name}}</span>
+						<div>
 						<img id="followImg" src="{{picture}}">
 					</div>
 				{{/each}}
 			</div>
 
-			<div id="personsThatFollowCurrentProfile">
+			<div id="followBoxes">
 				<h3 id="follower"> Follower <img class="imgFollow" src="/img/followers.png"> </h3>
 				{{#each getProfilesThatFollowCurrentProfile}}
 					<div>
-						<span class="linkToOtherProfile" data-id="{{_id}}">{{name}}<span>
+						<div class="linkToOtherProfile" data-id="{{_id}}">
+							<span>{{name}}</span>
+						<div>
 						<img id="followImg" src="{{picture}}">
 					</div>
 				{{/each}}
