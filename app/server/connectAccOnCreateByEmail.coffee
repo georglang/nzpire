@@ -70,7 +70,7 @@ Accounts.onCreateUser( (options,user)->
 		service_id = user.services[service].id				
 		emails = []
 		emails.push(user.services[service].email)
-		pictureUrl = "http://graph.facebook.com/#{service_id}/picture?type=large"
+		pictureUrl = "http://graph.facebook.com/#{service_id}/picture?width=120&height=120"
 		#Is this email already in our collection
 		checkedEmail = checkForEmail(emails)
 
