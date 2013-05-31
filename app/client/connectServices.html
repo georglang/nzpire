@@ -1,7 +1,18 @@
+<!--
 <template name="connectServices">
 	<div>
 		{{#each connectButtons}}
 			<input type="button" id="connectWith{{this}}" value="ConnectWith{{this}}">
+		{{/each}}	
+	</div>
+</template> -->
+
+
+<template name="connectServices">
+	<div>
+		{{#each connectButtons}}
+			<img id="connectWith{{this}}" class="connectBtn" value="ConnectWith{{this}}" src="/img/ConnectWith{{this}}.png">
+			</span>
 		{{/each}}	
 	</div>
 </template>
