@@ -73,6 +73,9 @@ Template.menue.events
 	'click #login-buttons-logout': ()->
 		Workspace.index()
 
+	'click #impressum': ()->
+		Workspace.impressum() 
+
 
 Template.menue.searching = ->
 	if not Session.get 'search'

@@ -21,6 +21,7 @@ WorkspaceRouter = Backbone.Router.extend(
     "test/:abc/p:page": "test" # #search/kiwis/p7
     "profile/:_id" : "profile"
     "news" : "news"
+    "impressum" : "impressum"
 
   index: ->
     #console.log "indexRouter"
@@ -101,6 +102,13 @@ WorkspaceRouter = Backbone.Router.extend(
     @navigate "news",
       trigger: true
       replace: true
+
+  impressum: ->
+    console.log "impressum"
+    Session.set "template", "impressum"
+    @navigate "impressum",
+    trigger: true
+    replace: true
 )
 @Workspace = new WorkspaceRouter()
 Meteor.startup ->

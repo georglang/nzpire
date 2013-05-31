@@ -1,8 +1,3 @@
-Meteor.startup ->
-  filepicker.setKey "AgE9nNiTnRKy1s8bU4zbuz"
-  filepicker.constructWidget document.getElementById("attachment")
-
-
 Template.profile.userName = ->
 	Profiles.findOne(_id: Session.get("profileId")).name
 

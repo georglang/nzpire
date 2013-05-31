@@ -2,17 +2,23 @@
   "meteor": {
     "git": "https://github.com/meteor/meteor.git",
     "branch": "master",
-    "commit": "bfe4b72ebec4367eaddcdf0887fcf5e649d9dcb8"
+    "commit": "5d736d4bf0448c7db1f9b47124dfafc34a9631bb"
   },
   "dependencies": {
     "basePackages": {
-      "filepicker": {}
+      "filepicker": {},
+      "collectionFS": {}
     },
     "packages": {
       "filepicker": {
         "git": "https://github.com/Filepicker/meteor.git",
         "tag": "v0.3.0",
         "commit": "dcb6f3779e5fc105520ba06b0392e3a79c73a7e6"
+      },
+      "collectionFS": {
+        "git": "https://github.com/raix/Meteor-CollectionFS.git",
+        "tag": "v0.2.3",
+        "commit": "4a1b9298a7ce64269fd14be29d9c4797b9253103"
       }
     }
   }
