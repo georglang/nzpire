@@ -72,7 +72,6 @@ buttonDesign = (link,id)->
 # return: array (with #models or @profiles or both) (+ .searchingFor" and .order)
 
 Template.search.getResults = ->
-	console.log "1"
 	searchingFor = Session.get("searchQuery").charAt(0)
 	if searchingFor == "@"
 		searchQuery = "/" + Session.get("searchQuery").slice(1) + "/i"
