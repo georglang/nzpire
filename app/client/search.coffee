@@ -79,11 +79,13 @@ Template.search.getResults = ->
 		result = searchForProfiles(searchQuery)
 		i.searchingFor = "profileLink" for i in result
 		i.order = order("profileLink",i._id) for i in result
+		i.button = buttonDesign("profileLink",i._id) for i in result
 	else if searchingFor == "#"
 	  searchQuery = "/" + Session.get("searchQuery").slice(1) + "/i"
 	  result = searchForModels(searchQuery)
 	  i.searchingFor = "modelLink" for i in result
 	  i.order = order("modelLink",i._id) for i in result
+	  i.button = buttonDesign("modelLink",i._id) for i in result
 	else
 		searchQuery = "/" + Session.get("searchQuery") + "/i"
 		result = searchForProfiles(searchQuery)

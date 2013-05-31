@@ -84,9 +84,9 @@ Template.news.getMostPopularModels = ->
 		permission = checkModelPermission m._id,true
 		if permission > Roles.none
 			allProfiles.forEach (p)->
-			modelFavourite = checkForFavourites m._id
-			if modelFavourite.length > 0
-				counter++
+				modelFavourite = checkForFavourites m._id
+				if modelFavourite.length > 0
+					counter++
 			m.favCounts = counter
 			models.push m
 	models.sort(sortArrayByFavouritedCount)
