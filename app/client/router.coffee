@@ -40,9 +40,6 @@ WorkspaceRouter = Backbone.Router.extend(
       Modeling.scene.setup()
       Meteor.defer Modeling.scene.update
       Modeling.interaction.mouseBindings.setup()
-      Meteor.autorun ->
-        Meteor.subscribe 'modelObjects', Session.get 'modelId'
-        Meteor.subscribe 'modelActions', Session.get 'modelId'
           
     @navigate "model/" + _id,
       trigger: true
@@ -72,7 +69,8 @@ WorkspaceRouter = Backbone.Router.extend(
   search: (query) ->
     #console.log "search " + query 
     Session.set "searchQuery", decodeURIComponent(query)    
-    Session.set "template", "search"
+    Session.set "search", query
+    #Session.set("template", "search")
     @navigate "search/" + query,
       trigger: true
       replace: true

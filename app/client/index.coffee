@@ -19,7 +19,15 @@ Template.index.descriptionText = ->
 	text = __('someNamespace.optionalSubNamespace.appDescription')
 	return text
 
-# Redirecits logged in Users to News Template
-Template.index.redirectToNewsIfLoggedIn = ->
-	if Meteor.user() != null
+# ## Rendered and Destroyed
+# Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy
+Template.index.rendered = ()->
+	$('#indexTemplate').addClass('activeTemplate')
+
+Template.index.destroyed = ()->
+	$('#indexTemplate').removeClass('activeTemplate')
+
+
+Meteor.autorun ->
+	if Meteor.user()
 		Workspace.news()

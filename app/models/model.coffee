@@ -236,7 +236,7 @@ Meteor.methods
 
 	# ### Update model name
 	updateModelName: (options) ->
-		if userHasAtLeastRole options?.modelId, Roles.owner
+		if userHasAtLeastRole options?._id, Roles.owner
 			checkNameAvailability = findModelByName options.name
 			optionsFind = {_id: options._id}
 			currentModel = findOneModelByOptions(optionsFind)
@@ -247,7 +247,7 @@ Meteor.methods
 
 	# ### Update model's public state
 	updateModelIsPublic: (options) ->
-		if userHasAtLeastRole options?.modelId, Roles.owner
+		if userHasAtLeastRole options?._id, Roles.owner
 			isPublic = options.isPublic
 			if options.isPublic == false
 				isPublic = true
@@ -257,7 +257,7 @@ Meteor.methods
 
 	# ### Update model tag
 	updateModelTag: (options) ->
-		if userHasAtLeastRole options?.modelId, Roles.collaborator
+		if userHasAtLeastRole options?._id, Roles.collaborator
 			if options._id == undefined || options.tag == undefined
 				throw new Meteor.Error(490, "Undefined Parameter");
 			tagName = options.tag
@@ -271,7 +271,7 @@ Meteor.methods
 
 	# ### Update model invite
 	updateModelInvite: (options) ->
-		if userHasAtLeastRole options?.modelId, Roles.owner
+		if userHasAtLeastRole options?._id, Roles.owner
 			if options._id == undefined || options.invite == undefined
 				throw new Meteor.Error(490, "Undefined Parameter");
 			if options.invite.length < 3
@@ -290,7 +290,7 @@ Meteor.methods
 
 	# ### Remove model tag
 	removeModelTag: (options) ->
-		if userHasAtLeastRole options?.modelId, Roles.collaborator
+		if userHasAtLeastRole options?._id, Roles.collaborator
 			if options._id == undefined || options.tag == undefined
 				throw new Meteor.Error(490, "Undefined Parameter");
 			else
@@ -298,7 +298,7 @@ Meteor.methods
 
 	# ### Remove model invite
 	removeModelInvite: (options) ->
-		if userHasAtLeastRole options?.modelId, Roles.owner
+		if userHasAtLeastRole options?._id, Roles.owner
 			if options._id == undefined || options.invite == undefined
 				throw new Meteor.Error(490, "Undefined Parameter");
 			else
@@ -311,7 +311,7 @@ Meteor.methods
 
 	# ### Remove model
 	removeModel: (options)->
-		if userHasAtLeastRole options?.modelId, Roles.owner
+		if userHasAtLeastRole options?._id, Roles.owner
 			if options._id == undefined || options.invite == undefined
 				throw new Meteor.Error(490, "Undefined Parameter");
 			ModelObjects.remove modelId: options._id
@@ -369,6 +369,9 @@ Meteor.methods
 @userHasAtLeastRole = (modelId, role) ->
 	modelPermission = checkModelPermission modelId, true
 	mayDoAction = modelPermission >= role
+	if mayDoAction
+		return true
+	throw new Meteor.Error 490, 'You don\'t have the permission to do this operation!'
 
 @Roles =
 	none: 0,

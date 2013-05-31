@@ -1,5 +1,4 @@
 # # Navigation Events
-
 Template.menue.events
 	# ## News
 	'click #news': ->
@@ -8,7 +7,7 @@ Template.menue.events
 		false
 
 	# ## Index
-	'click #home': ->
+	'click .brand': ->
 		console.log "clicked home"
 		Workspace.index()
 		false
@@ -65,10 +64,6 @@ Template.menue.events
 			else if searchQuery.length <= 2
 				$('#searchresult').empty()
 				Workspace.search ""
-		# the keydown event must not propagate further,
-		# because this might evoke shortcuts (like undo / redo)
-		# in the 3D scene!
-		e.stopImmediatePropagation()
 
 	# ## Model Showroom
 	'click #modelShowroom': ()->
@@ -77,3 +72,15 @@ Template.menue.events
 	# Redirects to Index on logout
 	'click #login-buttons-logout': ()->
 		Workspace.index()
+
+
+Template.menue.searching = ->
+	if not Session.get 'search'
+		return false
+	return true
+
+Meteor.startup ->
+	$(document).mouseup (e)->
+		searchParent = $("#searchParent")
+		if searchParent?.has(e.target).length is 0
+			Session.set 'search', null

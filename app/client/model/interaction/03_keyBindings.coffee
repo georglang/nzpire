@@ -8,6 +8,14 @@ Modeling.interaction.keyBindings = keyBindings = {}
 
 # ## Setup
 keyBindings.setup = ->
+  inputShouldNotBeIgnored = (event) ->
+    tagName = $(event.target).prop('tagName')
+    tagNamesToIgnore = [
+      'INPUT'
+      'TEXTAREA'
+    ]
+    doNotIgnoreInput = tagNamesToIgnore.indexOf(tagName) is -1
+
   # the context is the DOM element
   # on which the keybinding is called
   # (body by default)
@@ -38,8 +46,9 @@ keyBindings.setup = ->
   # undo the last step
   for undoShortcut in undoShortcuts
     Meteor.Keybindings.addOne undoShortcut,
-      ->
-        Modeling.interaction.history.undo()
+      (event) ->
+        if inputShouldNotBeIgnored event
+          Modeling.interaction.history.undo()
       keybindingsContext
       keybindingsEvent
 
@@ -47,8 +56,9 @@ keyBindings.setup = ->
   # redo the last step
   for redoShortcut in redoShortcuts
     Meteor.Keybindings.addOne redoShortcut,
-      ->
-        Modeling.interaction.history.redo()
+      (event) ->
+        if inputShouldNotBeIgnored event
+          Modeling.interaction.history.redo()
       keybindingsContext
       keybindingsEvent
 
@@ -56,8 +66,9 @@ keyBindings.setup = ->
   # choose a color
   installColorShortcut = (key, id) ->
     Meteor.Keybindings.addOne key,
-      ->
-        $(id).click()
+      (event) ->
+        if inputShouldNotBeIgnored event
+          $(id).click()
       keybindingsContext
       keybindingsEvent
 
@@ -67,29 +78,31 @@ keyBindings.setup = ->
   voxelSizeIncreaseShortcut = 'l'
 
   Meteor.Keybindings.addOne voxelSizeIncreaseShortcut,
-    ->
-      activeSizeBox = $('.activeSize')
-      siblings = activeSizeBox.siblings()
-      nextActiveSizeBox = null
-      if activeSizeBox.index() == siblings.length
-        nextActiveSizeBox = siblings[0]
-      else
-        nextActiveSizeBox = activeSizeBox.next()
-      nextActiveSizeBox.click()
+    (event) ->
+      if inputShouldNotBeIgnored event
+        activeSizeBox = $('.activeSize')
+        siblings = activeSizeBox.siblings()
+        nextActiveSizeBox = null
+        if activeSizeBox.index() == siblings.length
+          nextActiveSizeBox = siblings[0]
+        else
+          nextActiveSizeBox = activeSizeBox.next()
+        nextActiveSizeBox.click()
     keybindingsContext,
     keybindingsEvent
 
   voxelSizeDecreaseShortcut = 'k'
 
   Meteor.Keybindings.addOne voxelSizeDecreaseShortcut,
-    ->
-      activeSizeBox = $('.activeSize')
-      siblings = activeSizeBox.siblings()
-      prevActiveSizeBox = null
-      if activeSizeBox.index() == 0
-        prevActiveSizeBox = siblings[siblings.length - 1]
-      else
-        prevActiveSizeBox = activeSizeBox.prev()
-      prevActiveSizeBox.click()
+    (event) ->
+      if inputShouldNotBeIgnored event
+        activeSizeBox = $('.activeSize')
+        siblings = activeSizeBox.siblings()
+        prevActiveSizeBox = null
+        if activeSizeBox.index() == 0
+          prevActiveSizeBox = siblings[siblings.length - 1]
+        else
+          prevActiveSizeBox = activeSizeBox.prev()
+        prevActiveSizeBox.click()
     keybindingsContext,
     keybindingsEvent
