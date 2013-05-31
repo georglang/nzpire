@@ -28,22 +28,14 @@ Meteor.publish "allModels", ->
   models = Models.find({$or: [{isPublic: true},{'invited.userId': currentProfile._id},{creator: currentProfile._id}]},{fields: actionIds: 0, colors: 0, invited: 0})
   return models
 
-  ###
-  permittedModels = []
-  allModels.forEach (m) ->
-    permission = checkPermission(m._id,this.userId, userMail, true)
-    if permission > Roles.none
-      permittedModels.push m
-  console.log permittedModels
-  ###
-  #return permittedModels
-
-
 Meteor.publish 'model', (modelId) ->
-  Models.find _id: modelId
-
-Meteor.publish 'modelObjects', (modelId) ->
-  modelObjects = ModelObjects.find modelId: modelId
-
-Meteor.publish 'modelActions', (modelId) ->
-  modelActions = ModelActions.find modelId: modelId
+  user = Meteor.users.findOne({_id: this.userId})
+  if user
+    modelCursor = Models.find({$and: [{_id: modelId}, {$or: [{isPublic: true},{'invited.userId': currentProfile._id},{creator: currentProfile._id}]}]});
+    model = modelCursor.fetch()[0]
+    if model
+      modelObjectsCursor = ModelObjects.find modelId: modelId
+      modelActionsCursor = ModelActions.find modelId: modelId
+    return [modelCursor, modelObjectsCursor, modelActionsCursor]
+  else
+    return []
