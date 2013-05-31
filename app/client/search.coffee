@@ -58,9 +58,9 @@ order = (searchingFor,_id)->
 buttonDesign = (link,id)->
 	tmp = order(link,id)
 	if tmp == "follow" || tmp == "favourite"
-		return "btn btn-mini btn-primary"
+		return "btn btn-small btn-primary"
 	else
-		return "btn btn-mini btn-danger"
+		return "btn btn-small btn-danger"
 
 
 # ## Search Result

@@ -65,6 +65,9 @@ Template.menue.events
 				$('#searchresult').empty()
 				Workspace.search ""
 
+	'focus #searchQuery': (e)->
+		$(e.target).addClass("activeSearchQuery")
+
 	# ## Model Showroom
 	'click #modelShowroom': ()->
 		Workspace.modelShowroom()
@@ -82,8 +85,17 @@ Template.menue.searching = ->
 		return false
 	return true
 
+Template.menue.searchQueryClass = ->
+	if $('#searchQuery').is(':focus') == false
+		if not Session.get 'search'
+			console.log "false ljö"
+			return false
+	return 'activeSearchQuery'
+
 Meteor.startup ->
 	$(document).mouseup (e)->
 		searchParent = $("#searchParent")
 		if searchParent?.has(e.target).length is 0
+			console.log "Search Session null"
 			Session.set 'search', null
+			$('#searchQuery').removeClass('activeSearchQuery')
