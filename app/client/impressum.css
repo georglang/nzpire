@@ -1,0 +1,10 @@
+#container{
+	padding:4%;
+	width:12%;
+	background-color: #FFFFFF;
+	float:left;
+	height: 100%;
+	-moz-box-shadow: 2px 2px 8px #bab8ba;
+	-webkit-box-shadow: 2px 2px 8px #bab8ba;
+	box-shadow: 2px 2px 8px #bab8ba;
+}
