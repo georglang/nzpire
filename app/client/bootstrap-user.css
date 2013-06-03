@@ -10,15 +10,16 @@
 
 .navbar-inner img{
 	float:left;
+	padding-top: 10px;
+	margin-right:20px;
 }
-
+	
 
 .container{
 	position: relative;
-	/*width:87%;*/
 	float:left;
 	
-	height:100px;
+	height:120px;
 	background-color: #FFFFFF;
 	border:none;
 }
@@ -51,7 +52,7 @@
 }
 
 #newsListElement{
-	margin-left:4%;
+	margin-left:1%;
 }
 /* remove toogle on mouseover singup*/
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle{
@@ -63,8 +64,18 @@
 	height:120px;
 }
 
+.dropdown-toggle{
+	margin-top:-4%;
+}
 
+#searchQuery{
+	position:absolute;
+	left:0;
+}
 
+#listItems{
+
+}
 
 
 @media (min-width: 1px) and (max-width: 768px) {

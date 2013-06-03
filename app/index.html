@@ -8,17 +8,13 @@
 </body>
 
 <template name="menue">
-  <div class="navbar navbar-inverse">
+  <div class="navbar">
+
     <div class="navbar-inner">
-      <div class="container">
-        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="brand" href="#">nzpire.me</a>
-        <div class="nav-collapse collapse">
+       <img src="/img/logo.png" alt="nzpireLogo" width="120" height="120"/>
+      <div class="container">      
             <ul class="nav">
+             
               <li class="">
                 <div  tabindex="-1" id="searchParent">
                   <input class="{{searchQueryClass}}" type="text" id="searchQuery" placeholder="@People or #Models">
@@ -27,13 +23,11 @@
                   {{/if}}
                 </div>
               </li>
-              <!--              
-              <li class="">
-                <a href="#" id="home">Home</a>
-              </li>
-            -->
+
               {{#if currentUser.services}}
-                <li class="">
+                
+
+                <li id="newsListElement" class="">
                   <a href="#" id="news">News</a>
                 </li>
                 <!--
@@ -42,7 +36,7 @@
                 </li>
               -->
                 <li class="">
-                  <a href="#" id="model">Create new Model</a>
+                  <a href="#" id="model">Create Model</a>
                 </li>
                 <li class="">
                   <a href="#" id="modelShowroom">Model Showroom</a>
@@ -51,8 +45,9 @@
                   <a href="#" id="profile">Profile</a>
                 </li>
                 <li class="">
-                  <a href="#" id="impressum">Impressum</a>
+                  <a href="#" id="impressum">Imp</a>
                 </li>
+
               {{/if}}
               <!--
                 <li>
@@ -70,14 +65,14 @@
               </li>
             </ul>
           </div>
-        </div>
+        
       </div>
     </div>
   </div>
 </template>
 
 <template name="login">
-	{{loginButtons}}
+  {{loginButtons}}
 </template>
 
 <template name="page_controller">
@@ -85,17 +80,17 @@
 </template>
 
 <template name="index">
-	<div id="indexTemplate"> INDEX TEMPLATE
+  <div id="indexTemplate"> INDEX TEMPLATE
     {{> mochaTestReport}}
     {{descriptionText}}
     {{redirectLoggedIn}}
-	</div>	
+  </div>  
 </template>
 
 <template name="help">
-	<div> HELP TEMPLATE </div>
+  <div> HELP TEMPLATE </div>
 </template>
 
 <template name="test">
-	<div> TEST TEMPLATE </div>
+  <div> TEST TEMPLATE </div>
 </template>
