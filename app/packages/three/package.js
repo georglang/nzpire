@@ -6,7 +6,8 @@ Package.on_use(function (api) {
   api.add_files([
     'three.min.js',
     'FlyControls.js',
-    'TrackballControls.js'
+    'TrackballControls.js',
+    'FocusControls.js'
   ], ['client']
   );
 });

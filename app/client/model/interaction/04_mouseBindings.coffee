@@ -61,7 +61,6 @@ Template.model.events
   'mousedown canvas': (e) ->
     position.mouseDown = mouseBindings.getPosition.relative().clone();
   'mouseup canvas': (e) ->
-    console.log 'mouse up on canvas'
     if mouseBindings.getPosition.relative().equals mouseBindings.getPosition.mouseDown()
       pick = Modeling.scene.picking.pick()
 
