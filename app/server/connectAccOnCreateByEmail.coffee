@@ -116,6 +116,7 @@ Accounts.onCreateUser( (options,user)->
 	user.emails = emails
 	user.profile = options.profile
 	user.mail = emails
+	user.username = username
 
 	return user
 )
