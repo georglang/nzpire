@@ -4,12 +4,18 @@
 * return: cursor</p></div></div><div class="code"><div class="wrapper"><span class="nv">getModelNews = </span><span class="nf">-&gt;</span>
   <span class="c1">#console.log &quot;getModelNewsFunc&quot;</span>
   <span class="c1">#profiles = Profiles.find({},{sort: {updatedAt: 1}).fetch()</span>
+  <span class="k">if</span> <span class="o">not</span> <span class="nx">currentProfile</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">favourites</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;not currentProfile favourites&quot;</span>
+    <span class="k">return</span> <span class="kc">null</span>
   <span class="nv">models = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">_id: </span><span class="p">{</span><span class="nv">$in: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">favourites</span><span class="p">}},{</span><span class="nv">sort: </span><span class="p">{</span><span class="nx">updatedAt</span><span class="o">:-</span><span class="mi">1</span><span class="p">},</span><span class="nv">limit: </span><span class="mi">10</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
   <span class="c1">#jQuery.merge(profiles,models)</span>
   <span class="k">return</span> <span class="nx">models</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="profile-news">Profile News</h2>
 
 <p>Gets the 10 latest updated profiles the current user follows <br />
 * return: cursor</p></div></div><div class="code"><div class="wrapper"><span class="nv">getProfileNews = </span><span class="nf">-&gt;</span>
+  <span class="k">if</span> <span class="o">not</span> <span class="nx">currentProfile</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">following</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;not currentProfile following&quot;</span>
+    <span class="k">return</span> <span class="kc">null</span> 
   <span class="c1">#console.log &quot;getProfileNewsFunc&quot;</span>
   <span class="nv">profiles = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">_id: </span><span class="p">{</span><span class="nv">$in: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">following</span><span class="p">}},{</span><span class="nv">sort: </span><span class="p">{</span><span class="nx">updatedAt</span><span class="o">:-</span><span class="mi">1</span><span class="p">},</span><span class="nv">limit: </span><span class="mi">10</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
   <span class="k">return</span> <span class="nx">profiles</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="sort-function">Sort Function</h2>
@@ -26,9 +32,59 @@
   <span class="c1">#console.log &quot;getNews&quot;</span>
   <span class="nv">result = </span><span class="nx">getModelNews</span><span class="p">()</span>
   <span class="nv">result2 = </span><span class="nx">getProfileNews</span><span class="p">()</span>
+  <span class="k">if</span> <span class="o">not</span> <span class="nx">result</span> <span class="o">or</span> <span class="o">not</span> <span class="nx">result2</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;not result or not result 2&quot;</span>
+    <span class="k">return</span> <span class="kc">null</span>
   <span class="nx">jQuery</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="nx">result2</span><span class="p">)</span>
   <span class="nx">result</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">sortArrayByTimestamp</span><span class="p">)</span>
-  <span class="k">return</span> <span class="nx">result</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="rendered-and-destroyed">Rendered and Destroyed</h2>
+  <span class="k">return</span> <span class="nx">result</span>
+
+
+<span class="nv">Template.news.getRandomModels = </span><span class="nf">-&gt;</span>
+  <span class="nv">allModels = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">fetch</span><span class="p">()</span>
+  <span class="cm">###</span>
+<span class="cm">  models = []</span>
+<span class="cm">  allModels.forEach (m)-&gt;</span>
+<span class="cm">    permission = checkModelPermission m._id,true</span>
+<span class="cm">    if permission &gt; Roles.none  </span>
+<span class="cm">      models.push m</span>
+<span class="cm">  ###</span>
+
+  <span class="c1">#modelsShuffled = _.shuffle(models).slice(0,10)</span>
+  <span class="nv">allModels = </span><span class="nx">_</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">(</span><span class="nx">allModels</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">allModels</span>
+
+
+<span class="nv">sortArrayByFavouritedCount = </span><span class="nf">(a,b)-&gt;</span>
+  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">favCounts</span> <span class="o">&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">favCounts</span>
+  <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">favCounts</span> <span class="o">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">favCounts</span>
+  <span class="k">return</span> <span class="mi">0</span>
+
+<span class="nv">checkForFavourites = </span><span class="nf">(_id)-&gt;</span>
+  <span class="k">if</span> <span class="o">not</span> <span class="nx">currentProfile</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;not currentProfile id&quot;</span>
+    <span class="k">return</span> <span class="kc">null</span>
+  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span>
+    <span class="nv">favourites: </span><span class="nx">_id</span>
+    <span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
+
+<span class="nv">Template.news.getMostPopularModels = </span><span class="nf">-&gt;</span>
+  <span class="nv">allModels = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">fetch</span><span class="p">()</span>
+  <span class="nv">allProfiles = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">fetch</span><span class="p">()</span>
+  <span class="nv">models = </span><span class="p">[]</span>
+  <span class="nx">allModels</span><span class="p">.</span><span class="nx">forEach</span> <span class="nf">(m)-&gt;</span>
+    <span class="nv">counter = </span><span class="mi">0</span>
+    <span class="nv">modelFavourite = </span><span class="nx">checkForFavourites</span> <span class="nx">m</span><span class="p">.</span><span class="nx">_id</span>
+    <span class="k">if</span> <span class="nx">modelFavourite</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="nv">counter = </span><span class="nx">modelFavourite</span><span class="p">.</span><span class="nx">length</span>
+    <span class="nv">m.favCounts = </span><span class="nx">counter</span>
+    <span class="nx">models</span><span class="p">.</span><span class="nx">push</span> <span class="nx">m</span>
+  <span class="nx">models</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">sortArrayByFavouritedCount</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">models</span>
+
+<span class="nx">Template</span><span class="p">.</span><span class="nx">news</span><span class="p">.</span><span class="nx">events</span>
+  <span class="s">&#39;click div.modelLink&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
+    <span class="nx">Workspace</span><span class="p">.</span><span class="nx">model</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">title</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="rendered-and-destroyed">Rendered and Destroyed</h2>
 
 <p>Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.news.rendered = </span><span class="p">()</span><span class="nf">-&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#newsTemplate&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span>

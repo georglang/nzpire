@@ -209,9 +209,14 @@ Meteor.methods
 
 	# ### Create model
 	createModel: (options) ->
+		if not currentProfile()?._id
+			throw new Meteor.Error(499, "You need to be logged in to create a Model")
+			
 		checkNameAvailability = findModelByName options.name
 		if checkNameAvailability
 			throw new Meteor.Error(499, "Modelname already taken");
+		else if not options.name and not options.creator and not options.predecessor and not options.isPublic
+			throw new Meteor.Error(499, "Paramters not defined");
 		else
 			modelId = Models.insert({name: options.name,createdAt: new Date(),updatedAt:new Date(),tags:[],creator:options.creator,invited:[],predecessor:options.predecessor,isPublic:options.isPublic,colors:DefaultModelColors})
 			Profiles.update {_id: currentProfile()._id},{$push: {favourites: modelId}}

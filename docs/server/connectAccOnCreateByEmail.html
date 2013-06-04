@@ -19,8 +19,8 @@ Function to check if the Email is already in our Profile Collection</p></div></d
     <span class="nv">username = </span><span class="nx">preserveUsernameUniqueness</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">username</span><span class="p">)</span>
     <span class="nv">service = </span><span class="nx">twitterEmail</span>
     <span class="nv">emails = </span><span class="p">[]</span>
-    <span class="nx">emails</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">email</span><span class="p">)</span>
-    <span class="nv">pictureUrl = </span><span class="s">&quot;dummyPic.jpg&quot;</span>
+    <span class="nx">emails</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">emails</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">address</span><span class="p">)</span>
+    <span class="nv">pictureUrl = </span><span class="s">&quot;/img/dummyPic.jpg&quot;</span>
     <span class="nv">checkedEmail = </span><span class="nx">checkForEmail</span><span class="p">(</span><span class="nx">emails</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>Different handling for different services</p></div></div><div class="code"><div class="wrapper">  <span class="k">else</span> <span class="k">if</span> <span class="nx">service</span> <span class="o">==</span> <span class="s">&quot;github&quot;</span> 
     <span class="nv">username = </span><span class="nx">preserveUsernameUniqueness</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">username</span><span class="p">)</span>
     <span class="nv">options.profile.name = </span><span class="nx">username</span>
@@ -41,7 +41,7 @@ Function to check if the Email is already in our Profile Collection</p></div></d
     <span class="nv">service_id = </span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">id</span>        
     <span class="nv">emails = </span><span class="p">[]</span>
     <span class="nx">emails</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">screenName</span> <span class="o">+</span> <span class="s">&quot;@&quot;</span> <span class="o">+</span> <span class="nx">twitterEmail</span> <span class="o">+</span> <span class="s">&quot;.at&quot;</span><span class="p">)</span>
-    <span class="nv">pictureUrl = </span><span class="s">&quot;dummyPic.jpg&quot;</span>
+    <span class="nv">pictureUrl = </span><span class="s">&quot;/img/dummyPic.jpg&quot;</span>
     <span class="nv">checkedEmail = </span><span class="nx">checkForEmail</span><span class="p">(</span><span class="nx">emails</span><span class="p">)</span>
 
   <span class="k">else</span> <span class="k">if</span> <span class="nx">service</span> <span class="o">==</span> <span class="s">&quot;facebook&quot;</span>
@@ -49,7 +49,7 @@ Function to check if the Email is already in our Profile Collection</p></div></d
     <span class="nv">service_id = </span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">id</span>        
     <span class="nv">emails = </span><span class="p">[]</span>
     <span class="nx">emails</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">services</span><span class="p">[</span><span class="nx">service</span><span class="p">].</span><span class="nx">email</span><span class="p">)</span>
-    <span class="nv">pictureUrl = </span><span class="s">&quot;http://graph.facebook.com/</span><span class="si">#{</span><span class="nx">service_id</span><span class="si">}</span><span class="s">/picture?type=large&quot;</span>
+    <span class="nv">pictureUrl = </span><span class="s">&quot;http://graph.facebook.com/</span><span class="si">#{</span><span class="nx">service_id</span><span class="si">}</span><span class="s">/picture?width=120&amp;height=120&quot;</span>
     <span class="c1">#Is this email already in our collection</span>
     <span class="nv">checkedEmail = </span><span class="nx">checkForEmail</span><span class="p">(</span><span class="nx">emails</span><span class="p">)</span>
 
@@ -89,6 +89,7 @@ Function to check if the Email is already in our Profile Collection</p></div></d
   <span class="nv">user.emails = </span><span class="nx">emails</span>
   <span class="nv">user.profile = </span><span class="nx">options</span><span class="p">.</span><span class="nx">profile</span>
   <span class="nv">user.mail = </span><span class="nx">emails</span>
+  <span class="nv">user.username = </span><span class="nx">username</span>
 
   <span class="k">return</span> <span class="nx">user</span>
 <span class="p">)</span></div></div></div></div></body></html>

@@ -25,7 +25,7 @@ scene.setup = ->
     camera.position.z = 1000
     camera.position.y = 1000
 
-    controls = new THREE.TrackballControls camera, container[0]
+    controls = new THREE.FocusControls camera, container[0]
 
     controls.rotateSpeed = 1.0
     controls.zoomSpeed = 1.2
@@ -87,14 +87,15 @@ scene.setup = ->
 
     # ## Window resizing
     $(window).resize ->
-      container.height($(window).height() - container.offset().top)
-      width = container.width()
-      height = container.height()
-      aspect = width / height
+      if container.length
+        container.height($(window).height() - container.offset().top)
+        width = container.width()
+        height = container.height()
+        aspect = width / height
 
-      renderer.setSize width, height
-      camera.aspect = aspect
-      camera.updateProjectionMatrix();
+        renderer.setSize width, height
+        camera.aspect = aspect
+        camera.updateProjectionMatrix();
 
     $(window).resize()
 

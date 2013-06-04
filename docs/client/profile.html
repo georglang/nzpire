@@ -1,9 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>client/profile</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/profile"><meta name="groc-project-path" content="app/client/profile.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/profile.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span> <span class="nf">-&gt;</span>
-  <span class="nx">filepicker</span><span class="p">.</span><span class="nx">setKey</span> <span class="s">&quot;AgE9nNiTnRKy1s8bU4zbuz&quot;</span>
-  <span class="nx">filepicker</span><span class="p">.</span><span class="nx">constructWidget</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s">&quot;attachment&quot;</span><span class="p">)</span>
-
-
-<span class="nv">Template.profile.userName = </span><span class="nf">-&gt;</span>
+<!DOCTYPE html><html lang="en"><head><title>client/profile</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/profile"><meta name="groc-project-path" content="app/client/profile.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/profile.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nv">Template.profile.userName = </span><span class="nf">-&gt;</span>
   <span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;profileId&quot;</span><span class="p">)).</span><span class="nx">name</span>
 
 <span class="nv">Template.profile.email = </span><span class="nf">-&gt;</span>
@@ -38,6 +33,38 @@
     <span class="k">else</span>
       <span class="k">return</span> <span class="s">&quot;follow&quot;</span>
 
+<span class="nv">Template.profile.currentProfileFollowProfiles = </span><span class="nf">-&gt;</span>
+  <span class="nv">currentUser = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nv">_id : </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;profileId&quot;</span><span class="p">))</span>
+  <span class="nv">profiles = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">_id: </span><span class="p">{</span><span class="nv">$in: </span><span class="nx">currentUser</span><span class="p">.</span><span class="nx">following</span><span class="p">}})</span>
+  <span class="k">return</span> <span class="nx">profiles</span>
+
+<span class="nv">Template.profile.getProfilesThatFollowCurrentProfile = </span><span class="nf">-&gt;</span>
+  <span class="nv">currentUser = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nv">_id : </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;profileId&quot;</span><span class="p">))</span>
+  <span class="nv">profiles = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="nv">following : </span><span class="nx">currentUser</span><span class="p">.</span><span class="nx">_id</span><span class="p">})</span>
+  <span class="k">return</span> <span class="nx">profiles</span>
+
+<span class="nv">Template.profile.getFollowingLength = </span><span class="nf">-&gt;</span>
+  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;profileId&quot;</span><span class="p">)).</span><span class="nx">following</span><span class="p">.</span><span class="nx">length</span>
+
+<span class="nv">Template.profile.getFollowerLength = </span><span class="nf">-&gt;</span>
+  <span class="nv">currentUser = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nv">_id : </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;profileId&quot;</span><span class="p">))</span>
+  <span class="nv">profiles = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="nv">following : </span><span class="nx">currentUser</span><span class="p">.</span><span class="nx">_id</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
+  <span class="k">return</span> <span class="nx">profiles</span><span class="p">.</span><span class="nx">length</span>
+
+<span class="nv">Template.profile.followBtn = </span><span class="nf">-&gt;</span>
+  <span class="nv">profileId = </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;profileId&quot;</span><span class="p">)</span>
+  <span class="nv">followingStatus = </span><span class="nx">getFollowingStatus</span><span class="p">(</span><span class="nx">profileId</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;FOLLOWING Status&quot;</span><span class="p">,</span> <span class="nx">followingStatus</span>
+  <span class="k">if</span> <span class="nx">followingStatus</span> <span class="o">==</span> <span class="s">&quot;follow&quot;</span>
+    <span class="k">return</span> <span class="s">&quot;btn-primary&quot;</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="s">&quot;btn-danger&quot;</span>
+
+<span class="nv">Template.profile.notOwnProfile = </span><span class="nf">-&gt;</span>
+  <span class="nv">loggedIn = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">userId</span><span class="p">()</span>
+  <span class="k">return</span> <span class="p">(</span><span class="nx">loggedIn</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;profileId&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">)</span>
+
+
 
 <span class="nx">Template</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">events</span>
 
@@ -54,14 +81,26 @@
     <span class="nv">target = </span><span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">)</span>
     <span class="nv">attrValue = </span><span class="nx">target</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span>
     <span class="nv">attrName = </span><span class="nx">target</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s">&#39;id&#39;</span><span class="p">)</span>
-    <span class="nx">target</span><span class="p">.</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s">&quot;&lt;span id=&#39;&quot;</span><span class="o">+</span><span class="nx">attrName</span><span class="o">+</span><span class="s">&quot;&#39; class=&#39;editable&#39; type=&#39;text&#39;&gt;&quot;</span><span class="o">+</span><span class="nx">attrValue</span><span class="o">+</span><span class="s">&quot;&quot;</span><span class="p">)</span>
     <span class="nv">updateObject = </span><span class="p">{</span><span class="nv">$set: </span><span class="p">{}}</span>
     <span class="nx">updateObject</span><span class="p">.</span><span class="nx">$set</span><span class="p">[</span><span class="nx">attrName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">attrValue</span> <span class="c1">#define variable for db query</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">updateObject</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&#39;currentProfile id&#39;</span><span class="p">,</span> <span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span>
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id : </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">},</span> <span class="nx">updateObject</span><span class="p">)</span>
+    <span class="nx">target</span><span class="p">.</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s">&quot;&lt;span id=&#39;&quot;</span><span class="o">+</span><span class="nx">attrName</span><span class="o">+</span><span class="s">&quot;&#39; class=&#39;editable&#39; type=&#39;text&#39;&gt;&quot;</span><span class="o">+</span><span class="nx">attrValue</span><span class="o">+</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+    
 
   <span class="s">&#39;click div.follow&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$push: </span><span class="p">{</span><span class="nv">following: </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">id</span><span class="p">}}</span>
 
   <span class="s">&#39;click div.unfollow&#39;</span><span class="o">:</span> <span class="nf">(e) -&gt;</span>
-    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">},{</span><span class="nx">$pull</span><span class="o">:</span><span class="p">{</span><span class="nv">following: </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">id</span><span class="p">}}</span></div></div></div></div></body></html>
+    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">},{</span><span class="nx">$pull</span><span class="o">:</span><span class="p">{</span><span class="nv">following: </span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">id</span><span class="p">}}</span>
+
+  <span class="s">&#39;click div.linkToOtherProfile&#39;</span> <span class="o">:</span> <span class="nf">(e)-&gt;</span>
+    <span class="nx">Workspace</span><span class="p">.</span><span class="nx">profile</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;Target&quot;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="rendered-and-destroyed">Rendered and Destroyed</h2>
+
+<p>Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.profile.rendered = </span><span class="p">()</span><span class="nf">-&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#profileTemplate&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span>
+
+<span class="nv">Template.profile.destroyed = </span><span class="p">()</span><span class="nf">-&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#profileTemplate&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span></div></div></div></div></body></html>
