@@ -3,38 +3,55 @@
 </head>
 
 <body>
+  <div id="wrapper">
   {{> menue}}
+  <!--
+  <div id="myCarousel" class="carousel slide">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  
+  <div class="carousel-inner">
+    <div class="active item">…</div>
+    <div class="item">
+      <img src="/img/test3.jpg" alt="">
+       <div class="carousel-caption">
+        <p>Caption text here</p>
+      </div>
+    </div>
+  </div>
+  
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+-->
   {{> page_controller}}
+  {{> footer}}
+</wrapper>
 </body>
 
 <template name="menue">
   <div class="navbar">
 
     <div class="navbar-inner">
-       <img src="/img/logo.png" alt="nzpireLogo" width="120" height="120"/>
-      <div class="container">      
-            <ul class="nav">
-             
-              <li class="">
+       <img id="logo" src="/img/logo.png" alt="nzpireLogo" width="120" height="120"/>
+      <div class="container">
+       <div class="">
                 <div  tabindex="-1" id="searchParent">
-                  <input class="{{searchQueryClass}}" type="text" id="searchQuery" placeholder="@People or #Models">
+                  <input class="{{searchQueryClass}}" type="text" id="searchQuery" placeholder="@People or #Models">  <img src="/img/searchIcon.png">
+                  <!--<div style="clear:both"></div> -->
                   {{#if searching}}
                     {{> search}}
                   {{/if}}
                 </div>
-              </li>
-
+              </div>      
+            <ul class="nav">
               {{#if currentUser.services}}
-                
-
                 <li id="newsListElement" class="">
                   <a href="#" id="news">News</a>
                 </li>
-                <!--
-                <li class="">
-                  <a href="#" id="search">Search</a>
-                </li>
-              -->
                 <li class="">
                   <a href="#" id="model">Create Model</a>
                 </li>
@@ -44,10 +61,6 @@
                 <li class="">
                   <a href="#" id="profile">Profile</a>
                 </li>
-                <li class="">
-                  <a href="#" id="impressum">Imp</a>
-                </li>
-
               {{/if}}
               <!--
                 <li>
@@ -65,8 +78,7 @@
               </li>
             </ul>
           </div>
-        
-      </div>
+        </div>
     </div>
   </div>
 </template>
