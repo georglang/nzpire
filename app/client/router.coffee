@@ -1,12 +1,8 @@
 Template.page_controller.display_page = ->
-  #console.log "controller display page"
-  #console.log "display_page"
-  if Session.get('template') == undefined
-    #console.log "undefined == true"
-    Session.set "template", "index"
-  #console.log "Template act:" + Session.get 'template'
-  checkLoginProtection()
-  Template[Session.get("template")]()
+  if Session.get('template')
+    checkLoginProtection()
+    Template[Session.get("template")]()
+
 
 WorkspaceRouter = Backbone.Router.extend(
   routes:
@@ -18,7 +14,7 @@ WorkspaceRouter = Backbone.Router.extend(
     "help": "help" # #help
     "search": "search" # #search
     "search/:query": "search" # #search/kiwis
-    "test/:abc/p:page": "test" # #search/kiwis/p7
+    "unit_tests": "unit_tests"
     "profile/:_id" : "profile"
     "news" : "news"
     "impressum" : "impressum"
@@ -76,14 +72,14 @@ WorkspaceRouter = Backbone.Router.extend(
       trigger: true
       replace: true
 
-  test: (abc, page) ->
-    #console.log "test " + abc + " " + page
-    Session.set "template", "test"
-    @navigate "test/" + abc + "/" + page,
+  unit_tests: ->
+    Session.set "template", "unit_tests"
+    @navigate "unit_tests",
       trigger: true
       replace: true
 
   profile: (_id) ->
+    console.log "PROFILE ROUTE"
     Session.set "profileId", _id
     Session.set "template", "profile"
     @navigate "profile/" + _id,
