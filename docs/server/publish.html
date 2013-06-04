@@ -1,27 +1,86 @@
-<!DOCTYPE html><html lang="en"><head><title>server/publish</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="server/publish"><meta name="groc-project-path" content="app/server/publish.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/server/publish.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span> <span class="nf">-&gt;</span>
-  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">allow</span>
-    <span class="nv">update: </span><span class="nf">(userId, doc, fields, modifier) -&gt;</span>
-      <span class="k">return</span> <span class="kc">true</span>
-    <span class="nv">remove: </span><span class="nf">(userId, doc) -&gt;</span>
-      <span class="k">return</span> <span class="kc">true</span>
+<!DOCTYPE html><html lang="en"><head><title>server/publish</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="server/publish"><meta name="groc-project-path" content="app/server/publish.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/server/publish.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="published-data-sets">Published data sets</h1></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="profiles">Profiles</h2></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="all-profiles">All profiles</h3>
 
-<span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&quot;userData&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+<p>Profile information is published without restriction.
+This is crucial for search functionality.</p></div></div><div class="code"><div class="wrapper"><span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&quot;allProfiles&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({})</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="user-data">User data</h3>
+
+<p>The following user data is only published to the user,
+currently logged in:
+* login services (facebook, twitter, google plus, github)
+* email address</p></div></div><div class="code"><div class="wrapper"><span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&quot;userData&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
   <span class="k">return</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span> <span class="p">{</span><span class="nv">_id: </span><span class="k">this</span><span class="p">.</span><span class="nx">userId</span><span class="p">},</span>
     <span class="nv">fields:</span>
       <span class="s">&#39;services&#39;</span><span class="o">:</span> <span class="mi">1</span>
-      <span class="s">&#39;mail&#39;</span><span class="o">:</span> <span class="mi">1</span>
+      <span class="s">&#39;mail&#39;</span><span class="o">:</span> <span class="mi">1</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="allow-rules">Allow rules</h3>
 
-<span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&quot;allProfiles&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({})</span>
+<p>These rules only apply to direct changes to the database,
+coming from the client.
+The following operations may only be performed by the profile owner:
+* updating
+* removing</p></div></div><div class="code"><div class="wrapper"><span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span> <span class="nf">-&gt;</span>
+  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">allow</span>
+    <span class="nv">update: </span><span class="nf">(userId, doc, fields, modifier) -&gt;</span>
+      <span class="k">if</span> <span class="nx">currentProfile</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span> <span class="o">==</span>  <span class="nx">doc</span><span class="p">.</span><span class="nx">_id</span>
+        <span class="k">return</span> <span class="kc">true</span>
+      <span class="k">return</span> <span class="kc">false</span>
+    <span class="nv">remove: </span><span class="nf">(userId, doc) -&gt;</span>
+      <span class="k">if</span> <span class="nx">currentProfile</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span> <span class="o">==</span>  <span class="nx">doc</span><span class="p">.</span><span class="nx">_id</span>
+        <span class="k">return</span> <span class="kc">true</span>
+      <span class="k">return</span> <span class="kc">false</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="models">Models</h2>
 
-<span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&quot;allModels&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-  <span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({})</span>
+<h3 id="all-models">All Models</h3>
 
-<span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&#39;model&#39;</span><span class="p">,</span> <span class="nf">(modelId) -&gt;</span>
-  <span class="nx">Models</span><span class="p">.</span><span class="nx">find</span> <span class="nv">_id: </span><span class="nx">modelId</span>
+<p>Model information is published to every client
+with the following restrictions:
+* no action ids (needed for action history = undo/redo funtionality)
+* no colors (needed for editing shortcuts)</p></div></div><div class="code"><div class="wrapper"><span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&quot;allModels&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+  <span class="nv">user = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">_id: </span><span class="k">this</span><span class="p">.</span><span class="nx">userId</span><span class="p">})</span>
+  <span class="k">if</span> <span class="o">not</span> <span class="nx">user</span> 
+    <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">isPublic: </span><span class="kc">true</span><span class="p">},{</span><span class="nv">fields: _id: </span><span class="mi">1</span><span class="p">,</span> <span class="nv">name: </span><span class="mi">1</span><span class="p">,</span> <span class="nv">tags: </span><span class="mi">1</span><span class="p">})</span>
 
-<span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&#39;modelObjects&#39;</span><span class="p">,</span> <span class="nf">(modelId) -&gt;</span>
-  <span class="nv">modelObjects = </span><span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">find</span> <span class="nv">modelId: </span><span class="nx">modelId</span>
+  <span class="nv">userMail = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">_id: </span><span class="k">this</span><span class="p">.</span><span class="nx">userId</span><span class="p">}).</span><span class="nx">mail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nv">currentProfile = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">email</span><span class="o">:</span><span class="nx">userMail</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span>
+    <span class="nv">$or: </span><span class="p">[</span>
+      <span class="p">{</span><span class="nv">isPublic: </span><span class="kc">true</span><span class="p">},</span>
+      <span class="p">{</span><span class="s">&#39;invited.userId&#39;</span><span class="o">:</span> <span class="nx">currentProfile</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">},</span>
+      <span class="p">{</span><span class="nv">creator: </span><span class="nx">currentProfile</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="nv">fields: </span><span class="p">{</span>
+      <span class="nv">actionIds: </span><span class="mi">0</span><span class="p">,</span>
+      <span class="nv">colors: </span><span class="mi">0</span>
+    <span class="p">}</span>
+  <span class="p">});</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="model-to-view-or-to-edit">Model (to view or to edit)</h3>
 
-<span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&#39;modelActions&#39;</span><span class="p">,</span> <span class="nf">(modelId) -&gt;</span>
-  <span class="nv">modelActions = </span><span class="nx">ModelActions</span><span class="p">.</span><span class="nx">find</span> <span class="nv">modelId: </span><span class="nx">modelId</span></div></div></div></div></body></html>
+<p>The following model information is published to all clients,
+requesting information about a specific model (for viewing or editing),
+who have at least the role 'viewer':
+* unrestricted model information
+* model objects
+* model actions</p></div></div><div class="code"><div class="wrapper"><span class="nx">Meteor</span><span class="p">.</span><span class="nx">publish</span> <span class="s">&#39;model&#39;</span><span class="p">,</span> <span class="nf">(modelId) -&gt;</span>
+  <span class="nv">user = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">_id: </span><span class="k">this</span><span class="p">.</span><span class="nx">userId</span><span class="p">})</span>
+  <span class="k">if</span> <span class="o">not</span> <span class="nx">user</span>
+    <span class="k">return</span> <span class="p">[]</span>
+  <span class="nv">userMail = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">_id: </span><span class="k">this</span><span class="p">.</span><span class="nx">userId</span><span class="p">}).</span><span class="nx">mail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nv">currentProfile = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">email</span><span class="o">:</span><span class="nx">userMail</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+  <span class="nv">modelCursor = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span>
+    <span class="nv">$and: </span><span class="p">[</span>
+      <span class="p">{</span><span class="nv">_id: </span><span class="nx">modelId</span><span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nv">$or: </span><span class="p">[</span>
+          <span class="p">{</span><span class="nv">isPublic: </span><span class="kc">true</span><span class="p">},</span>
+          <span class="p">{</span><span class="s">&#39;invited.userId&#39;</span><span class="o">:</span> <span class="nx">currentProfile</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">},</span>
+          <span class="p">{</span><span class="nv">creator: </span><span class="nx">currentProfile</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">});</span>
+  <span class="nv">model = </span><span class="nx">modelCursor</span><span class="p">.</span><span class="nx">fetch</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="k">if</span> <span class="o">not</span> <span class="nx">model</span>
+    <span class="k">return</span> <span class="p">[]</span>
+
+  <span class="nv">modelObjectsCursor = </span><span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">find</span> <span class="nv">modelId: </span><span class="nx">modelId</span>
+  <span class="nv">modelActionsCursor = </span><span class="nx">ModelActions</span><span class="p">.</span><span class="nx">find</span> <span class="nv">modelId: </span><span class="nx">modelId</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">modelCursor</span><span class="p">,</span> <span class="nx">modelObjectsCursor</span><span class="p">,</span> <span class="nx">modelActionsCursor</span><span class="p">]</span></div></div></div></div></body></html>

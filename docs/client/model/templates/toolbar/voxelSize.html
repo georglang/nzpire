@@ -8,14 +8,14 @@
     <span class="k">return</span> <span class="kc">false</span>
 
 <span class="nv">Template.voxelSizes.getSize = </span><span class="nf">-&gt;</span>
-  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">size</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="mi">10</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="mi">10</span>
 
 <span class="nv">Template.voxelSizes.getBottom = </span><span class="nf">-&gt;</span>
-  <span class="k">return</span> <span class="nx">DefaultVoxelSizes</span><span class="p">[</span><span class="nx">DefaultVoxelSizes</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">size</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">size</span> <span class="o">*</span> <span class="mi">10</span>
+  <span class="k">return</span> <span class="nx">DefaultVoxelSizes</span><span class="p">[</span><span class="nx">DefaultVoxelSizes</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="nx">name</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">*</span> <span class="mi">10</span>
 
 <span class="nv">Template.voxelSizes.getBackground = </span><span class="nf">-&gt;</span>
   <span class="k">return</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;modelingColor&#39;</span>
 
 <span class="nx">Template</span><span class="p">.</span><span class="nx">voxelSizes</span><span class="p">.</span><span class="nx">events</span>
   <span class="s">&#39;click .voxelSize&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
-    <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&#39;voxelSize&#39;</span><span class="p">,</span> <span class="nx">DefaultVoxelSizes</span><span class="p">[</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">id</span><span class="p">].</span><span class="nx">size</span></div></div></div></div></body></html>
+    <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&#39;voxelSize&#39;</span><span class="p">,</span> <span class="nx">DefaultVoxelSizes</span><span class="p">[</span><span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s">&#39;index&#39;</span><span class="p">)].</span><span class="nx">size</span></div></div></div></div></body></html>

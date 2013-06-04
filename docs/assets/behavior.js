@@ -248,12 +248,33 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "slug": "landing-page",
                 "isFileHeader": true
               },
-              "depth": 1
+              "depth": 1,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Rendered and Destroyed",
+                    "slug": "rendered-and-destroyed"
+                  },
+                  "depth": 2
+                }
+              ]
             },
             "title": "Landing_page"
           },
           "depth": 2,
-          "outline": []
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Rendered and Destroyed",
+                "slug": "rendered-and-destroyed"
+              },
+              "depth": 2
+            }
+          ]
         }, {
           "type": "file",
           "data": {
@@ -695,6 +716,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                                 "slug": "snap-to-grid"
                               },
                               "depth": 3
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "By clicking",
+                                "slug": "by-clicking"
+                              },
+                              "depth": 3
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "By moving,",
+                                "slug": "by-moving"
+                              },
+                              "depth": 3
                             }
                           ]
                         }
@@ -719,6 +756,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                             "level": 3,
                             "title": "Snap to grid",
                             "slug": "snap-to-grid"
+                          },
+                          "depth": 3
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 3,
+                            "title": "By clicking",
+                            "slug": "by-clicking"
+                          },
+                          "depth": 3
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 3,
+                            "title": "By moving,",
+                            "slug": "by-moving"
                           },
                           "depth": 3
                         }
@@ -1035,6 +1088,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "type": "heading",
                           "data": {
                             "level": 2,
+                            "title": "Pickable",
+                            "slug": "pickable"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Content",
+                            "slug": "content"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
                             "title": "Lights",
                             "slug": "lights"
                           },
@@ -1045,6 +1114,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                             "level": 2,
                             "title": "Building plane",
                             "slug": "building-plane"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Object preview",
+                            "slug": "object-preview"
                           },
                           "depth": 2
                         }, {
@@ -1106,6 +1183,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "type": "heading",
                       "data": {
                         "level": 2,
+                        "title": "Pickable",
+                        "slug": "pickable"
+                      },
+                      "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "Content",
+                        "slug": "content"
+                      },
+                      "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
                         "title": "Lights",
                         "slug": "lights"
                       },
@@ -1116,6 +1209,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                         "level": 2,
                         "title": "Building plane",
                         "slug": "building-plane"
+                      },
+                      "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "Object preview",
+                        "slug": "object-preview"
                       },
                       "depth": 2
                     }, {
@@ -1924,7 +2025,17 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "title": "profile"
           },
           "depth": 2,
-          "outline": []
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Rendered and Destroyed",
+                "slug": "rendered-and-destroyed"
+              },
+              "depth": 2
+            }
+          ]
         }, {
           "type": "file",
           "data": {
@@ -2219,6 +2330,113 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                     "slug": "model-action"
                   },
                   "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Methods",
+                    "slug": "methods"
+                  },
+                  "depth": 2,
+                  "children": [
+                    {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Do model action",
+                        "slug": "do-model-action"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Undo model action",
+                        "slug": "undo-model-action"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Redo model action",
+                        "slug": "redo-model-action"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Create model",
+                        "slug": "create-model"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Clone model",
+                        "slug": "clone-model"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Update model name",
+                        "slug": "update-model-name"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Update model's public state",
+                        "slug": "update-models-public-state"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Update model tag",
+                        "slug": "update-model-tag"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Update model invite",
+                        "slug": "update-model-invite"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Remove model tag",
+                        "slug": "remove-model-tag"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Remove model invite",
+                        "slug": "remove-model-invite"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Remove model",
+                        "slug": "remove-model"
+                      },
+                      "depth": 3
+                    }
+                  ]
                 }
               ]
             },
@@ -2234,6 +2452,113 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "slug": "model-action"
               },
               "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Methods",
+                "slug": "methods"
+              },
+              "depth": 2,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Do model action",
+                    "slug": "do-model-action"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Undo model action",
+                    "slug": "undo-model-action"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Redo model action",
+                    "slug": "redo-model-action"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Create model",
+                    "slug": "create-model"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Clone model",
+                    "slug": "clone-model"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Update model name",
+                    "slug": "update-model-name"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Update model's public state",
+                    "slug": "update-models-public-state"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Update model tag",
+                    "slug": "update-model-tag"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Update model invite",
+                    "slug": "update-model-invite"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Remove model tag",
+                    "slug": "remove-model-tag"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Remove model invite",
+                    "slug": "remove-model-invite"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Remove model",
+                    "slug": "remove-model"
+                  },
+                  "depth": 3
+                }
+              ]
             }
           ]
         }, {
@@ -2332,10 +2657,149 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/server/publish.coffee",
             "projectPath": "app/server/publish.coffee",
             "targetPath": "server/publish",
-            "title": "publish"
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Published data sets",
+                "slug": "published-data-sets",
+                "isFileHeader": true
+              },
+              "depth": 1,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Profiles",
+                    "slug": "profiles"
+                  },
+                  "depth": 2,
+                  "children": [
+                    {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "All profiles",
+                        "slug": "all-profiles"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "User data",
+                        "slug": "user-data"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Allow rules",
+                        "slug": "allow-rules"
+                      },
+                      "depth": 3
+                    }
+                  ]
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Models",
+                    "slug": "models"
+                  },
+                  "depth": 2,
+                  "children": [
+                    {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "All Models",
+                        "slug": "all-models"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "Model (to view or to edit)",
+                        "slug": "model-to-view-or-to-edit"
+                      },
+                      "depth": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            "title": "Published data sets"
           },
           "depth": 2,
-          "outline": []
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Profiles",
+                "slug": "profiles"
+              },
+              "depth": 2,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "All profiles",
+                    "slug": "all-profiles"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "User data",
+                    "slug": "user-data"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Allow rules",
+                    "slug": "allow-rules"
+                  },
+                  "depth": 3
+                }
+              ]
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Models",
+                "slug": "models"
+              },
+              "depth": 2,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "All Models",
+                    "slug": "all-models"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "Model (to view or to edit)",
+                    "slug": "model-to-view-or-to-edit"
+                  },
+                  "depth": 3
+                }
+              ]
+            }
+          ]
         }
       ]
     }, {
@@ -2355,6 +2819,22 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2,
           "children": [
             {
+              "type": "file",
+              "data": {
+                "language": {
+                  "nameMatchers": [".coffee", "Cakefile"],
+                  "pygmentsLexer": "coffee-script",
+                  "singleLineComment": ["#"],
+                  "name": "CoffeeScript"
+                },
+                "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/tests/unit_tests/model_tests.coffee",
+                "projectPath": "app/tests/unit_tests/model_tests.coffee",
+                "targetPath": "tests/unit_tests/model_tests",
+                "title": "model_tests"
+              },
+              "depth": 3,
+              "outline": []
+            }, {
               "type": "file",
               "data": {
                 "language": {

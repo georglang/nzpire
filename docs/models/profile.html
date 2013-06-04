@@ -3,10 +3,16 @@
 <span class="vi">@findOneProfileByOptions = </span><span class="nf">(options)-&gt;</span>
   <span class="k">return</span> <span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
 
+<span class="vi">@checkEditingOwnProfile = </span><span class="nf">(profileId)-&gt;</span>
+  <span class="k">if</span> <span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span> <span class="o">!=</span> <span class="nx">profileId</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="s">&quot;Permission denied&quot;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="kc">true</span>
+
 <span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span>
   <span class="nv">createProfile: </span><span class="nf">(insertObject)-&gt;</span>
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">insertObject</span>
 
   <span class="nv">addServiceToProfile: </span><span class="nf">(profileId,updateObject)-&gt;</span>
+    <span class="nx">checkEditingOwnProfile</span><span class="p">(</span><span class="nx">profileId</span><span class="p">)</span>
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">profileId</span><span class="p">},{</span><span class="nv">$push: </span><span class="nx">updateObject</span><span class="p">}</span>      
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">profileId</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">updatedAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()}}</span></div></div></div></div></body></html>
