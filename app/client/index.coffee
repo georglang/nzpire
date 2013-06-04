@@ -29,5 +29,5 @@ Template.index.destroyed = ()->
 
 
 Meteor.autorun ->
-	if Meteor.user()
+	if Meteor.user() && Session.get('template') == 'index'
 		Workspace.news()
