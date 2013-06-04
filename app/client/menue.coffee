@@ -75,10 +75,11 @@ Template.menue.events
 	# Redirects to Index on logout
 	'click #login-buttons-logout': ()->
 		Workspace.index()
-
+	
 	'click #impressum': ()->
-		Workspace.impressum() 
-
+		console.log "clicked impressum"
+		Workspace.impressum()
+		false
 
 Template.menue.searching = ->
 	if not Session.get 'search'

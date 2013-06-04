@@ -1,30 +1,18 @@
 <!DOCTYPE html><html lang="en"><head><title>client/search</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/search"><meta name="groc-project-path" content="app/client/search.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/search.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="search">Search</h1></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="profilesearch">Profilesearch</h2>
 
-<p>Gets the profiles where the evaluated searchQuery matches <br />
+<p>Gets the profiles where the evaluated searchQuery matches without the current User <br />
 params: string (i.e. "/max_mustermann/i") <br />
 return: cursor</p></div></div><div class="code"><div class="wrapper"><span class="nv">searchForProfiles = </span><span class="nf">(searchQuery)-&gt;</span>
-  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span>
-    <span class="nv">name: </span><span class="nb">eval</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)</span>
-
-  <span class="cm">###</span>
-<span class="cm">  Profiles.find( $or:[</span>
-<span class="cm">      email: eval(searchQuery)</span>
-<span class="cm">    ,</span>
-<span class="cm">      name: eval(searchQuery)</span>
-<span class="cm">    ])</span>
-<span class="cm">  ###</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="modelsearch">Modelsearch</h2>
+  <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">services</span>
+    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$and</span><span class="o">:</span><span class="p">[{</span><span class="nx">name</span><span class="o">:</span><span class="nb">eval</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)},{</span><span class="nv">_id: </span><span class="p">{</span><span class="nv">$ne: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span><span class="p">}}]}).</span><span class="nx">fetch</span><span class="p">()</span>
+  <span class="k">else</span>
+    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="nb">eval</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)}).</span><span class="nx">fetch</span><span class="p">()</span> </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="modelsearch">Modelsearch</h2>
 
 <p>Gets the models where the evaluated searchQuery matches <br />
 Checks if the user has permissions to get the model returned <br />
 params: string (i.e. "/my_model/i") <br />
 return: cursor</p></div></div><div class="code"><div class="wrapper"><span class="nv">searchForModels = </span><span class="nf">(searchQuery)-&gt;</span>
-  <span class="nv">tmpResult = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">name: </span><span class="nb">eval</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)}).</span><span class="nx">fetch</span><span class="p">()</span>
-  <span class="nv">modelsResult = </span><span class="p">[]</span>
-  <span class="nx">tmpResult</span><span class="p">.</span><span class="nx">forEach</span> <span class="nf">(i)-&gt;</span>
-    <span class="nv">permission = </span><span class="nx">checkModelPermission</span> <span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span><span class="kc">true</span>
-    <span class="k">if</span> <span class="nx">permission</span> <span class="o">&gt;</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">none</span>
-      <span class="nx">modelsResult</span><span class="p">.</span><span class="nx">push</span> <span class="nx">i</span>
-  <span class="k">return</span> <span class="nx">modelsResult</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="check-follow">Check Follow</h2>
+  <span class="nv">tmpResult = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">$or: </span><span class="p">[{</span><span class="nv">name: </span><span class="nb">eval</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)},</span><span class="nv">tags: </span><span class="nb">eval</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)]}).</span><span class="nx">fetch</span><span class="p">()</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="check-follow">Check Follow</h2>
 
 <p>Checks if the currentUser follows the given profile(_id) <br />
 params: _id <br />
@@ -53,7 +41,24 @@ return: string ("unfollow"/"follow" || "defavourite"/"favourite")</p></div></div
     <span class="k">if</span> <span class="nx">checkForFavourites</span><span class="p">(</span><span class="nx">_id</span><span class="p">).</span><span class="nx">fetch</span><span class="p">().</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
       <span class="k">return</span> <span class="s">&quot;defavourite&quot;</span>
     <span class="k">else</span>
-      <span class="k">return</span> <span class="s">&quot;favourite&quot;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="search-result">Search Result</h2>
+      <span class="k">return</span> <span class="s">&quot;favourite&quot;</span>
+
+
+
+<span class="nv">buttonDesign = </span><span class="nf">(link,id)-&gt;</span>
+  <span class="nv">tmp = </span><span class="nx">order</span><span class="p">(</span><span class="nx">link</span><span class="p">,</span><span class="nx">id</span><span class="p">)</span>
+  <span class="k">if</span> <span class="nx">tmp</span> <span class="o">==</span> <span class="s">&quot;follow&quot;</span> <span class="o">||</span> <span class="nx">tmp</span> <span class="o">==</span> <span class="s">&quot;favourite&quot;</span>
+    <span class="k">return</span> <span class="s">&quot;btn btn-small btn-primary&quot;</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="s">&quot;btn btn-small btn-danger&quot;</span>
+
+<span class="nv">sortArrayByFollowing = </span><span class="nf">(a,b)-&gt;</span>
+  <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">length</span>
+  <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">length</span>
+  <span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="nx">b</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">length</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">name</span> <span class="o">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">name</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span>  <span class="nx">a</span><span class="p">.</span><span class="nx">name</span> <span class="o">&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">name</span>
+  <span class="k">return</span> <span class="mi">0</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="search-result">Search Result</h2>
 
 <p>Checks if the first char of the search query is "@" (profiles) or "#" (models) else (profiles &amp;&amp; models) <br />
 Creates the searchQuery with "/query/i" to enable that the search query has not to match exactly and is case insensitive <br />
@@ -67,21 +72,26 @@ return: array (with #models or @profiles or both) (+ .searchingFor" and .order)<
     <span class="nv">result = </span><span class="nx">searchForProfiles</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)</span>
     <span class="nv">i.searchingFor = </span><span class="s">&quot;profileLink&quot;</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result</span>
     <span class="nv">i.order = </span><span class="nx">order</span><span class="p">(</span><span class="s">&quot;profileLink&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result</span>
+    <span class="nv">i.button = </span><span class="nx">buttonDesign</span><span class="p">(</span><span class="s">&quot;profileLink&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result</span>
   <span class="k">else</span> <span class="k">if</span> <span class="nx">searchingFor</span> <span class="o">==</span> <span class="s">&quot;</span><span class="err">#</span><span class="s">&quot;</span>
     <span class="nv">searchQuery = </span><span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;searchQuery&quot;</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;/i&quot;</span>
     <span class="nv">result = </span><span class="nx">searchForModels</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)</span>
     <span class="nv">i.searchingFor = </span><span class="s">&quot;modelLink&quot;</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result</span>
     <span class="nv">i.order = </span><span class="nx">order</span><span class="p">(</span><span class="s">&quot;modelLink&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result</span>
+    <span class="nv">i.button = </span><span class="nx">buttonDesign</span><span class="p">(</span><span class="s">&quot;modelLink&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result</span>
   <span class="k">else</span>
     <span class="nv">searchQuery = </span><span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;searchQuery&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;/i&quot;</span>
-    <span class="nv">result = </span><span class="nx">searchForProfiles</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">).</span><span class="nx">fetch</span><span class="p">()</span>
+    <span class="nv">result = </span><span class="nx">searchForProfiles</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)</span>
     <span class="nv">result2 = </span><span class="nx">searchForModels</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">)</span>
     <span class="nv">i.searchingFor = </span><span class="s">&quot;profileLink&quot;</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result</span>
     <span class="nv">i.order = </span><span class="nx">order</span><span class="p">(</span><span class="s">&quot;profileLink&quot;</span><span class="p">,</span> <span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result</span>
+    <span class="nv">i.button = </span><span class="nx">buttonDesign</span><span class="p">(</span><span class="s">&quot;profileLink&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result</span>
     <span class="nv">i.searchingFor = </span><span class="s">&quot;modelLink&quot;</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result2</span>
     <span class="nv">i.order = </span><span class="nx">order</span><span class="p">(</span><span class="s">&quot;modelLink&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result2</span>
+    <span class="nv">i.button = </span><span class="nx">buttonDesign</span><span class="p">(</span><span class="s">&quot;modelLink&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result2</span>
     <span class="nx">jQuery</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="nx">result2</span><span class="p">)</span>
 
+  <span class="nx">result</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">sortArrayByFollowing</span><span class="p">)</span>
   <span class="k">return</span> <span class="nx">result</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="events">Events</h2>
 
 <p>Search click events to redirect to models or profiles or to update Profiles with follow/favourite</p></div></div><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">search</span><span class="p">.</span><span class="nx">events</span>
