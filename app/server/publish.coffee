@@ -1,3 +1,32 @@
+# # Published data sets
+
+# ## Profiles
+
+# ### All profiles
+# Profile information is published without restriction.
+# This is crucial for search functionality.
+
+Meteor.publish "allProfiles", ->
+  Profiles.find({})
+
+# ### User data
+# The following user data is only published to the user,
+# currently logged in:
+# * login services (facebook, twitter, google plus, github)
+# * email address
+Meteor.publish "userData", ->
+  return Meteor.users.find {_id: this.userId},
+    fields:
+      'services': 1
+      'mail': 1
+
+# ### Allow rules
+# These rules only apply to direct changes to the database,
+# coming from the client.
+# The following operations may only be performed by the profile owner:
+# * updating
+# * removing
+
 Meteor.startup ->
   Profiles.allow
     update: (userId, doc, fields, modifier) ->
@@ -9,15 +38,12 @@ Meteor.startup ->
         return true
       return false
 
-Meteor.publish "userData", ->
-  return Meteor.users.find {_id: this.userId},
-    fields:
-      'services': 1
-      'mail': 1
-
-Meteor.publish "allProfiles", ->
-	Profiles.find({})
-
+# ## Models
+# ### All Models
+# Model information is published to every client
+# with the following restrictions:
+# * no action ids (needed for action history = undo/redo funtionality)
+# * no colors (needed for editing shortcuts)
 Meteor.publish "allModels", ->
   user = Meteor.users.findOne({_id: this.userId})
   if not user 
@@ -38,6 +64,13 @@ Meteor.publish "allModels", ->
     }
   });
 
+# ### Model (to view or to edit)
+# The following model information is published to all clients,
+# requesting information about a specific model (for viewing or editing),
+# who have at least the role 'viewer':
+# * unrestricted model information
+# * model objects
+# * model actions
 Meteor.publish 'model', (modelId) ->
   user = Meteor.users.findOne({_id: this.userId})
   if not user
