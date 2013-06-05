@@ -18,3 +18,16 @@ Meteor.methods
 		checkEditingOwnProfile(profileId)
 		Profiles.update {_id: profileId},{$push: updateObject}			
 		Profiles.update {_id: profileId},{$set: {updatedAt: new Date()}}
+
+
+# ## Current Profile
+# * return: object
+@currentProfile = ->
+	Profiles.find(
+		email: currentEmail()
+	).fetch()[0]	
+
+# ## Current Users Email
+# * return: string
+@currentEmail = ->
+	Meteor.user().mail[0]

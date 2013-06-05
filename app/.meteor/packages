@@ -10,7 +10,6 @@ accounts-base
 accounts-password
 email
 accounts-facebook
-accounts-github
 accounts-google
 accounts-twitter
 jquery
@@ -24,3 +23,4 @@ accounts-ui-bootstrap-dropdown
 mocha-web
 versioning
 underscore
+accounts-github

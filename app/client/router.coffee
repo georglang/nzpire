@@ -80,7 +80,6 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true
 
   profile: (_id) ->
-    console.log "PROFILE ROUTE"
     Session.set "profileId", _id
     Session.set "template", "profile"
     @navigate "profile/" + _id,

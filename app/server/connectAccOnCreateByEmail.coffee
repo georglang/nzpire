@@ -43,7 +43,6 @@ Accounts.onCreateUser( (options,user)->
 		username = preserveUsernameUniqueness(user.services[service].username)
 		options.profile.name = username
 		service_id = user.services[service].id	
-
 		# options.profile.email is an array with emails
 		options.profile.email = Meteor.http.get('https://api.github.com/user/emails?access_token=' + user.services[service].accessToken).data
 		if options.profile.email.message == 'Not Found'

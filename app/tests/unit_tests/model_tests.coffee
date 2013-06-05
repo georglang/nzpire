@@ -1,6 +1,13 @@
-describe "Model", ->
-  describe "createModel", ->
-    it "create new Model", ->
+# # Unit_Tests
+# ## Steps to success:
+# ### * Clear database before running unit_tests
+# ### * Start Meteorite Server with: sudo METEOR_MOCHA_TEST_DIRS=tests/unit_tests mrt
+# ### * Call localhost:3000/unit_tests
+# ### * Check out your tests
+
+describe "Profile", ->
+  describe "Profile", ->
+    it "create new Account", ->
       if not Meteor.userId()
         Accounts.createUser
           username: "maxmustermann"
@@ -9,55 +16,71 @@ describe "Model", ->
           profile:
             name: "Max Mustermann"
 
+        chai.assert.equal Meteor.user()?,true
+
+describe "Models", ->
+  describe "Model Methods", ->
+    it "Create new Model", ->
       if Meteor.user()?.services
-        console.log "start"
-        options = {name: "testmodel", creator: "Altmann Christoph", predecessor: "", isPublic: false}
+        options = {name: "testmodel", creator: currentProfile()?._id, predecessor: "", isPublic: false}
         Meteor.call 'createModel',options
         createdModel = Models.findOne({name: "testmodel"})
-        console.log createdModel
         chai.assert.equal createdModel?, true
-        console.log "done"
 
-    it "create new Model and throw Exception", ->
+    it "Create same Model again", ->
       if Meteor.user()?.services
-        console.log "start2"
-        console.log "start second Test"
-        options = {name: "testmodel", creator: "Altmann Christoph", predecessor: "", isPublic: false}
+        options = {name: "testmodel", creator: currentProfile()?._id, predecessor: "", isPublic: false}
         Meteor.call 'createModel',options
+        createdModel = Models.find({name: "testmodel"}).fetch()
+        chai.assert.equal createdModel.length, 1
+
+    it "Rename Model", ->
+      if Meteor.user()?.services
+        modelId = Models.findOne({name:"testmodel"})
+        optionsUpdateModelName = {_id: modelId._id, name: "renamedTestmodel"}
+        Meteor.call 'updateModelName',optionsUpdateModelName
+
+        oldModel = Models.find({name:"testmodel"}).fetch()
+        chai.assert.equal oldModel.length, 0
+
+        renamedModel = Models.find({name:"renamedTestmodel"}).fetch()
+        chai.assert.equal renamedModel.length, 1
+
+    it "Clone Model", ->
+      if Meteor.user()?.services
+        predecessorModel = Models.find({name:"renamedTestmodel"}).fetch()
+        chai.assert.equal predecessorModel.length, 1
+
+        options = {name: "clonedModel", predecessor: predecessorModel[0]?._id, creator: currentProfile()?._id,isPublic: false}
+        Meteor.call 'cloneModel',options
+
+        clonedModel = Models.find({name:"clonedModel"}).fetch()
+        chai.assert.equal clonedModel.length, 1        
+
+    it "Update Model Public State", ->
+      if Meteor.user()?.services
+        model = Models.findOne({name:"renamedTestmodel"})
+        chai.assert.equal model.isPublic, false
+
+        options = {_id: model._id,isPublic: true}
+        Meteor.call 'updateModelIsPublic',options
+
+        updatedModel = Models.findOne({name:"renamedTestmodel"})
+        chai.assert.equal updatedModel.isPublic, true
+
+    it "Add Tags to Model", ->
+      if Meteor.user()?.services
+        model = Models.findOne({name:"renamedTestmodel"})
+        chai.assert.equal model.tags.length, 0
+
+        options = {_id: model._id,tag: "testTag1"}
+        Meteor.call 'updateModelTag', options
+
+        updatedModel = Models.find({name:"renamedTestmodel"})
+        chai.assert.equal updatedModel.tags[0], "testTag1"
         
-        console.log "done2"
-
-      
-
-      ###
-      console.log Models.find({}).fetch()
-
-      modelId = findOneModelByOptions(options)
-      optionsUpdateModelName = {_id: modelId._id, name: "renamedTestModel"}
-      Meteor.call 'updateModelName',optionsUpdateModelName, (error,result)->
-      	if error
-      		console.log error.reason
-
-      console.log Models.find({}).fetch()    
-      
-      newModel = findOneModelByOptions(optionsUpdateModelName)
-      chai.assert.equal modelId._id, newModel._id
-      chai.assert.equal newModel.name, "renamedTestModel"
-      chai.expect(modelId._id).to.equal(newModel._id)
-      chai.should()
-      modelId._id.should.equal(newModel._id)
-
-      optionsRemove = {name: newModel.name}
-      Meteor.call 'removeModel',optionsRemove, (error,result)->
-        if error
-          console.log error.reason
-
-      console.log Models.find({}).fetch()
-
-      optionsRemove2 = {name: "testmodel"}
-      Meteor.call 'removeModel',optionsRemove2, (error,result)->
-        if error
-          console.log error.reason
-
-      console.log Models.find({}).fetch()
-      ###
+  describe "Model Permissions", ->
+    it "Check Permission", ->
+      if Meteor.user()?.services
+        model = Models.findOne({name:"renamedTestmodel"})      
+        chai.assert.equal checkModelPermission(model._id,true), Roles.creator
