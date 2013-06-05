@@ -8,67 +8,55 @@ body{
 }
 
 .profileLink{
-	background-color:lightgreen;
+    background-color:lightgreen;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .modelLink{
-	background-color:lightblue;
+    background-color:lightblue;
     border-radius: 5px;
     cursor: pointer;
 }
 
 #searchQuery{
-	position: relative;
-	top:5px;
+    position: relative;
+    top:5px;
     transition: 0.1s ease-in;
 }
 
 .activeSearchQuery{
-    width: 400px;
+    width: 200px;
 }
 
 #login-name-link{
-	position: relative;
-	top: 9px;
-	margin-left: 15px;
+    position: relative;
+    top: 9px;
+    margin-left: 15px;
 }
 
 #login-sign-in-link{
-	position: relative;
-	top: 9px;
-	margin-left: 15px;
+    position: relative;
+    top: 9px;
+    margin-left: 15px;
 }
 
 .navbar{
-	margin-bottom: 0px;
+    margin-bottom: 0px;
+    width: 100%;
+    float:left;
 }
 
 .navbar navbar-inverse{
     background-color: #333333;
 }
 
-.footer{
-	margin-bottom:0px;
-	color:white;
-	width: 100%;
-	text-align:center;
-	position:fixed;
-	bottom:0px;
-}
-
-.footer > .navbar-inner{
-	min-height: 0px;
-	border-radius: 0px;
-}
-
 #modelName{
-	margin-top: 5px;
+    margin-top: 5px;
 }
 
 #createNewModel{
-	margin-bottom:5px;
+    margin-bottom:5px;
 }
 
 .searchTemplate{
@@ -103,6 +91,16 @@ body{
     width: 63px;
     margin-top:-1px !important;
     margin-left: 2px;
+}
+
+#socialMediaButtons{
+    float: right;
+    min-width: 330px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 1%;
+    height: 21px;
 }
 
 .activeTemplate {
