@@ -7,7 +7,8 @@ Package.on_use(function (api) {
     'three.min.js',
     'FlyControls.js',
     'TrackballControls.js',
-    'FocusControls.js'
+    'FocusControls.js',
+    'Detector.js'
   ], ['client']
   );
 });

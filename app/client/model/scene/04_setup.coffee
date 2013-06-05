@@ -3,7 +3,11 @@
 @Modeling ?= {}
 Modeling.scene ?= {}
 scene = Modeling.scene
-Modeling.renderer ?= new THREE.WebGLRenderer()
+
+if Detector.webgl
+    Modeling.renderer ?= new THREE.WebGLRenderer()
+else
+    Modeling.renderer ?= new THREE.CanvasRenderer()
 renderer = Modeling.renderer
 
 scene.setup = ->
