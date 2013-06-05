@@ -1,16 +1,5 @@
-test_createModel = ->
-    #create a model
-    if Meteor.user()?.services
-      console.log currentProfile()
-      options = {name: "testmodel", creator: "Altmann Christoph", predecessor: "", isPublic: false}
-      modelId = Meteor.call 'createModel',options, (error,result)->
-        if error 
-          console.log error.reason
-        foundModelId = Models.findOne({name: "testmodel"})?._id
-        chai.assert.equals foundModelId, result
-
 describe "Model", ->
-  describe "updateModelname", ->
+  describe "createModel", ->
     it "create new Model", ->
       if not Meteor.userId()
         Accounts.createUser
@@ -19,10 +8,25 @@ describe "Model", ->
           email: "a@b.com"
           profile:
             name: "Max Mustermann"
-        , (error) ->
 
       if Meteor.user()?.services
-        test_createModel()
+        console.log "start"
+        options = {name: "testmodel", creator: "Altmann Christoph", predecessor: "", isPublic: false}
+        Meteor.call 'createModel',options
+        createdModel = Models.findOne({name: "testmodel"})
+        console.log createdModel
+        chai.assert.equal createdModel?, true
+        console.log "done"
+
+    it "create new Model and throw Exception", ->
+      if Meteor.user()?.services
+        console.log "start2"
+        console.log "start second Test"
+        options = {name: "testmodel", creator: "Altmann Christoph", predecessor: "", isPublic: false}
+        Meteor.call 'createModel',options
+        
+        console.log "done2"
+
       
 
       ###

@@ -6,6 +6,7 @@ Template.page_controller.display_page = ->
 
 WorkspaceRouter = Backbone.Router.extend(
   routes:
+    "": "index"
     "/": "index"
     "index": "index"
     "model/:id": "model"
