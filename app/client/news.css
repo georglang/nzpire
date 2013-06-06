@@ -1,0 +1,17 @@
+.newsBoxes{
+  padding:2%;
+  width:18%;
+  background-color: #FFFFFF;
+  float:left;
+  margin-right:4%;
+  height: 100%;
+  -moz-box-shadow: 2px 2px 8px #bab8ba;
+  -webkit-box-shadow: 2px 2px 8px #bab8ba;
+  box-shadow: 2px 2px 8px #bab8ba;
+}
+
+.listItem{
+  padding-top:20px;
+  padding-bottom:20px;
+  border-bottom: #ccc7c7 1px dotted;
+}
