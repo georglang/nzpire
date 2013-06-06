@@ -20,10 +20,9 @@ Template.message.timestamp = ->
 		minutes: minutes
 	return time
 
-Template.message.rendered = ->
-	console.log "rendered"
-	$('.chatBox>div:last').focus()
-	$('#newMessage').focus()
+Template.chat.rendered = ->
+	#$('.chatBox>div:last').focus()
+	#$('#newMessage').focus()
 
 Template.chat.events
 	'keydown': (e) ->

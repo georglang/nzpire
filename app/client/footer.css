@@ -4,6 +4,7 @@ width: 100%;
 position: fixed;
 bottom: 0;
 background-color: white;
+transition: 1s ease-in;
 }
 
 footer ul{
@@ -23,4 +24,8 @@ footer ul li{
 	text-align:center;
 	position:fixed;
 	bottom:0px;
+}
+
+.activeModeling{
+	bottom: -100px;
 }
