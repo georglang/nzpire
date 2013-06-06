@@ -1,29 +1,32 @@
 <template name="news">
-	<div id="newsTemplate"> NEWS TEMPLATE
-	{{#if currentUser.services}}
-	{{#each getNews}}
-	<div> {{name}}_{{updatedAt}} </div>
-	{{/each}}
-	<ul>
-		<li><h4>Random Models:</h4></li>
-		{{#each getRandomModels}}
-		<li>
-			<div title="{{this._id}}" class="modelLink test">
-				{{this.name}}
-			</div>
-		</li>
+	<div id="newsTemplate"> 
+	
+	<div id="changeNews" class="newsBoxes">
+		<h3>Activities</h3>
+		{{#if currentUser.services}}
+		{{#each getNews}}
+		<div class="listItem"> {{name}} {{updatedAt}} </div>
 		{{/each}}
-	</ul>
-	<ul>
-		<li><h4>Most Popular Models:</h4></li>
-		{{#each getMostPopularModels}}
-		<li>
-			<div title="{{this._id}}" class="modelLink">
-				{{this.name}} {{this.favCounts}}
-			</div>
-		</li>
-		{{/each}}
-	</ul>	
+	</div>
+	
+		<div id="randomModels" class="newsBoxes">
+			<h3>Random Models</h3>
+			{{#each getRandomModels}}
+				<div title="{{this._id}}" class="modelLink listItem">
+					{{this.name}}
+				</div>
+			{{/each}}
+		</div>
+		
+		<div id="popularModels" class="newsBoxes">
+			<h3>Popular Models</h3>
+			{{#each getMostPopularModels}}
+				<div title="{{this._id}}" class="modelLink listItem">
+					{{this.name}} {{this.favCounts}}
+				</div>
+			{{/each}}
+		</div>	
+	
 	{{/if}}
 	</div>
 </template>
