@@ -1,0 +1,15 @@
+<template name="chat">
+	<div class="chatTemplate">
+		<div class="chatBox">
+			{{#each messages}}
+				{{> message}}
+			{{/each}}
+		</div>
+		<input type="text" id="newMessage" placeholder="message">
+	</div>
+</template>
+
+
+<template name="message">
+	<div>{{timestamp.hours}}:{{timestamp.minutes}}-{{publisher}}:{{this.message}}</div>
+</template>
