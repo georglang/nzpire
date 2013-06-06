@@ -1,6 +1,6 @@
 Template.chat.messages = ->
 	messages = ModelChat.find({modelId: Session.get('modelId')}).fetch()
-	return messages.reverse()
+	return messages
 
 Template.message.publisher = ->
 	publisher = Profiles.findOne({_id:this.publisherId})
@@ -14,11 +14,16 @@ Template.message.timestamp = ->
 		minutes = '0' + this.timestamp.getMinutes()
 	if this.timestamp.getHours < 10
 		hours = '0' + this.timestamp.getHours()
-		
+
 	time = 
 		hours: this.timestamp.getHours()
 		minutes: minutes
 	return time
+
+Template.message.rendered = ->
+	console.log "rendered"
+	$('.chatBox>div:last').focus()
+	$('#newMessage').focus()
 
 Template.chat.events
 	'keydown': (e) ->
