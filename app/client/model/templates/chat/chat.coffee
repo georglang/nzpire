@@ -1,6 +1,6 @@
 Template.chat.messages = ->
 	messages = ModelChat.find({modelId: Session.get('modelId')}).fetch()
-	return messages
+	return messages.reverse()
 
 Template.message.publisher = ->
 	publisher = Profiles.findOne({_id:this.publisherId})
@@ -20,7 +20,8 @@ Template.message.timestamp = ->
 		minutes: minutes
 	return time
 
-Template.chat.rendered = ->
+Template.message.rendered = ->
+	#$('.chatBox').scrollTop($('.chatBox')[0].scrollHeight);
 	#$('.chatBox>div:last').focus()
 	#$('#newMessage').focus()
 
@@ -34,6 +35,6 @@ Template.chat.events
 					modelId: Session.get 'modelId'
 					message: message
 					publisher: currentProfile()._id
-				Meteor.call 'createMessage', options, (result,err)->
+				Meteor.call 'createMessage', options, (err,result)->
 					if err
 						console.log err.reason
