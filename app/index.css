@@ -14,7 +14,6 @@ body{
 }
 
 .modelLink{
-    background-color:lightblue;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -95,7 +94,7 @@ body{
 
 #socialMediaButtons{
     float: right;
-    min-width: 330px;
+    min-width: 360px;
     position: absolute;
     right: 0;
     top: 0;

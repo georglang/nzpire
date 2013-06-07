@@ -89,7 +89,7 @@
 #searchParent{
 	float:left;
 	width: 28%;
-	margin-top: 44px;
+	margin-top: 41px;
 	margin-left: 20px;
 }
 
@@ -103,7 +103,7 @@
 
 .item img{
 	width:100%;
-	height:600px;
+	height:500px;
 }
 
 :focus {
@@ -128,6 +128,25 @@ input, textarea, .uneditable-input {
  .navbar{
  	margin-left:-7%;
  }
+}
+
+.carouselCaptionImproved {
+	position: absolute;
+	right: 98px;
+	height: 78px;
+	width: 300px;
+	top: 63px;
+	padding: 15px;
+	background: #333333;
+	background: rgba(0, 0, 0, 0.45);
+	color:#FFFFFF;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+}
+
+.carouselCaptionImproved p{
+	font-size: 278%;
 }
 /*
 @media (max-width: 979px) {

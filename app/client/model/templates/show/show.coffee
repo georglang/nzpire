@@ -9,6 +9,7 @@ Template.model.handleModelPermission = ->
 
 Template.model.rendered = ()->
 	$('#modelTemplate').addClass('activeTemplate')
+	THREEx.Screenshot.bindKey(renderer);
 
 Template.model.destroyed = ()->
 	$('#modelTemplate').removeClass('activeTemplate')

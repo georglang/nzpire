@@ -129,6 +129,22 @@ Template.modelSidebar.isFavourited = ->
     else
       return false
 
+getSnapshotDataURL = (width, height, format) ->
+  originalWidth = Modeling.renderer.domElement.width
+  originalHeight = Modeling.renderer.domElement.height
+
+  Modeling.renderer.setSize width, height
+  Modeling.scene.camera.aspect = width / height
+  Modeling.scene.camera.updateProjectionMatrix()
+  Modeling.renderer.render Modeling.scene.itself, Modeling.scene.camera
+  snapshotDataURL = Modeling.renderer.domElement.toDataURL("image/" + format)
+  
+  Modeling.renderer.setSize originalWidth, originalHeight
+  Modeling.scene.camera.aspect = originalWidth / originalHeight
+  Modeling.scene.camera.updateProjectionMatrix()
+  Modeling.renderer.render Modeling.scene.itself, Modeling.scene.camera
+  snapshotDataURL
+
 # ## Events
 Template.modelSidebar.events
 
@@ -235,4 +251,16 @@ Template.modelSidebar.events
         $('#createNewModel').after("<div id='errorCloneModel'>"+error.reason+"</div>")
       else
         Workspace.model(result)
+
+  'click #takeSnapshot': ->
+    snapshotDataURL = getSnapshotDataURL(100,100,'png')
+    console.log 'SNAPSHOTURL', snapshotDataURL
+    console.log 'ModelId', Session.get('modelId')
+    Models.update({_id: Session.get('modelId')},{$set: {snapshotURL: snapshotDataURL}})
+
+
+
+
+
+
 
