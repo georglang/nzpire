@@ -60,6 +60,8 @@ Template.news.getRandomModels = ->
 
 	#modelsShuffled = _.shuffle(models).slice(0,10)
 	allModels = _.shuffle(allModels).slice(0,10)
+	for model in allModels
+		model.snapshotURL ?= '/img/dummyModel.jpg'
 	return allModels
 
 
