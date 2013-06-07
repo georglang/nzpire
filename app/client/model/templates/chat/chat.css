@@ -1,0 +1,20 @@
+.chatBox{
+	position: absolute;
+	background-color: rgba(255,255,255,0.1);
+	width: 285px;
+	color: #0982bb ;
+	height:150px;
+	left:20px;
+	bottom:120px;
+	overflow-y:scroll;
+	overflow-x:hidden;
+}
+
+#newMessage{
+	position: absolute;
+	width: 255px;
+	left:20px;
+	bottom: 70px;
+	background-color: rgba(255,255,255,0.3);
+	color: #0982bb ;
+}

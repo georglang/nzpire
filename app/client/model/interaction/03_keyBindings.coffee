@@ -42,67 +42,68 @@ keyBindings.setup = ->
     'r'
   ]
   
-  # for each undo shortcut being activated
-  # undo the last step
-  for undoShortcut in undoShortcuts
-    Meteor.Keybindings.addOne undoShortcut,
+  $(document).ready ->
+    # for each undo shortcut being activated
+    # undo the last step
+    for undoShortcut in undoShortcuts
+      Meteor.Keybindings.addOne undoShortcut,
+        (event) ->
+          if inputShouldNotBeIgnored event
+            Modeling.interaction.history.undo()
+        keybindingsContext
+        keybindingsEvent
+
+    # for each redo shortcut being activated
+    # redo the last step
+    for redoShortcut in redoShortcuts
+      Meteor.Keybindings.addOne redoShortcut,
+        (event) ->
+          if inputShouldNotBeIgnored event
+            Modeling.interaction.history.redo()
+        keybindingsContext
+        keybindingsEvent
+
+    # for each color shortcut begin activated
+    # choose a color
+    installColorShortcut = (key, id) ->
+      Meteor.Keybindings.addOne key,
+        (event) ->
+          if inputShouldNotBeIgnored event
+            $(id).click()
+        keybindingsContext
+        keybindingsEvent
+
+    for modelingColor in DefaultModelColors
+      installColorShortcut modelingColor.shortcut, "#modelingColor_" + modelingColor.index
+
+    voxelSizeIncreaseShortcut = 'l'
+
+    Meteor.Keybindings.addOne voxelSizeIncreaseShortcut,
       (event) ->
         if inputShouldNotBeIgnored event
-          Modeling.interaction.history.undo()
-      keybindingsContext
+          activeSizeBox = $('.activeSize')
+          siblings = activeSizeBox.siblings()
+          nextActiveSizeBox = null
+          if activeSizeBox.index() == siblings.length
+            nextActiveSizeBox = siblings[0]
+          else
+            nextActiveSizeBox = activeSizeBox.next()
+          nextActiveSizeBox.click()
+      keybindingsContext,
       keybindingsEvent
 
-  # for each redo shortcut being activated
-  # redo the last step
-  for redoShortcut in redoShortcuts
-    Meteor.Keybindings.addOne redoShortcut,
+    voxelSizeDecreaseShortcut = 'k'
+
+    Meteor.Keybindings.addOne voxelSizeDecreaseShortcut,
       (event) ->
         if inputShouldNotBeIgnored event
-          Modeling.interaction.history.redo()
-      keybindingsContext
+          activeSizeBox = $('.activeSize')
+          siblings = activeSizeBox.siblings()
+          prevActiveSizeBox = null
+          if activeSizeBox.index() == 0
+            prevActiveSizeBox = siblings[siblings.length - 1]
+          else
+            prevActiveSizeBox = activeSizeBox.prev()
+          prevActiveSizeBox.click()
+      keybindingsContext,
       keybindingsEvent
-
-  # for each color shortcut begin activated
-  # choose a color
-  installColorShortcut = (key, id) ->
-    Meteor.Keybindings.addOne key,
-      (event) ->
-        if inputShouldNotBeIgnored event
-          $(id).click()
-      keybindingsContext
-      keybindingsEvent
-
-  for modelingColor in DefaultModelColors
-    installColorShortcut modelingColor.shortcut, "#modelingColor_" + modelingColor.index
-
-  voxelSizeIncreaseShortcut = 'l'
-
-  Meteor.Keybindings.addOne voxelSizeIncreaseShortcut,
-    (event) ->
-      if inputShouldNotBeIgnored event
-        activeSizeBox = $('.activeSize')
-        siblings = activeSizeBox.siblings()
-        nextActiveSizeBox = null
-        if activeSizeBox.index() == siblings.length
-          nextActiveSizeBox = siblings[0]
-        else
-          nextActiveSizeBox = activeSizeBox.next()
-        nextActiveSizeBox.click()
-    keybindingsContext,
-    keybindingsEvent
-
-  voxelSizeDecreaseShortcut = 'k'
-
-  Meteor.Keybindings.addOne voxelSizeDecreaseShortcut,
-    (event) ->
-      if inputShouldNotBeIgnored event
-        activeSizeBox = $('.activeSize')
-        siblings = activeSizeBox.siblings()
-        prevActiveSizeBox = null
-        if activeSizeBox.index() == 0
-          prevActiveSizeBox = siblings[siblings.length - 1]
-        else
-          prevActiveSizeBox = activeSizeBox.prev()
-        prevActiveSizeBox.click()
-    keybindingsContext,
-    keybindingsEvent

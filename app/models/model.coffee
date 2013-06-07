@@ -3,6 +3,9 @@
 @Models = new Meteor.Collection 'models'
 @ModelObjects = new Meteor.Collection 'modelObjects'
 
+# ## Chat Collection: _id, modelId, publisherId, message, timestamp
+@ModelChat = new Meteor.Collection 'modelChat'
+
 # ## Model Action
 
 @ModelActions = new Meteor.Collection 'modelActions'
@@ -322,6 +325,17 @@ Meteor.methods
 			ModelObjects.remove modelId: options._id
 			ModelActions.remove modelId: options._id
 			Models.remove options
+
+	createMessage: (options)->
+		if userHasAtLeastRole options?.modelId, Roles.viewer
+			if options.modelId == undefined || options.publisher == undefined || options.message == undefined
+				throw new Meteor.Error(490, "Undefined Parameter")
+			ModelChat.insert({
+				modelId: options.modelId,
+				publisherId: options.publisher,
+				message: options.message,
+				timestamp: new Date()
+			})
 
 @modelLoaded = ->
 	model = Models.findOne({})

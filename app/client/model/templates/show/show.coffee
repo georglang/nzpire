@@ -9,7 +9,10 @@ Template.model.handleModelPermission = ->
 
 Template.model.rendered = ()->
 	$('#modelTemplate').addClass('activeTemplate')
-	THREEx.Screenshot.bindKey(renderer);
+	$('footer').addClass('activeModeling')
+	$('.navbar').addClass('activeNavModeling')
 
 Template.model.destroyed = ()->
 	$('#modelTemplate').removeClass('activeTemplate')
+	$('footer').removeClass('activeModeling')
+	$('.navbar').removeClass('activeNavModeling')

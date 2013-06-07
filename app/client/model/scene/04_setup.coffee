@@ -5,7 +5,12 @@ Modeling.scene ?= {}
 scene = Modeling.scene
 
 if Detector.webgl
-    Modeling.renderer ?= new THREE.WebGLRenderer()
+    Modeling.renderer ?= new THREE.WebGLRenderer
+        antialias: true
+        # preserving the drawing buffer is important for
+        # taking screenshots from the canvas
+        preserveDrawingBuffer: true
+        clearColor: 0x000000
 else
     Modeling.renderer ?= new THREE.CanvasRenderer()
 renderer = Modeling.renderer
@@ -17,13 +22,12 @@ scene.setup = ->
   Meteor.defer ->
     # ## DOM element
     container = $ "#modelContainer"
-    container.focus()
 
     # ## Rendering
     viewAngle = 45
     aspect = 1
-    near = 0.1
-    far = 10000
+    near = 10
+    far = 100000
 
     camera = scene.camera = new THREE.PerspectiveCamera viewAngle, aspect, near, far
     camera.position.z = 1000
@@ -66,12 +70,37 @@ scene.setup = ->
 
     # ## Lights
     cameraLight = new THREE.PointLight 0xffffff, 1.0, 10000
+    cameraLight.castShadow = true
     camera.add cameraLight
 
     # ## Building plane
-    plane = new THREE.Mesh(new THREE.PlaneGeometry(10000, 10000, 50, 50), new THREE.MeshLambertMaterial({color: 0x333333}))
+    plane = new THREE.Mesh(new THREE.PlaneGeometry(10000, 10000, 50, 50), new THREE.MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0.5}))
     plane.rotation.x = - Math.PI / 2
     scene.pickable.add plane
+
+    # ## Skybox
+    path = "/textures/skyboxes/sky01/"
+    format = ".jpg"
+    urls = [
+        path + "px" + format,
+        path + "nx" + format,
+        path + "py" + format,
+        path + "ny" + format,
+        path + "pz" + format,
+        path + "nz" + format
+    ]
+    textureCube = THREE.ImageUtils.loadTextureCube(urls, new THREE.CubeRefractionMapping())
+    shader = THREE.ShaderLib["cube"]
+    shader.uniforms["tCube"].value = textureCube
+    material = new THREE.ShaderMaterial(
+      fragmentShader: shader.fragmentShader
+      vertexShader: shader.vertexShader
+      uniforms: shader.uniforms
+      depthWrite: false
+      side: THREE.BackSide
+    )
+    skybox = new THREE.Mesh(new THREE.CubeGeometry(10000, 10000, 10000), material)
+    scene.itself.add skybox
 
     # ## Object preview
     scene.materials.objectPreview = objectPreviewMaterial = new THREE.MeshLambertMaterial

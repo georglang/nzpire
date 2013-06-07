@@ -96,4 +96,5 @@ Meteor.publish 'model', (modelId) ->
 
   modelObjectsCursor = ModelObjects.find modelId: modelId
   modelActionsCursor = ModelActions.find modelId: modelId
-  return [modelCursor, modelObjectsCursor, modelActionsCursor]
+  modelChatCursor = ModelChat.find modelId: modelId
+  return [modelCursor, modelObjectsCursor, modelActionsCursor, modelChatCursor]

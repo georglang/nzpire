@@ -44,6 +44,7 @@ body{
     margin-bottom: 0px;
     width: 100%;
     float:left;
+    transition: 0.5s ease-in;
 }
 
 .navbar navbar-inverse{
@@ -101,6 +102,18 @@ body{
     margin-top: 1%;
     height: 21px;
 }
+
+.activeNavModeling{
+    position: absolute;
+    top: -85px;
+}
+
+.activeNavModeling:hover{
+    top: 0px;
+}
+
+
+
 
 .activeTemplate {
     animation: fadein 1s;
