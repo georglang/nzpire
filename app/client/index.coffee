@@ -29,5 +29,10 @@ Template.index.destroyed = ()->
 
 
 Meteor.autorun ->
+	$(".carousel").each ->
+	  $(this).carousel
+	    interval: 2000
+	 
 	if Meteor.user() && Session.get('template') == 'index'
 		Workspace.news()
+
