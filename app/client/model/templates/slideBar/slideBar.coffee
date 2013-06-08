@@ -254,8 +254,6 @@ Template.modelSidebar.events
 
   'click #takeSnapshot': ->
     snapshotDataURL = getSnapshotDataURL(100,100,'png')
-    console.log 'SNAPSHOTURL', snapshotDataURL
-    console.log 'ModelId', Session.get('modelId')
     Models.update({_id: Session.get('modelId')},{$set: {snapshotURL: snapshotDataURL}})
 
 
