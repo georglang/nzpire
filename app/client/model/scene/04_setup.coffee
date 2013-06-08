@@ -36,10 +36,6 @@ scene.setup = ->
     camera.position.z = 1000
     camera.position.y = 1000
 
-    controls.object = camera
-    controls.domElement = container[0]
-    controls.enabled = true
-
     renderer.continueRenderLoop = true
 
     render = ->
@@ -129,6 +125,12 @@ scene.setup = ->
         camera.updateProjectionMatrix();
 
     $(window).resize()
+
+    # ## Camera controls
+    canvas = container.find "canvas"
+    controls.object = camera
+    controls.updateDomElement canvas[0]
+    controls.enabled = true
 
     # Kick off rendering loop!
     render()
