@@ -15,3 +15,23 @@
   padding-bottom:20px;
   border-bottom: #ccc7c7 1px dotted;
 }
+
+.randomModel{
+  float:left;
+  margin-left:2%;
+}
+
+#singleRandomModel{
+  width:100px;
+  height:100px;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  border-radius: 14px;
+  background-size: 100% 100%;
+}
+
+#singleRandomModel p{
+  text-align: center;
+  margin-top:1%;
+  color:#FFFFFF;
+}

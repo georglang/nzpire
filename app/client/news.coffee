@@ -60,6 +60,8 @@ Template.news.getRandomModels = ->
 
 	#modelsShuffled = _.shuffle(models).slice(0,10)
 	allModels = _.shuffle(allModels).slice(0,10)
+	for model in allModels
+		model.snapshotURL ?= '/img/dummyModel.jpg'
 	return allModels
 
 
@@ -92,7 +94,11 @@ Template.news.getMostPopularModels = ->
 
 Template.news.events
 	'click div.modelLink': (e)->
-		Workspace.model e.target.title
+		Workspace.model $(e.currentTarget).data("id")
+
+#	'click div.linkToOtherModel' : (e)->
+#		console.log "Target MODEL weiterleitung", e.currentTarget
+#		Workspace.model $(e.currentTarget).data("id")
 
 
 # ## Rendered and Destroyed

@@ -12,8 +12,10 @@
 		<div id="randomModels" class="newsBoxes">
 			<h3>Random Models</h3>
 			{{#each getRandomModels}}
-				<div title="{{this._id}}" class="modelLink listItem">
-					{{this.name}}
+				<div data-id="{{this._id}}" class="modelLink randomModel">
+					<div id="singleRandomModel" style="background-image:url({{this.snapshotURL}})">
+						<p>{{this.name}}</p>
+					</div>
 				</div>
 			{{/each}}
 		</div>
@@ -21,7 +23,7 @@
 		<div id="popularModels" class="newsBoxes">
 			<h3>Popular Models</h3>
 			{{#each getMostPopularModels}}
-				<div title="{{this._id}}" class="modelLink listItem">
+				<div title="{{this._id}}" class="modelLink listItem" data-id="{{this._id}}">
 					{{this.name}} {{this.favCounts}}
 				</div>
 			{{/each}}
