@@ -6,7 +6,6 @@ Template.model.handleModelPermission = ->
 	if permission <= Roles.none
     Workspace.index()
 
-
 Template.model.rendered = ()->
 	$('#modelTemplate').addClass('activeTemplate')
 	$('footer').addClass('activeModeling')
@@ -16,3 +15,4 @@ Template.model.destroyed = ()->
 	$('#modelTemplate').removeClass('activeTemplate')
 	$('footer').removeClass('activeModeling')
 	$('.navbar').removeClass('activeNavModeling')
+	Modeling.scene.shutdown();

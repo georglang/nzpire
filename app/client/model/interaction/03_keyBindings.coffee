@@ -107,3 +107,11 @@ keyBindings.setup = ->
           prevActiveSizeBox.click()
       keybindingsContext,
       keybindingsEvent
+
+    settingNewFocusPointShortcut = 'space'
+
+    Meteor.Keybindings.addOne settingNewFocusPointShortcut,
+      (event) ->
+        pick = Modeling.scene.picking.pick()
+        if pick
+          Modeling.scene.controls.future.focusPoint.copy pick.point

@@ -3,6 +3,7 @@
 @Modeling ?= {}
 Modeling.scene ?= {}
 scene = Modeling.scene
+controls = scene.controls = new THREE.FocusControls()
 
 if Detector.webgl
     Modeling.renderer ?= new THREE.WebGLRenderer
@@ -14,6 +15,8 @@ if Detector.webgl
 else
     Modeling.renderer ?= new THREE.CanvasRenderer()
 renderer = Modeling.renderer
+
+renderer.continueRenderLoop = false;
 
 scene.setup = ->
   scene.currentObjects = []
@@ -33,24 +36,19 @@ scene.setup = ->
     camera.position.z = 1000
     camera.position.y = 1000
 
-    controls = new THREE.FocusControls camera, container[0]
+    controls.object = camera
+    controls.domElement = container[0]
+    controls.enabled = true
 
-    controls.rotateSpeed = 1.0
-    controls.zoomSpeed = 1.2
-    controls.panSpeed = 0.8
-
-    controls.noZoom = false
-    controls.noPan = false
-
-    controls.staticMoving = true
-    controls.dynamicDampingFactor = 0.3
+    renderer.continueRenderLoop = true
 
     render = ->
-      # Only render when template is active.
-      if Session.get("template") == "model"
-        renderer.render scene.itself, camera
-        controls.update()
-      requestAnimationFrame render
+      if renderer.continueRenderLoop
+        # Only render when template is active.
+        if Session.get("template") == "model"
+          renderer.render scene.itself, camera
+          controls.update()
+        requestAnimationFrame render
 
     # ## Clock
     clock = new THREE.Clock()
@@ -134,3 +132,7 @@ scene.setup = ->
 
     # Kick off rendering loop!
     render()
+
+scene.shutdown = ->
+  renderer.continueRenderLoop = false
+  controls.enabled = false

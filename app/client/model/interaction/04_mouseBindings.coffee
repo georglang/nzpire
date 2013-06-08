@@ -93,5 +93,5 @@ mouseBindings.setup = ->
     updateObjectPreview()
   
   Meteor.defer ->
-    $('#modelContainer').off 'mousemove', mouseMove
-    $('#modelContainer').on 'mousemove', mouseMove 
+    $('#modelContainer > canvas').off 'mousemove', mouseMove
+    $('#modelContainer > canvas').on 'mousemove', mouseMove 

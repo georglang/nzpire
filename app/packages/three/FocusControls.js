@@ -1,11 +1,6 @@
-/**
- * @author Mike Schäkermann
- */
-
 THREE.FocusControls = function ( object, domElement ) {
 
 	var _this = this;
-	var STATE = { NONE: -1, ROTATE: 0, ZOOM: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_ZOOM: 4, TOUCH_PAN: 5 };
 
 	this.object = object;
 	this.domElement = ( domElement !== undefined ) ? domElement : document;
@@ -17,55 +12,48 @@ THREE.FocusControls = function ( object, domElement ) {
 	this.screen = { width: 0, height: 0, offsetLeft: 0, offsetTop: 0 };
 	this.radius = ( this.screen.width + this.screen.height ) / 4;
 
-	this.rotateSpeed = 1.0;
-	this.zoomSpeed = 1.2;
-	this.panSpeed = 0.3;
+	this.current = {
+		focusPoint: new THREE.Vector3(0, 0, 0),
+		phi: Math.PI * 0.25,
+		theta: Math.PI * 0.25,
+		distanceFromFocusPoint: 400
+	};
 
-	this.noRotate = false;
-	this.noZoom = false;
-	this.noPan = false;
+	this.future = {
+		focusPoint: this.current.focusPoint.clone(),
+		phi: this.current.phi,
+		theta: this.current.theta,
+		distanceFromFocusPoint: this.current.distanceFromFocusPoint
+	};
 
-	this.staticMoving = false;
-	this.dynamicDampingFactor = 0.2;
+	this.animationDampingFactor = 0.75;
 
-	this.minDistance = 0;
-	this.maxDistance = Infinity;
+	this.motionSpeed = new THREE.Vector3(0.005, 0.005, 0.005);
+	this.motionStepLength = 50;
+	this.rotationSpeed = new THREE.Vector2(2, 2);
+	this.zoomSpeed = 2;
 
-	this.keys = [ 65 /*A*/, 83 /*S*/, 68 /*D*/ ];
+	this.zoom = {
+		min: 20,
+		max: 1000
+	};
+
+	this.keys = {
+		up: [ 87 /*W*/, 38 /*ARROW UP*/ ],
+		left: [ 65 /*A*/, 37 /*ARROW LEFT*/ ],
+		down: [ 83 /*S*/, 40 /*ARROW DOWN*/ ],
+		right: [ 68 /*D*/, 39 /*ARROW RIGHT*/ ]
+	};
 
 	// internals
 
-	this.target = new THREE.Vector3();
+	_mousePosition = {
+		down: new THREE.Vector2(),
+		last: new THREE.Vector2(),
+		current: new THREE.Vector2()
+	};
 
-	var lastPosition = new THREE.Vector3();
-
-	var _state = STATE.NONE,
-	_prevState = STATE.NONE,
-
-	_eye = new THREE.Vector3(),
-
-	_rotateStart = new THREE.Vector3(),
-	_rotateEnd = new THREE.Vector3(),
-
-	_zoomStart = new THREE.Vector2(),
-	_zoomEnd = new THREE.Vector2(),
-
-	_touchZoomDistanceStart = 0,
-	_touchZoomDistanceEnd = 0,
-
-	_panStart = new THREE.Vector2(),
-	_panEnd = new THREE.Vector2();
-
-	// for reset
-
-	this.target0 = this.target.clone();
-	this.position0 = this.object.position.clone();
-	this.up0 = this.object.up.clone();
-
-	// events
-
-	var changeEvent = { type: 'change' };
-
+	_mouseDelta = new THREE.Vector2();
 
 	// methods
 
@@ -77,257 +65,162 @@ THREE.FocusControls = function ( object, domElement ) {
 		this.screen.offsetLeft = 0;
 		this.screen.offsetTop = 0;
 
-		this.radius = ( this.screen.width + this.screen.height ) / 4;
-
-	};
-
-	this.handleEvent = function ( event ) {
-
-		if ( typeof this[ event.type ] == 'function' ) {
-
-			this[ event.type ]( event );
-
-		}
-
 	};
 
 	this.getMouseOnScreen = function ( clientX, clientY ) {
 
 		return new THREE.Vector2(
-			( clientX - _this.screen.offsetLeft ) / _this.radius * 0.5,
-			( clientY - _this.screen.offsetTop ) / _this.radius * 0.5
+			( clientX - _this.screen.offsetLeft ),
+			( clientY - _this.screen.offsetTop )
 		);
-
-	};
-
-	this.getMouseProjectionOnBall = function ( clientX, clientY ) {
-
-		var mouseOnBall = new THREE.Vector3(
-			( clientX - _this.screen.width * 0.5 - _this.screen.offsetLeft ) / _this.radius,
-			( _this.screen.height * 0.5 + _this.screen.offsetTop - clientY ) / _this.radius,
-			0.0
-		);
-
-		var length = mouseOnBall.length();
-
-		if ( length > 1.0 ) {
-
-			mouseOnBall.normalize();
-
-		} else {
-
-			mouseOnBall.z = Math.sqrt( 1.0 - length * length );
-
-		}
-
-		_eye.copy( _this.object.position ).sub( _this.target );
-
-		var projection = _this.object.up.clone().setLength( mouseOnBall.y );
-		projection.add( _this.object.up.clone().cross( _eye ).setLength( mouseOnBall.x ) );
-		projection.add( _eye.setLength( mouseOnBall.z ) );
-
-		return projection;
-
-	};
-
-	this.rotateCamera = function () {
-
-		var angle = Math.acos( _rotateStart.dot( _rotateEnd ) / _rotateStart.length() / _rotateEnd.length() );
-
-		if ( angle ) {
-
-			var axis = ( new THREE.Vector3() ).crossVectors( _rotateStart, _rotateEnd ).normalize(),
-				quaternion = new THREE.Quaternion();
-
-			angle *= _this.rotateSpeed;
-
-			quaternion.setFromAxisAngle( axis, -angle );
-
-			_eye.applyQuaternion( quaternion );
-			_this.object.up.applyQuaternion( quaternion );
-
-			_rotateEnd.applyQuaternion( quaternion );
-
-			if ( _this.staticMoving ) {
-
-				_rotateStart.copy( _rotateEnd );
-
-			} else {
-
-				quaternion.setFromAxisAngle( axis, angle * ( _this.dynamicDampingFactor - 1.0 ) );
-				_rotateStart.applyQuaternion( quaternion );
-
-			}
-
-		}
-
-	};
-
-	this.zoomCamera = function () {
-
-		if ( _state === STATE.TOUCH_ZOOM ) {
-
-			var factor = _touchZoomDistanceStart / _touchZoomDistanceEnd;
-			_touchZoomDistanceStart = _touchZoomDistanceEnd;
-			_eye.multiplyScalar( factor );
-
-		} else {
-
-			var factor = 1.0 + ( _zoomEnd.y - _zoomStart.y ) * _this.zoomSpeed;
-
-			if ( factor !== 1.0 && factor > 0.0 ) {
-
-				_eye.multiplyScalar( factor );
-
-				if ( _this.staticMoving ) {
-
-					_zoomStart.copy( _zoomEnd );
-
-				} else {
-
-					_zoomStart.y += ( _zoomEnd.y - _zoomStart.y ) * this.dynamicDampingFactor;
-
-				}
-
-			}
-
-		}
-
-	};
-
-	this.panCamera = function () {
-
-		var mouseChange = _panEnd.clone().sub( _panStart );
-
-		if ( mouseChange.lengthSq() ) {
-
-			mouseChange.multiplyScalar( _eye.length() * _this.panSpeed );
-
-			var pan = _eye.clone().cross( _this.object.up ).setLength( mouseChange.x );
-			pan.add( _this.object.up.clone().setLength( mouseChange.y ) );
-
-			_this.object.position.add( pan );
-			_this.target.add( pan );
-
-			if ( _this.staticMoving ) {
-
-				_panStart = _panEnd;
-
-			} else {
-
-				_panStart.add( mouseChange.subVectors( _panEnd, _panStart ).multiplyScalar( _this.dynamicDampingFactor ) );
-
-			}
-
-		}
-
-
-
-	};
-
-	this.checkDistances = function () {
-
-		if ( !_this.noZoom || !_this.noPan ) {
-
-			if ( _this.object.position.lengthSq() > _this.maxDistance * _this.maxDistance ) {
-
-				_this.object.position.setLength( _this.maxDistance );
-
-			}
-
-			if ( _eye.lengthSq() < _this.minDistance * _this.minDistance ) {
-
-				_this.object.position.addVectors( _this.target, _eye.setLength( _this.minDistance ) );
-
-			}
-
-		}
 
 	};
 
 	this.update = function () {
 
-		_eye.subVectors( _this.object.position, _this.target );
+		for (key in _this.future) {
 
-		if ( !_this.noRotate ) {
+			switch ( typeof(_this.future[key]) ) {
 
-			_this.rotateCamera();
+				case 'number':
+					_this.current[key] += ( _this.future[key] - _this.current[key] ) * ( 1 - _this.animationDampingFactor );
+					break;
 
-		}
+				case 'object':
+					difference = new THREE.Vector3();
+					_this.current[key].add( difference.subVectors( _this.future[key], _this.current[key] ).multiplyScalar( 1 - _this.animationDampingFactor ) );
+					break;
 
-		if ( !_this.noZoom ) {
-
-			_this.zoomCamera();
-
-		}
-
-		if ( !_this.noPan ) {
-
-			_this.panCamera();
+			}
 
 		}
 
-		_this.object.position.addVectors( _this.target, _eye );
+		offsetFromFocusPoint = new THREE.Vector3(
+			Math.cos(_this.current.theta),
+			Math.sin(_this.current.phi),
+			Math.sin(_this.current.theta)
+		);
 
-		_this.checkDistances();
+		offsetFromFocusPoint.normalize();
+		offsetFromFocusPoint.multiplyScalar(_this.current.distanceFromFocusPoint);
 
-		_this.object.lookAt( _this.target );
+		_this.object.position.addVectors(_this.current.focusPoint, offsetFromFocusPoint);
 
-		if ( lastPosition.distanceToSquared( _this.object.position ) > 0 ) {
-
-			//_this.dispatchEvent( changeEvent );
-
-			lastPosition.copy( _this.object.position );
-
-		}
-
-	};
-
-	this.reset = function () {
-
-		_state = STATE.NONE;
-		_prevState = STATE.NONE;
-
-		_this.target.copy( _this.target0 );
-		_this.object.position.copy( _this.position0 );
-		_this.object.up.copy( _this.up0 );
-
-		_eye.subVectors( _this.object.position, _this.target );
-
-		_this.object.lookAt( _this.target );
-
-		_this.dispatchEvent( changeEvent );
-
-		lastPosition.copy( _this.object.position );
+		_this.object.lookAt( _this.current.focusPoint );
 
 	};
 
 	// listeners
 
+	function translateFocusPointFromCameraPerspectiveInXZPlane( directionVector, units ) {
+
+		directionVector.applyEuler( _this.object.rotation, _this.object.eulerOrder );
+		directionVector.y = 0;
+		directionVector.normalize();
+		directionVector.multiplyScalar( units );
+		_this.future.focusPoint.add( directionVector );
+
+	}
+
+	function moveCameraLeft( units ) {
+
+		directionVector = new THREE.Vector3(-1, 0, 0);
+		translateFocusPointFromCameraPerspectiveInXZPlane( directionVector, units );
+
+	}
+
+	function moveCameraFront( units ) {
+
+		directionVector = new THREE.Vector3(0, 1, 0);
+		translateFocusPointFromCameraPerspectiveInXZPlane( directionVector, units );
+
+	}
+
+	function moveCameraUp( units ) {
+
+		_this.future.focusPoint.y += units;
+
+	}
+
+	function zoom( units ) {
+
+		_this.future.distanceFromFocusPoint = Math.min( _this.zoom.max, Math.max( _this.zoom.min, _this.future.distanceFromFocusPoint + units ) );
+
+	}
+
+	function abstractDown ( coordX, coordY ) {
+
+		_mousePosition.down.copy( _this.getMouseOnScreen( coordX, coordY ) );
+		_mousePosition.last.copy( _mousePosition.down );
+		_mousePosition.current.copy( _mousePosition.down );
+
+	}
+
+	function initiateMoveCallback( coordX, coordY ) {
+
+		_mousePosition.current.copy( _this.getMouseOnScreen( coordX, coordY ) );
+
+		_mouseDelta = new THREE.Vector2();
+		_mouseDelta.subVectors( _mousePosition.current, _mousePosition.last );
+
+	}
+
+	function finishMoveCallback() {
+
+		_mousePosition.last.copy( _mousePosition.current );
+
+	}
+
+	function abstractMove1Pointer ( coordX, coordY ) {
+
+		initiateMoveCallback( coordX, coordY );
+
+		_this.future.theta += _this.rotationSpeed.x * ( _mouseDelta.x / 10 ) / 180.0 * Math.PI;
+		_this.future.phi += _this.rotationSpeed.y * ( _mouseDelta.y / 10 ) / 180.0 * Math.PI;
+
+		finishMoveCallback();
+
+	}
+
+	function abstractMove2Pointers ( coordX, coordY ) {
+
+		initiateMoveCallback( coordX, coordY );
+
+		moveCameraLeft( _mouseDelta.x * _this.current.distanceFromFocusPoint * _this.motionSpeed.x );
+		moveCameraFront( _mouseDelta.y * _this.current.distanceFromFocusPoint * _this.motionSpeed.z );
+
+		finishMoveCallback();
+
+	}
+
+	function abstractMove3Pointers ( coordX, coordY ) {
+
+		initiateMoveCallback( coordX, coordY );
+
+		zoom( - _this.zoomSpeed * _mouseDelta.y );
+
+		finishMoveCallback();
+
+	}
+
 	function keydown( event ) {
 
 		if ( _this.enabled === false ) return;
 
-		window.removeEventListener( 'keydown', keydown );
+		if ( _this.keys.left.indexOf( event.keyCode ) !== -1 ) {
+			moveCameraLeft( _this.motionSpeed.x * _this.current.distanceFromFocusPoint * _this.motionStepLength );
+		}
 
-		_prevState = _state;
+		if ( _this.keys.right.indexOf( event.keyCode ) !== -1 ) {
+			moveCameraLeft( - _this.motionSpeed.x * _this.current.distanceFromFocusPoint * _this.motionStepLength );
+		}
 
-		if ( _state !== STATE.NONE ) {
+		if ( _this.keys.up.indexOf( event.keyCode ) !== -1 ) {
+			moveCameraFront( _this.motionSpeed.z * _this.current.distanceFromFocusPoint * _this.motionStepLength );
+		}
 
-			return;
-
-		} else if ( event.keyCode === _this.keys[ STATE.ROTATE ] && !_this.noRotate ) {
-
-			_state = STATE.ROTATE;
-
-		} else if ( event.keyCode === _this.keys[ STATE.ZOOM ] && !_this.noZoom ) {
-
-			_state = STATE.ZOOM;
-
-		} else if ( event.keyCode === _this.keys[ STATE.PAN ] && !_this.noPan ) {
-
-			_state = STATE.PAN;
-
+		if ( _this.keys.down.indexOf( event.keyCode ) !== -1 ) {
+			moveCameraFront( - _this.motionSpeed.z * _this.current.distanceFromFocusPoint * _this.motionStepLength );
 		}
 
 	}
@@ -335,10 +228,6 @@ THREE.FocusControls = function ( object, domElement ) {
 	function keyup( event ) {
 
 		if ( _this.enabled === false ) return;
-
-		_state = _prevState;
-
-		window.addEventListener( 'keydown', keydown, false );
 
 	}
 
@@ -349,51 +238,50 @@ THREE.FocusControls = function ( object, domElement ) {
 		event.preventDefault();
 		event.stopPropagation();
 
-		if ( _state === STATE.NONE ) {
+		abstractDown( event.clientX, event.clientY );
 
-			_state = event.button;
-
+		switch (event.button) {
+			case 0:
+				document.addEventListener( 'mousemove', mouseMoveLeftButton, false );
+				break;
+			case 2:
+				document.addEventListener( 'mousemove', mouseMoveRightButton, false );
+				break;
 		}
 
-		if ( _state === STATE.ROTATE && !_this.noRotate ) {
-
-			_rotateStart = _rotateEnd = _this.getMouseProjectionOnBall( event.clientX, event.clientY );
-
-		} else if ( _state === STATE.ZOOM && !_this.noZoom ) {
-
-			_zoomStart = _zoomEnd = _this.getMouseOnScreen( event.clientX, event.clientY );
-
-		} else if ( _state === STATE.PAN && !_this.noPan ) {
-
-			_panStart = _panEnd = _this.getMouseOnScreen( event.clientX, event.clientY );
-
-		}
-
-		document.addEventListener( 'mousemove', mousemove, false );
 		document.addEventListener( 'mouseup', mouseup, false );
-
 	}
 
-	function mousemove( event ) {
+	function mouseMoveLeftButton( event ) {
 
 		if ( _this.enabled === false ) return;
 
 		event.preventDefault();
 		event.stopPropagation();
 
-		if ( _state === STATE.ROTATE && !_this.noRotate ) {
+		abstractMove1Pointer( event.clientX, event.clientY );
 
-			_rotateEnd = _this.getMouseProjectionOnBall( event.clientX, event.clientY );
+	}
 
-		} else if ( _state === STATE.ZOOM && !_this.noZoom ) {
+	function mouseMoveMiddleButton( event ) {
 
-			_zoomEnd = _this.getMouseOnScreen( event.clientX, event.clientY );
+		if ( _this.enabled === false ) return;
 
-		} else if ( _state === STATE.PAN && !_this.noPan ) {
+		event.preventDefault();
+		event.stopPropagation();
 
-			_panEnd = _this.getMouseOnScreen( event.clientX, event.clientY );
+		abstractMove3Pointers( event.clientX, event.clientY );
 
-		}
+	}
+
+	function mouseMoveRightButton( event ) {
+
+		if ( _this.enabled === false ) return;
+
+		event.preventDefault();
+		event.stopPropagation();
+
+		abstractMove2Pointers( event.clientX, event.clientY );
 
 	}
 
@@ -404,9 +292,8 @@ THREE.FocusControls = function ( object, domElement ) {
 		event.preventDefault();
 		event.stopPropagation();
 
-		_state = STATE.NONE;
-
-		document.removeEventListener( 'mousemove', mousemove );
+		document.removeEventListener( 'mousemove', mouseMoveLeftButton );
+		document.removeEventListener( 'mousemove', mouseMoveRightButton );
 		document.removeEventListener( 'mouseup', mouseup );
 
 	}
@@ -430,7 +317,7 @@ THREE.FocusControls = function ( object, domElement ) {
 
 		}
 
-		_zoomStart.y += delta * 0.01;
+		zoom( - _this.zoomSpeed * delta );
 
 	}
 
@@ -438,29 +325,7 @@ THREE.FocusControls = function ( object, domElement ) {
 
 		if ( _this.enabled === false ) return;
 
-		switch ( event.touches.length ) {
-
-			case 1:
-				_state = STATE.TOUCH_ROTATE;
-				_rotateStart = _rotateEnd = _this.getMouseProjectionOnBall( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-				break;
-
-			case 2:
-				_state = STATE.TOUCH_ZOOM;
-				var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-				var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-				_touchZoomDistanceEnd = _touchZoomDistanceStart = Math.sqrt( dx * dx + dy * dy );
-				break;
-
-			case 3:
-				_state = STATE.TOUCH_PAN;
-				_panStart = _panEnd = _this.getMouseOnScreen( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-				break;
-
-			default:
-				_state = STATE.NONE;
-
-		}
+		abstractDown( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
 
 	}
 
@@ -474,21 +339,18 @@ THREE.FocusControls = function ( object, domElement ) {
 		switch ( event.touches.length ) {
 
 			case 1:
-				_rotateEnd = _this.getMouseProjectionOnBall( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
+				abstractMove1Pointer( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
 				break;
 
 			case 2:
-				var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-				var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-				_touchZoomDistanceEnd = Math.sqrt( dx * dx + dy * dy )
+				abstractMove2Pointers( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
 				break;
 
 			case 3:
-				_panEnd = _this.getMouseOnScreen( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
+				abstractMove3Pointers( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
 				break;
 
 			default:
-				_state = STATE.NONE;
 
 		}
 
@@ -501,20 +363,18 @@ THREE.FocusControls = function ( object, domElement ) {
 		switch ( event.touches.length ) {
 
 			case 1:
-				_rotateStart = _rotateEnd = _this.getMouseProjectionOnBall( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
+				// what happens when touch with 1 finger ends?
 				break;
 
 			case 2:
-				_touchZoomDistanceStart = _touchZoomDistanceEnd = 0;
+				// what happens when touch with 2 fingers ends?
 				break;
 
 			case 3:
-				_panStart = _panEnd = _this.getMouseOnScreen( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
+				// what happens when touch with 3 fingers ends?
 				break;
 
 		}
-
-		_state = STATE.NONE;
 
 	}
 
@@ -536,4 +396,4 @@ THREE.FocusControls = function ( object, domElement ) {
 
 };
 
-THREE.TrackballControls.prototype = Object.create( THREE.EventDispatcher.prototype );
+THREE.FocusControls.prototype = Object.create( THREE.EventDispatcher.prototype );
