@@ -38,6 +38,11 @@ setModelActionIds = (options) ->
 				undo: options.undoActionId
 				redo: options.redoActionId
 
+markModelAsUpdated = (options) ->
+	Models.update {_id: options.modelId},
+		$set:
+			updatedAt: new Date()
+
 class ModelAction
 	constructor: (options) ->
 		@validateBasicOptions options
@@ -177,6 +182,7 @@ Meteor.methods
 					modelId: action.modelId
 					undoActionId: action._id
 					redoActionId: null
+				markModelAsUpdated modelId: options.modelId
 		else
 			throw new Meteor.Error 490, 'Model action ' + options?.type + ' does not exist!'
 
@@ -194,6 +200,7 @@ Meteor.methods
 						modelId: action.modelId
 						undoActionId: previousActionId
 						redoActionId: action._id
+					markModelAsUpdated modelId: options.modelId
 
 	# ### Redo model action
 	redoModelAction: (options) ->
@@ -209,6 +216,7 @@ Meteor.methods
 						modelId: action.modelId
 						undoActionId: action._id
 						redoActionId: nextActionId
+					markModelAsUpdated modelId: options.modelId
 
 	# ### Create model
 	createModel: (options) ->
@@ -251,6 +259,7 @@ Meteor.methods
 			if checkNameAvailability && options.name != currentModel.name
 				throw new Meteor.Error(499, "Modelname already taken");
 			else
+				markModelAsUpdated modelId: options._id
 				return Models.update({_id: options._id},{$set: {name: options.name}})
 
 	# ### Update model's public state
@@ -261,6 +270,7 @@ Meteor.methods
 				isPublic = true
 			else
 				isPublic = false
+			markModelAsUpdated modelId: options._id
 			return Models.update({_id: options._id},{$set: {isPublic: isPublic}})
 
 	# ### Update model tag
