@@ -2,71 +2,79 @@
   <div class="slide-main">
     <div class="slide-container">
       <ul id="slideContainerListItems">
-        <li>Modelname
+        <li><span class="slidebarHeadlines">Modelname</span>
           <ul>
             <li>
               <div class="modelname">{{modelname}}</div>
             </li>
           </ul>
+          <br>
         </li>
-        <li>UpdatedAt
+        <li><span class="slidebarHeadlines">UpdatedAt</span>
           <ul>
             <li>
               <div class="updatedAt">{{updatedAt}}</div>
             </li>
           </ul>
+          <br>
         </li>
-        <li>Invited
+        <li><span class="slidebarHeadlines">Invited</span>
           <ul>
             {{#each invited}}          
               <li>
-                <div class="invited">{{this.name}}</div><div class="invitedRole">{{this.role}}</div>
+                <div class="invited {{this.class}}">{{this.name}}</div><div class="invitedRole">{{this.role}}</div>
               </li>
             {{/each}}
           </ul>
+          <br>
         </li>      
-        <li>Tags
+        <li><span class="slidebarHeadlines">Tags</span>
           <ul>
             {{#each tags}}          
               <li>
-                <div class="tags">{{this}}</div>
+                <div class="tags {{this.class}}">{{this.name}}</div>
               </li>
             {{/each}}
+            <br>
           </ul>
         </li>            
-        <li>Creator
+        <li><span class="slidebarHeadlines">Creator</span>
           <ul>
             <li>
               <div class="creator">{{creator}}</div>
             </li>
           </ul>
+          <br>
         </li>        
         {{#if predecessor}}
-          <li>Predecessor
+          <li><span class="slidebarHeadlines">Predecessor</span>
             <ul>
               <li>
                 <div class="predecessor">{{predecessor}}</div>
               </li>
             </ul>
+            <br>
           </li>
         {{/if}}
-        <li>IsPublic
+        <li><span class="slidebarHeadlines">IsPublic</span>
           <ul>
             <li>
               <div class="isPublic">{{isPublic}}</div>
             </li>
           </ul>
+          <br>
         </li>        
       </ul>
       {{#if currentUser.services}}
         {{#if isFavourited}}
-          <input type="button" id="favourite" value="Favourite">
+          <input class="btn-primary" type="button" id="favourite" value="Favourite">
         {{else}}
-          <input type="button" id="defavourite" value="Defavourite">
+          <input class="btn-danger" type="button" id="defavourite" value="Defavourite">
         {{/if}}
-        <input type="button" id="clone" value="Clone">
+        <input class="btn" type="button" id="takeSnapshot" value="Snapshot">
+        <br>
+        <input class="btn" type="button" id="clone" value="Clone">
       {{/if}}
-      <input type="button" id="takeSnapshot" value="Snapshot">
     </div>
   </div>  
 

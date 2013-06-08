@@ -7,7 +7,7 @@ Template.menue.events
 		false
 
 	# ## Index
-	'click .brand': ->
+	'click #logo': ->
 		console.log "clicked home"
 		Workspace.index()
 		false

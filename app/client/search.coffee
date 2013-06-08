@@ -103,8 +103,8 @@ Template.search.getResults = ->
 		i.order = order("modelLink",i._id) for i in result2
 		i.button = buttonDesign("modelLink",i._id) for i in result2
 		jQuery.merge(result,result2)
-
-	result.sort(sortArrayByFollowing)
+	if Meteor.userId()
+		result.sort(sortArrayByFollowing)
 	return result
 
 # ## Events
