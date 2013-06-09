@@ -20,7 +20,7 @@
 	<div id="popularModels" class="newsBoxes">
 		<h3>Popular Models</h3>
 		{{#each getMostPopularModels}}
-			<div data-id="{{this._id}}" class="randomModel">
+			<div data-id="{{this._id}}" class="randomModel modelLink">
 				<div class="singleRandomModel" style="background-image:url({{this.snapshotURL}})">
 					<p>{{this.name}} {{this.favCounts}}</p>
 				</div>

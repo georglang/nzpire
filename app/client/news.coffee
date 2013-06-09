@@ -96,7 +96,7 @@ Template.news.getMostPopularModels = ->
 	return models
 
 Template.news.events
-	'click div.modelLink': (e)->
+	'click div.randomModel': (e)->
 		Workspace.model $(e.currentTarget).data("id")
 
 #	'click div.linkToOtherModel' : (e)->
