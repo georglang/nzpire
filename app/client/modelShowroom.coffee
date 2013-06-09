@@ -8,6 +8,8 @@ userInvitedModels = (role)->
 	modelsResult = []
 	tmpResult.forEach (i)->
 		permission = checkModelPermission i._id,false
+		for model in modelsResult
+			model.snapshotURL ?= '/img/dummyModel.jpg'
 		if permission == role
 			modelsResult.push i
 	return modelsResult
