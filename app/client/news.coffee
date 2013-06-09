@@ -88,6 +88,9 @@ Template.news.getMostPopularModels = ->
 		if modelFavourite.length > 0
 			counter = modelFavourite.length
 		m.favCounts = counter
+
+		for model in allModels
+			model.snapshotURL ?= '/img/dummyModel.jpg'
 		models.push m
 	models.sort(sortArrayByFavouritedCount)
 	return models
