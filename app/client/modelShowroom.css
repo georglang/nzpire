@@ -1,0 +1,67 @@
+.roleBox{
+  padding:2%;
+  width:214px;
+  min-height: 280px;
+  background-color: #FFFFFF;
+  float:left;
+  margin-right:4%;
+  text-align: center;
+  height: 100%;
+  -moz-box-shadow: 2px 2px 8px #bab8ba;
+  -webkit-box-shadow: 2px 2px 8px #bab8ba;
+  box-shadow: 2px 2px 8px #bab8ba;
+}
+
+.roleBox h3{
+  text-align: center;
+  margin-top:-4%;
+  border-bottom: #ccc7c7 1px dotted;
+  padding-bottom: 3%;
+  margin-bottom:8%;
+}
+
+.roleListItem{
+	padding-top:20px;
+	padding-bottom:20px;
+	border-bottom: #ccc7c7 1px dotted;
+}
+
+.roleListItem span{
+	padding-left:8%;
+}
+
+.singleModel{
+  width:100px;
+  height:100px;
+  margin:auto;
+  -webkit-border-radius: 14px;
+  -moz-border-radius: 14px;
+  border-radius: 14px;
+  background-size: 100% 100%;
+  margin-bottom: 6%;
+  text-align: center;
+}
+
+.singleModel p{
+  margin:auto;
+  margin-top:2%;
+  color:#FFFFFF;
+  font-weight:bold;
+  white-space: nowrap;
+  width: 70%;                   
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
+  -o-text-overflow: ellipsis;
+}
+
+.newsHeader {
+  margin-top:-4%;
+  border-bottom: #ccc7c7 1px dotted;
+  padding-bottom: 3%;
+  margin-bottom:8%;
+}
+
+.modelLink{
+  border-bottom: #ccc7c7 1px dotted;
+}
