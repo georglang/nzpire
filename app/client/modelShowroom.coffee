@@ -40,7 +40,7 @@ Template.modelShowroom.Viewer = ()->
 # Model_Showroom events: click event for redirecting to the specified Model
 Template.modelShowroom.events
 	'click div.modelLink': (e)->
-		Workspace.model e.target.id
+		Workspace.model $(e.currentTarget).data("id")
 
 
 # ## Rendered and Destroyed
