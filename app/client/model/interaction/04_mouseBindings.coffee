@@ -79,7 +79,10 @@ Template.model.events
             Modeling.scene.content.remove pick.object
               
 mouseBindings.setup = ->
-  mouseMove = (e) ->
+  mouseMoveContainer = (e) ->
+    $(this).focus()
+
+  mouseMoveCanvas = (e) ->
     offset = $(this).offset()
     width = $(this).width()
     height = $(this).height()
@@ -93,5 +96,7 @@ mouseBindings.setup = ->
     updateObjectPreview()
   
   Meteor.defer ->
-    $('#modelContainer > canvas').off 'mousemove', mouseMove
-    $('#modelContainer > canvas').on 'mousemove', mouseMove 
+    $('#modelContainer').off 'mousemove', mouseMoveContainer
+    $('#modelContainer').on 'mousemove', mouseMoveContainer
+    $('#modelContainer > canvas').off 'mousemove', mouseMoveCanvas
+    $('#modelContainer > canvas').on 'mousemove', mouseMoveCanvas
