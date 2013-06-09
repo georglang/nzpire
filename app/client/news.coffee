@@ -88,12 +88,15 @@ Template.news.getMostPopularModels = ->
 		if modelFavourite.length > 0
 			counter = modelFavourite.length
 		m.favCounts = counter
+
+		for model in allModels
+			model.snapshotURL ?= '/img/dummyModel.jpg'
 		models.push m
 	models.sort(sortArrayByFavouritedCount)
 	return models
 
 Template.news.events
-	'click div.modelLink': (e)->
+	'click div.randomModel': (e)->
 		Workspace.model $(e.currentTarget).data("id")
 
 #	'click div.linkToOtherModel' : (e)->

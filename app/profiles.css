@@ -96,11 +96,11 @@ h3{
 
 #followBoxes{
 	width: 20%;
+	min-height: 280px;
 	position:relative;
 	float: left;
 	margin-left: 4%;
 	background-color: #FFFFFF;
-	margin-top: 3%;
 	min-height: 270px;
 	-moz-box-shadow: 2px 2px 8px #bab8ba;
 	-webkit-box-shadow: 2px 2px 8px #bab8ba;

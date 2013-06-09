@@ -8,6 +8,8 @@ userInvitedModels = (role)->
 	modelsResult = []
 	tmpResult.forEach (i)->
 		permission = checkModelPermission i._id,false
+		for model in modelsResult
+			model.snapshotURL ?= '/img/dummyModel.jpg'
 		if permission == role
 			modelsResult.push i
 	return modelsResult
@@ -40,7 +42,7 @@ Template.modelShowroom.Viewer = ()->
 # Model_Showroom events: click event for redirecting to the specified Model
 Template.modelShowroom.events
 	'click div.modelLink': (e)->
-		Workspace.model e.target.id
+		Workspace.model $(e.currentTarget).data("id")
 
 
 # ## Rendered and Destroyed

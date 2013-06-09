@@ -16,7 +16,7 @@ THREE.FocusControls = function ( object, domElement ) {
 		focusPoint: new THREE.Vector3(0, 0, 0),
 		phi: Math.PI * 0.25,
 		theta: Math.PI * 0.25,
-		distanceFromFocusPoint: 400
+		distanceFromFocusPoint: 96
 	};
 
 	this.future = {
@@ -31,7 +31,7 @@ THREE.FocusControls = function ( object, domElement ) {
 	this.motionSpeed = new THREE.Vector3(0.005, 0.005, 0.005);
 	this.motionStepLength = 50;
 	this.rotationSpeed = new THREE.Vector2(2, 2);
-	this.zoomSpeed = 2;
+	this.zoomSpeed = 4;
 
 	this.zoom = {
 		min: 20,

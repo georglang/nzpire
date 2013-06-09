@@ -1,32 +1,48 @@
 <template name="modelShowroom">
 	{{#if currentUser.services}}	
 	<div id="modelShowroomTemplate">
-		<ul>
-			<li>Creator:</li>
-			<ul>
+		<div>
+			<div class="roleBox">
+				<h3>Creator</h3>
 				{{#each Creator}}
-					<li><div class="modelLink" id="{{this._id}}">{{this.name}}</div></li>	
+					<div data-id="{{this._id}}" class="modelLink">
+						<div class="singleModel" style="background-image:url({{this.snapshotURL}})">
+							<p>{{this.name}}</p>
+						</div>
+					</div>
 				{{/each}}
-			</ul>		
-			<li>Owner:</li>		
-			<ul>
+			</div>
+			<div class="roleBox">
+				<h3>Owner</h3>
 				{{#each Owner}}
-					<li><div class="modelLink" id="{{this._id}}">{{this.name}}</div></li>	
+					<div data-id="{{this._id}}" class="modelLink">
+						<div class="singleModel" style="background-image:url({{this.snapshotURL}})">
+							<p>{{this.name}}</p>
+						</div>
+					</div>
 				{{/each}}
-			</ul>
-			<li>Collaborator:</li>		
-			<ul>			
+			</div>
+			<div class="roleBox">
+				<h3>Collaborator</h3>
 				{{#each Collaborator}}
-					<li><div class="modelLink" id="{{this._id}}">{{this.name}}</div></li>	
+					<div data-id="{{this._id}}" class="modelLink">
+						<div class="singleModel" style="background-image:url({{this.snapshotURL}})">
+							<p>{{this.name}}</p>
+						</div>
+					</div>
 				{{/each}}
-			</ul>
-			<li>Viewer:</li>		
-			<ul>			
+			</div>
+			<div class="roleBox">
+				<h3>Viewer</h3>
 				{{#each Viewer}}
-					<li><div class="modelLink" id="{{this._id}}">{{this.name}}</div></li>	
-				{{/each}}									
-			</ul>
-		</ul>		
+					<div data-id="{{this._id}}" class="modelLink">
+						<div class="singleModel" style="background-image:url({{this.snapshotURL}})">
+							<p>{{this.name}}</p>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</div>		
 	</div>
 	{{/if}}
 	{{activateCSS}}
