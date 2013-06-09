@@ -1,6 +1,5 @@
 <template name="news">
 	<div id="newsTemplate"> 
-	
 	<div id="changeNews" class="newsBoxes">
 		<h3>Activities</h3>
 		{{#if currentUser.services}}
@@ -8,27 +7,26 @@
 		<div class="listItem"> {{name}} {{updatedAt}} </div>
 		{{/each}}
 	</div>
-	
-		<div id="randomModels" class="newsBoxes">
-			<h3>Random Models</h3>
-			{{#each getRandomModels}}
-				<div data-id="{{this._id}}" class="modelLink randomModel">
-					<div id="singleRandomModel" style="background-image:url({{this.snapshotURL}})">
-						<p>{{this.name}}</p>
-					</div>
+	<div id="randomModels" class="newsBoxes">
+		<h3>Random Models</h3>
+		{{#each getRandomModels}}
+			<div data-id="{{this._id}}" class="modelLink randomModel">
+				<div class="singleRandomModel" style="background-image:url({{this.snapshotURL}})">
+					<p>{{this.name}}</p>
 				</div>
-			{{/each}}
-		</div>
-		
-		<div id="popularModels" class="newsBoxes">
-			<h3>Popular Models</h3>
-			{{#each getMostPopularModels}}
-				<div title="{{this._id}}" class="modelLink listItem" data-id="{{this._id}}">
-					{{this.name}} {{this.favCounts}}
+			</div>
+		{{/each}}
+	</div>
+	<div id="popularModels" class="newsBoxes">
+		<h3>Popular Models</h3>
+		{{#each getMostPopularModels}}
+			<div data-id="{{this._id}}" class="randomModel">
+				<div class="singleRandomModel" style="background-image:url({{this.snapshotURL}})">
+					<p>{{this.name}} {{this.favCounts}}</p>
 				</div>
-			{{/each}}
-		</div>	
-	
+			</div>
+		{{/each}}
+	</div>	
 	{{/if}}
 	</div>
 </template>
