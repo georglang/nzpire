@@ -86,7 +86,15 @@ Meteor.publish "allModels", ->
 Meteor.publish 'model', (modelId) ->
   user = Meteor.users.findOne({_id: this.userId})
   if not user
-    return []
+    modelCursor = Models.find
+      _id: modelId
+      isPublic: true
+    model = modelCursor.fetch()[0]
+    if not model
+      return []
+    modelObjectsCursor = ModelObjects.find modelId: modelId
+    return [modelCursor, modelObjectsCursor]
+
   userMail = Meteor.users.findOne({_id: this.userId}).mail[0]
   currentProfile = Profiles.find({email:userMail}).fetch()[0]
 
