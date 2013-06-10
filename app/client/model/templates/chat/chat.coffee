@@ -16,7 +16,6 @@ Schaekermann Mike
 # * return: array
 Template.chat.messages = ->
 	messages = ModelChat.find({modelId: Session.get('modelId')}).fetch()
-	return messages.reverse()
 
 # ## Message Publisher
 # * return: string
@@ -40,10 +39,8 @@ Template.message.timestamp = ->
 		minutes: minutes
 	return time
 
-Template.message.rendered = ->
-	#$('.chatBox').scrollTop($('.chatBox')[0].scrollHeight);
-	#$('.chatBox>div:last').focus()
-	#$('#newMessage').focus()
+Template.chat.rendered = ->
+	$('.chatBox').scrollTop($('.chatBox')[0]?.scrollHeight);
 
 # ## Events
 # ### Submit entered Message

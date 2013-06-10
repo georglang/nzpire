@@ -28,6 +28,10 @@ Schaekermann Mike
 	padding-left: 10px;
 }
 
+.chatBox>div:last-child {
+	padding-bottom: 30px;
+}
+
 #newMessage{
 	position: absolute;
 	width: 240px;
