@@ -12,21 +12,34 @@ Schaekermann Mike
 
 .chatBox{
 	position: absolute;
-	background-color: rgba(255,255,255,0.1);
-	width: 285px;
-	color: #0982bb ;
-	height:150px;
-	left:20px;
-	bottom:120px;
-	overflow-y:scroll;
-	overflow-x:hidden;
+	background-color: rgba(255,255,255,0.2);
+	width: 240px;
+	color: #0982bb;
+	height: 100%;
+	left: 0px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-top: 160px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	top: -100px;
+	padding-left: 10px;
 }
 
 #newMessage{
 	position: absolute;
-	width: 255px;
-	left:20px;
-	bottom: 70px;
-	background-color: rgba(255,255,255,0.3);
-	color: #0982bb ;
+	width: 240px;
+	left: 0px;
+	background-color: rgba(255,255,255,0.5);
+	color: #0982bb;
+	border-radius: 3px 0px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	bottom: 65px;
+	height: 25px;
+	padding-left: 10px;
 }
