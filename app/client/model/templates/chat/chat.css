@@ -13,7 +13,7 @@ Schaekermann Mike
 .chatBox{
 	position: absolute;
 	background-color: rgba(255,255,255,0.2);
-	width: 235px;
+	width: 240px;
 	color: #0982bb;
 	height: 100%;
 	left: 0px;
@@ -29,8 +29,8 @@ Schaekermann Mike
 }
 
 #newMessage{
-	position: relative;
-	width: 235px;
+	position: absolute;
+	width: 240px;
 	left: 0px;
 	background-color: rgba(255,255,255,0.5);
 	color: #0982bb;
@@ -39,7 +39,7 @@ Schaekermann Mike
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-o-box-sizing: border-box;
-	bottom: -467px;
+	bottom: 65px;
 	height: 25px;
 	padding-left: 10px;
 }

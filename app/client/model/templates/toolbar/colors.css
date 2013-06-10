@@ -10,22 +10,30 @@ Margreiter Daniel
 Schaekermann Mike
 */
 
-#colors{
-	position: fixed;
-	bottom: 10px;
-	left: 5px;
+#colors {
+	position: absolute;
+	bottom: 39px;
+	left: 0px;
+	height: 35px;
 }
 
-.modelingColor{
-	width:20px;
-	height:20px;
-	float:left;
-	border: 2px solid #42424A;
+.modelingColor {
+	width: 24px;
+	height: 100%;
+	float: left;
+	border: 2px solid rgba(50, 50, 50, 1);
 	border-radius: 2px;
-	margin-right: 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
 	cursor: pointer;
 }
 
+.modelingColor:hover {
+	border-bottom: 10px solid;
+}
+
 .activeColor{
-	border: 2px solid darkred;
+	border-bottom: 10px solid;
 }
