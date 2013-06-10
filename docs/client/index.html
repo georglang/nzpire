@@ -12,17 +12,21 @@
 <span class="nv">anotherMessage = </span><span class="nx">__</span><span class="p">(</span><span class="s">&#39;someNamespace.optionalSubNamespace.anUntranslatedMessage&#39;</span><span class="p">)</span>
 <span class="c1">#console.log anotherMessage</span>
 
-<span class="nv">Template.index.descriptionText = </span><span class="nf">-&gt;</span>
+<span class="nv">Template.index.descriptionText = </span><span class="o">-&gt;</span>
   <span class="nv">text = </span><span class="nx">__</span><span class="p">(</span><span class="s">&#39;someNamespace.optionalSubNamespace.appDescription&#39;</span><span class="p">)</span>
   <span class="k">return</span> <span class="nx">text</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="rendered-and-destroyed">Rendered and Destroyed</h2>
 
-<p>Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.index.rendered = </span><span class="p">()</span><span class="nf">-&gt;</span>
+<p>Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.index.rendered = </span><span class="nf">()-&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#indexTemplate&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span>
 
-<span class="nv">Template.index.destroyed = </span><span class="p">()</span><span class="nf">-&gt;</span>
+<span class="nv">Template.index.destroyed = </span><span class="nf">()-&gt;</span>
   <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#indexTemplate&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span>
 
 
-<span class="nx">Meteor</span><span class="p">.</span><span class="nx">autorun</span> <span class="nf">-&gt;</span>
+<span class="nx">Meteor</span><span class="p">.</span><span class="nx">autorun</span> <span class="o">-&gt;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&quot;.carousel&quot;</span><span class="p">).</span><span class="nx">each</span> <span class="o">-&gt;</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">carousel</span>
+      <span class="nv">interval: </span><span class="mi">2000</span>
+   
   <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;template&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;index&#39;</span>
     <span class="nx">Workspace</span><span class="p">.</span><span class="nx">news</span><span class="p">()</span></div></div></div></div></body></html>

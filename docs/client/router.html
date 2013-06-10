@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><title>client/router</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/router"><meta name="groc-project-path" content="app/client/router.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/router.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nv">Template.page_controller.display_page = </span><span class="nf">-&gt;</span>
+<!DOCTYPE html><html lang="en"><head><title>client/router</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="client/router"><meta name="groc-project-path" content="app/client/router.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/client/router.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nv">Template.page_controller.display_page = </span><span class="o">-&gt;</span>
   <span class="k">if</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;template&#39;</span><span class="p">)</span>
     <span class="nx">checkLoginProtection</span><span class="p">()</span>
     <span class="nx">Template</span><span class="p">[</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;template&quot;</span><span class="p">)]()</span>
@@ -6,11 +6,12 @@
 
 <span class="nv">WorkspaceRouter = </span><span class="nx">Backbone</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span>
   <span class="nv">routes:</span>
+    <span class="s">&quot;&quot;</span><span class="o">:</span> <span class="s">&quot;index&quot;</span>
     <span class="s">&quot;/&quot;</span><span class="o">:</span> <span class="s">&quot;index&quot;</span>
     <span class="s">&quot;index&quot;</span><span class="o">:</span> <span class="s">&quot;index&quot;</span>
     <span class="s">&quot;model/:id&quot;</span><span class="o">:</span> <span class="s">&quot;model&quot;</span>
     <span class="s">&quot;model/:id/edit&quot;</span><span class="o">:</span> <span class="s">&quot;modelEdit&quot;</span>
-    <span class="s">&quot;modelshowroom&quot;</span> <span class="o">:</span> <span class="s">&quot;modelshowroom&quot;</span>
+    <span class="s">&quot;modelShowroom&quot;</span> <span class="o">:</span> <span class="s">&quot;modelShowroom&quot;</span>
     <span class="s">&quot;help&quot;</span><span class="o">:</span> <span class="s">&quot;help&quot;</span> <span class="c1"># #help</span>
     <span class="s">&quot;search&quot;</span><span class="o">:</span> <span class="s">&quot;search&quot;</span> <span class="c1"># #search</span>
     <span class="s">&quot;search/:query&quot;</span><span class="o">:</span> <span class="s">&quot;search&quot;</span> <span class="c1"># #search/kiwis</span>
@@ -19,7 +20,7 @@
     <span class="s">&quot;news&quot;</span> <span class="o">:</span> <span class="s">&quot;news&quot;</span>
     <span class="s">&quot;impressum&quot;</span> <span class="o">:</span> <span class="s">&quot;impressum&quot;</span>
 
-  <span class="nv">index: </span><span class="nf">-&gt;</span>
+  <span class="nv">index: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;indexRouter&quot;</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;index&quot;</span>  
     <span class="nx">@navigate</span> <span class="s">&quot;index&quot;</span><span class="p">,</span>
@@ -32,7 +33,7 @@
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;loading&quot;</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;modelingColor&quot;</span><span class="p">,</span> <span class="nx">DefaultModelColors</span><span class="p">[</span><span class="mi">7</span><span class="p">].</span><span class="nx">color</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;voxelSize&quot;</span><span class="p">,</span> <span class="nx">DefaultVoxelSizes</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nx">size</span>
-    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">subscribe</span> <span class="s">&#39;model&#39;</span><span class="p">,</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;modelId&#39;</span><span class="p">),</span> <span class="nf">-&gt;</span>
+    <span class="nx">Meteor</span><span class="p">.</span><span class="nx">subscribe</span> <span class="s">&#39;model&#39;</span><span class="p">,</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;modelId&#39;</span><span class="p">),</span> <span class="o">-&gt;</span>
       <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;model&quot;</span>
       <span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">setup</span><span class="p">()</span>
       <span class="nx">Meteor</span><span class="p">.</span><span class="nx">defer</span> <span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">update</span>
@@ -50,13 +51,13 @@
       <span class="nv">trigger: </span><span class="kc">true</span>
       <span class="nv">replace: </span><span class="kc">true</span>
 
-  <span class="nv">modelShowroom: </span><span class="nf">-&gt;</span>
+  <span class="nv">modelShowroom: </span><span class="o">-&gt;</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;modelShowroom&quot;</span>
-    <span class="nx">@navigate</span> <span class="s">&quot;modelshowroom&quot;</span><span class="p">,</span>
+    <span class="nx">@navigate</span> <span class="s">&quot;modelShowroom&quot;</span><span class="p">,</span>
       <span class="nv">trigger: </span><span class="kc">true</span>
       <span class="nv">replace: </span><span class="kc">true</span>
 
-  <span class="nv">help: </span><span class="nf">-&gt;</span>
+  <span class="nv">help: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;help&quot;</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;help&quot;</span>
     <span class="nx">@navigate</span> <span class="s">&quot;help&quot;</span><span class="p">,</span>
@@ -72,34 +73,33 @@
       <span class="nv">trigger: </span><span class="kc">true</span>
       <span class="nv">replace: </span><span class="kc">true</span>
 
-  <span class="nv">unit_tests: </span><span class="nf">-&gt;</span>
+  <span class="nv">unit_tests: </span><span class="o">-&gt;</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;unit_tests&quot;</span>
     <span class="nx">@navigate</span> <span class="s">&quot;unit_tests&quot;</span><span class="p">,</span>
       <span class="nv">trigger: </span><span class="kc">true</span>
       <span class="nv">replace: </span><span class="kc">true</span>
 
   <span class="nv">profile: </span><span class="nf">(_id) -&gt;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;PROFILE ROUTE&quot;</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;profileId&quot;</span><span class="p">,</span> <span class="nx">_id</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;profile&quot;</span>
     <span class="nx">@navigate</span> <span class="s">&quot;profile/&quot;</span> <span class="o">+</span> <span class="nx">_id</span><span class="p">,</span>
       <span class="nv">trigger: </span><span class="kc">true</span>
       <span class="nv">replace: </span><span class="kc">true</span>
 
-  <span class="nv">edit: </span><span class="nf">-&gt;</span>
+  <span class="nv">edit: </span><span class="o">-&gt;</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;edit&quot;</span>
     <span class="nx">@navigate</span> <span class="s">&quot;edit/&quot;</span><span class="p">,</span>
       <span class="nv">trigger: </span><span class="kc">true</span>
       <span class="nv">replace: </span><span class="kc">true</span>      
 
-  <span class="nv">news: </span><span class="nf">-&gt;</span>
+  <span class="nv">news: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;news&quot; </span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;news&quot;</span>
     <span class="nx">@navigate</span> <span class="s">&quot;news&quot;</span><span class="p">,</span>
       <span class="nv">trigger: </span><span class="kc">true</span>
       <span class="nv">replace: </span><span class="kc">true</span>
 
-  <span class="nv">impressum: </span><span class="nf">-&gt;</span>
+  <span class="nv">impressum: </span><span class="o">-&gt;</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;impressum&quot;</span>
     <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&quot;template&quot;</span><span class="p">,</span> <span class="s">&quot;impressum&quot;</span>
     <span class="nx">@navigate</span> <span class="s">&quot;impressum&quot;</span><span class="p">,</span>
@@ -107,5 +107,5 @@
     <span class="nv">replace: </span><span class="kc">true</span>
 <span class="p">)</span>
 <span class="vi">@Workspace = </span><span class="k">new</span> <span class="nx">WorkspaceRouter</span><span class="p">()</span>
-<span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span> <span class="nf">-&gt;</span>
+<span class="nx">Meteor</span><span class="p">.</span><span class="nx">startup</span> <span class="o">-&gt;</span>
   <span class="nx">Backbone</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">start</span> <span class="nv">pushState: </span><span class="kc">true</span></div></div></div></div></body></html>

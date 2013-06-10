@@ -6,9 +6,9 @@
   <span class="nv">mouseDown: </span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Vector2</span>
 
 <span class="nv">mouseBindings.getPosition =</span>
-  <span class="nv">absolute: </span><span class="nf">-&gt;</span> <span class="nx">position</span><span class="p">.</span><span class="nx">absolute</span>
-  <span class="nv">relative: </span><span class="nf">-&gt;</span> <span class="nx">position</span><span class="p">.</span><span class="nx">relative</span>
-  <span class="nv">mouseDown: </span><span class="nf">-&gt;</span> <span class="nx">position</span><span class="p">.</span><span class="nx">mouseDown</span>
+  <span class="nv">absolute: </span><span class="o">-&gt;</span> <span class="nx">position</span><span class="p">.</span><span class="nx">absolute</span>
+  <span class="nv">relative: </span><span class="o">-&gt;</span> <span class="nx">position</span><span class="p">.</span><span class="nx">relative</span>
+  <span class="nv">mouseDown: </span><span class="o">-&gt;</span> <span class="nx">position</span><span class="p">.</span><span class="nx">mouseDown</span>
 
 <span class="nv">getBuildingPointFromPick = </span><span class="nf">(pick) -&gt;</span>
   <span class="nv">blockSize = </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;voxelSize&#39;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="snap-to-grid">Snap to grid</h3>
@@ -36,7 +36,7 @@
       <span class="nx">buildingPoint</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
   <span class="k">return</span> <span class="nx">buildingPoint</span>
 
-<span class="nv">updateObjectPreview = </span><span class="nf">-&gt;</span>
+<span class="nv">updateObjectPreview = </span><span class="o">-&gt;</span>
   <span class="nv">pick = </span><span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">picking</span><span class="p">.</span><span class="nx">pick</span><span class="p">()</span>
   <span class="k">if</span> <span class="nx">pick</span>
     <span class="nv">objectPreview = </span><span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">objectPreview</span>
@@ -71,7 +71,7 @@ positions of the mouse cursor</p></div></div><div class="code"><div class="wrapp
               <span class="nv">objectId: </span><span class="nx">pick</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">name</span>
             <span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">pick</span><span class="p">.</span><span class="nx">object</span>
               
-<span class="nv">mouseBindings.setup = </span><span class="nf">-&gt;</span>
+<span class="nv">mouseBindings.setup = </span><span class="o">-&gt;</span>
   <span class="nv">mouseMove = </span><span class="nf">(e) -&gt;</span>
     <span class="nv">offset = </span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">offset</span><span class="p">()</span>
     <span class="nv">width = </span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span>
@@ -85,6 +85,6 @@ positions of the mouse cursor</p></div></div><div class="code"><div class="wrapp
     
     <span class="nx">updateObjectPreview</span><span class="p">()</span>
   
-  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">defer</span> <span class="nf">-&gt;</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer&#39;</span><span class="p">).</span><span class="nx">off</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMove</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer&#39;</span><span class="p">).</span><span class="nx">on</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMove</span> </div></div></div></div></body></html>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">defer</span> <span class="o">-&gt;</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">off</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMove</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">on</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMove</span> </div></div></div></div></body></html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><title>models/model</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="models/model"><meta name="groc-project-path" content="app/models/model.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/models/model.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="model">Model</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="vi">@Models = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s">&#39;models&#39;</span>
-<span class="vi">@ModelObjects = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s">&#39;modelObjects&#39;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="model-action">Model Action</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="vi">@ModelActions = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s">&#39;modelActions&#39;</span>
+<span class="vi">@ModelObjects = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s">&#39;modelObjects&#39;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="chat-collection-id-modelid-publisherid-message-timestamp">Chat Collection: _id, modelId, publisherId, message, timestamp</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="vi">@ModelChat = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s">&#39;modelChat&#39;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="model-action">Model Action</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="vi">@ModelActions = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s">&#39;modelActions&#39;</span>
 
 <span class="nv">ModelActionConstructors = </span><span class="p">{}</span>
 <span class="nv">ModelObjectTypes = </span><span class="p">[</span>
@@ -28,6 +28,11 @@
       <span class="nv">actionIds:</span>
         <span class="nv">undo: </span><span class="nx">options</span><span class="p">.</span><span class="nx">undoActionId</span>
         <span class="nv">redo: </span><span class="nx">options</span><span class="p">.</span><span class="nx">redoActionId</span>
+
+<span class="nv">markModelAsUpdated = </span><span class="nf">(options) -&gt;</span>
+  <span class="nx">Models</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">modelId</span><span class="p">},</span>
+    <span class="nv">$set:</span>
+      <span class="nv">updatedAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
 
 <span class="k">class</span> <span class="nx">ModelAction</span>
   <span class="nv">constructor: </span><span class="nf">(options) -&gt;</span>
@@ -60,16 +65,16 @@
   <span class="nv">validateSpecifics: </span><span class="nf">(specifics) -&gt;</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span> <span class="mi">490</span><span class="p">,</span> <span class="s">&#39;ModelAction.validateSpecifics() not implemented!&#39;</span>
 
-  <span class="nv">do: </span><span class="nf">-&gt;</span>
+  <span class="nv">do: </span><span class="o">-&gt;</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span> <span class="mi">490</span><span class="p">,</span> <span class="s">&#39;ModelAction.do() not implemented!&#39;</span>
 
-  <span class="nv">undo: </span><span class="nf">-&gt;</span>
+  <span class="nv">undo: </span><span class="o">-&gt;</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span> <span class="mi">490</span><span class="p">,</span> <span class="s">&#39;ModelAction.undo() not implemented!&#39;</span>
 
-  <span class="nv">getDatabaseObject: </span><span class="nf">-&gt;</span>
+  <span class="nv">getDatabaseObject: </span><span class="o">-&gt;</span>
     <span class="k">return</span> <span class="k">this</span>
 
-  <span class="nv">save: </span><span class="nf">-&gt;</span>
+  <span class="nv">save: </span><span class="o">-&gt;</span>
     <span class="nv">databaseObject = </span><span class="nx">@getDatabaseObject</span><span class="p">()</span>
     <span class="nv">actionToUndo = </span><span class="nx">getModelActionToUndo</span> <span class="nx">@modelId</span>
     <span class="nv">actionToRedo = </span><span class="nx">getModelActionToRedo</span> <span class="nx">@modelId</span>
@@ -125,14 +130,14 @@
       <span class="k">if</span> <span class="o">not</span> <span class="nx">validSize</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span> <span class="mi">490</span><span class="p">,</span> <span class="s">&#39;Invalid voxel size &#39;</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">specifics</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">size</span> <span class="o">+</span> <span class="s">&#39; passed to specifics object for type voxel (options.specifics.object.size) of model action addObject!&#39;</span>
     <span class="nv">options.specifics.object.modelId = </span><span class="nx">options</span><span class="p">.</span><span class="nx">modelId</span>
-  <span class="nv">do: </span><span class="nf">-&gt;</span>
+  <span class="nv">do: </span><span class="o">-&gt;</span>
     <span class="k">if</span> <span class="nx">@specifics</span><span class="p">.</span><span class="nx">objectId</span>
       <span class="vi">@specifics.object._id = </span><span class="nx">@specifics</span><span class="p">.</span><span class="nx">objectId</span>
       <span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">@specifics</span><span class="p">.</span><span class="nx">object</span>
     <span class="k">else</span>
       <span class="vi">@specifics.objectId = </span><span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">@specifics</span><span class="p">.</span><span class="nx">object</span>
       <span class="nx">@update</span> <span class="nv">$set: </span><span class="s">&#39;specifics.objectId&#39;</span><span class="o">:</span> <span class="nx">@specifics</span><span class="p">.</span><span class="nx">objectId</span>
-  <span class="nv">undo: </span><span class="nf">-&gt;</span>
+  <span class="nv">undo: </span><span class="o">-&gt;</span>
     <span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">remove</span> <span class="nv">_id: </span><span class="nx">@specifics</span><span class="p">.</span><span class="nx">objectId</span>
 
 <span class="nv">ModelActionConstructors.addObject = </span><span class="nx">ModelActionAddObject</span>
@@ -145,9 +150,9 @@
       <span class="nv">options.specifics.object = </span><span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">findOne</span> <span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">specifics</span><span class="p">.</span><span class="nx">objectId</span>
       <span class="k">if</span> <span class="o">not</span> <span class="nx">options</span><span class="p">.</span><span class="nx">specifics</span><span class="p">.</span><span class="nx">object</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span> <span class="mi">490</span><span class="p">,</span> <span class="s">&#39;Invalid object id &#39;</span> <span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">specifics</span><span class="p">.</span><span class="nx">objectId</span> <span class="o">+</span> <span class="s">&#39; passed to specifics (options.specifics.objectId) of model action removeObject!&#39;</span>
-  <span class="nv">do: </span><span class="nf">-&gt;</span>
+  <span class="nv">do: </span><span class="o">-&gt;</span>
     <span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">remove</span> <span class="nv">_id: </span><span class="nx">@specifics</span><span class="p">.</span><span class="nx">objectId</span>
-  <span class="nv">undo: </span><span class="nf">-&gt;</span>
+  <span class="nv">undo: </span><span class="o">-&gt;</span>
     <span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">insert</span> <span class="nx">@specifics</span><span class="p">.</span><span class="nx">object</span>
 
 <span class="nv">ModelActionConstructors.removeObject = </span><span class="nx">ModelActionRemoveObject</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="methods">Methods</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="do-model-action">Do model action</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">doModelAction: </span><span class="nf">(options) -&gt;</span>
@@ -160,6 +165,7 @@
           <span class="nv">modelId: </span><span class="nx">action</span><span class="p">.</span><span class="nx">modelId</span>
           <span class="nv">undoActionId: </span><span class="nx">action</span><span class="p">.</span><span class="nx">_id</span>
           <span class="nv">redoActionId: </span><span class="kc">null</span>
+        <span class="nx">markModelAsUpdated</span> <span class="nv">modelId: </span><span class="nx">options</span><span class="p">.</span><span class="nx">modelId</span>
     <span class="k">else</span>
       <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span> <span class="mi">490</span><span class="p">,</span> <span class="s">&#39;Model action &#39;</span> <span class="o">+</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="s">&#39; does not exist!&#39;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="undo-model-action">Undo model action</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">undoModelAction: </span><span class="nf">(options) -&gt;</span>
     <span class="k">if</span> <span class="nx">userHasAtLeastRole</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">modelId</span><span class="p">,</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">owner</span>
@@ -173,7 +179,8 @@
           <span class="nx">setModelActionIds</span>
             <span class="nv">modelId: </span><span class="nx">action</span><span class="p">.</span><span class="nx">modelId</span>
             <span class="nv">undoActionId: </span><span class="nx">previousActionId</span>
-            <span class="nv">redoActionId: </span><span class="nx">action</span><span class="p">.</span><span class="nx">_id</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="redo-model-action">Redo model action</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">redoModelAction: </span><span class="nf">(options) -&gt;</span>
+            <span class="nv">redoActionId: </span><span class="nx">action</span><span class="p">.</span><span class="nx">_id</span>
+          <span class="nx">markModelAsUpdated</span> <span class="nv">modelId: </span><span class="nx">options</span><span class="p">.</span><span class="nx">modelId</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="redo-model-action">Redo model action</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">redoModelAction: </span><span class="nf">(options) -&gt;</span>
     <span class="k">if</span> <span class="nx">userHasAtLeastRole</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">modelId</span><span class="p">,</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">owner</span>
       <span class="nv">actionObject = </span><span class="nx">getModelActionToRedo</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">modelId</span>
       <span class="k">if</span> <span class="nx">actionObject</span>
@@ -185,7 +192,8 @@
           <span class="nx">setModelActionIds</span>
             <span class="nv">modelId: </span><span class="nx">action</span><span class="p">.</span><span class="nx">modelId</span>
             <span class="nv">undoActionId: </span><span class="nx">action</span><span class="p">.</span><span class="nx">_id</span>
-            <span class="nv">redoActionId: </span><span class="nx">nextActionId</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="create-model">Create model</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">createModel: </span><span class="nf">(options) -&gt;</span>
+            <span class="nv">redoActionId: </span><span class="nx">nextActionId</span>
+          <span class="nx">markModelAsUpdated</span> <span class="nv">modelId: </span><span class="nx">options</span><span class="p">.</span><span class="nx">modelId</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="create-model">Create model</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">createModel: </span><span class="nf">(options) -&gt;</span>
     <span class="k">if</span> <span class="o">not</span> <span class="nx">currentProfile</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span>
       <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">499</span><span class="p">,</span> <span class="s">&quot;You need to be logged in to create a Model&quot;</span><span class="p">)</span>
       
@@ -219,6 +227,7 @@
       <span class="k">if</span> <span class="nx">checkNameAvailability</span> <span class="o">&amp;&amp;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">name</span> <span class="o">!=</span> <span class="nx">currentModel</span><span class="p">.</span><span class="nx">name</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">499</span><span class="p">,</span> <span class="s">&quot;Modelname already taken&quot;</span><span class="p">);</span>
       <span class="k">else</span>
+        <span class="nx">markModelAsUpdated</span> <span class="nv">modelId: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span>
         <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">name: </span><span class="nx">options</span><span class="p">.</span><span class="nx">name</span><span class="p">}})</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="update-models-public-state">Update model's public state</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">updateModelIsPublic: </span><span class="nf">(options) -&gt;</span>
     <span class="k">if</span> <span class="nx">userHasAtLeastRole</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">owner</span>
       <span class="nv">isPublic = </span><span class="nx">options</span><span class="p">.</span><span class="nx">isPublic</span>
@@ -226,6 +235,7 @@
         <span class="nv">isPublic = </span><span class="kc">true</span>
       <span class="k">else</span>
         <span class="nv">isPublic = </span><span class="kc">false</span>
+      <span class="nx">markModelAsUpdated</span> <span class="nv">modelId: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span>
       <span class="k">return</span> <span class="nx">Models</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">isPublic: </span><span class="nx">isPublic</span><span class="p">}})</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="update-model-tag">Update model tag</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nv">updateModelTag: </span><span class="nf">(options) -&gt;</span>
     <span class="k">if</span> <span class="nx">userHasAtLeastRole</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">collaborator</span>
       <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">_id</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="nx">options</span><span class="p">.</span><span class="nx">tag</span> <span class="o">==</span> <span class="kc">undefined</span>
@@ -276,7 +286,18 @@
       <span class="nx">ModelActions</span><span class="p">.</span><span class="nx">remove</span> <span class="nv">modelId: </span><span class="nx">options</span><span class="p">.</span><span class="nx">_id</span>
       <span class="nx">Models</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">options</span>
 
-<span class="vi">@modelLoaded = </span><span class="nf">-&gt;</span>
+  <span class="nv">createMessage: </span><span class="nf">(options)-&gt;</span>
+    <span class="k">if</span> <span class="nx">userHasAtLeastRole</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">modelId</span><span class="p">,</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">viewer</span>
+      <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">modelId</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="nx">options</span><span class="p">.</span><span class="nx">publisher</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="nx">options</span><span class="p">.</span><span class="nx">message</span> <span class="o">==</span> <span class="kc">undefined</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="s">&quot;Undefined Parameter&quot;</span><span class="p">)</span>
+      <span class="nx">ModelChat</span><span class="p">.</span><span class="nx">insert</span><span class="p">({</span>
+        <span class="nv">modelId: </span><span class="nx">options</span><span class="p">.</span><span class="nx">modelId</span><span class="p">,</span>
+        <span class="nv">publisherId: </span><span class="nx">options</span><span class="p">.</span><span class="nx">publisher</span><span class="p">,</span>
+        <span class="nv">message: </span><span class="nx">options</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+        <span class="nv">timestamp: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+      <span class="p">})</span>
+
+<span class="vi">@modelLoaded = </span><span class="o">-&gt;</span>
   <span class="nv">model = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({})</span>
   <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
     <span class="k">return</span> <span class="kc">false</span>

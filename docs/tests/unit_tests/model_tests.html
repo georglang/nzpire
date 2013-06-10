@@ -1,17 +1,16 @@
-<!DOCTYPE html><html lang="en"><head><title>tests/unit_tests/model_tests</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="tests/unit_tests/model_tests"><meta name="groc-project-path" content="app/tests/unit_tests/model_tests.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/tests/unit_tests/model_tests.coffee</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="nv">test_createModel = </span><span class="nf">-&gt;</span>
-    <span class="c1">#create a model</span>
-    <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">services</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">currentProfile</span><span class="p">()</span>
-      <span class="nv">options = </span><span class="p">{</span><span class="nv">name: </span><span class="s">&quot;testmodel&quot;</span><span class="p">,</span> <span class="nv">creator: </span><span class="s">&quot;Altmann Christoph&quot;</span><span class="p">,</span> <span class="nv">predecessor: </span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nv">isPublic: </span><span class="kc">false</span><span class="p">}</span>
-      <span class="nv">modelId = </span><span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;createModel&#39;</span><span class="p">,</span><span class="nx">options</span><span class="p">,</span> <span class="nf">(error,result)-&gt;</span>
-        <span class="k">if</span> <span class="nx">error</span> 
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">error</span><span class="p">.</span><span class="nx">reason</span>
-        <span class="nv">foundModelId = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">name: </span><span class="s">&quot;testmodel&quot;</span><span class="p">})</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span>
-        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equals</span> <span class="nx">foundModelId</span><span class="p">,</span> <span class="nx">result</span>
+<!DOCTYPE html><html lang="en"><head><title>tests/unit_tests/model_tests</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="tests/unit_tests/model_tests"><meta name="groc-project-path" content="app/tests/unit_tests/model_tests.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/tests/unit_tests/model_tests.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="unit-tests">Unit_Tests</h1>
 
-<span class="nx">describe</span> <span class="s">&quot;Model&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-  <span class="nx">describe</span> <span class="s">&quot;updateModelname&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
-    <span class="nx">it</span> <span class="s">&quot;create new Model&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+<h2 id="steps-to-success">Steps to success:</h2>
+
+<h3 id="-clear-database-before-running-unit-tests">* Clear database before running unit_tests</h3>
+
+<h3 id="startmeteoriteserverwithsudometeor_mocha_test_dirstestsunit_testsmrt">* Start Meteorite Server with: sudo METEOR<em>MOCHA</em>TEST<em>DIRS=tests/unit</em>tests mrt</h3>
+
+<h3 id="-call-localhost3000unit-tests">* Call localhost:3000/unit_tests</h3>
+
+<h3 id="-check-out-your-tests">* Check out your tests</h3></div></div><div class="code"><div class="wrapper"><span class="nx">describe</span> <span class="s">&quot;Profile&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+  <span class="nx">describe</span> <span class="s">&quot;Profile&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="nx">it</span> <span class="s">&quot;create new Account&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
       <span class="k">if</span> <span class="o">not</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">userId</span><span class="p">()</span>
         <span class="nx">Accounts</span><span class="p">.</span><span class="nx">createUser</span>
           <span class="nv">username: </span><span class="s">&quot;maxmustermann&quot;</span>
@@ -19,41 +18,72 @@
           <span class="nv">email: </span><span class="s">&quot;a@b.com&quot;</span>
           <span class="nv">profile:</span>
             <span class="nv">name: </span><span class="s">&quot;Max Mustermann&quot;</span>
-        <span class="p">,</span> <span class="nf">(error) -&gt;</span>
 
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">,</span><span class="kc">true</span>
+
+<span class="nx">describe</span> <span class="s">&quot;Models&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+  <span class="nx">describe</span> <span class="s">&quot;Model Methods&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="nx">it</span> <span class="s">&quot;Create new Model&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
       <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">services</span>
-        <span class="nx">test_createModel</span><span class="p">()</span>
-      
+        <span class="nv">options = </span><span class="p">{</span><span class="nv">name: </span><span class="s">&quot;testmodel&quot;</span><span class="p">,</span> <span class="nv">creator: </span><span class="nx">currentProfile</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nv">predecessor: </span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nv">isPublic: </span><span class="kc">false</span><span class="p">}</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;createModel&#39;</span><span class="p">,</span><span class="nx">options</span>
+        <span class="nv">createdModel = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nv">name: </span><span class="s">&quot;testmodel&quot;</span><span class="p">})</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">createdModel</span><span class="o">?</span><span class="p">,</span> <span class="kc">true</span>
 
-      <span class="cm">###</span>
-<span class="cm">      console.log Models.find({}).fetch()</span>
+    <span class="nx">it</span> <span class="s">&quot;Create same Model again&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">services</span>
+        <span class="nv">options = </span><span class="p">{</span><span class="nv">name: </span><span class="s">&quot;testmodel&quot;</span><span class="p">,</span> <span class="nv">creator: </span><span class="nx">currentProfile</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nv">predecessor: </span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nv">isPublic: </span><span class="kc">false</span><span class="p">}</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;createModel&#39;</span><span class="p">,</span><span class="nx">options</span>
+        <span class="nv">createdModel = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">name: </span><span class="s">&quot;testmodel&quot;</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">createdModel</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="cm">      modelId = findOneModelByOptions(options)</span>
-<span class="cm">      optionsUpdateModelName = {_id: modelId._id, name: &quot;renamedTestModel&quot;}</span>
-<span class="cm">      Meteor.call &#39;updateModelName&#39;,optionsUpdateModelName, (error,result)-&gt;</span>
-<span class="cm">        if error</span>
-<span class="cm">          console.log error.reason</span>
+    <span class="nx">it</span> <span class="s">&quot;Rename Model&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">services</span>
+        <span class="nv">modelId = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;testmodel&quot;</span><span class="p">})</span>
+        <span class="nv">optionsUpdateModelName = </span><span class="p">{</span><span class="nv">_id: </span><span class="nx">modelId</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nv">name: </span><span class="s">&quot;renamedTestmodel&quot;</span><span class="p">}</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;updateModelName&#39;</span><span class="p">,</span><span class="nx">optionsUpdateModelName</span>
 
-<span class="cm">      console.log Models.find({}).fetch()    </span>
-<span class="cm">      </span>
-<span class="cm">      newModel = findOneModelByOptions(optionsUpdateModelName)</span>
-<span class="cm">      chai.assert.equal modelId._id, newModel._id</span>
-<span class="cm">      chai.assert.equal newModel.name, &quot;renamedTestModel&quot;</span>
-<span class="cm">      chai.expect(modelId._id).to.equal(newModel._id)</span>
-<span class="cm">      chai.should()</span>
-<span class="cm">      modelId._id.should.equal(newModel._id)</span>
+        <span class="nv">oldModel = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;testmodel&quot;</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">oldModel</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="mi">0</span>
 
-<span class="cm">      optionsRemove = {name: newModel.name}</span>
-<span class="cm">      Meteor.call &#39;removeModel&#39;,optionsRemove, (error,result)-&gt;</span>
-<span class="cm">        if error</span>
-<span class="cm">          console.log error.reason</span>
+        <span class="nv">renamedModel = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;renamedTestmodel&quot;</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">renamedModel</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="cm">      console.log Models.find({}).fetch()</span>
+    <span class="nx">it</span> <span class="s">&quot;Clone Model&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">services</span>
+        <span class="nv">predecessorModel = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;renamedTestmodel&quot;</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">predecessorModel</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="cm">      optionsRemove2 = {name: &quot;testmodel&quot;}</span>
-<span class="cm">      Meteor.call &#39;removeModel&#39;,optionsRemove2, (error,result)-&gt;</span>
-<span class="cm">        if error</span>
-<span class="cm">          console.log error.reason</span>
+        <span class="nv">options = </span><span class="p">{</span><span class="nv">name: </span><span class="s">&quot;clonedModel&quot;</span><span class="p">,</span> <span class="nv">predecessor: </span><span class="nx">predecessorModel</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span> <span class="nv">creator: </span><span class="nx">currentProfile</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span><span class="nv">isPublic: </span><span class="kc">false</span><span class="p">}</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;cloneModel&#39;</span><span class="p">,</span><span class="nx">options</span>
 
-<span class="cm">      console.log Models.find({}).fetch()</span>
-<span class="cm">      ###</span></div></div></div></div></body></html>
+        <span class="nv">clonedModel = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;clonedModel&quot;</span><span class="p">}).</span><span class="nx">fetch</span><span class="p">()</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">clonedModel</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="mi">1</span>        
+
+    <span class="nx">it</span> <span class="s">&quot;Update Model Public State&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">services</span>
+        <span class="nv">model = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;renamedTestmodel&quot;</span><span class="p">})</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">model</span><span class="p">.</span><span class="nx">isPublic</span><span class="p">,</span> <span class="kc">false</span>
+
+        <span class="nv">options = </span><span class="p">{</span><span class="nv">_id: </span><span class="nx">model</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span><span class="nv">isPublic: </span><span class="kc">true</span><span class="p">}</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;updateModelIsPublic&#39;</span><span class="p">,</span><span class="nx">options</span>
+
+        <span class="nv">updatedModel = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;renamedTestmodel&quot;</span><span class="p">})</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">updatedModel</span><span class="p">.</span><span class="nx">isPublic</span><span class="p">,</span> <span class="kc">true</span>
+
+    <span class="nx">it</span> <span class="s">&quot;Add Tags to Model&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">services</span>
+        <span class="nv">model = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;renamedTestmodel&quot;</span><span class="p">})</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">model</span><span class="p">.</span><span class="nx">tags</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="mi">0</span>
+
+        <span class="nv">options = </span><span class="p">{</span><span class="nv">_id: </span><span class="nx">model</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span><span class="nv">tag: </span><span class="s">&quot;testTag1&quot;</span><span class="p">}</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;updateModelTag&#39;</span><span class="p">,</span> <span class="nx">options</span>
+
+        <span class="nv">updatedModel = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;renamedTestmodel&quot;</span><span class="p">})</span>
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">updatedModel</span><span class="p">.</span><span class="nx">tags</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&quot;testTag1&quot;</span>
+        
+  <span class="nx">describe</span> <span class="s">&quot;Model Permissions&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="nx">it</span> <span class="s">&quot;Check Permission&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">services</span>
+        <span class="nv">model = </span><span class="nx">Models</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s">&quot;renamedTestmodel&quot;</span><span class="p">})</span>      
+        <span class="nx">chai</span><span class="p">.</span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span> <span class="nx">checkModelPermission</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span><span class="kc">true</span><span class="p">),</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">creator</span></div></div></div></div></body></html>

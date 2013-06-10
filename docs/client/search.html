@@ -65,7 +65,7 @@ Creates the searchQuery with "/query/i" to enable that the search query has not 
 Calls the order function to check if the user follows/favourites  profiles/models <br />
 If # and @ not given the function gets models and profiles and merges them <br />
 params: <br />
-return: array (with #models or @profiles or both) (+ .searchingFor" and .order)</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.search.getResults = </span><span class="nf">-&gt;</span>
+return: array (with #models or @profiles or both) (+ .searchingFor" and .order)</p></div></div><div class="code"><div class="wrapper"><span class="nv">Template.search.getResults = </span><span class="o">-&gt;</span>
   <span class="nv">searchingFor = </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;searchQuery&quot;</span><span class="p">).</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
   <span class="k">if</span> <span class="nx">searchingFor</span> <span class="o">==</span> <span class="s">&quot;@&quot;</span>
     <span class="nv">searchQuery = </span><span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&quot;searchQuery&quot;</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;/i&quot;</span>

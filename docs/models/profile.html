@@ -15,4 +15,16 @@
   <span class="nv">addServiceToProfile: </span><span class="nf">(profileId,updateObject)-&gt;</span>
     <span class="nx">checkEditingOwnProfile</span><span class="p">(</span><span class="nx">profileId</span><span class="p">)</span>
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">profileId</span><span class="p">},{</span><span class="nv">$push: </span><span class="nx">updateObject</span><span class="p">}</span>      
-    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">profileId</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">updatedAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()}}</span></div></div></div></div></body></html>
+    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">profileId</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">updatedAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()}}</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="current-profile">Current Profile</h2>
+
+<ul>
+<li>return: object</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="vi">@currentProfile = </span><span class="o">-&gt;</span>
+  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
+    <span class="nv">email: </span><span class="nx">currentEmail</span><span class="p">()</span>
+  <span class="p">).</span><span class="nx">fetch</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="current-users-email">Current Users Email</h2>
+
+<ul>
+<li>return: string</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="vi">@currentEmail = </span><span class="o">-&gt;</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">().</span><span class="nx">mail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div></div></div></body></html>

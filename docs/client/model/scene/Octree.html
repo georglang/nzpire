@@ -63,7 +63,7 @@ these are the children of the note</p></div></div><div class="code"><div class="
     
     <span class="nx">@split</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@currentLevel</span> <span class="o">&lt;</span> <span class="nx">@minLevel</span>
     
-  <span class="nv">split: </span><span class="nf">-&gt;</span>
+  <span class="nv">split: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;----------------------------------------------- split&quot;</span>
     <span class="k">return</span> <span class="k">if</span> <span class="nx">@maxLevel</span> <span class="o">&lt;=</span> <span class="nx">@currentLevel</span> <span class="o">||</span> <span class="nx">@topLeftFront</span> <span class="o">!=</span> <span class="kc">undefined</span>
 
@@ -75,7 +75,7 @@ these are the children of the note</p></div></div><div class="code"><div class="
 
     <span class="k">return</span>
   
-  <span class="nv">instantiateChildren: </span><span class="nf">-&gt;</span>
+  <span class="nv">instantiateChildren: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;----------------------------------------------- instantiateChildren&quot;</span>
     
     <span class="nv">x = </span><span class="nx">@boundingBox</span><span class="p">.</span><span class="nx">center</span><span class="p">.</span><span class="nx">x</span>
@@ -124,7 +124,7 @@ these are the children of the note</p></div></div><div class="code"><div class="
     
     <span class="k">return</span>
   
-  <span class="nv">fillAllChildren: </span><span class="nf">-&gt;</span>
+  <span class="nv">fillAllChildren: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;----------------------------------------------- fillAllChildren&quot;</span>
     <span class="nx">@topLeftFront</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
     <span class="nx">@topRightFront</span><span class="p">.</span><span class="nx">fill</span><span class="p">()</span>
@@ -138,7 +138,7 @@ these are the children of the note</p></div></div><div class="code"><div class="
 
     <span class="k">return</span>
 
-  <span class="nv">fill: </span><span class="nf">-&gt;</span>
+  <span class="nv">fill: </span><span class="o">-&gt;</span>
     <span class="c1">#console.log &quot;----------------------------------------------- fill&quot;</span>
     <span class="vi">@isInUse = </span><span class="kc">true</span>
 
