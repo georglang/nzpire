@@ -24,8 +24,6 @@ Schaekermann Mike
 
 # ## Login Protected Sites
 @loginProtectionArray = [
-	"modelEdit"
 	"news"
 	"profile"
-	"edit"
 	]
