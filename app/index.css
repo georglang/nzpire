@@ -126,12 +126,6 @@ iframe{
     top: 0px;
 }
 
-#widget {
-    white-space: nowrap;
-    overflow: hidden;
-    text-align: right !important;
-}
-
 .activeTemplate {
     animation: fadein 1s;
     -moz-animation: fadein 1s; /* Firefox */

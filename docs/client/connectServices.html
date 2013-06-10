@@ -4,7 +4,9 @@
   <span class="s">&#39;github&#39;</span><span class="o">:</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithGithub</span>
   <span class="s">&#39;twitter&#39;</span><span class="o">:</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">loginWithTwitter</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="connect-profiles">Connect Profiles</h2>
 
-<p>Inserts the new Mail into the old Account and Deletes the created User and reloggs the User <br />
+<p>Saves the new mail into a tmp variable und reloggs the user.
+In the relogInCallback the mail is saved to the profile
+After the function the created Profile gets removed
 * params: string (oldAccounts email), function (i.e. Meteor.loginWithFacebook) <br />
 * return:    </p></div></div><div class="code"><div class="wrapper"><span class="nv">connectProfiles = </span><span class="nf">(tmpEmail,tmpService)-&gt;</span>
   <span class="nv">tmpProfile = </span><span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span>

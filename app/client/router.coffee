@@ -100,7 +100,7 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true
 
   impressum: ->
-    console.log "impressum"
+    #console.log "impressum"
     Session.set "template", "impressum"
     @navigate "impressum",
     trigger: true

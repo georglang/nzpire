@@ -7,7 +7,9 @@ loginFunctions =
 	'twitter': Meteor.loginWithTwitter
 
 # ## Connect Profiles
-# Inserts the new Mail into the old Account and Deletes the created User and reloggs the User    
+# Saves the new mail into a tmp variable und reloggs the user.
+# In the relogInCallback the mail is saved to the profile
+# After the function the created Profile gets removed
 # * params: string (oldAccounts email), function (i.e. Meteor.loginWithFacebook)    
 # * return:    
 connectProfiles = (tmpEmail,tmpService)->

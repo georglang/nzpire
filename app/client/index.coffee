@@ -4,7 +4,7 @@
 language = window.navigator.userLanguage || window.navigator.language
 if language.length > 2
 	language = language.replace(/-/g,"_")
-#console.log language
+
 Meteor.setLocale(language);
 #console.log "----------------- I18N ---------------------------"
 

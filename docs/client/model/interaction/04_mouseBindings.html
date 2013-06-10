@@ -72,7 +72,10 @@ positions of the mouse cursor</p></div></div><div class="code"><div class="wrapp
             <span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">pick</span><span class="p">.</span><span class="nx">object</span>
               
 <span class="nv">mouseBindings.setup = </span><span class="o">-&gt;</span>
-  <span class="nv">mouseMove = </span><span class="nf">(e) -&gt;</span>
+  <span class="nv">mouseMoveContainer = </span><span class="nf">(e) -&gt;</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">focus</span><span class="p">()</span>
+
+  <span class="nv">mouseMoveCanvas = </span><span class="nf">(e) -&gt;</span>
     <span class="nv">offset = </span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">offset</span><span class="p">()</span>
     <span class="nv">width = </span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span>
     <span class="nv">height = </span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">height</span><span class="p">()</span>
@@ -86,5 +89,7 @@ positions of the mouse cursor</p></div></div><div class="code"><div class="wrapp
     <span class="nx">updateObjectPreview</span><span class="p">()</span>
   
   <span class="nx">Meteor</span><span class="p">.</span><span class="nx">defer</span> <span class="o">-&gt;</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">off</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMove</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">on</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMove</span> </div></div></div></div></body></html>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer&#39;</span><span class="p">).</span><span class="kc">off</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveContainer</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer&#39;</span><span class="p">).</span><span class="kc">on</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveContainer</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">off</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveCanvas</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">on</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveCanvas</span></div></div></div></div></body></html>

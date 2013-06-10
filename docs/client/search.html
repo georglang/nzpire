@@ -90,8 +90,8 @@ return: array (with #models or @profiles or both) (+ .searchingFor" and .order)<
     <span class="nv">i.order = </span><span class="nx">order</span><span class="p">(</span><span class="s">&quot;modelLink&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result2</span>
     <span class="nv">i.button = </span><span class="nx">buttonDesign</span><span class="p">(</span><span class="s">&quot;modelLink&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">.</span><span class="nx">_id</span><span class="p">)</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">result2</span>
     <span class="nx">jQuery</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="nx">result2</span><span class="p">)</span>
-
-  <span class="nx">result</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">sortArrayByFollowing</span><span class="p">)</span>
+  <span class="k">if</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">userId</span><span class="p">()</span>
+    <span class="nx">result</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">sortArrayByFollowing</span><span class="p">)</span>
   <span class="k">return</span> <span class="nx">result</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="events">Events</h2>
 
 <p>Search click events to redirect to models or profiles or to update Profiles with follow/favourite</p></div></div><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">search</span><span class="p">.</span><span class="nx">events</span>

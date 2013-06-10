@@ -46,10 +46,12 @@ Template.modelSidebar.tags = ->
   if model == undefined
     return null
   else
-    tags = model.tags
+    tags = []
+    tags.push({name: i, class:""}) for i in model.tags
+    #tags = model.tags
     if tags != undefined
       if Template.modelSidebar.isOwner()    
-        tags.push ""
+        tags.push {name:"click to tag", class: "editable"}
       return tags
     else
       return null
@@ -63,7 +65,7 @@ Template.modelSidebar.creator = ->
   else
     creatorId = model.creator
     if creatorId != ""
-      name = findOneProfileByOptions({_id: creatorId}).name
+      name = findOneProfileByOptions({_id: creatorId})?.name
       return name
     else
       return null
@@ -78,9 +80,9 @@ Template.modelSidebar.invited = ->
   else
     invitedPeople = model.invited
     if invitedPeople != undefined
-      names.push({name: findOneProfileByOptions({_id: i.userId}).name,role: i.role}) for i in invitedPeople
+      names.push({name: findOneProfileByOptions({_id: i.userId}).name,role: i.role, class:""}) for i in invitedPeople
       if Template.modelSidebar.isOwner()
-        names.push {name:"",role:""}
+        names.push {name:"click to invite",role:"",class:"editable"}
       return names
     else
       return null
@@ -94,7 +96,7 @@ Template.modelSidebar.predecessor = ->
   else
     predecessorId = model.predecessor
     if predecessorId != ""
-      name = findOneModelByOptions({_id:predecessorId}).name
+      name = findOneModelByOptions({_id:predecessorId})?.name
       return name
     else
       return null
@@ -157,25 +159,26 @@ Template.modelSidebar.events
       if className == 'modelname'
         $(e.target).replaceWith("<input autofocus='autofocus' id='editModelName' type='text' value='"+Template.modelSidebar.modelname()+"'>")
       # ##### * Tags
-      else if className == 'tags'
+      else if className == 'tags editable'
         tagName = $(e.target).html()
-        if tagName.length == 0
-          $(e.target).replaceWith("<input autofocus='autofocus' id='addTag' type='text' placeholder='Tagname'>")
-        else
-          options = {_id: Session.get('modelId'),tag: tagName}
-          Meteor.call 'removeModelTag', options, (error,result)->
-            if error
-              console.log error.reason
+        $(e.target).replaceWith("<input autofocus='autofocus' id='addTag' type='text' placeholder='Tagname'>")
+      else if className == 'tags '
+        tagName = $(e.target).html()
+        options = {_id: Session.get('modelId'),tag: tagName}
+        Meteor.call 'removeModelTag', options, (error,result)->
+          if error
+            console.log error.reason
       # ##### * Invites
-      else if className == 'invited'
+      else if className == 'invited editable'
         invitedName = $(e.target).html()
-        if invitedName.length == 0
-          $(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><select id='invitedRole'><option value='owner'>Owner</option><option value='collaborator'>Collaborator</option><option value='viewer'>Viewer</option></select><input id='addInviteButton' type='button' value='invite'>")
-        else
-          options = {_id: Session.get('modelId'),invite: invitedName}
-          Meteor.call 'removeModelInvite', options, (error,result)->
-            if error
-              console.log error.reason
+        #$(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><select id='invitedRole'><option value='owner'>Owner</option><option value='collaborator'>Collaborator</option><option value='viewer'>Viewer</option></select><input id='addInviteButton' type='button' value='invite'>")
+        $(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><br><input type='radio' name='role' value='owner'>Owner <br><input type='radio' name='role' value='collaborator'>Collaborator <br><input type='radio' name='role' value='viewer' checked='checked'>Viewer <br><input id='addInviteButton' type='button' value='invite'>")
+      else if className == 'invited '
+        invitedName = $(e.target).html()
+        options = {_id: Session.get('modelId'),invite: invitedName}
+        Meteor.call 'removeModelInvite', options, (error,result)->
+          if error
+            console.log error.reason
       # ##### * Publicity
       else if className == 'isPublic'
         options = {_id: Session.get('modelId'),isPublic: Template.modelSidebar.isPublic()}
@@ -214,7 +217,8 @@ Template.modelSidebar.events
   'click #addInviteButton': (e)->
     if $('#errorUpdateInvite')[0] != undefined
       $('#errorUpdateInvite').remove()        
-    role = $('#invitedRole').val()
+    #role = $('#invitedRole').val()
+    role = $('input:radio[name=role]:checked').val()
     options = {_id: Session.get('modelId'),invite: $('#addInvite').val(),role:role}
     Meteor.call 'updateModelInvite',options, (error,result)->
       if error
@@ -238,7 +242,7 @@ Template.modelSidebar.events
     if $('#cloneModelName')[0] != undefined
       $('#cloneModelName').remove()
       $('#createCloneModel').remove()
-    $(e.target).after("<input type='text' id='cloneModelName' placeholder='Enter Modelname'><input type='button' id='createCloneModel' value='Create Clone'>")
+    $(e.target).after("<input type='text' id='cloneModelName' placeholder='Enter Modelname'><input class='btn btn-primary' type='button' id='createCloneModel' value='Create Clone'>")
 
   'click #createCloneModel': ->
     modelName = $('#cloneModelName').val()

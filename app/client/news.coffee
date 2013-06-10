@@ -47,7 +47,9 @@ Template.news.getNews = ->
 	result.sort(sortArrayByTimestamp)
 	return result
 
-
+# ## Random Models
+# ## Gets all Models, shuffles them and slices the first then out
+# * return: array (incl. model.snapshotURL)
 Template.news.getRandomModels = ->
 	allModels = Models.find({}).fetch()
 	###
@@ -64,20 +66,25 @@ Template.news.getRandomModels = ->
 		model.snapshotURL ?= '/img/dummyModel.jpg'
 	return allModels
 
-
+# ## Sort By Favourite Count
+# * return: 0,1,-1 
 sortArrayByFavouritedCount = (a,b)->
 	return -1 if a.favCounts > b.favCounts
 	return 1 if a.favCounts < b.favCounts
 	return 0
 
+# ## Favourited Profiles
+# * return: cursor
 checkForFavourites = (_id)->
 	if not currentProfile()?._id
-		console.log "not currentProfile id"
 		return null
 	Profiles.find({
 		favourites: _id
 		}).fetch()
 
+# ## Most Popular Models
+# Gets the Models the most Profiles favourited
+# * return array (incl. model.favCounts, model.snapshotURL)
 Template.news.getMostPopularModels = ->
 	allModels = Models.find({}).fetch()
 	allProfiles = Profiles.find({}).fetch()

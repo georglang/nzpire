@@ -215,20 +215,24 @@ THREE.FocusControls = function ( object, domElement ) {
 
 		if ( _this.enabled === false ) return;
 
-		if ( _this.keys.left.indexOf( event.keyCode ) !== -1 ) {
-			moveCameraLeft( _this.motionSpeed.x * _this.current.distanceFromFocusPoint * _this.motionStepLength );
-		}
+		if ( inputShouldNotBeIgnored( event ) ) {
 
-		if ( _this.keys.right.indexOf( event.keyCode ) !== -1 ) {
-			moveCameraLeft( - _this.motionSpeed.x * _this.current.distanceFromFocusPoint * _this.motionStepLength );
-		}
+			if ( _this.keys.left.indexOf( event.keyCode ) !== -1 ) {
+				moveCameraLeft( _this.motionSpeed.x * _this.current.distanceFromFocusPoint * _this.motionStepLength );
+			}
 
-		if ( _this.keys.up.indexOf( event.keyCode ) !== -1 ) {
-			moveCameraFront( _this.motionSpeed.z * _this.current.distanceFromFocusPoint * _this.motionStepLength );
-		}
+			if ( _this.keys.right.indexOf( event.keyCode ) !== -1 ) {
+				moveCameraLeft( - _this.motionSpeed.x * _this.current.distanceFromFocusPoint * _this.motionStepLength );
+			}
 
-		if ( _this.keys.down.indexOf( event.keyCode ) !== -1 ) {
-			moveCameraFront( - _this.motionSpeed.z * _this.current.distanceFromFocusPoint * _this.motionStepLength );
+			if ( _this.keys.up.indexOf( event.keyCode ) !== -1 ) {
+				moveCameraFront( _this.motionSpeed.z * _this.current.distanceFromFocusPoint * _this.motionStepLength );
+			}
+
+			if ( _this.keys.down.indexOf( event.keyCode ) !== -1 ) {
+				moveCameraFront( - _this.motionSpeed.z * _this.current.distanceFromFocusPoint * _this.motionStepLength );
+			}
+
 		}
 
 	}

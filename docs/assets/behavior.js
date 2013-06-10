@@ -1341,10 +1341,111 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                         "sourcePath": "/home/georg/qpt2b_e/app/client/model/templates/chat/chat.coffee",
                         "projectPath": "app/client/model/templates/chat/chat.coffee",
                         "targetPath": "client/model/templates/chat/chat",
-                        "title": "chat"
+                        "firstHeader": {
+                          "type": "heading",
+                          "data": {
+                            "level": 1,
+                            "title": "Model_Chat",
+                            "slug": "model-chat",
+                            "isFileHeader": true
+                          },
+                          "depth": 1,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Model Messages",
+                                "slug": "model-messages"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Message Publisher",
+                                "slug": "message-publisher"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Message Timestamp",
+                                "slug": "message-timestamp"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Events",
+                                "slug": "events"
+                              },
+                              "depth": 2,
+                              "children": [
+                                {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 3,
+                                    "title": "Submit entered Message",
+                                    "slug": "submit-entered-message"
+                                  },
+                                  "depth": 3
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "title": "Model_Chat"
                       },
                       "depth": 5,
-                      "outline": []
+                      "outline": [
+                        {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Model Messages",
+                            "slug": "model-messages"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Message Publisher",
+                            "slug": "message-publisher"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Message Timestamp",
+                            "slug": "message-timestamp"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Events",
+                            "slug": "events"
+                          },
+                          "depth": 2,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "Submit entered Message",
+                                "slug": "submit-entered-message"
+                              },
+                              "depth": 3
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }, {
@@ -1794,10 +1895,95 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                         "sourcePath": "/home/georg/qpt2b_e/app/client/model/templates/toolbar/colors.coffee",
                         "projectPath": "app/client/model/templates/toolbar/colors.coffee",
                         "targetPath": "client/model/templates/toolbar/colors",
-                        "title": "colors"
+                        "firstHeader": {
+                          "type": "heading",
+                          "data": {
+                            "level": 1,
+                            "title": "Model_Colors",
+                            "slug": "model-colors",
+                            "isFileHeader": true
+                          },
+                          "depth": 1,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Model Color",
+                                "slug": "model-color"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Is Current Color",
+                                "slug": "is-current-color"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Events",
+                                "slug": "events"
+                              },
+                              "depth": 2,
+                              "children": [
+                                {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 3,
+                                    "title": "Sets the Session modelingColor to the clicked color",
+                                    "slug": "sets-the-session-modelingcolor-to-the-clicked-color"
+                                  },
+                                  "depth": 3
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "title": "Model_Colors"
                       },
                       "depth": 5,
-                      "outline": []
+                      "outline": [
+                        {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Model Color",
+                            "slug": "model-color"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Is Current Color",
+                            "slug": "is-current-color"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Events",
+                            "slug": "events"
+                          },
+                          "depth": 2,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "Sets the Session modelingColor to the clicked color",
+                                "slug": "sets-the-session-modelingcolor-to-the-clicked-color"
+                              },
+                              "depth": 3
+                            }
+                          ]
+                        }
+                      ]
                     }, {
                       "type": "file",
                       "data": {
@@ -1810,10 +1996,111 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                         "sourcePath": "/home/georg/qpt2b_e/app/client/model/templates/toolbar/voxelSize.coffee",
                         "projectPath": "app/client/model/templates/toolbar/voxelSize.coffee",
                         "targetPath": "client/model/templates/toolbar/voxelSize",
-                        "title": "voxelSize"
+                        "firstHeader": {
+                          "type": "heading",
+                          "data": {
+                            "level": 1,
+                            "title": "Model_Voxelsize",
+                            "slug": "model-voxelsize",
+                            "isFileHeader": true
+                          },
+                          "depth": 1,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Voxel Sizes",
+                                "slug": "voxel-sizes"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Is Current Voxel Size",
+                                "slug": "is-current-voxel-size"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "CSS Style Calculations",
+                                "slug": "css-style-calculations"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Events",
+                                "slug": "events"
+                              },
+                              "depth": 2,
+                              "children": [
+                                {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 3,
+                                    "title": "Sets the Session voxelSize to the clicked size",
+                                    "slug": "sets-the-session-voxelsize-to-the-clicked-size"
+                                  },
+                                  "depth": 3
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "title": "Model_Voxelsize"
                       },
                       "depth": 5,
-                      "outline": []
+                      "outline": [
+                        {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Voxel Sizes",
+                            "slug": "voxel-sizes"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Is Current Voxel Size",
+                            "slug": "is-current-voxel-size"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "CSS Style Calculations",
+                            "slug": "css-style-calculations"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Events",
+                            "slug": "events"
+                          },
+                          "depth": 2,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "Sets the Session voxelSize to the clicked size",
+                                "slug": "sets-the-session-voxelsize-to-the-clicked-size"
+                              },
+                              "depth": 3
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -2005,6 +2292,46 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "type": "heading",
                   "data": {
                     "level": 2,
+                    "title": "Random Models",
+                    "slug": "random-models"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Gets all Models, shuffles them and slices the first then out",
+                    "slug": "gets-all-models-shuffles-them-and-slices-the-first-then-out"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Sort By Favourite Count",
+                    "slug": "sort-by-favourite-count"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Favourited Profiles",
+                    "slug": "favourited-profiles"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Most Popular Models",
+                    "slug": "most-popular-models"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
                     "title": "Rendered and Destroyed",
                     "slug": "rendered-and-destroyed"
                   },
@@ -2046,6 +2373,46 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "level": 2,
                 "title": "News",
                 "slug": "news"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Random Models",
+                "slug": "random-models"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Gets all Models, shuffles them and slices the first then out",
+                "slug": "gets-all-models-shuffles-them-and-slices-the-first-then-out"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Sort By Favourite Count",
+                "slug": "sort-by-favourite-count"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Favourited Profiles",
+                "slug": "favourited-profiles"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Most Popular Models",
+                "slug": "most-popular-models"
               },
               "depth": 2
             }, {

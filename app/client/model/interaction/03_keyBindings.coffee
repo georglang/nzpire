@@ -8,14 +8,6 @@ Modeling.interaction.keyBindings = keyBindings = {}
 
 # ## Setup
 keyBindings.setup = ->
-  inputShouldNotBeIgnored = (event) ->
-    tagName = $(event.target).prop('tagName')
-    tagNamesToIgnore = [
-      'INPUT'
-      'TEXTAREA'
-    ]
-    doNotIgnoreInput = tagNamesToIgnore.indexOf(tagName) is -1
-
   # the context is the DOM element
   # on which the keybinding is called
   # (body by default)
@@ -112,6 +104,7 @@ keyBindings.setup = ->
 
     Meteor.Keybindings.addOne settingNewFocusPointShortcut,
       (event) ->
-        pick = Modeling.scene.picking.pick()
-        if pick
-          Modeling.scene.controls.future.focusPoint.copy pick.point
+        if inputShouldNotBeIgnored event
+          pick = Modeling.scene.picking.pick()
+          if pick
+            Modeling.scene.controls.future.focusPoint.copy pick.point

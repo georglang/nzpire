@@ -4,6 +4,7 @@ Package.describe({
 
 Package.on_use(function (api) {
   api.add_files([
+    'Helpers.js',
     'three.min.js',
     'FlyControls.js',
     'TrackballControls.js',
