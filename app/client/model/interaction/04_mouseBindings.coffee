@@ -88,7 +88,6 @@ Template.model.events
           if pick.object.name
             Modeling.interaction.manipulation.object.remove
               objectId: pick.object.name
-            Modeling.scene.content.remove pick.object
               
 mouseBindings.setup = ->
   mouseMoveContainer = (e) ->
