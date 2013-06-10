@@ -1,11 +1,11 @@
-<!DOCTYPE html><html lang="en"><head><title>models/profile</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="models/profile"><meta name="groc-project-path" content="app/models/profile.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/models/profile.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="profile">Profile</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="vi">@Profiles = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s">&#39;profiles&#39;</span>
+<!DOCTYPE html><html lang="en"><head><title>models/profile</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="models/profile"><meta name="groc-project-path" content="app/models/profile.coffee"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path">app/models/profile.coffee</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h1 id="profile">Profile</h1></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="vi">@Profiles = </span><span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nx">Collection</span> <span class="s1">&#39;profiles&#39;</span>
 
 <span class="vi">@findOneProfileByOptions = </span><span class="nf">(options)-&gt;</span>
   <span class="k">return</span> <span class="nx">Profiles</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
 
 <span class="vi">@checkEditingOwnProfile = </span><span class="nf">(profileId)-&gt;</span>
   <span class="k">if</span> <span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span> <span class="o">!=</span> <span class="nx">profileId</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="s">&quot;Permission denied&quot;</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nx">Meteor</span><span class="p">.</span><span class="nb">Error</span><span class="p">(</span><span class="mi">490</span><span class="p">,</span> <span class="s2">&quot;Permission denied&quot;</span><span class="p">);</span>
   <span class="k">return</span> <span class="kc">true</span>
 
 <span class="nx">Meteor</span><span class="p">.</span><span class="nx">methods</span>
@@ -15,4 +15,16 @@
   <span class="nv">addServiceToProfile: </span><span class="nf">(profileId,updateObject)-&gt;</span>
     <span class="nx">checkEditingOwnProfile</span><span class="p">(</span><span class="nx">profileId</span><span class="p">)</span>
     <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">profileId</span><span class="p">},{</span><span class="nv">$push: </span><span class="nx">updateObject</span><span class="p">}</span>      
-    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">profileId</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">updatedAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()}}</span></div></div></div></div></body></html>
+    <span class="nx">Profiles</span><span class="p">.</span><span class="nx">update</span> <span class="p">{</span><span class="nv">_id: </span><span class="nx">profileId</span><span class="p">},{</span><span class="nv">$set: </span><span class="p">{</span><span class="nv">updatedAt: </span><span class="k">new</span> <span class="nb">Date</span><span class="p">()}}</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="current-profile">Current Profile</h2>
+
+<ul>
+<li>return: object</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="vi">@currentProfile = </span><span class="o">-&gt;</span>
+  <span class="nx">Profiles</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span>
+    <span class="nv">email: </span><span class="nx">currentEmail</span><span class="p">()</span>
+  <span class="p">).</span><span class="nx">fetch</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="current-users-email">Current Users Email</h2>
+
+<ul>
+<li>return: string</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="vi">@currentEmail = </span><span class="o">-&gt;</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">user</span><span class="p">().</span><span class="nx">mail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div></div></div></body></html>

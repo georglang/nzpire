@@ -5,7 +5,7 @@
 <span class="nx">scene</span><span class="p">.</span><span class="nx">materials</span> <span class="o">?=</span> 
   <span class="nv">default: </span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">MeshLambertMaterial</span><span class="p">(</span><span class="nv">color: </span><span class="mh">0xFFFFFF</span><span class="p">)</span>
 <span class="nv">materials = </span><span class="nx">scene</span><span class="p">.</span><span class="nx">materials</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="creating-a-mesh-for-a-given-database-object">Creating a mesh for a given database object</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="nv">meshForObject = </span><span class="nf">(object) -&gt;</span>
-  <span class="nv">colorKey = </span><span class="nx">object</span><span class="p">.</span><span class="nx">color</span> <span class="o">?</span> <span class="s">&#39;default&#39;</span>
+  <span class="nv">colorKey = </span><span class="nx">object</span><span class="p">.</span><span class="nx">color</span> <span class="o">?</span> <span class="s1">&#39;default&#39;</span>
   <span class="nv">material = </span><span class="kc">undefined</span>
   <span class="nv">materialInMap = </span><span class="nx">materials</span><span class="p">[</span><span class="nx">colorKey</span><span class="p">]</span>
   <span class="k">if</span> <span class="nx">materialInMap</span>
@@ -15,7 +15,7 @@
     <span class="nx">materials</span><span class="p">[</span><span class="nx">colorKey</span><span class="p">]</span> <span class="o">=</span> <span class="nv">material = </span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">MeshLambertMaterial</span> <span class="nv">color: </span><span class="nx">colorAsInteger</span>
   <span class="nv">mesh = </span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">(</span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">CubeGeometry</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="nx">material</span><span class="p">)</span>
   <span class="nv">mesh.position = </span><span class="nx">object</span><span class="p">.</span><span class="nx">position</span>
-  <span class="k">if</span> <span class="nx">object</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s">&#39;voxel&#39;</span>
+  <span class="k">if</span> <span class="nx">object</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s1">&#39;voxel&#39;</span>
     <span class="nv">scale = </span><span class="nx">object</span><span class="p">.</span><span class="nx">size</span> <span class="o">?</span> <span class="mi">50</span>
     <span class="nx">mesh</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">set</span> <span class="nx">scale</span><span class="p">,</span> <span class="nx">scale</span><span class="p">,</span> <span class="nx">scale</span>
   <span class="nv">mesh.name = </span><span class="nx">object</span><span class="p">.</span><span class="nx">_id</span>
@@ -26,7 +26,7 @@
   <span class="nx">removeObject</span> <span class="nx">object</span>
   <span class="nx">addObject</span> <span class="nx">object</span>
 
-<span class="nv">scene.update = </span><span class="nf">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="registration-of-observer-callbacks">Registration of observer callbacks</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;modelId&#39;</span><span class="p">}).</span><span class="nx">observe</span>
+<span class="nv">scene.update = </span><span class="o">-&gt;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="registration-of-observer-callbacks">Registration of observer callbacks</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="nx">ModelObjects</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;modelId&#39;</span><span class="p">}).</span><span class="nx">observe</span>
     <span class="nv">added: </span><span class="nx">addObject</span>
     <span class="nv">updated: </span><span class="nx">updateObject</span>
     <span class="nv">removed: </span><span class="nx">removeObject</span></div></div></div></div></body></html>

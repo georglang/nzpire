@@ -13,7 +13,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "commentsOnly": true,
           "name": "Markdown"
         },
-        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/README.md",
+        "sourcePath": "/home/morathil/qpt2b/README.md",
         "projectPath": "README.md",
         "targetPath": "index",
         "firstHeader": {
@@ -84,7 +84,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/config.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/config.coffee",
             "projectPath": "app/client/config.coffee",
             "targetPath": "client/config",
             "firstHeader": {
@@ -110,7 +110,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/connectServices.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/connectServices.coffee",
             "projectPath": "app/client/connectServices.coffee",
             "targetPath": "client/connectServices",
             "firstHeader": {
@@ -211,7 +211,23 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/i18n.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/footer.coffee",
+            "projectPath": "app/client/footer.coffee",
+            "targetPath": "client/footer",
+            "title": "footer"
+          },
+          "depth": 2,
+          "outline": []
+        }, {
+          "type": "file",
+          "data": {
+            "language": {
+              "nameMatchers": [".coffee", "Cakefile"],
+              "pygmentsLexer": "coffee-script",
+              "singleLineComment": ["#"],
+              "name": "CoffeeScript"
+            },
+            "sourcePath": "/home/morathil/qpt2b/app/client/i18n.coffee",
             "projectPath": "app/client/i18n.coffee",
             "targetPath": "client/i18n",
             "firstHeader": {
@@ -237,7 +253,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/index.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/index.coffee",
             "projectPath": "app/client/index.coffee",
             "targetPath": "client/index",
             "firstHeader": {
@@ -284,7 +300,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/menue.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/menue.coffee",
             "projectPath": "app/client/menue.coffee",
             "targetPath": "client/menue",
             "firstHeader": {
@@ -443,7 +459,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/01_history.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/01_history.coffee",
                     "projectPath": "app/client/model/interaction/01_history.coffee",
                     "targetPath": "client/model/interaction/01_history",
                     "firstHeader": {
@@ -490,7 +506,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/02_manipulation.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/02_manipulation.coffee",
                     "projectPath": "app/client/model/interaction/02_manipulation.coffee",
                     "targetPath": "client/model/interaction/02_manipulation",
                     "firstHeader": {
@@ -639,7 +655,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/03_keyBindings.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/03_keyBindings.coffee",
                     "projectPath": "app/client/model/interaction/03_keyBindings.coffee",
                     "targetPath": "client/model/interaction/03_keyBindings",
                     "firstHeader": {
@@ -686,7 +702,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/04_mouseBindings.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/04_mouseBindings.coffee",
                     "projectPath": "app/client/model/interaction/04_mouseBindings.coffee",
                     "targetPath": "client/model/interaction/04_mouseBindings",
                     "firstHeader": {
@@ -787,7 +803,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/interaction/main.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/main.coffee",
                     "projectPath": "app/client/model/interaction/main.coffee",
                     "targetPath": "client/model/interaction/main",
                     "firstHeader": {
@@ -823,7 +839,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/01_update.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/01_update.coffee",
                     "projectPath": "app/client/model/scene/01_update.coffee",
                     "targetPath": "client/model/scene/01_update",
                     "firstHeader": {
@@ -934,7 +950,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/02_lights.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/02_lights.coffee",
                     "projectPath": "app/client/model/scene/02_lights.coffee",
                     "targetPath": "client/model/scene/02_lights",
                     "firstHeader": {
@@ -960,7 +976,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/03_picking.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/03_picking.coffee",
                     "projectPath": "app/client/model/scene/03_picking.coffee",
                     "targetPath": "client/model/scene/03_picking",
                     "firstHeader": {
@@ -1039,7 +1055,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/04_setup.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/04_setup.coffee",
                     "projectPath": "app/client/model/scene/04_setup.coffee",
                     "targetPath": "client/model/scene/04_setup",
                     "firstHeader": {
@@ -1120,6 +1136,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "type": "heading",
                           "data": {
                             "level": 2,
+                            "title": "Skybox",
+                            "slug": "skybox"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
                             "title": "Object preview",
                             "slug": "object-preview"
                           },
@@ -1138,6 +1162,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                             "level": 2,
                             "title": "Window resizing",
                             "slug": "window-resizing"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Camera controls",
+                            "slug": "camera-controls"
                           },
                           "depth": 2
                         }
@@ -1215,6 +1247,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "type": "heading",
                       "data": {
                         "level": 2,
+                        "title": "Skybox",
+                        "slug": "skybox"
+                      },
+                      "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
                         "title": "Object preview",
                         "slug": "object-preview"
                       },
@@ -1235,6 +1275,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                         "slug": "window-resizing"
                       },
                       "depth": 2
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "Camera controls",
+                        "slug": "camera-controls"
+                      },
+                      "depth": 2
                     }
                   ]
                 }, {
@@ -1246,7 +1294,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/scene/Octree.coffee",
+                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/Octree.coffee",
                     "projectPath": "app/client/model/scene/Octree.coffee",
                     "targetPath": "client/model/scene/Octree",
                     "firstHeader": {
@@ -1276,8 +1324,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 {
                   "type": "folder",
                   "data": {
-                    "path": "client/model/templates/edit",
-                    "title": "edit"
+                    "path": "client/model/templates/chat",
+                    "title": "chat"
                   },
                   "depth": 4,
                   "children": [
@@ -1290,13 +1338,114 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/templates/edit/edit.coffee",
-                        "projectPath": "app/client/model/templates/edit/edit.coffee",
-                        "targetPath": "client/model/templates/edit/edit",
-                        "title": "edit"
+                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/chat/chat.coffee",
+                        "projectPath": "app/client/model/templates/chat/chat.coffee",
+                        "targetPath": "client/model/templates/chat/chat",
+                        "firstHeader": {
+                          "type": "heading",
+                          "data": {
+                            "level": 1,
+                            "title": "Model_Chat",
+                            "slug": "model-chat",
+                            "isFileHeader": true
+                          },
+                          "depth": 1,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Model Messages",
+                                "slug": "model-messages"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Message Publisher",
+                                "slug": "message-publisher"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Message Timestamp",
+                                "slug": "message-timestamp"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Events",
+                                "slug": "events"
+                              },
+                              "depth": 2,
+                              "children": [
+                                {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 3,
+                                    "title": "Submit entered Message",
+                                    "slug": "submit-entered-message"
+                                  },
+                                  "depth": 3
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "title": "Model_Chat"
                       },
                       "depth": 5,
-                      "outline": []
+                      "outline": [
+                        {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Model Messages",
+                            "slug": "model-messages"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Message Publisher",
+                            "slug": "message-publisher"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Message Timestamp",
+                            "slug": "message-timestamp"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Events",
+                            "slug": "events"
+                          },
+                          "depth": 2,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "Submit entered Message",
+                                "slug": "submit-entered-message"
+                              },
+                              "depth": 3
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }, {
@@ -1316,7 +1465,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/templates/show/show.coffee",
+                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/show/show.coffee",
                         "projectPath": "app/client/model/templates/show/show.coffee",
                         "targetPath": "client/model/templates/show/show",
                         "title": "show"
@@ -1342,7 +1491,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/templates/slideBar/slideBar.coffee",
+                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/slideBar/slideBar.coffee",
                         "projectPath": "app/client/model/templates/slideBar/slideBar.coffee",
                         "targetPath": "client/model/templates/slideBar/slideBar",
                         "firstHeader": {
@@ -1743,13 +1892,98 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/templates/toolbar/colors.coffee",
+                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/toolbar/colors.coffee",
                         "projectPath": "app/client/model/templates/toolbar/colors.coffee",
                         "targetPath": "client/model/templates/toolbar/colors",
-                        "title": "colors"
+                        "firstHeader": {
+                          "type": "heading",
+                          "data": {
+                            "level": 1,
+                            "title": "Model_Colors",
+                            "slug": "model-colors",
+                            "isFileHeader": true
+                          },
+                          "depth": 1,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Model Color",
+                                "slug": "model-color"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Is Current Color",
+                                "slug": "is-current-color"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Events",
+                                "slug": "events"
+                              },
+                              "depth": 2,
+                              "children": [
+                                {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 3,
+                                    "title": "Sets the Session modelingColor to the clicked color",
+                                    "slug": "sets-the-session-modelingcolor-to-the-clicked-color"
+                                  },
+                                  "depth": 3
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "title": "Model_Colors"
                       },
                       "depth": 5,
-                      "outline": []
+                      "outline": [
+                        {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Model Color",
+                            "slug": "model-color"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Is Current Color",
+                            "slug": "is-current-color"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Events",
+                            "slug": "events"
+                          },
+                          "depth": 2,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "Sets the Session modelingColor to the clicked color",
+                                "slug": "sets-the-session-modelingcolor-to-the-clicked-color"
+                              },
+                              "depth": 3
+                            }
+                          ]
+                        }
+                      ]
                     }, {
                       "type": "file",
                       "data": {
@@ -1759,13 +1993,114 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/model/templates/toolbar/voxelSize.coffee",
+                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/toolbar/voxelSize.coffee",
                         "projectPath": "app/client/model/templates/toolbar/voxelSize.coffee",
                         "targetPath": "client/model/templates/toolbar/voxelSize",
-                        "title": "voxelSize"
+                        "firstHeader": {
+                          "type": "heading",
+                          "data": {
+                            "level": 1,
+                            "title": "Model_Voxelsize",
+                            "slug": "model-voxelsize",
+                            "isFileHeader": true
+                          },
+                          "depth": 1,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Voxel Sizes",
+                                "slug": "voxel-sizes"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Is Current Voxel Size",
+                                "slug": "is-current-voxel-size"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "CSS Style Calculations",
+                                "slug": "css-style-calculations"
+                              },
+                              "depth": 2
+                            }, {
+                              "type": "heading",
+                              "data": {
+                                "level": 2,
+                                "title": "Events",
+                                "slug": "events"
+                              },
+                              "depth": 2,
+                              "children": [
+                                {
+                                  "type": "heading",
+                                  "data": {
+                                    "level": 3,
+                                    "title": "Sets the Session voxelSize to the clicked size",
+                                    "slug": "sets-the-session-voxelsize-to-the-clicked-size"
+                                  },
+                                  "depth": 3
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "title": "Model_Voxelsize"
                       },
                       "depth": 5,
-                      "outline": []
+                      "outline": [
+                        {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Voxel Sizes",
+                            "slug": "voxel-sizes"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Is Current Voxel Size",
+                            "slug": "is-current-voxel-size"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "CSS Style Calculations",
+                            "slug": "css-style-calculations"
+                          },
+                          "depth": 2
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 2,
+                            "title": "Events",
+                            "slug": "events"
+                          },
+                          "depth": 2,
+                          "children": [
+                            {
+                              "type": "heading",
+                              "data": {
+                                "level": 3,
+                                "title": "Sets the Session voxelSize to the clicked size",
+                                "slug": "sets-the-session-voxelsize-to-the-clicked-size"
+                              },
+                              "depth": 3
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -1781,7 +2116,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/modelShowroom.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/modelShowroom.coffee",
             "projectPath": "app/client/modelShowroom.coffee",
             "targetPath": "client/modelShowroom",
             "firstHeader": {
@@ -1908,7 +2243,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/news.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/news.coffee",
             "projectPath": "app/client/news.coffee",
             "targetPath": "client/news",
             "firstHeader": {
@@ -1951,6 +2286,46 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                     "level": 2,
                     "title": "News",
                     "slug": "news"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Random Models",
+                    "slug": "random-models"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Gets all Models, shuffles them and slices the first then out",
+                    "slug": "gets-all-models-shuffles-them-and-slices-the-first-then-out"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Sort By Favourite Count",
+                    "slug": "sort-by-favourite-count"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Favourited Profiles",
+                    "slug": "favourited-profiles"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Most Popular Models",
+                    "slug": "most-popular-models"
                   },
                   "depth": 2
                 }, {
@@ -2004,6 +2379,46 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 2,
+                "title": "Random Models",
+                "slug": "random-models"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Gets all Models, shuffles them and slices the first then out",
+                "slug": "gets-all-models-shuffles-them-and-slices-the-first-then-out"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Sort By Favourite Count",
+                "slug": "sort-by-favourite-count"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Favourited Profiles",
+                "slug": "favourited-profiles"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Most Popular Models",
+                "slug": "most-popular-models"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
                 "title": "Rendered and Destroyed",
                 "slug": "rendered-and-destroyed"
               },
@@ -2019,7 +2434,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/profile.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/profile.coffee",
             "projectPath": "app/client/profile.coffee",
             "targetPath": "client/profile",
             "title": "profile"
@@ -2045,7 +2460,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/router.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/router.coffee",
             "projectPath": "app/client/router.coffee",
             "targetPath": "client/router",
             "title": "router"
@@ -2061,7 +2476,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/client/search.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/client/search.coffee",
             "projectPath": "app/client/search.coffee",
             "targetPath": "client/search",
             "firstHeader": {
@@ -2206,7 +2621,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "singleLineComment": ["#"],
           "name": "CoffeeScript"
         },
-        "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/globalFunctions.coffee",
+        "sourcePath": "/home/morathil/qpt2b/app/globalFunctions.coffee",
         "projectPath": "app/globalFunctions.coffee",
         "targetPath": "globalFunctions",
         "firstHeader": {
@@ -2220,22 +2635,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 1,
           "children": [
             {
-              "type": "heading",
-              "data": {
-                "level": 2,
-                "title": "Current Profile",
-                "slug": "current-profile"
-              },
-              "depth": 2
-            }, {
-              "type": "heading",
-              "data": {
-                "level": 2,
-                "title": "Current Users Email",
-                "slug": "current-users-email"
-              },
-              "depth": 2
-            }, {
               "type": "heading",
               "data": {
                 "level": 2,
@@ -2259,22 +2658,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
       "depth": 1,
       "outline": [
         {
-          "type": "heading",
-          "data": {
-            "level": 2,
-            "title": "Current Profile",
-            "slug": "current-profile"
-          },
-          "depth": 2
-        }, {
-          "type": "heading",
-          "data": {
-            "level": 2,
-            "title": "Current Users Email",
-            "slug": "current-users-email"
-          },
-          "depth": 2
-        }, {
           "type": "heading",
           "data": {
             "level": 2,
@@ -2309,7 +2692,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/models/model.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/models/model.coffee",
             "projectPath": "app/models/model.coffee",
             "targetPath": "models/model",
             "firstHeader": {
@@ -2323,6 +2706,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "depth": 1,
               "children": [
                 {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Chat Collection: _id, modelId, publisherId, message, timestamp",
+                    "slug": "chat-collection-id-modelid-publisherid-message-timestamp"
+                  },
+                  "depth": 2
+                }, {
                   "type": "heading",
                   "data": {
                     "level": 2,
@@ -2448,6 +2839,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 2,
+                "title": "Chat Collection: _id, modelId, publisherId, message, timestamp",
+                "slug": "chat-collection-id-modelid-publisherid-message-timestamp"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
                 "title": "Model Action",
                 "slug": "model-action"
               },
@@ -2570,7 +2969,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/models/profile.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/models/profile.coffee",
             "projectPath": "app/models/profile.coffee",
             "targetPath": "models/profile",
             "firstHeader": {
@@ -2581,12 +2980,49 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "slug": "profile",
                 "isFileHeader": true
               },
-              "depth": 1
+              "depth": 1,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Current Profile",
+                    "slug": "current-profile"
+                  },
+                  "depth": 2
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Current Users Email",
+                    "slug": "current-users-email"
+                  },
+                  "depth": 2
+                }
+              ]
             },
             "title": "Profile"
           },
           "depth": 2,
-          "outline": []
+          "outline": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Current Profile",
+                "slug": "current-profile"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Current Users Email",
+                "slug": "current-users-email"
+              },
+              "depth": 2
+            }
+          ]
         }
       ]
     }, {
@@ -2606,7 +3042,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/server/config.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/server/config.coffee",
             "projectPath": "app/server/config.coffee",
             "targetPath": "server/config",
             "title": "config"
@@ -2622,7 +3058,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/server/connectAccOnCreateByEmail.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/server/connectAccOnCreateByEmail.coffee",
             "projectPath": "app/server/connectAccOnCreateByEmail.coffee",
             "targetPath": "server/connectAccOnCreateByEmail",
             "title": "connectAccOnCreateByEmail"
@@ -2638,7 +3074,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/server/index.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/server/index.coffee",
             "projectPath": "app/server/index.coffee",
             "targetPath": "server/index",
             "title": "index"
@@ -2654,7 +3090,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/server/publish.coffee",
+            "sourcePath": "/home/morathil/qpt2b/app/server/publish.coffee",
             "projectPath": "app/server/publish.coffee",
             "targetPath": "server/publish",
             "firstHeader": {
@@ -2827,29 +3263,98 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["#"],
                   "name": "CoffeeScript"
                 },
-                "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/tests/unit_tests/model_tests.coffee",
+                "sourcePath": "/home/morathil/qpt2b/app/tests/unit_tests/model_tests.coffee",
                 "projectPath": "app/tests/unit_tests/model_tests.coffee",
                 "targetPath": "tests/unit_tests/model_tests",
-                "title": "model_tests"
-              },
-              "depth": 3,
-              "outline": []
-            }, {
-              "type": "file",
-              "data": {
-                "language": {
-                  "nameMatchers": [".coffee", "Cakefile"],
-                  "pygmentsLexer": "coffee-script",
-                  "singleLineComment": ["#"],
-                  "name": "CoffeeScript"
+                "firstHeader": {
+                  "type": "heading",
+                  "data": {
+                    "level": 1,
+                    "title": "Unit_Tests",
+                    "slug": "unit-tests",
+                    "isFileHeader": true
+                  },
+                  "depth": 1,
+                  "children": [
+                    {
+                      "type": "heading",
+                      "data": {
+                        "level": 2,
+                        "title": "Steps to success:",
+                        "slug": "steps-to-success"
+                      },
+                      "depth": 2,
+                      "children": [
+                        {
+                          "type": "heading",
+                          "data": {
+                            "level": 3,
+                            "title": "* Clear database before running unit_tests",
+                            "slug": "-clear-database-before-running-unit-tests"
+                          },
+                          "depth": 3
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 3,
+                            "title": "* Call localhost:3000/unit_tests",
+                            "slug": "-call-localhost3000unit-tests"
+                          },
+                          "depth": 3
+                        }, {
+                          "type": "heading",
+                          "data": {
+                            "level": 3,
+                            "title": "* Check out your tests",
+                            "slug": "-check-out-your-tests"
+                          },
+                          "depth": 3
+                        }
+                      ]
+                    }
+                  ]
                 },
-                "sourcePath": "/Users/mikeschaekermann/Desktop/nzpire.me/app/tests/unit_tests/testing.coffee",
-                "projectPath": "app/tests/unit_tests/testing.coffee",
-                "targetPath": "tests/unit_tests/testing",
-                "title": "testing"
+                "title": "Unit_Tests"
               },
               "depth": 3,
-              "outline": []
+              "outline": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Steps to success:",
+                    "slug": "steps-to-success"
+                  },
+                  "depth": 2,
+                  "children": [
+                    {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "* Clear database before running unit_tests",
+                        "slug": "-clear-database-before-running-unit-tests"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "* Call localhost:3000/unit_tests",
+                        "slug": "-call-localhost3000unit-tests"
+                      },
+                      "depth": 3
+                    }, {
+                      "type": "heading",
+                      "data": {
+                        "level": 3,
+                        "title": "* Check out your tests",
+                        "slug": "-check-out-your-tests"
+                      },
+                      "depth": 3
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }

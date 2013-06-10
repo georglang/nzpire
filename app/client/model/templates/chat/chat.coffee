@@ -1,11 +1,19 @@
+# # Model_Chat
+
+# ## Model Messages
+# * return: array
 Template.chat.messages = ->
 	messages = ModelChat.find({modelId: Session.get('modelId')}).fetch()
 	return messages.reverse()
 
+# ## Message Publisher
+# * return: string
 Template.message.publisher = ->
 	publisher = Profiles.findOne({_id:this.publisherId})
 	return publisher?.name
 
+# ## Message Timestamp
+# * return: object (.minutes, .hours)
 Template.message.timestamp = ->
 	minutes = this.timestamp.getMinutes()
 	hours = this.timestamp.getHours()
@@ -25,6 +33,8 @@ Template.message.rendered = ->
 	#$('.chatBox>div:last').focus()
 	#$('#newMessage').focus()
 
+# ## Events
+# ### Submit entered Message
 Template.chat.events
 	'keydown': (e) ->
 		if e.keyCode == 13
