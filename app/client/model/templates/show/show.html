@@ -14,9 +14,11 @@ Schaekermann Mike
 	<div id="modelTemplate">
 	  {{handleModelPermission}}
 	  {{>modelSidebar}}
-	  {{>modelingColors}}
-	  {{>chat}}
-	  {{>voxelSizes}}
+	  {{#if isAtLeastCollaborator}}
+	  	{{>modelingColors}}
+	  	{{>chat}}
+	  	{{>voxelSizes}}
+	  {{/if}}
 	  {{#constant}}
 	    <a href="#" id="modelContainer" autofocus="autofocus"></a>
 	  {{/constant}}

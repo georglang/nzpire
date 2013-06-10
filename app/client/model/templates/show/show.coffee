@@ -18,6 +18,10 @@ Template.model.handleModelPermission = ->
 	if permission <= Roles.none
     Workspace.index()
 
+Template.model.isAtLeastCollaborator = ->
+  permission = checkModelPermission(Session.get('modelId'),true)
+  return permission >= Roles.collaborator
+
 Template.model.rendered = ()->
 	$('#modelTemplate').addClass('activeTemplate')
 	$('footer').addClass('activeModeling')
