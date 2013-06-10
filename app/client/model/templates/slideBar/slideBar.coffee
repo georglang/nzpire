@@ -51,7 +51,7 @@ Template.modelSidebar.tags = ->
     #tags = model.tags
     if tags != undefined
       if Template.modelSidebar.isOwner()    
-        tags.push {name:"click to tag", class: "editable"}
+        tags.push {name:"click to tag", class: "addAble"}
       return tags
     else
       return null
@@ -82,7 +82,7 @@ Template.modelSidebar.invited = ->
     if invitedPeople != undefined
       names.push({name: findOneProfileByOptions({_id: i.userId}).name,role: i.role, class:""}) for i in invitedPeople
       if Template.modelSidebar.isOwner()
-        names.push {name:"click to invite",role:"",class:"editable"}
+        names.push {name:"click to invite",role:"",class:"addAble"}
       return names
     else
       return null
@@ -159,7 +159,7 @@ Template.modelSidebar.events
       if className == 'modelname'
         $(e.target).replaceWith("<input autofocus='autofocus' id='editModelName' type='text' value='"+Template.modelSidebar.modelname()+"'>")
       # ##### * Tags
-      else if className == 'tags editable'
+      else if className == 'tags addAble'
         tagName = $(e.target).html()
         $(e.target).replaceWith("<input autofocus='autofocus' id='addTag' type='text' placeholder='Tagname'>")
       else if className == 'tags '
@@ -169,7 +169,7 @@ Template.modelSidebar.events
           if error
             console.log error.reason
       # ##### * Invites
-      else if className == 'invited editable'
+      else if className == 'invited addAble'
         invitedName = $(e.target).html()
         #$(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><select id='invitedRole'><option value='owner'>Owner</option><option value='collaborator'>Collaborator</option><option value='viewer'>Viewer</option></select><input id='addInviteButton' type='button' value='invite'>")
         $(e.target).replaceWith("<input autofocus='autofocus' id='addInvite' type='text' list='profilesDatalist' placeholder='Username'><br><input type='radio' name='role' value='owner'>Owner <br><input type='radio' name='role' value='collaborator'>Collaborator <br><input type='radio' name='role' value='viewer' checked='checked'>Viewer <br><input id='addInviteButton' type='button' value='invite'>")
