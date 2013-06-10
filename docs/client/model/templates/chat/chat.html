@@ -3,7 +3,7 @@
 <ul>
 <li>return: array</li>
 </ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.chat.messages = </span><span class="o">-&gt;</span>
-  <span class="nv">messages = </span><span class="nx">ModelChat</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)}).</span><span class="nx">fetch</span><span class="p">()</span>
+  <span class="nv">messages = </span><span class="nx">ModelChat</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;modelId&#39;</span><span class="p">)}).</span><span class="nx">fetch</span><span class="p">()</span>
   <span class="k">return</span> <span class="nx">messages</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="message-publisher">Message Publisher</h2>
 
 <ul>
@@ -19,9 +19,9 @@
   <span class="nv">hours = </span><span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span>
 
   <span class="k">if</span> <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">10</span>
-    <span class="nv">minutes = </span><span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span>
+    <span class="nv">minutes = </span><span class="s">&#39;0&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span>
   <span class="k">if</span> <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">getHours</span> <span class="o">&lt;</span> <span class="mi">10</span>
-    <span class="nv">hours = </span><span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span>
+    <span class="nv">hours = </span><span class="s">&#39;0&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span>
 
   <span class="nv">time = </span>
     <span class="nv">hours: </span><span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span>
@@ -34,15 +34,15 @@
   <span class="c1">#$(&#39;#newMessage&#39;).focus()</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="events">Events</h2>
 
 <h3 id="submit-entered-message">Submit entered Message</h3></div></div><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">chat</span><span class="p">.</span><span class="nx">events</span>
-  <span class="s1">&#39;keydown&#39;</span><span class="o">:</span> <span class="nf">(e) -&gt;</span>
+  <span class="s">&#39;keydown&#39;</span><span class="o">:</span> <span class="nf">(e) -&gt;</span>
     <span class="k">if</span> <span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">13</span>
-      <span class="nv">message = </span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#newMessage&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+      <span class="nv">message = </span><span class="nx">$</span><span class="p">(</span><span class="s">&#39;#newMessage&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
       <span class="k">if</span> <span class="nx">message</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#newMessage&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#newMessage&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
         <span class="nv">options = </span>
-          <span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;modelId&#39;</span>
+          <span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;modelId&#39;</span>
           <span class="nv">message: </span><span class="nx">message</span>
           <span class="nv">publisher: </span><span class="nx">currentProfile</span><span class="p">().</span><span class="nx">_id</span>
-        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s1">&#39;createMessage&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nf">(err,result)-&gt;</span>
+        <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;createMessage&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nf">(err,result)-&gt;</span>
           <span class="k">if</span> <span class="nx">err</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">err</span><span class="p">.</span><span class="nx">reason</span></div></div></div></div></body></html>

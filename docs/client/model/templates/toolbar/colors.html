@@ -3,7 +3,7 @@
 <ul>
 <li>return: array</li>
 </ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelingColors.getModelColors = </span><span class="o">-&gt;</span>
-  <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">)})</span>
+  <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;modelId&#39;</span><span class="p">)})</span>
   <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
     <span class="k">return</span> <span class="kc">null</span>
   <span class="k">return</span> <span class="nx">model</span><span class="p">.</span><span class="nx">colors</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="is-current-color">Is Current Color</h2>
@@ -11,15 +11,15 @@
 <ul>
 <li>return: bool</li>
 </ul></div></div><div class="code"><div class="wrapper"><span class="nv">Template.modelingColors.isCurrentColor = </span><span class="nf">()-&gt;</span>
-  <span class="k">if</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelingColor&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="k">this</span><span class="p">.</span><span class="nx">color</span>
+  <span class="k">if</span> <span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;modelingColor&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="k">this</span><span class="p">.</span><span class="nx">color</span>
     <span class="k">return</span> <span class="kc">true</span>
   <span class="k">else</span>
     <span class="k">return</span> <span class="kc">false</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="events">Events</h2>
 
 <h3 id="sets-the-session-modelingcolor-to-the-clicked-color">Sets the Session modelingColor to the clicked color</h3></div></div><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">modelingColors</span><span class="p">.</span><span class="nx">events</span>
-  <span class="s1">&#39;click .modelingColor&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
-    <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;modelId&#39;</span><span class="p">})</span>
+  <span class="s">&#39;click .modelingColor&#39;</span><span class="o">:</span> <span class="nf">(e)-&gt;</span>
+    <span class="nv">model = </span><span class="nx">findOneModelByOptions</span><span class="p">({</span><span class="nv">_id: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;modelId&#39;</span><span class="p">})</span>
     <span class="k">if</span> <span class="nx">model</span> <span class="o">==</span> <span class="kc">undefined</span>
       <span class="k">return</span> <span class="kc">null</span>
     <span class="k">else</span>
-      <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s1">&#39;modelingColor&#39;</span><span class="p">,</span> <span class="nx">model</span><span class="p">.</span><span class="nx">colors</span><span class="p">[</span><span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">)].</span><span class="nx">color</span></div></div></div></div></body></html>
+      <span class="nx">Session</span><span class="p">.</span><span class="nx">set</span> <span class="s">&#39;modelingColor&#39;</span><span class="p">,</span> <span class="nx">model</span><span class="p">.</span><span class="nx">colors</span><span class="p">[</span><span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s">&#39;index&#39;</span><span class="p">)].</span><span class="nx">color</span></div></div></div></div></body></html>

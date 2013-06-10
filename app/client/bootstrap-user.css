@@ -156,6 +156,14 @@ input, textarea, .uneditable-input {
 .carouselCaptionImproved p{
 	font-size: 278%;
 }
+
+#widget {
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: right;
+    margin-left: 20px;
+}
+
 /*
 @media (max-width: 979px) {
 .container{

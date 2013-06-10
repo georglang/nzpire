@@ -11,27 +11,27 @@
   <span class="nv">mouseDown: </span><span class="o">-&gt;</span> <span class="nx">position</span><span class="p">.</span><span class="nx">mouseDown</span>
 
 <span class="nv">getBuildingPointFromPick = </span><span class="nf">(pick) -&gt;</span>
-  <span class="nv">blockSize = </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;voxelSize&#39;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="snap-to-grid">Snap to grid</h3>
+  <span class="nv">blockSize = </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;voxelSize&#39;</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="snap-to-grid">Snap to grid</h3>
 
 <p>Put the normal of the face clicked on into world space</p></div></div><div class="code"><div class="wrapper">  <span class="nv">matrixNormal = </span><span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Matrix3</span><span class="p">().</span><span class="nx">getNormalMatrix</span> <span class="nx">pick</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">matrixWorld</span>
   <span class="nv">normalWorld = </span><span class="nx">pick</span><span class="p">.</span><span class="nx">face</span><span class="p">.</span><span class="nx">normal</span><span class="p">.</span><span class="nx">clone</span><span class="p">().</span><span class="nx">applyMatrix3</span><span class="p">(</span><span class="nx">matrixNormal</span><span class="p">).</span><span class="nx">normalize</span><span class="p">()</span>
-  <span class="nv">buildingPoint = </span><span class="nx">pick</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">add</span> <span class="nx">normalWorld</span><span class="p">.</span><span class="nx">setLength</span><span class="p">(</span><span class="nx">blockSize</span> <span class="err">/ 2)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>For all 3 dimensions x, y and z:</p></div></div><div class="code"><div class="wrapper">  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ul>
+  <span class="nv">buildingPoint = </span><span class="nx">pick</span><span class="p">.</span><span class="nx">point</span><span class="p">.</span><span class="nx">add</span> <span class="nx">normalWorld</span><span class="p">.</span><span class="nx">setLength</span><span class="p">(</span><span class="nx">blockSize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>For all 3 dimensions x, y and z:</p></div></div><div class="code"><div class="wrapper">  </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ul>
 <li>normalize to positive values</li>
 <li>get the modulo rest, applying block size</li>
 <li>round up or down</li>
 <li>add offset</li>
 <li>denormalize from positive values</li>
-</ul></div></div><div class="code"><div class="wrapper">  <span class="nv">dimensions = </span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]</span>
+</ul></div></div><div class="code"><div class="wrapper">  <span class="nv">dimensions = </span><span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">]</span>
   <span class="k">for</span> <span class="nx">d</span> <span class="k">in</span> <span class="nx">dimensions</span>
     <span class="nv">isNegative = </span><span class="nx">buildingPoint</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="nx">isNegative</span>
       <span class="nx">buildingPoint</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="nv">rest = </span><span class="nx">buildingPoint</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span> <span class="o">%</span> <span class="nx">blockSize</span>
-    <span class="nv">roundUp = </span><span class="nx">rest</span> <span class="o">&gt;=</span> <span class="nx">blockSize</span> <span class="err">/ 2</span>
+    <span class="nv">roundUp = </span><span class="nx">rest</span> <span class="o">&gt;=</span> <span class="nx">blockSize</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="nv">summand = </span><span class="k">if</span> <span class="nx">roundUp</span> <span class="k">then</span> <span class="nx">blockSize</span> <span class="o">-</span> <span class="nx">rest</span> <span class="k">else</span> <span class="o">-</span><span class="nx">rest</span>
     <span class="nx">buildingPoint</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span> <span class="o">=</span> <span class="nx">buildingPoint</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span> <span class="o">+</span> <span class="nx">summand</span>
     <span class="nv">offsetDirection = </span><span class="k">if</span> <span class="nx">roundUp</span> <span class="k">then</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">1</span>
-    <span class="nx">buildingPoint</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">offsetDirection</span> <span class="o">*</span> <span class="nx">blockSize</span> <span class="err">/ 2</span>
+    <span class="nx">buildingPoint</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">offsetDirection</span> <span class="o">*</span> <span class="nx">blockSize</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="k">if</span> <span class="nx">isNegative</span>
       <span class="nx">buildingPoint</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
   <span class="k">return</span> <span class="nx">buildingPoint</span>
@@ -51,9 +51,9 @@
 
 <p>save the absolute and relative (to the canvas)
 positions of the mouse cursor</p></div></div><div class="code"><div class="wrapper"><span class="nx">Template</span><span class="p">.</span><span class="nx">model</span><span class="p">.</span><span class="nx">events</span>
-  <span class="s1">&#39;mousedown canvas&#39;</span><span class="o">:</span> <span class="nf">(e) -&gt;</span>
+  <span class="s">&#39;mousedown canvas&#39;</span><span class="o">:</span> <span class="nf">(e) -&gt;</span>
     <span class="nv">position.mouseDown = </span><span class="nx">mouseBindings</span><span class="p">.</span><span class="nx">getPosition</span><span class="p">.</span><span class="nx">relative</span><span class="p">().</span><span class="nx">clone</span><span class="p">();</span>
-  <span class="s1">&#39;mouseup canvas&#39;</span><span class="o">:</span> <span class="nf">(e) -&gt;</span>
+  <span class="s">&#39;mouseup canvas&#39;</span><span class="o">:</span> <span class="nf">(e) -&gt;</span>
     <span class="k">if</span> <span class="nx">mouseBindings</span><span class="p">.</span><span class="nx">getPosition</span><span class="p">.</span><span class="nx">relative</span><span class="p">().</span><span class="nx">equals</span> <span class="nx">mouseBindings</span><span class="p">.</span><span class="nx">getPosition</span><span class="p">.</span><span class="nx">mouseDown</span><span class="p">()</span>
       <span class="nv">pick = </span><span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">picking</span><span class="p">.</span><span class="nx">pick</span><span class="p">()</span>
 
@@ -61,10 +61,10 @@ positions of the mouse cursor</p></div></div><div class="code"><div class="wrapp
         <span class="k">if</span> <span class="nx">e</span><span class="p">.</span><span class="nx">which</span> <span class="o">is</span> <span class="mi">1</span>
           <span class="nx">Modeling</span><span class="p">.</span><span class="nx">interaction</span><span class="p">.</span><span class="nx">manipulation</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">add</span>
             <span class="nv">object:</span>
-              <span class="nv">type: </span><span class="s1">&#39;voxel&#39;</span>
+              <span class="nv">type: </span><span class="s">&#39;voxel&#39;</span>
               <span class="nv">position: </span><span class="nx">getBuildingPointFromPick</span> <span class="nx">pick</span>
-              <span class="nv">color: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;modelingColor&#39;</span>
-              <span class="nv">size: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;voxelSize&#39;</span>
+              <span class="nv">color: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;modelingColor&#39;</span>
+              <span class="nv">size: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;voxelSize&#39;</span>
         <span class="k">else</span> <span class="k">if</span> <span class="nx">e</span><span class="p">.</span><span class="nx">which</span> <span class="o">is</span> <span class="mi">3</span>
           <span class="k">if</span> <span class="nx">pick</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">name</span>
             <span class="nx">Modeling</span><span class="p">.</span><span class="nx">interaction</span><span class="p">.</span><span class="nx">manipulation</span><span class="p">.</span><span class="nx">object</span><span class="p">.</span><span class="nx">remove</span>
@@ -83,13 +83,13 @@ positions of the mouse cursor</p></div></div><div class="code"><div class="wrapp
     <span class="nv">position.absolute.x = </span><span class="nx">e</span><span class="p">.</span><span class="nx">pageX</span> <span class="o">-</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">left</span>
     <span class="nv">position.absolute.y = </span><span class="nx">e</span><span class="p">.</span><span class="nx">pageY</span> <span class="o">-</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">top</span>
     
-    <span class="nv">position.relative.x = </span>  <span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">absolute</span><span class="p">.</span><span class="nx">x</span> <span class="err">/ width  * 2) - 1</span>
-    <span class="nv">position.relative.y = </span><span class="o">-</span> <span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">absolute</span><span class="p">.</span><span class="nx">y</span> <span class="err">/ height * 2) + 1</span>
+    <span class="nv">position.relative.x = </span>  <span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">absolute</span><span class="p">.</span><span class="nx">x</span> <span class="o">/</span> <span class="nx">width</span>  <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="nv">position.relative.y = </span><span class="o">-</span> <span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">absolute</span><span class="p">.</span><span class="nx">y</span> <span class="o">/</span> <span class="nx">height</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
     
     <span class="nx">updateObjectPreview</span><span class="p">()</span>
   
   <span class="nx">Meteor</span><span class="p">.</span><span class="nx">defer</span> <span class="o">-&gt;</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modelContainer&#39;</span><span class="p">).</span><span class="kc">off</span> <span class="s1">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveContainer</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modelContainer&#39;</span><span class="p">).</span><span class="kc">on</span> <span class="s1">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveContainer</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">off</span> <span class="s1">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveCanvas</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">on</span> <span class="s1">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveCanvas</span></div></div></div></div></body></html>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer&#39;</span><span class="p">).</span><span class="kc">off</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveContainer</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer&#39;</span><span class="p">).</span><span class="kc">on</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveContainer</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">off</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveCanvas</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelContainer &gt; canvas&#39;</span><span class="p">).</span><span class="kc">on</span> <span class="s">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">mouseMoveCanvas</span></div></div></div></div></body></html>

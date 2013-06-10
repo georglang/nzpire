@@ -3,32 +3,25 @@
 		{{#if currentUser.services}}
 			<div id="profileContainer">
 				<img id="profileImg" src="{{pictureUrl}}" alt="profile image"/>
-
 				{{#if notOwnProfile}}   
 					<div id="followState">
 						<div class="{{show}} btn {{followBtn}}" id="{{id}}">{{show}}</div>
 					</div>
 				{{/if}}
-
 				<div id="nameField">
-					<span id="name" class="editable">{{userName}}</span>
+					<span id="name" class="editable">{{userName}}</span><img id="editIcon" src="/img/pen.png">
 				</div>
-
 				<div class="profilListItem" id="email">
 					<img src="/img/email.png">
 					<span>{{email}}</span>
 				</div>
-				<!--<div><span id="www" class="editable"> {{www}}</span> </div> -->
-				<!-- <input type="filepicker" id='uploadWidget'/> -->
-
 				<div class="profilListItem">
 					<img class="imgFollow" src="/img/following.png">
 					<span>Following</span>
 					<div class="number">
 						<span>{{getFollowingLength}}</span>
 					</div>
-				</div>
-				
+				</div>		
 				<div class="profilListItem">
 					<img class="imgFollow" src="/img/followers.png">
 					<span>Follower</span>
@@ -39,7 +32,6 @@
 					{{>connectServices}}
 				</div>
 			</div>
-
 			<div id="followBoxes">
 				<h3 id="follower"> Following <img class="imgFollow" src="/img/following.png"> </h3>
 				{{#each currentProfileFollowProfiles}}
@@ -51,7 +43,6 @@
 					</div>
 				{{/each}}
 			</div>
-
 			<div id="followBoxes">
 				<h3 id="follower"> Follower <img class="imgFollow" src="/img/followers.png"> </h3>
 				{{#each getProfilesThatFollowCurrentProfile}}

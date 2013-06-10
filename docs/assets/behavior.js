@@ -13,7 +13,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "commentsOnly": true,
           "name": "Markdown"
         },
-        "sourcePath": "/home/morathil/qpt2b/README.md",
+        "sourcePath": "/home/georg/qpt2b_e/README.md",
         "projectPath": "README.md",
         "targetPath": "index",
         "firstHeader": {
@@ -84,7 +84,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/config.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/config.coffee",
             "projectPath": "app/client/config.coffee",
             "targetPath": "client/config",
             "firstHeader": {
@@ -110,7 +110,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/connectServices.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/connectServices.coffee",
             "projectPath": "app/client/connectServices.coffee",
             "targetPath": "client/connectServices",
             "firstHeader": {
@@ -211,7 +211,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/footer.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/footer.coffee",
             "projectPath": "app/client/footer.coffee",
             "targetPath": "client/footer",
             "title": "footer"
@@ -227,7 +227,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/i18n.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/i18n.coffee",
             "projectPath": "app/client/i18n.coffee",
             "targetPath": "client/i18n",
             "firstHeader": {
@@ -253,7 +253,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/index.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/index.coffee",
             "projectPath": "app/client/index.coffee",
             "targetPath": "client/index",
             "firstHeader": {
@@ -300,7 +300,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/menue.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/menue.coffee",
             "projectPath": "app/client/menue.coffee",
             "targetPath": "client/menue",
             "firstHeader": {
@@ -459,7 +459,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/01_history.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/interaction/01_history.coffee",
                     "projectPath": "app/client/model/interaction/01_history.coffee",
                     "targetPath": "client/model/interaction/01_history",
                     "firstHeader": {
@@ -506,7 +506,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/02_manipulation.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/interaction/02_manipulation.coffee",
                     "projectPath": "app/client/model/interaction/02_manipulation.coffee",
                     "targetPath": "client/model/interaction/02_manipulation",
                     "firstHeader": {
@@ -655,7 +655,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/03_keyBindings.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/interaction/03_keyBindings.coffee",
                     "projectPath": "app/client/model/interaction/03_keyBindings.coffee",
                     "targetPath": "client/model/interaction/03_keyBindings",
                     "firstHeader": {
@@ -702,7 +702,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/04_mouseBindings.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/interaction/04_mouseBindings.coffee",
                     "projectPath": "app/client/model/interaction/04_mouseBindings.coffee",
                     "targetPath": "client/model/interaction/04_mouseBindings",
                     "firstHeader": {
@@ -803,7 +803,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/interaction/main.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/interaction/main.coffee",
                     "projectPath": "app/client/model/interaction/main.coffee",
                     "targetPath": "client/model/interaction/main",
                     "firstHeader": {
@@ -839,7 +839,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/01_update.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/scene/01_update.coffee",
                     "projectPath": "app/client/model/scene/01_update.coffee",
                     "targetPath": "client/model/scene/01_update",
                     "firstHeader": {
@@ -950,7 +950,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/02_lights.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/scene/02_lights.coffee",
                     "projectPath": "app/client/model/scene/02_lights.coffee",
                     "targetPath": "client/model/scene/02_lights",
                     "firstHeader": {
@@ -976,7 +976,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/03_picking.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/scene/03_picking.coffee",
                     "projectPath": "app/client/model/scene/03_picking.coffee",
                     "targetPath": "client/model/scene/03_picking",
                     "firstHeader": {
@@ -1055,7 +1055,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/04_setup.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/scene/04_setup.coffee",
                     "projectPath": "app/client/model/scene/04_setup.coffee",
                     "targetPath": "client/model/scene/04_setup",
                     "firstHeader": {
@@ -1294,7 +1294,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                       "singleLineComment": ["#"],
                       "name": "CoffeeScript"
                     },
-                    "sourcePath": "/home/morathil/qpt2b/app/client/model/scene/Octree.coffee",
+                    "sourcePath": "/home/georg/qpt2b_e/app/client/model/scene/Octree.coffee",
                     "projectPath": "app/client/model/scene/Octree.coffee",
                     "targetPath": "client/model/scene/Octree",
                     "firstHeader": {
@@ -1338,7 +1338,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/chat/chat.coffee",
+                        "sourcePath": "/home/georg/qpt2b_e/app/client/model/templates/chat/chat.coffee",
                         "projectPath": "app/client/model/templates/chat/chat.coffee",
                         "targetPath": "client/model/templates/chat/chat",
                         "firstHeader": {
@@ -1465,7 +1465,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/show/show.coffee",
+                        "sourcePath": "/home/georg/qpt2b_e/app/client/model/templates/show/show.coffee",
                         "projectPath": "app/client/model/templates/show/show.coffee",
                         "targetPath": "client/model/templates/show/show",
                         "title": "show"
@@ -1491,7 +1491,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/slideBar/slideBar.coffee",
+                        "sourcePath": "/home/georg/qpt2b_e/app/client/model/templates/slideBar/slideBar.coffee",
                         "projectPath": "app/client/model/templates/slideBar/slideBar.coffee",
                         "targetPath": "client/model/templates/slideBar/slideBar",
                         "firstHeader": {
@@ -1892,7 +1892,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/toolbar/colors.coffee",
+                        "sourcePath": "/home/georg/qpt2b_e/app/client/model/templates/toolbar/colors.coffee",
                         "projectPath": "app/client/model/templates/toolbar/colors.coffee",
                         "targetPath": "client/model/templates/toolbar/colors",
                         "firstHeader": {
@@ -1993,7 +1993,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                           "singleLineComment": ["#"],
                           "name": "CoffeeScript"
                         },
-                        "sourcePath": "/home/morathil/qpt2b/app/client/model/templates/toolbar/voxelSize.coffee",
+                        "sourcePath": "/home/georg/qpt2b_e/app/client/model/templates/toolbar/voxelSize.coffee",
                         "projectPath": "app/client/model/templates/toolbar/voxelSize.coffee",
                         "targetPath": "client/model/templates/toolbar/voxelSize",
                         "firstHeader": {
@@ -2116,7 +2116,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/modelShowroom.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/modelShowroom.coffee",
             "projectPath": "app/client/modelShowroom.coffee",
             "targetPath": "client/modelShowroom",
             "firstHeader": {
@@ -2243,7 +2243,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/news.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/news.coffee",
             "projectPath": "app/client/news.coffee",
             "targetPath": "client/news",
             "firstHeader": {
@@ -2434,10 +2434,31 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/profile.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/profile.coffee",
             "projectPath": "app/client/profile.coffee",
             "targetPath": "client/profile",
-            "title": "profile"
+            "firstHeader": {
+              "type": "heading",
+              "data": {
+                "level": 1,
+                "title": "Profile",
+                "slug": "profile",
+                "isFileHeader": true
+              },
+              "depth": 1,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 2,
+                    "title": "Rendered and Destroyed",
+                    "slug": "rendered-and-destroyed"
+                  },
+                  "depth": 2
+                }
+              ]
+            },
+            "title": "Profile"
           },
           "depth": 2,
           "outline": [
@@ -2460,7 +2481,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/router.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/router.coffee",
             "projectPath": "app/client/router.coffee",
             "targetPath": "client/router",
             "title": "router"
@@ -2476,7 +2497,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/client/search.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/client/search.coffee",
             "projectPath": "app/client/search.coffee",
             "targetPath": "client/search",
             "firstHeader": {
@@ -2621,7 +2642,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "singleLineComment": ["#"],
           "name": "CoffeeScript"
         },
-        "sourcePath": "/home/morathil/qpt2b/app/globalFunctions.coffee",
+        "sourcePath": "/home/georg/qpt2b_e/app/globalFunctions.coffee",
         "projectPath": "app/globalFunctions.coffee",
         "targetPath": "globalFunctions",
         "firstHeader": {
@@ -2692,7 +2713,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/models/model.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/models/model.coffee",
             "projectPath": "app/models/model.coffee",
             "targetPath": "models/model",
             "firstHeader": {
@@ -2969,7 +2990,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/models/profile.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/models/profile.coffee",
             "projectPath": "app/models/profile.coffee",
             "targetPath": "models/profile",
             "firstHeader": {
@@ -3042,7 +3063,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/server/config.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/server/config.coffee",
             "projectPath": "app/server/config.coffee",
             "targetPath": "server/config",
             "title": "config"
@@ -3058,7 +3079,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/server/connectAccOnCreateByEmail.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/server/connectAccOnCreateByEmail.coffee",
             "projectPath": "app/server/connectAccOnCreateByEmail.coffee",
             "targetPath": "server/connectAccOnCreateByEmail",
             "title": "connectAccOnCreateByEmail"
@@ -3074,7 +3095,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/server/index.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/server/index.coffee",
             "projectPath": "app/server/index.coffee",
             "targetPath": "server/index",
             "title": "index"
@@ -3090,7 +3111,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "singleLineComment": ["#"],
               "name": "CoffeeScript"
             },
-            "sourcePath": "/home/morathil/qpt2b/app/server/publish.coffee",
+            "sourcePath": "/home/georg/qpt2b_e/app/server/publish.coffee",
             "projectPath": "app/server/publish.coffee",
             "targetPath": "server/publish",
             "firstHeader": {
@@ -3263,7 +3284,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "singleLineComment": ["#"],
                   "name": "CoffeeScript"
                 },
-                "sourcePath": "/home/morathil/qpt2b/app/tests/unit_tests/model_tests.coffee",
+                "sourcePath": "/home/georg/qpt2b_e/app/tests/unit_tests/model_tests.coffee",
                 "projectPath": "app/tests/unit_tests/model_tests.coffee",
                 "targetPath": "tests/unit_tests/model_tests",
                 "firstHeader": {
@@ -3368,7 +3389,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   setTableOfContentsActive = function(active) {
     var html$;
-
     html$ = $('html');
     if (active) {
       nav$.addClass('active');
@@ -3387,7 +3407,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   focusCurrentNode = function() {
     var currentNodeBottom, currentNodeTop;
-
     currentNodeTop = currentNode$.offset().top - toc$.children(':visible').first().offset().top;
     currentNodeBottom = currentNodeTop + currentNode$.children('.label').height();
     if (currentNodeTop < toc$.scrollTop()) {
@@ -3400,7 +3419,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   setCurrentNodeExpanded = function(expanded) {
     var parents$;
-
     if (expanded) {
       currentNode$.addClass('expanded');
     } else {
@@ -3425,7 +3443,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   selectNodeByDocumentPath = function(documentPath, headerSlug) {
     var link, urlChunks, _i, _len, _ref;
-
     if (headerSlug == null) {
       headerSlug = null;
     }
@@ -3448,7 +3465,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   moveCurrentNode = function(up) {
     var i, newIndex, node, visibleNodes$, _i, _len;
-
     visibleNodes$ = toc$.find('li:visible:not(.filtered)');
     newIndex = 0;
     for (i = _i = 0, _len = visibleNodes$.length; _i < _len; i = ++_i) {
@@ -3469,7 +3485,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   visitCurrentNode = function() {
     var labelLink$;
-
     labelLink$ = currentNode$.children('a.label');
     if (labelLink$.length > 0) {
       return window.location = labelLink$.attr('href');
@@ -3482,7 +3497,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   appendSearchNode = function(node$) {
     var text$;
-
     text$ = node$.find('> .label .text');
     return searchableNodes.push([text$.text().toLowerCase(), node$, text$]);
   };
@@ -3491,7 +3505,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   searchNodes = function(queryString) {
     var c, filtered, matched, matcher, nodeInfo, p, _i, _j, _k, _len, _len1, _len2, _results;
-
     queryString = queryString.toLowerCase().replace(/\s+/, '');
     if (queryString === currentQuery) {
       return;
@@ -3502,7 +3515,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
     }
     matcher = new RegExp(((function() {
       var _i, _len, _results;
-
       _results = [];
       for (_i = 0, _len = queryString.length; _i < _len; _i++) {
         c = queryString[_i];
@@ -3538,7 +3550,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
       highlightMatch(nodeInfo[2], queryString);
       _results.push((function() {
         var _l, _len3, _ref, _results1;
-
         _ref = nodeInfo[1].parents('li');
         _results1 = [];
         for (_l = 0, _len3 = _ref.length; _l < _len3; _l++) {
@@ -3553,7 +3564,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   clearFilter = function() {
     var nodeInfo, _i, _len, _results;
-
     nav$.removeClass('searching');
     currentQuery = '';
     _results = [];
@@ -3567,7 +3577,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   highlightMatch = function(text$, queryString) {
     var char, foundIndex, furthestIndex, lowerText, markedText, nodeText, _i, _len;
-
     nodeText = text$.text();
     lowerText = nodeText.toLowerCase();
     markedText = '';
@@ -3589,7 +3598,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   buildNav = function(metaInfo) {
     var node, sourceURL, _i, _len;
-
     nav$ = $("<nav>\n  <ul class=\"tools\">\n    <li class=\"toggle\">Table of Contents</li>\n    <li class=\"search\">\n      <input id=\"search\" type=\"search\" autocomplete=\"off\"/>\n    </li>\n  </ul>\n  <ol class=\"toc\"/>\n  </div>\n</nav>").appendTo($('body'));
     toc$ = nav$.find('.toc');
     if (metaInfo.githubURL) {
@@ -3609,7 +3617,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   buildTOCNode = function(node, metaInfo) {
     var c, children$, discloser$, label$, node$, _i, _len, _ref, _ref1, _ref2;
-
     node$ = $("<li class=\"" + node.type + "\"/>");
     switch (node.type) {
       case 'file':
@@ -3648,7 +3655,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
 
   $(function() {
     var lastMousedownTimestamp, metaInfo, search$, toggle$;
-
     metaInfo = {
       relativeRoot: $('meta[name="groc-relative-root"]').attr('content'),
       githubURL: $('meta[name="groc-github-url"]').attr('content'),

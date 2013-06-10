@@ -2,17 +2,17 @@
   <span class="k">return</span> <span class="nx">modelLoaded</span><span class="p">()</span>
 
 <span class="nv">Template.model.handleModelPermission = </span><span class="o">-&gt;</span>
-  <span class="nv">permission = </span><span class="nx">checkModelPermission</span><span class="p">(</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;modelId&#39;</span><span class="p">),</span><span class="kc">true</span><span class="p">)</span>
+  <span class="nv">permission = </span><span class="nx">checkModelPermission</span><span class="p">(</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;modelId&#39;</span><span class="p">),</span><span class="kc">true</span><span class="p">)</span>
   <span class="k">if</span> <span class="nx">permission</span> <span class="o">&lt;=</span> <span class="nx">Roles</span><span class="p">.</span><span class="nx">none</span>
     <span class="nx">Workspace</span><span class="p">.</span><span class="nx">index</span><span class="p">()</span>
 
 <span class="nv">Template.model.rendered = </span><span class="nf">()-&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modelTemplate&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;activeTemplate&#39;</span><span class="p">)</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;footer&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;activeModeling&#39;</span><span class="p">)</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.navbar&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;activeNavModeling&#39;</span><span class="p">)</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelTemplate&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;footer&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s">&#39;activeModeling&#39;</span><span class="p">)</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;.navbar&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s">&#39;activeNavModeling&#39;</span><span class="p">)</span>
 
 <span class="nv">Template.model.destroyed = </span><span class="nf">()-&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modelTemplate&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;activeTemplate&#39;</span><span class="p">)</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;footer&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;activeModeling&#39;</span><span class="p">)</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.navbar&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">&#39;activeNavModeling&#39;</span><span class="p">)</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;#modelTemplate&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s">&#39;activeTemplate&#39;</span><span class="p">)</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;footer&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s">&#39;activeModeling&#39;</span><span class="p">)</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s">&#39;.navbar&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s">&#39;activeNavModeling&#39;</span><span class="p">)</span>
   <span class="nx">Modeling</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">shutdown</span><span class="p">();</span></div></div></div></div></body></html>

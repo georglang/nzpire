@@ -7,13 +7,13 @@
 <p>Adds an object to the current model.</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>options:</p></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><ul>
 <li>object {Object}</li>
 </ul></div></div><div class="code"><div class="wrapper"><span class="nv">object.add = </span><span class="nf">(options) -&gt;</span>
-  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s1">&#39;doModelAction&#39;</span><span class="p">,</span>
-    <span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;modelId&#39;</span>
-    <span class="nv">type: </span><span class="s1">&#39;addObject&#39;</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;doModelAction&#39;</span><span class="p">,</span>
+    <span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;modelId&#39;</span>
+    <span class="nv">type: </span><span class="s">&#39;addObject&#39;</span>
     <span class="nv">specifics:</span>
       <span class="nv">object: </span><span class="nx">options</span><span class="p">.</span><span class="nx">object</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="remove">Remove</h3></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="nv">object.remove = </span><span class="nf">(options) -&gt;</span>
-  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s1">&#39;doModelAction&#39;</span><span class="p">,</span>
-    <span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;modelId&#39;</span>
-    <span class="nv">type: </span><span class="s1">&#39;removeObject&#39;</span>
+  <span class="nx">Meteor</span><span class="p">.</span><span class="nx">call</span> <span class="s">&#39;doModelAction&#39;</span><span class="p">,</span>
+    <span class="nv">modelId: </span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;modelId&#39;</span>
+    <span class="nv">type: </span><span class="s">&#39;removeObject&#39;</span>
     <span class="nv">specifics:</span>
       <span class="nv">objectId: </span><span class="nx">options</span><span class="p">.</span><span class="nx">objectId</span>    </div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="translate">Translate</h3></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="rotate">Rotate</h3></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h3 id="scale">Scale</h3></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><h2 id="group">Group</h2></div></div></div></div></body></html>

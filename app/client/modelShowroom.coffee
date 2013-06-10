@@ -1,6 +1,7 @@
 # #Model_Showroom
 
-# Gets all Models where the User has the expected Role    
+# Gets all Models where the User has the expected Role
+# set the dummy picture if no snapshot was taken    
 # * params: Roles    
 # * return: Array (models)   
 userInvitedModels = (role)->
@@ -8,10 +9,10 @@ userInvitedModels = (role)->
 	modelsResult = []
 	tmpResult.forEach (i)->
 		permission = checkModelPermission i._id,false
-		for model in modelsResult
-			model.snapshotURL ?= '/img/dummyModel.jpg'
 		if permission == role
 			modelsResult.push i
+		for model in modelsResult
+			model.snapshotURL ?= '/img/dummyModel.jpg'
 	return modelsResult
 
 # ## Owner
