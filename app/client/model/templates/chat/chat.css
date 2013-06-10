@@ -17,18 +17,28 @@ Schaekermann Mike
 	color: #0982bb;
 	height: 100%;
 	left: 0px;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	padding-top: 160px;
+	overflow: hidden;
+	top: -100px;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-o-box-sizing: border-box;
-	top: -100px;
-	padding-left: 10px;
 }
 
-.chatBox>div:last-child {
+.scroller{
+	width: 265px;
+	height: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-top: 160px;
+	padding-left: 10px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+
+.scroller>div:last-child {
 	padding-bottom: 30px;
 }
 

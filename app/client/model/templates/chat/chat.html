@@ -14,9 +14,11 @@ Schaekermann Mike
 	{{#isolate}}
 	<div class="chatTemplate">
 		<div class="chatBox">
-			{{#each messages}}
-				{{> message}}
-			{{/each}}
+			<div class="scroller">
+				{{#each messages}}
+					{{> message}}
+				{{/each}}
+			</div>
 		</div>
 		<input type="text" id="newMessage" placeholder="message">
 	</div>
