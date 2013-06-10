@@ -22,9 +22,7 @@ WorkspaceRouter = Backbone.Router.extend(
     "/": "index"
     "index": "index"
     "model/:id": "model"
-    "model/:id/edit": "modelEdit"
     "modelShowroom" : "modelShowroom"
-    "help": "help" # #help
     "search": "search" # #search
     "search/:query": "search" # #search/kiwis
     "unit_tests": "unit_tests"
@@ -40,39 +38,20 @@ WorkspaceRouter = Backbone.Router.extend(
       replace: true
 
   model: (_id)->
-    #console.log "modelRouter"
     Session.set "modelId", _id
     Session.set "template", "loading"
     Session.set "modelingColor", DefaultModelColors[7].color
     Session.set "voxelSize", DefaultVoxelSizes[2].size
     Meteor.subscribe 'model', Session.get('modelId'), ->
       Session.set "template", "model"
-      Modeling.scene.setup()
-      Meteor.defer Modeling.scene.update
-      Modeling.interaction.mouseBindings.setup()
           
     @navigate "model/" + _id,
-      trigger: true
-      replace: true
-
-  modelEdit: (_id)->
-    #console.log "modelEdit"
-    Session.set "template", "modelEdit"
-    Session.set "model", _id
-    @navigate "model/" + _id + "/edit"
       trigger: true
       replace: true
 
   modelShowroom: ->
     Session.set "template", "modelShowroom"
     @navigate "modelShowroom",
-      trigger: true
-      replace: true
-
-  help: ->
-    #console.log "help"
-    Session.set "template", "help"
-    @navigate "help",
       trigger: true
       replace: true
 

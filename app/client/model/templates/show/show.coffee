@@ -23,6 +23,11 @@ Template.model.rendered = ()->
 	$('footer').addClass('activeModeling')
 	$('.navbar').addClass('activeNavModeling')
 
+Template.model.created = ->
+  Modeling.scene.setup()
+  Meteor.defer Modeling.scene.update
+  Modeling.interaction.mouseBindings.setup()
+
 Template.model.destroyed = ()->
 	$('#modelTemplate').removeClass('activeTemplate')
 	$('footer').removeClass('activeModeling')

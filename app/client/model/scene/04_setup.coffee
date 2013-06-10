@@ -139,9 +139,8 @@ scene.setup = ->
     $(window).resize()
 
     # ## Camera controls
-    canvas = container.find "canvas"
     controls.object = camera
-    controls.updateDomElement canvas[0]
+    controls.updateDomElement renderer.domElement
     controls.enabled = true
 
     # Kick off rendering loop!
