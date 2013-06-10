@@ -1,3 +1,15 @@
+/*
+FH Salzburg 2013
+MultiMediaTechnology
+Lizenz: GNU Affero General Public License (AGPL)
+
+Students:
+Altmann Christoph
+Lang Georg
+Margreiter Daniel
+Schaekermann Mike
+*/
+
 this.open('http://localhost:3000', function() {
   this.describe('SignUp and Login', function() {
     this.assert.ok(this.$('#login-buttons').length, 'expects login buttons');

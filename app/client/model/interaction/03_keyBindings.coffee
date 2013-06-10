@@ -1,3 +1,15 @@
+###
+FH Salzburg 2013
+MultiMediaTechnology
+Lizenz: GNU Affero General Public License (AGPL)
+
+Students:
+Altmann Christoph
+Lang Georg
+Margreiter Daniel
+Schaekermann Mike
+###
+
 # # Key bindings
 
 # Find a reference at [meteor-keybindings](https://github.com/matteodem/meteor-keybindings)
