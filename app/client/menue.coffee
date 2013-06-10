@@ -93,6 +93,11 @@ Template.menue.events
 		Workspace.impressum()
 		false
 
+Template.menue.activeModelingClass = ->
+	if 'model' is Session.get 'template'
+		console.log 'active nav modeling'
+		return 'activeNavModeling'
+
 Template.menue.searching = ->
 	if not Session.get 'search'
 		return false

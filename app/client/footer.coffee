@@ -16,3 +16,8 @@ Template.footer.events
 			console.log "clicked impressum"
 			Workspace.impressum()
 			false
+
+Template.footer.activeModelingClass = ->
+  if 'model' is Session.get 'template'
+    console.log 'active footer modeling'
+    return 'activeModeling'
