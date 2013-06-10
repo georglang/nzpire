@@ -11,7 +11,6 @@ h3{
 	height:100%;
 }
 
-
 #profileContainer{
 	padding:4%;
 	width:26%;
@@ -56,11 +55,6 @@ h3{
 #email img{
 	width:26px;
 	height:26px;
-}
-
-
-#www{
-
 }
 
 .profilListItem{
@@ -168,4 +162,9 @@ h4{
 
 .editabel:hover{
 	background-color: grey;
+}
+
+#editIcon{
+	width: 22px;
+	height:22px;
 }

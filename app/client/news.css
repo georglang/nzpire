@@ -48,6 +48,7 @@
   white-space: nowrap;
   width: 70%;                   
   overflow: hidden;
+  text-align:center;
   text-overflow: ellipsis;
   -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
   -o-text-overflow: ellipsis;

@@ -1,6 +1,7 @@
 # #Model_Showroom
 
-# Gets all Models where the User has the expected Role    
+# Gets all Models where the User has the expected Role
+# set the dummy picture if no snapshot was taken    
 # * params: Roles    
 # * return: Array (models)   
 userInvitedModels = (role)->
