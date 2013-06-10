@@ -32,3 +32,8 @@ Template.model.destroyed = ()->
 	$('footer').removeClass('activeModeling')
 	$('.navbar').removeClass('activeNavModeling')
 	Modeling.scene.shutdown();
+
+Template.model.isActiveShortcutInfo = ->
+	if Session.get 'activeShortcutInfo'
+		return true
+	return false

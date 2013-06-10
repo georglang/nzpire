@@ -143,6 +143,11 @@ Template.modelSidebar.isFavourited = ->
     else
       return false
 
+Template.modelSidebar.isShortcutShow = ->
+  if not Session.get 'activeShortcutInfo'
+    return true
+  return false
+
 getSnapshotDataURL = (width, height, format) ->
   originalWidth = Modeling.renderer.domElement.width
   originalHeight = Modeling.renderer.domElement.height
@@ -268,9 +273,18 @@ Template.modelSidebar.events
       else
         Workspace.model(result)
 
+  # #### * Snapshot
   'click #takeSnapshot': ->
     snapshotDataURL = getSnapshotDataURL(100,100,'png')
     Models.update({_id: Session.get('modelId')},{$set: {snapshotURL: snapshotDataURL}})
+
+  # #### * Show Shortcuts
+  'click #showShortcuts': ->
+    Session.set 'activeShortcutInfo', true
+
+  'click #hideShortcuts': ->
+    Session.set 'activeShortcutInfo', false
+
 
 
 
