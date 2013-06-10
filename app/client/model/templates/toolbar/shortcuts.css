@@ -1,11 +1,11 @@
 .templateShortcutInfo{
 	position: fixed;
-	right: 98%;
+	left: 0px;
 	top: 37px;
 	background-color: white;
-	overflow-y:scroll;
+	overflow:hidden;
 	height:94%;
-	width: 170px;
+	width: 230px;
 	padding:5px; 
     -webkit-transition-duration: 0.2s;
     -moz-transition-duration: 0.2s;
@@ -13,11 +13,12 @@
     transition-duration: 0.2s;
 }
 
+/*
 .templateShortcutInfo:hover{
 	left:0px;
 	top: 37px;
 }
-
+*/
 .key{
 	float: left;
 	display: block;

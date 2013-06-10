@@ -85,6 +85,12 @@ Schaekermann Mike
         {{/if}}
         <input class="btn" type="button" id="takeSnapshot" value="Snapshot">
         <br>
+        {{#if isShortcutShow}}
+          <input class="btn" type="button" id="showShortcuts" value="Show Shortcuts">
+        {{else}}
+          <input class="btn-danger" type="button" id="hideShortcuts" value="Hide Shortcuts">
+        {{/if}}
+        <br>
         <input class="btn" type="button" id="clone" value="Clone">
       {{/if}}
     </div>

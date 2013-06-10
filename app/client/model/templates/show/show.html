@@ -18,7 +18,9 @@ Schaekermann Mike
 	  	{{>modelingColors}}
 	  	{{>chat}}
 	  	{{>voxelSizes}}
-	  	{{>shortcutInfo}}
+	  	{{#if isActiveShortcutInfo}}
+	  		{{>shortcutInfo}}
+	  	{{/if}}
 	  {{/if}}
 	  {{#constant}}
 	    <a href="#" id="modelContainer" autofocus="autofocus"></a>
