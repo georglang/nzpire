@@ -310,6 +310,8 @@ Meteor.methods
 
 			if invitedProfile == undefined
 				throw new Meteor.Error(496, "Username does not exist");
+			else if currentProfile()?.name == invitedProfile.name
+				throw new Meteor.Error(490, "You cant invite yourself");
 			else
 				checkAlreadyInvited = Models.findOne({_id: options._id,'invited.userId':invitedProfile._id})
 			if checkAlreadyInvited == undefined

@@ -129,7 +129,8 @@ Template.modelSidebar.isPublic = ->
 # ## Profilelist
 # * return: cursor
 Template.modelSidebar.profilesList = ->
-  return Profiles.find({})
+  currentId = currentProfile()?._id
+  return Profiles.find({_id:{$ne: currentId}})
 
 # ## Favourite
 # * return: bool

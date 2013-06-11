@@ -40,7 +40,7 @@ Template.message.timestamp = ->
 	return time
 
 Template.chat.rendered = ->
-	$('.scroller').scrollTop($('.scroller')[0]?.scrollHeight);
+	#$('.scroller').scrollTop($('.scroller')[0]?.scrollHeight);
 
 # ## Events
 # ### Submit entered Message
