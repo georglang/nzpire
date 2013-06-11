@@ -16,7 +16,12 @@ Schaekermann Mike
 		<h3>Activities</h3>
 		{{#if currentUser.services}}
 		{{#each getNews}}
-		<div class="listItem"> {{name}} {{updatedAt}} </div>
+		<div data-id="{{this._id}}" class="modelLink">
+			<div class="singleModel" style="background-image:url({{this.snapshotURL}})">
+				<p>{{this.name}}</p>
+			</div>
+			{{updatedAt}}
+		</div>
 		{{/each}}
 	</div>
 	<div id="randomModels" class="newsBoxes">
