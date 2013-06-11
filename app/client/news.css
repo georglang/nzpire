@@ -64,6 +64,7 @@ Schaekermann Mike
   text-overflow: ellipsis;
   -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
   -o-text-overflow: ellipsis;
+  text-shadow: 1px 1px black;
 }
 
 .modelLink{
