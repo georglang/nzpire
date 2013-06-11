@@ -129,6 +129,8 @@ Template.modelSidebar.isPublic = ->
 # ## Profilelist
 # * return: cursor
 Template.modelSidebar.profilesList = ->
+  if Meteor.user() == null
+    return false
   currentId = currentProfile()?._id
   return Profiles.find({_id:{$ne: currentId}})
 

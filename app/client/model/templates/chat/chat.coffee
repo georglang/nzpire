@@ -43,6 +43,9 @@ Template.message.timestamp = ->
 Template.chat.rendered = ->
 	#$('.scroller').scrollTop($('.scroller')[0]?.scrollHeight);
 
+Template.chat.getCurrentColor = ->
+	return Session.get 'modelingColor'
+
 # ## Events
 # ### Submit entered Message
 Template.chat.events
@@ -52,6 +55,7 @@ Template.chat.events
 			if message.length > 0
 				$('#newMessage').val('')
 				options = 
+					color: Session.get 'modelingColor'
 					modelId: Session.get 'modelId'
 					message: message
 					publisher: currentProfile()._id
