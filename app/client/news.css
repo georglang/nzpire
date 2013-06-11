@@ -69,3 +69,12 @@ Schaekermann Mike
 .modelLink{
   border-bottom: #ccc7c7 1px dotted;
 }
+
+.datum{
+  position: relative;
+  left: 34%;
+  top:10px;
+  margin-top:10px;
+  font-style: italic;
+  font-weight: bold;
+}

@@ -117,6 +117,26 @@ Template.news.getMostPopularModels = ->
 	models.sort(sortArrayByFavouritedCount)
 	return models
 
+Template.news.formatTime = ->
+	timestamp = this.updatedAt
+
+	if timestamp.getMinutes() < 10
+		minutes = "0" + timestamp.getMinutes()
+	else
+		minutes = timestamp.getMinutes()
+	if timestamp.getHours < 10
+		hours = "0" + timestamp.getHours()
+	else
+		hours = timestamp.getHours()
+
+	timeObject =
+		minute: minutes
+		hour: hours
+		day: timestamp.getDay()
+		month: timestamp.getMonth()
+		year: timestamp.getFullYear()
+
+
 Template.news.events
 	'click div.randomModel': (e)->
 		Workspace.model $(e.currentTarget).data("id")

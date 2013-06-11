@@ -35,7 +35,7 @@ Template.message.timestamp = ->
 		hours = '0' + this.timestamp.getHours()
 
 	time = 
-		hours: this.timestamp.getHours()
+		hours: hours
 		minutes: minutes
 	return time
 

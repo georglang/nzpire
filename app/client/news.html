@@ -17,10 +17,12 @@ Schaekermann Mike
 		{{#if currentUser.services}}
 		{{#each getNews}}
 		<div data-id="{{this._id}}" class="modelLink">
+			<span class="datum">
+			{{formatTime.hour}}:{{formatTime.minute}} {{formatTime.day}}.{{formatTime.month}}.{{formatTime.year}}
+			</span>			
 			<div class="singleModel" style="background-image:url({{this.picture}})">
 				<p>{{this.name}}</p>
 			</div>
-			{{updatedAt}}
 		</div>
 		{{/each}}
 	</div>
