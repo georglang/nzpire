@@ -52,7 +52,7 @@ Template.news.getNews = ->
 	#console.log "getNews"
 	result = getModelNews()
 	for model in result
-		model.snapshotURL ?= '/img/dummyModel.jpg'
+		model.picture ?= '/img/dummyModel.jpg'
 	result2 = getProfileNews()
 	if not result or not result2
 		console.log "not result or not result 2"
@@ -64,7 +64,7 @@ Template.news.getNews = ->
 
 # ## Random Models
 # ## Gets all Models, shuffles them and slices the first then out
-# * return: array (incl. model.snapshotURL)
+# * return: array (incl. model.picture)
 Template.news.getRandomModels = ->
 	allModels = Models.find({}).fetch()
 	###
@@ -78,7 +78,7 @@ Template.news.getRandomModels = ->
 	#modelsShuffled = _.shuffle(models).slice(0,10)
 	allModels = _.shuffle(allModels).slice(0,10)
 	for model in allModels
-		model.snapshotURL ?= '/img/dummyModel.jpg'
+		model.picture ?= '/img/dummyModel.jpg'
 	return allModels
 
 # ## Sort By Favourite Count
@@ -99,7 +99,7 @@ checkForFavourites = (_id)->
 
 # ## Most Popular Models
 # Gets the Models the most Profiles favourited
-# * return array (incl. model.favCounts, model.snapshotURL)
+# * return array (incl. model.favCounts, model.picture)
 Template.news.getMostPopularModels = ->
 	allModels = Models.find({}).fetch()
 	allProfiles = Profiles.find({}).fetch()
@@ -112,7 +112,7 @@ Template.news.getMostPopularModels = ->
 		m.favCounts = counter
 
 		for model in allModels
-			model.snapshotURL ?= '/img/dummyModel.jpg'
+			model.picture ?= '/img/dummyModel.jpg'
 		models.push m
 	models.sort(sortArrayByFavouritedCount)
 	return models

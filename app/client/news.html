@@ -17,7 +17,7 @@ Schaekermann Mike
 		{{#if currentUser.services}}
 		{{#each getNews}}
 		<div data-id="{{this._id}}" class="modelLink">
-			<div class="singleModel" style="background-image:url({{this.snapshotURL}})">
+			<div class="singleModel" style="background-image:url({{this.picture}})">
 				<p>{{this.name}}</p>
 			</div>
 			{{updatedAt}}
@@ -28,7 +28,7 @@ Schaekermann Mike
 		<h3>Random Models</h3>
 		{{#each getRandomModels}}
 			<div data-id="{{this._id}}" class="modelLink randomModel">
-				<div class="singleRandomModel" style="background-image:url({{this.snapshotURL}})">
+				<div class="singleRandomModel" style="background-image:url({{this.picture}})">
 					<p>{{this.name}}</p>
 				</div>
 			</div>
@@ -38,7 +38,7 @@ Schaekermann Mike
 		<h3>Popular Models</h3>
 		{{#each getMostPopularModels}}
 			<div data-id="{{this._id}}" class="randomModel modelLink">
-				<div class="singleRandomModel" style="background-image:url({{this.snapshotURL}})">
+				<div class="singleRandomModel" style="background-image:url({{this.picture}})">
 					<p>{{this.name}} {{this.favCounts}}</p>
 				</div>
 			</div>

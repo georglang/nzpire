@@ -276,7 +276,7 @@ Template.modelSidebar.events
   # #### * Snapshot
   'click #takeSnapshot': ->
     snapshotDataURL = getSnapshotDataURL(100,100,'png')
-    Models.update({_id: Session.get('modelId')},{$set: {snapshotURL: snapshotDataURL}})
+    Models.update({_id: Session.get('modelId')},{$set: {picture: snapshotDataURL}})
 
   # #### * Show Shortcuts
   'click #showShortcuts': ->
