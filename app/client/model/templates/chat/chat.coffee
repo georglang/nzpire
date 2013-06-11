@@ -16,6 +16,7 @@ Schaekermann Mike
 # * return: array
 Template.chat.messages = ->
 	messages = ModelChat.find({modelId: Session.get('modelId')}).fetch()
+	return messages.reverse()
 
 # ## Message Publisher
 # * return: string
