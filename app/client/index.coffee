@@ -35,10 +35,11 @@ Template.index.descriptionText = ->
 # Adds the activeTemplate Class (fade in effect) on rendering and removes it on destroy
 Template.index.rendered = ()->
 	$('#indexTemplate').addClass('activeTemplate')
+	$('body').addClass('overflowHidden')
 
 Template.index.destroyed = ()->
 	$('#indexTemplate').removeClass('activeTemplate')
-
+	$('body').removeClass('overflowHidden')
 
 Meteor.autorun ->
 	$(".carousel").each ->

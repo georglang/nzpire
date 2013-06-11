@@ -152,6 +152,9 @@ iframe{
     cursor: pointer;
 }
 
+.overflowHidden{
+    overflow: hidden;
+}
 
 .activeTemplate {
     animation: fadein 1s;
