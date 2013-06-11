@@ -362,6 +362,99 @@ Meteor.methods
 				msgcolor: options.color
 			})
 
+	# ### create an obj file and the corresponding mtl file
+	saveModelToObjectFile: (options) ->
+		if userHasAtLeastRole options?.id, Roles.viewer
+			counter = 0
+			verticesCounter = 0
+			objFile = "# www.nzpire.me\nmtllib model.mtl\n"
+			mtlFile = "# www.nzpire.me\n"
+			
+			model = ModelObjects.find(modelId:options.id).fetch()
+			for o in model
+				# save obj data of mesh, color and verticesOffset for faces in tmp
+				tmp = convertMeshToObjAndColor(meshForObject(o), verticesCounter)
+				
+				verticesCounter = tmp.verticesCounter
+				mtlResult = addColorToMtlFile tmp.color, mtlFile
+				mtlFile = mtlResult.file
+				
+				objFile += "o Cube" + counter + "\n"
+				objFile += "usemtl " + mtlResult.colorName + "\n"
+				objFile += tmp.obj
+
+				++counter
+			
+			files =
+				obj: objFile
+				mtl: mtlFile
+			
+			return files
+
+# adds a new color to a mtl file if not already available and returns it
+# returns the updated file and the color name for the obj file
+@addColorToMtlFile = (color, file) ->
+	name = ""
+	colorCounter = 0
+	isInFile = false
+
+	lines = file.split("\n")
+	lines.splice 0, 1
+	for line in lines
+		if line.match("Kd") != null
+			rgb = line.substring(3, line.length).split(" ")
+			
+			# determine if color is already in the mtl file
+			if(rgb[0] == color.r.toString() && rgb[1] == color.g.toString() && rgb[2] == color.b.toString())
+				isInFile = true
+				break
+		else if line.match("newmtl") != null
+			name = "color" + line.substring(line.length - 1, line.length)
+			++colorCounter
+
+	if !isInFile
+		name = "color" + colorCounter
+		file += "newmtl " + name + "\n"
+		# only diffuse color is relevant online
+		# to add specular color or ambient color add a line with Ks or Ka
+		file += "Kd " + color.r + " " + color.g + " " + color.b + "\n"
+
+	result =
+		file: file
+		colorName: name
+
+	return result
+
+# converts three js mesh data into the wavefront format
+# returns data which contains the obj data of the mesh, the color in rgb, and the vertices offset for faces
+@convertMeshToObjAndColor = (mesh, verticesOffset) ->
+  mesh.updateMatrixWorld()
+  geo = mesh.geometry
+  num = geo.vertices.length
+  obj = ""
+  
+  i = 0
+  while i < geo.vertices.length
+    vector = new THREE.Vector3(geo.vertices[i].x, geo.vertices[i].y, geo.vertices[i].z)
+    vector.applyMatrix4(mesh.matrixWorld)
+    obj += "v " + (vector.x) + " " + vector.y + " " + vector.z + "\n"
+    i++
+  
+  i = 0
+  while i < geo.faces.length
+   	obj += "f " + (geo.faces[i].a + 1 + verticesOffset) + " " + (geo.faces[i].b + 1 + verticesOffset) + " " + (geo.faces[i].c + 1 + verticesOffset)
+    obj += " " + (geo.faces[i].d + 1 + verticesOffset)  if geo.faces[i].d isnt `undefined`
+    obj += "\n"
+    i++
+
+  data = 
+  	obj: obj
+  	color: mesh.material.color
+  	verticesCounter: (verticesOffset + geo.vertices.length)
+
+  return data
+
+
 @modelLoaded = ->
 	model = Models.findOne({})
 	if model == undefined
@@ -444,3 +537,4 @@ Meteor.methods
 	{index: 3, name: 4, size: 8}
 	{index: 4, name: 5, size: 16}
 ]
+
