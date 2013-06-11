@@ -51,12 +51,15 @@ sortArrayByTimestamp = (a,b)->
 Template.news.getNews = ->
 	#console.log "getNews"
 	result = getModelNews()
+	for model in result
+		model.snapshotURL ?= '/img/dummyModel.jpg'
 	result2 = getProfileNews()
 	if not result or not result2
 		console.log "not result or not result 2"
 		return null
 	jQuery.merge(result,result2)
 	result.sort(sortArrayByTimestamp)
+
 	return result
 
 # ## Random Models
@@ -116,6 +119,9 @@ Template.news.getMostPopularModels = ->
 
 Template.news.events
 	'click div.randomModel': (e)->
+		Workspace.model $(e.currentTarget).data("id")
+
+	'click div.modelLink': (e)->
 		Workspace.model $(e.currentTarget).data("id")
 
 #	'click div.linkToOtherModel' : (e)->
