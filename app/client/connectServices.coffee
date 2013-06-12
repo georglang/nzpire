@@ -15,7 +15,6 @@ Schaekermann Mike
 loginFunctions =
 	'facebook': Meteor.loginWithFacebook 
 	'google': Meteor.loginWithGoogle
-	'github': Meteor.loginWithGithub
 	'twitter': Meteor.loginWithTwitter
 
 # ## Connect Profiles
@@ -59,23 +58,25 @@ relogInCallback = (updateObject, email, tmpProfile, newProfile)->
 # * return: array (i.e. ["Facebook","Twitter"])    
 Template.connectServices.connectButtons = ->
 	# ### Provides Services
-	services = ["Facebook","Twitter","Google","Github"];
+	services = ["Facebook","Twitter","Google"];
 
 	tmpProfile = Profiles.find(
 		email: currentEmail()
 		).fetch()[0]
 	# Array of Services the User has already connected    
-	serviceArray = tmpProfile.services
+	serviceArray = tmpProfile?.services
 
 	i = 0
 	# Compares the User Services with the Provided services and slices the matches out of the provided    
-	while i < serviceArray.length
-	  element = serviceArray[i]
-	  service = Object.keys(element)[0].charAt(0).toUpperCase() + Object.keys(element)[0].slice(1)
-	  inArray = $.inArray(service, services)
-	  if inArray != -1
-	  	services.splice inArray,1
-	  ++i	  
+	if serviceArray != undefined
+		console.log "in if"
+		while i < serviceArray.length
+		  element = serviceArray[i]
+		  service = Object.keys(element)[0].charAt(0).toUpperCase() + Object.keys(element)[0].slice(1)
+		  inArray = $.inArray(service, services)
+		  if inArray != -1
+		  	services.splice inArray,1
+		  ++i	  
 	return services	
 
 # ## Connect Button Events

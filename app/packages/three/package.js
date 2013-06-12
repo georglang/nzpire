@@ -10,6 +10,6 @@ Package.on_use(function (api) {
     'TrackballControls.js',
     'FocusControls.js',
     'Detector.js'
-  ], ['client']
+  ], ['client', 'server']
   );
 });

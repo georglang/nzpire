@@ -142,6 +142,20 @@ iframe{
     top: 0px;
 }
 
+.login-image{
+    width: 16px;
+    height: 16px;
+    float: left;
+}
+
+.login-text-and-button{
+    cursor: pointer;
+}
+
+.overflowHidden{
+    overflow: hidden;
+}
+
 .activeTemplate {
     animation: fadein 1s;
     -moz-animation: fadein 1s; /* Firefox */

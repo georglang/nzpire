@@ -288,6 +288,18 @@ Template.modelSidebar.events
   'click #hideShortcuts': ->
     Session.set 'activeShortcutInfo', false
 
+  'click #download': ->
+    options = 
+      id: Session.get "modelId"
+    Meteor.call 'saveModelToObjectFile', options, (error, result) ->
+      if error
+        $('#createNewModel').after("<div id='errorCloneModel'>"+error.reason+"</div>")
+      else
+        objBlob = new Blob([result.obj], {type: "text/plain;charset=utf-8"})
+        saveAs(objBlob, "model.obj")
+        
+        mtlBlob = new Blob([result.mtl], {type: "text/plain;charset=utf-8"})
+        saveAs(mtlBlob, "model.mtl")
 
 
 
