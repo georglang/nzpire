@@ -24,7 +24,7 @@ userInvitedModels = (role)->
 		if permission == role
 			modelsResult.push i
 		for model in modelsResult
-			model.snapshotURL ?= '/img/dummyModel.jpg'
+			model.picture ?= '/img/dummyModel.jpg'
 	return modelsResult
 
 # ## Owner

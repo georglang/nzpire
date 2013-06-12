@@ -310,6 +310,8 @@ Meteor.methods
 
 			if invitedProfile == undefined
 				throw new Meteor.Error(496, "Username does not exist");
+			else if currentProfile()?.name == invitedProfile.name
+				throw new Meteor.Error(490, "You cant invite yourself");
 			else
 				checkAlreadyInvited = Models.findOne({_id: options._id,'invited.userId':invitedProfile._id})
 			if checkAlreadyInvited == undefined
@@ -350,13 +352,14 @@ Meteor.methods
 
 	createMessage: (options)->
 		if userHasAtLeastRole options?.modelId, Roles.viewer
-			if options.modelId == undefined || options.publisher == undefined || options.message == undefined
+			if options.modelId == undefined || options.publisher == undefined || options.message == undefined || options.color == undefined
 				throw new Meteor.Error(490, "Undefined Parameter")
 			ModelChat.insert({
 				modelId: options.modelId,
 				publisherId: options.publisher,
 				message: options.message,
-				timestamp: new Date()
+				timestamp: new Date(),
+				msgcolor: options.color
 			})
 
 	# ### create an obj file and the corresponding mtl file

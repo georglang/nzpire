@@ -16,6 +16,7 @@ Schaekermann Mike
 # * return: array
 Template.chat.messages = ->
 	messages = ModelChat.find({modelId: Session.get('modelId')}).fetch()
+	return messages.reverse()
 
 # ## Message Publisher
 # * return: string
@@ -35,12 +36,15 @@ Template.message.timestamp = ->
 		hours = '0' + this.timestamp.getHours()
 
 	time = 
-		hours: this.timestamp.getHours()
+		hours: hours
 		minutes: minutes
 	return time
 
 Template.chat.rendered = ->
-	$('.scroller').scrollTop($('.scroller')[0]?.scrollHeight);
+	#$('.scroller').scrollTop($('.scroller')[0]?.scrollHeight);
+
+Template.chat.getCurrentColor = ->
+	return Session.get 'modelingColor'
 
 # ## Events
 # ### Submit entered Message
@@ -51,6 +55,7 @@ Template.chat.events
 			if message.length > 0
 				$('#newMessage').val('')
 				options = 
+					color: Session.get 'modelingColor'
 					modelId: Session.get 'modelId'
 					message: message
 					publisher: currentProfile()._id

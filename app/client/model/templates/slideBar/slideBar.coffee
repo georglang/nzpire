@@ -129,7 +129,10 @@ Template.modelSidebar.isPublic = ->
 # ## Profilelist
 # * return: cursor
 Template.modelSidebar.profilesList = ->
-  return Profiles.find({})
+  if Meteor.user() == null
+    return false
+  currentId = currentProfile()?._id
+  return Profiles.find({_id:{$ne: currentId}})
 
 # ## Favourite
 # * return: bool
@@ -276,7 +279,7 @@ Template.modelSidebar.events
   # #### * Snapshot
   'click #takeSnapshot': ->
     snapshotDataURL = getSnapshotDataURL(100,100,'png')
-    Models.update({_id: Session.get('modelId')},{$set: {snapshotURL: snapshotDataURL}})
+    Models.update({_id: Session.get('modelId')},{$set: {picture: snapshotDataURL}})
 
   # #### * Show Shortcuts
   'click #showShortcuts': ->

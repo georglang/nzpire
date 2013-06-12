@@ -20,12 +20,12 @@ Schaekermann Mike
 				{{/each}}
 			</div>
 		</div>
-		<input type="text" id="newMessage" placeholder="message">
+		<input style="color:#{{getCurrentColor}}" type="text" id="newMessage" placeholder="message">
 	</div>
 	{{/isolate}}
 </template>
 
 
 <template name="message">
-	<div tabindex="-1">{{timestamp.hours}}:{{timestamp.minutes}}-{{publisher}}:{{this.message}}</div>
+	<div style="color:#{{this.msgcolor}}" tabindex="-1">{{timestamp.hours}}:{{timestamp.minutes}}-{{publisher}}:{{this.message}}</div>
 </template>

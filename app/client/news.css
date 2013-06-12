@@ -12,7 +12,7 @@ Schaekermann Mike
 
 .newsBoxes{
   padding:2%;
-  width:18%;
+  width:280px;
   min-height: 280px;
   background-color: #FFFFFF;
   float:left;
@@ -64,8 +64,18 @@ Schaekermann Mike
   text-overflow: ellipsis;
   -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
   -o-text-overflow: ellipsis;
+  text-shadow: 1px 1px black;
 }
 
 .modelLink{
   border-bottom: #ccc7c7 1px dotted;
+}
+
+.datum{
+  position: relative;
+  left: 34%;
+  top:10px;
+  margin-top:10px;
+  font-style: italic;
+  font-weight: bold;
 }

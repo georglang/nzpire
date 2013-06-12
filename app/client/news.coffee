@@ -51,17 +51,20 @@ sortArrayByTimestamp = (a,b)->
 Template.news.getNews = ->
 	#console.log "getNews"
 	result = getModelNews()
+	for model in result
+		model.picture ?= '/img/dummyModel.jpg'
 	result2 = getProfileNews()
 	if not result or not result2
 		console.log "not result or not result 2"
 		return null
 	jQuery.merge(result,result2)
 	result.sort(sortArrayByTimestamp)
+
 	return result
 
 # ## Random Models
 # ## Gets all Models, shuffles them and slices the first then out
-# * return: array (incl. model.snapshotURL)
+# * return: array (incl. model.picture)
 Template.news.getRandomModels = ->
 	allModels = Models.find({}).fetch()
 	###
@@ -75,7 +78,7 @@ Template.news.getRandomModels = ->
 	#modelsShuffled = _.shuffle(models).slice(0,10)
 	allModels = _.shuffle(allModels).slice(0,10)
 	for model in allModels
-		model.snapshotURL ?= '/img/dummyModel.jpg'
+		model.picture ?= '/img/dummyModel.jpg'
 	return allModels
 
 # ## Sort By Favourite Count
@@ -96,7 +99,7 @@ checkForFavourites = (_id)->
 
 # ## Most Popular Models
 # Gets the Models the most Profiles favourited
-# * return array (incl. model.favCounts, model.snapshotURL)
+# * return array (incl. model.favCounts, model.picture)
 Template.news.getMostPopularModels = ->
 	allModels = Models.find({}).fetch()
 	allProfiles = Profiles.find({}).fetch()
@@ -109,13 +112,36 @@ Template.news.getMostPopularModels = ->
 		m.favCounts = counter
 
 		for model in allModels
-			model.snapshotURL ?= '/img/dummyModel.jpg'
+			model.picture ?= '/img/dummyModel.jpg'
 		models.push m
 	models.sort(sortArrayByFavouritedCount)
 	return models
 
+Template.news.formatTime = ->
+	timestamp = this.updatedAt
+
+	if timestamp.getMinutes() < 10
+		minutes = "0" + timestamp.getMinutes()
+	else
+		minutes = timestamp.getMinutes()
+	if timestamp.getHours < 10
+		hours = "0" + timestamp.getHours()
+	else
+		hours = timestamp.getHours()
+
+	timeObject =
+		minute: minutes
+		hour: hours
+		day: timestamp.getDay()
+		month: timestamp.getMonth()
+		year: timestamp.getFullYear()
+
+
 Template.news.events
 	'click div.randomModel': (e)->
+		Workspace.model $(e.currentTarget).data("id")
+
+	'click div.modelLink': (e)->
 		Workspace.model $(e.currentTarget).data("id")
 
 #	'click div.linkToOtherModel' : (e)->
